@@ -15,12 +15,17 @@ Los íconos Android requeridos de 192 y 512 están incorporados dentro del manif
 
 El botón interno usa el prompt nativo cuando Chrome lo ofrece. Si Chrome no expone el prompt a la página, muestra la instrucción manual: `⋮ → Instalar app`. El botón se oculta automáticamente en el modo app instalado (`display-mode: standalone`).
 
-Abrí el dominio final directamente en Chrome Android, no dentro de un preview/iframe. Si ya hubo un intento fallido de PWA, cerrá las pestañas del sitio o eliminá sus datos en Chrome antes de volver a probar.
+## Mapa interactivo: MapCN
+La ubicación usa una isla React con el componente oficial MapCN, basado en MapLibre GL. Se carga solo cuando la sección Ubicación se acerca al viewport, por lo que no agrega trabajo al hero. Ya no se incluyen las 76 teselas locales del mapa anterior.
 
-## Alertas de fechas / Firebase
-La interfaz de alertas está preparada y marcada como `Próximamente`. No solicita permisos aún porque Firebase Messaging y el almacenamiento de suscripciones todavía no están conectados.
+El basemap ahora es una única imagen local georreferenciada de OpenStreetMap. MapCN/MapLibre la renderiza como un mapa real: permite desplazamiento, zoom, marcador, popup y controles incluso si el preview no tiene red. El worker de MapLibre también está alojado localmente. No necesita API key ni requests de tiles externos.
 
-Para activar notificaciones reales más adelante se necesitarán: `firebaseConfig` público, VAPID public key, Firebase Cloud Messaging y una colección/función segura para guardar tokens y enviar campañas. Nunca incluyas claves privadas o service-account JSON en estos archivos estáticos.
+Los archivos del mapa están versionados como `v3` para evitar que la caché inmutable de assets de Vercel retenga una versión anterior.
+
+## Prueba de notificación
+Los botones `Probar alerta · Test` envían **una notificación local de prueba** mediante el service worker. En el primer uso Android pedirá permiso. Al tocar la notificación se abre JOYCE y su CTA de entradas.
+
+No es web push real: no se guarda ninguna suscripción, token, VAPID key ni configuración Firebase. Para alertas reales de nuevas fechas todavía se necesita `firebaseConfig` público, VAPID public key, Firebase Cloud Messaging y una ruta de envío segura del lado del servidor. Retirá el botón de prueba antes de publicar el sitio al público.
 
 ## QR y fechas
 Dentro de cada fecha hay un botón `QR`. El QR se genera localmente y abre esa fecha junto con su compra de entradas. El botón de descarga crea un JPG editorial con nombre del evento, código QR y llamado a la acción, listo para compartir.
