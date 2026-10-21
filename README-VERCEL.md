@@ -5,6 +5,8 @@ Este paquete es un sitio estático: no necesita instalar dependencias ni ejecuta
 ## Contenido a publicar
 - `index.html`
 - `assets/`
+- `manifest.webmanifest`
+- `service-worker.js`
 - `vercel.json`
 
 Conservá esta estructura de archivos al desplegar. No cambies las rutas dentro de `assets/`.
@@ -21,10 +23,30 @@ Conservá esta estructura de archivos al desplegar. No cambies las rutas dentro 
 3. Vercel detectará el sitio estático. No definas Build Command ni Output Directory.
 4. Hacé clic en **Deploy**.
 
-## Fechas compartibles
-Los enlaces compartidos usan este formato y abren directamente la fecha correcta:
-- `https://tu-dominio.com/?evento=joyce-23-oct`
-- `https://tu-dominio.com/?evento=goth-24-oct`
-- `https://tu-dominio.com/?evento=halloween-31-oct`
+## PWA instalable
+La web incluye manifest, service worker e íconos PWA. En navegadores compatibles aparecerá el botón `Instalar app`; en iPhone se instala desde Compartir → Agregar a pantalla de inicio.
 
-`vercel.json` deja los assets con cache largo. Si reemplazás una imagen o video conservando el mismo nombre, conviene cambiarle el nombre de archivo y actualizar `index.html` para evitar que visitantes vean una versión cacheada.
+El service worker precachea el shell, íconos y poster de respaldo. El video hero y las tiles del mapa no se precachean para que la instalación sea liviana.
+
+## Alertas de fechas / Firebase
+La interfaz de alertas está preparada y marcada como `Próximamente`. No solicita permisos aún porque Firebase Messaging y el almacenamiento de suscripciones todavía no están conectados.
+
+Para activar notificaciones reales más adelante se necesitarán:
+- `firebaseConfig` público;
+- clave pública Web Push / VAPID de Firebase;
+- Firebase Cloud Messaging;
+- una colección/función segura para guardar tokens y enviar campañas.
+
+Nunca incluyas claves privadas o service-account JSON en estos archivos estáticos.
+
+## QR y enlaces de fechas
+Dentro de cada fecha hay un botón `QR`. Genera localmente un código SVG que abre esa fecha y su compra de entradas. No utiliza un proveedor externo de QR.
+
+Además, `vercel.json` incluye URLs cortas para piezas impresas:
+- `https://tu-dominio.com/q/joyce`
+- `https://tu-dominio.com/q/goth`
+- `https://tu-dominio.com/q/halloween`
+
+Cada URL redirige a la fecha correspondiente y conserva parámetros de campaña QR. Usá estas rutas cuando prepares códigos QR para flyers, mesas o pantallas después de conectar el dominio definitivo.
+
+El paquete incluye favicon ICO y Apple Touch Icon. Los assets tienen cache largo. Si reemplazás una imagen o video conservando el mismo nombre, cambiá el nombre de archivo y actualizá `index.html` para evitar que visitantes vean una versión cacheada.

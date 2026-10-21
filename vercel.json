@@ -1,7 +1,25 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
+  "redirects": [
+    { "source": "/q/joyce", "destination": "/?evento=joyce-23-oct&utm_source=qr&utm_medium=print&utm_campaign=joyce", "permanent": false },
+    { "source": "/q/goth", "destination": "/?evento=goth-24-oct&utm_source=qr&utm_medium=print&utm_campaign=goth", "permanent": false },
+    { "source": "/q/halloween", "destination": "/?evento=halloween-31-oct&utm_source=qr&utm_medium=print&utm_campaign=halloween", "permanent": false }
+  ],
   "headers": [
+    {
+      "source": "/service-worker.js",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" },
+        { "key": "Service-Worker-Allowed", "value": "/" }
+      ]
+    },
+    {
+      "source": "/manifest.webmanifest",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+      ]
+    },
     {
       "source": "/assets/(.*)",
       "headers": [

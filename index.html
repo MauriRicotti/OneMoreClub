@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#080808" />
   <meta name="description" content="ONE MORE ELECTRONIC — La noche no termina." />
+  <link rel="icon" href="assets/favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <link rel="preload" as="image" href="assets/one-more-crowd-hero.webp" fetchpriority="high" />
   <link rel="preload" as="image" href="assets/one-logo.webp" fetchpriority="high" />
   <title>ONE MORE ELECTRONIC — La noche no termina</title>
@@ -141,10 +147,11 @@
     .event-countdown-head { display:flex; justify-content:space-between; gap:12px; padding:9px 0 8px; color:rgba(242,240,235,.64); font-size:8px; font-weight:700; letter-spacing:.14em; line-height:1; text-transform:uppercase; }
     .event-countdown-clock { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; background:rgba(242,240,235,.35); }.event-countdown-clock span { display:flex; flex-direction:column; gap:5px; padding:9px 7px 8px; background:#101010; }.event-countdown-clock b { font-size:clamp(20px,2.1vw,31px); font-weight:900; letter-spacing:-.08em; line-height:.76; }.event-countdown-clock small { color:rgba(242,240,235,.58); font-size:7px; font-weight:700; letter-spacing:.12em; line-height:1; text-transform:uppercase; }
     .announce { display:flex; align-items:center; justify-content:space-between; gap:20px; min-height:52px; padding:0 15px; border:1px solid var(--paper); background:var(--paper); color:var(--ink); font-size:10px; font-weight:700; letter-spacing:.12em; text-decoration:none; text-transform:uppercase; transition:background-color 180ms ease,color 180ms ease; }
-    .event-actions { display:grid; grid-template-columns:minmax(0,1.5fr) minmax(0,1fr); gap:7px; }.event-actions .announce { min-width:0; }.event-share { display:flex; align-items:center; justify-content:space-between; gap:8px; min-height:52px; padding:0 13px; border:1px solid rgba(242,240,235,.72); background:transparent; color:var(--paper); font:inherit; font-size:9px; font-weight:700; letter-spacing:.11em; line-height:1; text-align:left; text-transform:uppercase; cursor:pointer; transition:background-color 180ms ease,color 180ms ease; }.event-share:hover, .event-share:focus-visible { background:var(--paper); color:var(--ink); }.event-share:focus-visible { outline:2px solid var(--paper); outline-offset:4px; }.event-share b { font-size:17px; font-weight:400; }
+    .event-actions { display:grid; grid-template-columns:minmax(0,1.45fr) minmax(0,1fr) 48px; gap:7px; }.event-actions .announce { min-width:0; }.event-share { display:flex; align-items:center; justify-content:space-between; gap:8px; min-height:52px; padding:0 13px; border:1px solid rgba(242,240,235,.72); background:transparent; color:var(--paper); font:inherit; font-size:9px; font-weight:700; letter-spacing:.11em; line-height:1; text-align:left; text-transform:uppercase; cursor:pointer; transition:background-color 180ms ease,color 180ms ease; }.event-share:hover, .event-share:focus-visible { background:var(--paper); color:var(--ink); }.event-share:focus-visible { outline:2px solid var(--paper); outline-offset:4px; }.event-share b { font-size:17px; font-weight:400; }.event-qr-trigger { display:grid; place-items:center; min-height:52px; padding:0; border:1px solid rgba(242,240,235,.72); background:transparent; color:var(--paper); font:inherit; font-size:9px; font-weight:700; letter-spacing:.05em; line-height:1; text-transform:uppercase; cursor:pointer; transition:background-color 180ms ease,color 180ms ease; }.event-qr-trigger:hover, .event-qr-trigger:focus-visible { background:var(--paper); color:var(--ink); }.event-qr-trigger:focus-visible { outline:2px solid var(--paper); outline-offset:4px; }
     .announce:hover, .announce:focus-visible { background:transparent; color:var(--paper); }.announce:focus-visible { outline:2px solid var(--paper); outline-offset:4px; }.announce b { font-size:18px; font-weight:400; }
     .ticket-notice { position:fixed; z-index:150; bottom:22px; left:22px; display:flex; align-items:center; gap:11px; padding:11px 13px; border:1px solid var(--ink); background:var(--paper); color:var(--ink); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1; text-transform:uppercase; opacity:0; pointer-events:none; transform:translate3d(0,10px,0); transition:opacity 170ms ease,transform 170ms ease; }
     .ticket-notice.is-visible { opacity:1; transform:translate3d(0,0,0); }.ticket-notice b { font-size:14px; font-weight:400; }
+    .qr-modal[hidden] { display:none; }.qr-modal { position:fixed; z-index:170; inset:0; display:grid; place-items:center; padding:18px; background:rgba(8,8,8,.82); }.qr-dialog { position:relative; width:min(100%,420px); border:1px solid var(--ink); background:var(--paper); color:var(--ink); box-shadow:8px 8px 0 #080808; }.qr-dialog-head { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; padding:17px 18px 15px; border-bottom:1px solid rgba(8,8,8,.7); }.qr-dialog-kicker { margin:0 0 7px; color:rgba(8,8,8,.6); font-size:8px; font-weight:700; letter-spacing:.15em; line-height:1; text-transform:uppercase; }.qr-dialog-title { margin:0; font-size:clamp(31px,7vw,47px); font-weight:900; letter-spacing:-.1em; line-height:.74; text-transform:uppercase; }.qr-close { display:grid; place-items:center; width:32px; height:32px; padding:0; border:1px solid var(--ink); background:transparent; color:var(--ink); font:inherit; font-size:20px; line-height:1; cursor:pointer; }.qr-close:hover, .qr-close:focus-visible { background:var(--ink); color:var(--paper); }.qr-close:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }.qr-dialog-main { display:flex; flex-direction:column; align-items:center; padding:23px 18px 20px; }.qr-code { display:grid; place-items:center; width:min(100%,264px); min-height:264px; padding:10px; border:1px solid var(--ink); background:var(--paper); }.qr-code svg { display:block; width:100%; height:auto; }.qr-code-status { margin:0; color:rgba(8,8,8,.62); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1.35; text-align:center; text-transform:uppercase; }.qr-description { max-width:275px; margin:17px 0 0; font-size:11px; font-weight:700; letter-spacing:.02em; line-height:1.35; text-align:center; text-transform:uppercase; }.qr-dialog-actions { display:grid; grid-template-columns:1fr 1fr; width:100%; gap:7px; margin-top:20px; }.qr-dialog-actions button { display:flex; align-items:center; justify-content:space-between; min-height:42px; padding:0 12px; border:1px solid var(--ink); background:transparent; color:var(--ink); font:inherit; font-size:8px; font-weight:700; letter-spacing:.11em; line-height:1; text-align:left; text-transform:uppercase; cursor:pointer; }.qr-dialog-actions button:hover, .qr-dialog-actions button:focus-visible { background:var(--ink); color:var(--paper); }.qr-dialog-actions button:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }body.qr-open { overflow:hidden; }
     .event-bottom { display:flex; justify-content:space-between; gap:16px; padding:16px 22px; border-top:1px solid rgba(8,8,8,.6); color:rgba(8,8,8,.72); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1.2; text-transform:uppercase; }
     .archive { overflow:hidden; padding:15px; background:#080808; color:var(--paper); }
     .archive-frame { border:1px solid rgba(242,240,235,.48); }
@@ -303,6 +310,7 @@
     .footer-entry-policy { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); border-top:1px solid rgba(242,240,235,.42); }
     .footer-policy-item { min-height:103px; display:flex; flex-direction:column; justify-content:center; gap:9px; padding:18px 22px; border-right:1px solid rgba(242,240,235,.42); }
     .footer-policy-item:last-child { border-right:0; }.footer-policy-label { margin:0; color:rgba(242,240,235,.6); font-size:8px; font-weight:700; letter-spacing:.15em; line-height:1; text-transform:uppercase; }.footer-policy-copy { margin:0; color:var(--paper); font-size:10px; font-weight:700; letter-spacing:.075em; line-height:1.35; text-transform:uppercase; }.footer-map-link { display:inline-flex; align-items:center; justify-content:space-between; gap:12px; color:var(--paper); font-size:10px; font-weight:700; letter-spacing:.1em; line-height:1.25; text-decoration:none; text-transform:uppercase; }.footer-map-link:hover, .footer-map-link:focus-visible { text-decoration:underline; text-underline-offset:4px; }.footer-map-link b { font-size:16px; font-weight:400; }
+    .footer-app-row { display:flex; align-items:center; justify-content:space-between; gap:24px; padding:18px 22px; border-top:1px solid rgba(242,240,235,.42); }.footer-app-label { margin:0 0 8px; color:rgba(242,240,235,.6); font-size:8px; font-weight:700; letter-spacing:.15em; line-height:1; text-transform:uppercase; }.footer-app-copy { margin:0; color:var(--paper); font-size:10px; font-weight:700; letter-spacing:.075em; line-height:1.3; text-transform:uppercase; }.footer-app-actions { display:flex; align-items:center; gap:7px; }.footer-install, .footer-alerts { display:flex; align-items:center; justify-content:space-between; gap:15px; min-height:40px; padding:0 12px; border:1px solid rgba(242,240,235,.72); background:transparent; color:var(--paper); font:inherit; font-size:8px; font-weight:700; letter-spacing:.12em; line-height:1; text-transform:uppercase; }.footer-install { cursor:pointer; }.footer-install:hover, .footer-install:focus-visible { background:var(--paper); color:var(--ink); }.footer-install:focus-visible { outline:2px solid var(--paper); outline-offset:3px; }.footer-install b { font-size:15px; font-weight:400; }.footer-alerts { color:rgba(242,240,235,.58); cursor:not-allowed; }.footer-alerts small { color:var(--paper); font-size:7px; font-weight:700; letter-spacing:.12em; }
     .footer-bottom { display:flex; justify-content:space-between; align-items:center; gap:18px; padding:16px 22px; border-top:1px solid rgba(242,240,235,.42); }
     .footer-bottom p, .footer-bottom a { margin:0; color:rgba(242,240,235,.68); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1.2; text-decoration:none; text-transform:uppercase; }
     .footer-bottom a { color:var(--paper); }
@@ -311,12 +319,12 @@
       .site-header { min-height:70px; padding:14px 20px; }.hero { padding-top:70px; }.header-side { display:none; }.menu-toggle { display:block; }.mobile-nav { position:fixed; z-index:49; top:70px; right:10px; left:10px; flex-direction:column; gap:0; padding:10px 20px 20px; border:1px solid rgba(242,240,235,.45); background:#080808; }.mobile-nav.open { display:flex; }.mobile-nav a { padding:16px 0; border-bottom:1px solid rgba(242,240,235,.25); color:var(--paper); font-size:11px; font-weight:700; letter-spacing:.12em; text-decoration:none; text-transform:uppercase; }.mobile-nav .mobile-ticket { margin-top:10px; padding:15px; border:1px solid var(--paper); background:var(--paper); color:var(--ink); text-align:center; }
       .hero-main { padding:20px 29px 46px; flex-direction:column; justify-content:flex-end; align-items:stretch; }.hero-copy { width:100%; }.hero-countdown { position:relative; right:auto; bottom:auto; width:100%; margin-top:12px; padding:10px 12px; grid-template-columns:minmax(0,1fr) auto; }.countdown-kicker, .countdown-link { display:none; }.countdown-event { font-size:18px; line-height:.82; }.countdown-date { margin-top:4px; font-size:7px; }.countdown-clock { grid-column:2; display:flex; gap:6px; margin:0; border:0; background:transparent; align-self:center; }.countdown-clock span { flex-direction:row; gap:2px; padding:0; background:transparent; }.countdown-clock b { font-size:15px; line-height:1; }.countdown-clock small { align-self:end; font-size:6px; }.eyebrow { font-size:9px; margin-bottom:16px; } h1 { font-size:clamp(48px,13.7vw,64px); letter-spacing:-.1em; line-height:.78; } .tagline { margin-top:23px; font-size:13px; }.action-row { gap:14px; margin-top:27px; }.action { min-width:100%; }.status { font-size:8px; }.wordmark { width:96px; right:22px; top:20%; opacity:.74; }.hero-aside { right:20px; bottom:86px; }.scroll { right:20px; bottom:22px; }
       .intro-slider > .next-experience { height:100svh; min-height:100svh; overflow-y:auto; padding:10px; }.intro-slider .next-frame { height:auto; min-height:calc(100svh - 20px); }.intro-slider .section-top { grid-template-columns:1fr auto; }.intro-slider .section-top .event-switcher { grid-column:2; justify-self:end; }.intro-slider .section-top .event-brand { display:none; }.event-nav-copy { min-width:84px; }.event-nav-copy strong { font-size:7px; }.hero-routes { grid-template-columns:1fr; width:100%; margin-top:25px; }.hero-route { min-height:54px; }.hero-aside { display:none; }.entry-curtain::before { inset:10px; }.curtain-layout { inset:10px; grid-template-columns:1fr auto; grid-template-rows:auto 1fr auto; gap:10px; padding:21px 20px; }.curtain-index { grid-column:1; }.curtain-serial { grid-column:2; font-size:7px; }.curtain-main { grid-column:1 / -1; }.curtain-overline { margin-bottom:20px; font-size:8px; }.curtain-title { font-size:clamp(59px,17vw,102px); line-height:.68; }.curtain-rule { margin:25px 0 11px; }.curtain-caption { max-width:245px; font-size:8px; }.mobile-home .menu-arrow { font-size:19px; }
-      .next-experience { padding:10px; }.next-frame { min-height:calc(100svh - 20px); }.section-top { padding:15px; font-size:8px; }.section-top > .event-brand { display:none; }.event-stage { display:grid; grid-template-columns:1fr; }.event-poster { width:100%; height:auto; min-height:0; max-height:640px; aspect-ratio:auto; border-right:0; border-bottom:1px solid rgba(8,8,8,.6); }.intro-slider .event-poster img { width:100%; height:auto; max-height:640px; object-fit:contain; }.event-content { grid-template-columns:1fr; }.intro-slider .event-title { min-height:340px; padding:27px 20px 25px; row-gap:18px; border-right:0; border-bottom:1px solid rgba(8,8,8,.6); }.intro-slider .event-title h2 { margin:0; font-size:clamp(62px,19vw,90px); line-height:.76; }.intro-slider .event-title.is-long-title { min-height:360px; }.intro-slider .event-title.is-long-title h2 { font-size:clamp(46px,12vw,66px); letter-spacing:-.1em; line-height:.86; }.event-info { min-height:450px; padding:29px 20px 24px; }.event-number span { font-size:114px; }.detail-list { margin-top:38px; }.detail { grid-template-columns:80px 1fr; }.event-actions { grid-template-columns:minmax(0,1.38fr) minmax(0,1fr); }.event-share { padding:0 11px; font-size:8px; }.event-bottom { align-items:center; padding:12px 15px; font-size:8px; }.event-bottom > span:first-child { max-width:100px; }.intro-slider .slider-enter { flex:0 0 auto; min-height:32px; gap:6px; padding:0 9px; font-size:7px; letter-spacing:.08em; white-space:nowrap; }.event-bottom span:last-child { text-align:right; }
+      .next-experience { padding:10px; }.next-frame { min-height:calc(100svh - 20px); }.section-top { padding:15px; font-size:8px; }.section-top > .event-brand { display:none; }.event-stage { display:grid; grid-template-columns:1fr; }.event-poster { width:100%; height:auto; min-height:0; max-height:640px; aspect-ratio:auto; border-right:0; border-bottom:1px solid rgba(8,8,8,.6); }.intro-slider .event-poster img { width:100%; height:auto; max-height:640px; object-fit:contain; }.event-content { grid-template-columns:1fr; }.intro-slider .event-title { min-height:340px; padding:27px 20px 25px; row-gap:18px; border-right:0; border-bottom:1px solid rgba(8,8,8,.6); }.intro-slider .event-title h2 { margin:0; font-size:clamp(62px,19vw,90px); line-height:.76; }.intro-slider .event-title.is-long-title { min-height:360px; }.intro-slider .event-title.is-long-title h2 { font-size:clamp(46px,12vw,66px); letter-spacing:-.1em; line-height:.86; }.event-info { min-height:450px; padding:29px 20px 24px; }.event-number span { font-size:114px; }.detail-list { margin-top:38px; }.detail { grid-template-columns:80px 1fr; }.event-actions { grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) 44px; }.event-share { padding:0 10px; font-size:8px; }.event-qr-trigger { min-height:52px; font-size:8px; }.qr-modal { padding:12px; }.qr-dialog { box-shadow:5px 5px 0 #080808; }.qr-code { width:min(100%,244px); min-height:244px; }.event-bottom { align-items:center; padding:12px 15px; font-size:8px; }.event-bottom > span:first-child { max-width:100px; }.intro-slider .slider-enter { flex:0 0 auto; min-height:32px; gap:6px; padding:0 9px; font-size:7px; letter-spacing:.08em; white-space:nowrap; }.event-bottom span:last-child { text-align:right; }
       .archive { padding:10px; }.archive-top { padding:15px; font-size:8px; }.archive-intro { display:block; padding:37px 20px 31px; }.archive-intro h2 { font-size:clamp(56px,17vw,85px); }.archive-intro p { margin-top:25px; font-size:12px; }.archive-rail { grid-auto-columns:87vw; }.archive-card { min-height:430px; padding:18px; }.archive-card-name { font-size:clamp(60px,18vw,88px); }.archive-card-name.small { font-size:clamp(51px,14vw,70px); }
       .manifesto { padding:10px; }.manifesto-frame { min-height:calc(100svh - 20px); }.manifesto-top { padding:15px; font-size:8px; }.manifesto-top span:last-child { display:none; }.manifesto-main { grid-template-columns:1fr; }.manifesto-title { min-height:435px; padding:30px 20px 25px; border-right:0; border-bottom:1px solid rgba(8,8,8,.62); }.manifesto-title h2 { margin:45px 0; font-size:clamp(46px,12.3vw,64px); letter-spacing:-.115em; line-height:.78; }.manifesto-title h2 span { white-space:nowrap; }.manifesto-copy { min-height:440px; padding:29px 20px 25px; }.manifesto-copy p { font-size:24px; }.manifesto-footer { padding:14px 15px; font-size:8px; }.manifesto-footer span:last-child { text-align:right; }
       .gallery { padding:10px; }.gallery-top { padding:15px; font-size:8px; }.gallery-top span:last-child { display:none; }.gallery-head { display:block; padding:39px 20px 33px; }.gallery-kicker { margin-bottom:18px; font-size:9px; }.gallery-head h2 { font-size:clamp(49px,12.8vw,61px); }.gallery-head p { margin-top:28px; font-size:12px; }.gallery-masonry { grid-template-columns:1fr 1fr; grid-template-rows:360px 230px 230px; }.gallery-item--dance { grid-column:span 2; grid-row:auto; }.gallery-item--decks { grid-column:span 1; grid-row:span 1; }.gallery-item--lights { grid-column:span 1; grid-row:span 1; }.gallery-item--community { grid-column:span 2; grid-row:auto; }.gallery-label { right:15px; bottom:15px; left:15px; font-size:9px; }.gallery-footer { padding:14px 15px; font-size:8px; }.gallery-footer span:last-child { text-align:right; }
       .map-section { padding:10px; }.map-top { padding:15px; font-size:8px; }.map-top span:last-child { display:none; }.map-main { grid-template-columns:1fr; }.map-canvas { min-height:360px; border-right:0; border-bottom:1px solid rgba(8,8,8,.62); }.venue-map { height:360px; min-height:0; }.map-status { top:15px; left:15px; }.map-open { left:15px; bottom:15px; }.map-controls { right:15px; bottom:15px; }.map-marker-label { font-size:8px; padding:8px 9px; }.map-panel { min-height:420px; padding:29px 20px 25px; }.map-panel h2 { margin:35px 0; font-size:clamp(59px,17vw,86px); }.map-foot { padding:14px 15px; font-size:8px; }.map-foot span:last-child { text-align:right; }
-      .signal { padding:10px; }.signal-frame { min-height:calc(100svh - 20px); }.signal-top { padding:15px; font-size:8px; }.signal-top span:last-child { display:none; }.signal-main { grid-template-columns:1fr; }.signal-title { min-height:390px; padding:30px 20px 25px; border-right:0; border-bottom:1px solid rgba(8,8,8,.62); }.signal-title h2 { margin:43px 0; font-size:clamp(59px,17vw,87px); }.signal-side { min-height:380px; padding:29px 20px 25px; }.signal-side p { font-size:24px; }.signal-actions { margin-top:31px; }.signal-foot { padding:14px 15px; font-size:8px; }.signal-foot span:last-child { text-align:right; }.site-footer { padding:10px; }.footer-main { grid-template-columns:1fr; }.footer-identity { min-height:335px; padding:29px 20px 25px; border-right:0; border-bottom:1px solid rgba(242,240,235,.42); }.footer-claim { margin-top:50px; font-size:clamp(51px,16vw,79px); }.footer-column { min-height:auto; padding:27px 20px; border-right:0; border-bottom:1px solid rgba(242,240,235,.42); }.footer-label { margin-bottom:18px; }.footer-event-name { font-size:54px; }.footer-entry-policy { grid-template-columns:1fr; }.footer-policy-item { min-height:0; padding:18px 20px; border-right:0; border-bottom:1px solid rgba(242,240,235,.42); }.footer-policy-item:last-child { border-bottom:0; }.footer-bottom { align-items:flex-start; padding:14px 15px; }.footer-bottom p, .footer-bottom a { font-size:8px; }.footer-bottom p { max-width:190px; }.ticket-notice { right:16px; bottom:18px; left:16px; justify-content:space-between; }
+      .signal { padding:10px; }.signal-frame { min-height:calc(100svh - 20px); }.signal-top { padding:15px; font-size:8px; }.signal-top span:last-child { display:none; }.signal-main { grid-template-columns:1fr; }.signal-title { min-height:390px; padding:30px 20px 25px; border-right:0; border-bottom:1px solid rgba(8,8,8,.62); }.signal-title h2 { margin:43px 0; font-size:clamp(59px,17vw,87px); }.signal-side { min-height:380px; padding:29px 20px 25px; }.signal-side p { font-size:24px; }.signal-actions { margin-top:31px; }.signal-foot { padding:14px 15px; font-size:8px; }.signal-foot span:last-child { text-align:right; }.site-footer { padding:10px; }.footer-main { grid-template-columns:1fr; }.footer-identity { min-height:335px; padding:29px 20px 25px; border-right:0; border-bottom:1px solid rgba(242,240,235,.42); }.footer-claim { margin-top:50px; font-size:clamp(51px,16vw,79px); }.footer-column { min-height:auto; padding:27px 20px; border-right:0; border-bottom:1px solid rgba(242,240,235,.42); }.footer-label { margin-bottom:18px; }.footer-event-name { font-size:54px; }.footer-entry-policy { grid-template-columns:1fr; }.footer-policy-item { min-height:0; padding:18px 20px; border-right:0; border-bottom:1px solid rgba(242,240,235,.42); }.footer-policy-item:last-child { border-bottom:0; }.footer-app-row { align-items:flex-start; flex-direction:column; gap:16px; padding:18px 20px; }.footer-app-actions { width:100%; }.footer-install, .footer-alerts { flex:1; }.footer-bottom { align-items:flex-start; padding:14px 15px; }.footer-bottom p, .footer-bottom a { font-size:8px; }.footer-bottom p { max-width:190px; }.ticket-notice { right:16px; bottom:18px; left:16px; justify-content:space-between; }
     }
 
     @media (max-width:780px) {
@@ -339,6 +347,7 @@
       .mobile-nav-links a:focus-visible, .mobile-nav-links a:hover { color:#fff; outline:0; }
       .mobile-nav-links a:focus-visible .menu-copy b, .mobile-nav-links a:hover .menu-copy b { text-decoration:underline; text-underline-offset:5px; }
       .mobile-ticket { display:flex; align-items:center; justify-content:space-between; min-height:54px; margin-top:auto; padding:0 15px; border:1px solid var(--paper); background:var(--paper); color:var(--ink) !important; font-size:10px; font-weight:700; letter-spacing:.13em; text-transform:uppercase; opacity:0; transform:translateY(10px); transition:opacity 170ms ease,transform 170ms ease; }
+      .mobile-install, .mobile-alerts { display:flex; align-items:center; justify-content:space-between; width:100%; min-height:48px; margin-top:8px; padding:0 15px; border:1px solid rgba(242,240,235,.55); background:transparent; color:var(--paper); font:inherit; font-size:9px; font-weight:700; letter-spacing:.12em; line-height:1; text-transform:uppercase; }.mobile-install { cursor:pointer; }.mobile-alerts { color:rgba(242,240,235,.58); cursor:not-allowed; }.mobile-alerts small { color:var(--paper); font-size:7px; font-weight:700; letter-spacing:.12em; }.mobile-nav.open .mobile-install, .mobile-nav.open .mobile-alerts { opacity:1; transform:translateY(0); }
       .mobile-nav.open .mobile-nav-top, .mobile-nav.open .mobile-nav-links a, .mobile-nav.open .mobile-ticket { opacity:1; transform:translateY(0); }
       .mobile-nav.open .mobile-nav-top { transition-delay:40ms; }
       .mobile-nav.open .mobile-nav-links a:nth-child(1) { transition-delay:70ms; }
@@ -346,7 +355,7 @@
       .mobile-nav.open .mobile-nav-links a:nth-child(3) { transition-delay:130ms; }
       .mobile-nav.open .mobile-nav-links a:nth-child(4) { transition-delay:160ms; }
       .mobile-nav.open .mobile-nav-links a:nth-child(5) { transition-delay:190ms; }
-      .mobile-nav.open .mobile-ticket { transition-delay:220ms; }
+      .mobile-nav.open .mobile-ticket { transition-delay:220ms; }.mobile-nav.open .mobile-install { transition-delay:245ms; }.mobile-nav.open .mobile-alerts { transition-delay:270ms; }
       .founders-head { display:block; padding:31px 20px 27px; }.founders-head h3 { font-size:clamp(49px,15vw,77px); }.founders-head p { margin-top:20px; }.founders-grid { grid-template-columns:1fr; }.founder-card { display:grid; grid-template-columns:minmax(0,39%) minmax(0,1fr); }.founder-card figure { width:100%; min-height:214px; aspect-ratio:auto; }.founder-body { min-height:0; padding:18px 16px 19px; }.founder-number { margin-bottom:27px; }.founder-name { font-size:clamp(29px,8.7vw,40px); white-space:nowrap; }.founder-role { margin-top:11px; font-size:8px; }.founder-bio { margin-top:18px; font-size:12px; line-height:1.36; }
       .hero { padding-top:70px; }
       body.menu-open { overflow:hidden; }
@@ -399,6 +408,8 @@
           <a href="#ubicacion"><span class="menu-index">05</span><span class="menu-copy"><b>Ubicación</b><small>One More Club · Devoto</small></span><span class="menu-arrow" aria-hidden="true">↘</span></a>
         </div>
         <a class="mobile-ticket" href="#proxima-experiencia"><span>Entradas</span><span aria-hidden="true">↗</span></a>
+        <button class="mobile-install" type="button" data-pwa-install hidden><span>Instalar ONE MORE</span><span aria-hidden="true">↓</span></button>
+        <button class="mobile-alerts" type="button" disabled><span>Alertas de fechas</span><small>Próximamente</small></button>
       </nav>
     </header>
 
@@ -479,6 +490,7 @@
             <div class="event-actions">
               <a class="announce" data-event-ticket href="https://www.passline.com/eventos/viernes-2310-more-joyce-arg" target="_blank" rel="noopener noreferrer">Comprar entradas <b aria-hidden="true">↗</b></a>
               <button class="event-share" type="button" data-event-share aria-label="Compartir la fecha JOYCE"><span>Compartir</span><b aria-hidden="true">↗</b></button>
+              <button class="event-qr-trigger" type="button" data-event-qr aria-label="Ver código QR de la fecha JOYCE">QR</button>
             </div>
           </aside>
         </div>
@@ -735,6 +747,16 @@
           <a class="footer-map-link" href="https://www.google.com/maps/search/?api=1&amp;query=Av.+Francisco+Beir%C3%B3+3334%2C+Villa+Devoto%2C+Buenos+Aires" target="_blank" rel="noopener noreferrer"><span>Cómo llegar<br>Google Maps</span><b aria-hidden="true">↗</b></a>
         </div>
       </aside>
+      <section class="footer-app-row" aria-label="ONE MORE app y alertas">
+        <div>
+          <p class="footer-app-label">ONE MORE APP</p>
+          <p class="footer-app-copy">Instalá la app para tener ONE MORE a un toque.</p>
+        </div>
+        <div class="footer-app-actions">
+          <button type="button" class="footer-install" data-pwa-install hidden><span>Instalar app</span><b aria-hidden="true">↓</b></button>
+          <button type="button" class="footer-alerts" disabled><span>Alertas de fechas</span><small>Próximamente</small></button>
+        </div>
+      </section>
       <div class="footer-bottom">
         <p>© 2026 ONE MORE ELECTRONIC · Todos los derechos reservados</p>
         <a href="#archivo" aria-label="Volver al comienzo de ONE MORE">Volver arriba ↑</a>
@@ -742,6 +764,23 @@
     </div>
   </footer>
   <div id="ticket-notice" class="ticket-notice" role="status" aria-live="polite" aria-atomic="true"><span>Abriendo entradas</span><b aria-hidden="true">↗</b></div>
+  <div class="qr-modal" data-qr-modal hidden>
+    <section class="qr-dialog" role="dialog" aria-modal="true" aria-labelledby="qr-title" aria-describedby="qr-description">
+      <header class="qr-dialog-head">
+        <div><p class="qr-dialog-kicker">ONE MORE ELECTRONIC</p><h2 id="qr-title" class="qr-dialog-title" data-qr-title>Fecha</h2></div>
+        <button class="qr-close" type="button" data-qr-close aria-label="Cerrar código QR">×</button>
+      </header>
+      <div class="qr-dialog-main">
+        <div class="qr-code" data-qr-code aria-label="Código QR de la fecha"><p class="qr-code-status">Generando QR</p></div>
+        <p id="qr-description" class="qr-description">Escaneá para ver esta fecha y conseguir tus entradas.</p>
+        <div class="qr-dialog-actions">
+          <button type="button" data-qr-download><span>Descargar<br>SVG</span><b aria-hidden="true">↓</b></button>
+          <button type="button" data-qr-copy><span>Copiar<br>link</span><b aria-hidden="true">↗</b></button>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script src="assets/qrcode.min.js"></script>
   <script>
     const archiveRail = document.getElementById('archive-carousel');
     const archiveCards = [...archiveRail.querySelectorAll('.archive-card')];
@@ -889,6 +928,13 @@
     const eventDetailLineup = document.querySelector('[data-event-detail-lineup]');
     const eventTicket = document.querySelector('[data-event-ticket]');
     const eventShareButton = document.querySelector('[data-event-share]');
+    const eventQrButton = document.querySelector('[data-event-qr]');
+    const qrModal = document.querySelector('[data-qr-modal]');
+    const qrCloseButton = document.querySelector('[data-qr-close]');
+    const qrTitle = document.querySelector('[data-qr-title]');
+    const qrCode = document.querySelector('[data-qr-code]');
+    const qrDownloadButton = document.querySelector('[data-qr-download]');
+    const qrCopyButton = document.querySelector('[data-qr-copy]');
     const ticketNotice = document.getElementById('ticket-notice');
     const ticketNoticeText = ticketNotice.querySelector('span');
     let ticketNoticeTimer;
@@ -914,18 +960,24 @@
       field.remove();
       if (!copied) throw new Error('copy failed');
     };
-    const shareCurrentEvent = async () => {
+    const getCurrentEventShareDetails = () => {
       const event = upcomingEvents[activeEventIndex];
       const url = new URL(window.location.href);
       url.search = '';
       url.hash = '';
       url.searchParams.set('evento', event.slug);
-      const shareUrl = url.toString();
-      const title = `ONE MORE ELECTRONIC — ${event.titleHtml.replace(/<[^>]+>/g, '')}`;
-      const text = `${event.footer} · ${event.place}`;
+      return {
+        event,
+        url:url.toString(),
+        title:`ONE MORE ELECTRONIC — ${event.titleHtml.replace(/<[^>]+>/g, '')}`,
+        text:`${event.footer} · ${event.place}`
+      };
+    };
+    const shareCurrentEvent = async () => {
+      const { url, title, text } = getCurrentEventShareDetails();
       if (navigator.share) {
         try {
-          await navigator.share({ title, text, url:shareUrl });
+          await navigator.share({ title, text, url });
           showActionNotice('Fecha compartida');
           return;
         } catch (error) {
@@ -933,7 +985,58 @@
         }
       }
       try {
-        await copyShareLink(shareUrl);
+        await copyShareLink(url);
+        showActionNotice('Link copiado');
+      } catch (_) {
+        showActionNotice('No se pudo copiar el link');
+      }
+    };
+    let activeQrSvg = '';
+    let activeQrUrl = '';
+    let qrReturnFocus;
+    const closeEventQr = ({ returnFocus = true } = {}) => {
+      if (qrModal.hidden) return;
+      qrModal.hidden = true;
+      document.body.classList.remove('qr-open');
+      if (returnFocus && qrReturnFocus) qrReturnFocus.focus();
+    };
+    const openEventQr = async () => {
+      const { event, url } = getCurrentEventShareDetails();
+      qrReturnFocus = document.activeElement;
+      qrModal.hidden = false;
+      document.body.classList.add('qr-open');
+      qrTitle.textContent = event.titleHtml.replace(/<[^>]+>/g, '');
+      qrCode.innerHTML = '<p class="qr-code-status">Generando QR</p>';
+      activeQrSvg = '';
+      activeQrUrl = url;
+      qrCloseButton.focus();
+      try {
+        if (!window.QRCode || !window.QRCode.toString) throw new Error('QR encoder unavailable');
+        activeQrSvg = await window.QRCode.toString(url, {
+          type:'svg', errorCorrectionLevel:'M', margin:4, width:320,
+          color:{ dark:'#080808', light:'#f2f0eb' }
+        });
+        qrCode.innerHTML = activeQrSvg;
+      } catch (_) {
+        qrCode.innerHTML = '<p class="qr-code-status">No se pudo generar el QR</p>';
+      }
+    };
+    const downloadEventQr = () => {
+      if (!activeQrSvg) return;
+      const { event } = getCurrentEventShareDetails();
+      const file = new Blob([activeQrSvg], { type:'image/svg+xml;charset=utf-8' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(file);
+      link.download = `one-more-${event.slug}.svg`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(link.href);
+      showActionNotice('QR descargado');
+    };
+    const copyCurrentQrLink = async () => {
+      try {
+        await copyShareLink(activeQrUrl || getCurrentEventShareDetails().url);
         showActionNotice('Link copiado');
       } catch (_) {
         showActionNotice('No se pudo copiar el link');
@@ -941,6 +1044,11 @@
     };
     eventTicket.addEventListener('click', confirmTicketOpening);
     eventShareButton.addEventListener('click', shareCurrentEvent);
+    eventQrButton.addEventListener('click', openEventQr);
+    qrCloseButton.addEventListener('click', () => closeEventQr());
+    qrDownloadButton.addEventListener('click', downloadEventQr);
+    qrCopyButton.addEventListener('click', copyCurrentQrLink);
+    qrModal.addEventListener('click', (event) => { if (event.target === qrModal) closeEventQr(); });
     const eventFooter = document.querySelector('[data-event-footer]');
     const eventInfo = document.querySelector('[data-event-info]');
     const eventPosition = document.querySelector('[data-event-position]');
@@ -1063,6 +1171,7 @@
       eventTicket.href = event.ticketUrl;
       eventTicket.replaceChildren(document.createTextNode(event.ticket), Object.assign(document.createElement('b'), { textContent:'↗', ariaHidden:'true' }));
       eventShareButton.setAttribute('aria-label', `Compartir la fecha ${event.titleHtml.replace(/<[^>]+>/g, '')}`);
+      eventQrButton.setAttribute('aria-label', `Ver código QR de la fecha ${event.titleHtml.replace(/<[^>]+>/g, '')}`);
       if (document.body.classList.contains('event-open')) {
         const eventUrl = new URL(window.location.href);
         eventUrl.searchParams.set('evento', event.slug);
@@ -1141,6 +1250,7 @@
     });
     mobileMenu.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => closeMobileMenu()));
     document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !qrModal.hidden) { closeEventQr(); return; }
       if (event.key === 'Escape' && menuToggle.getAttribute('aria-expanded') === 'true') closeMobileMenu({ returnFocus:true });
     });
     window.addEventListener('resize', () => {
@@ -1385,8 +1495,36 @@
       }
     });
     document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !qrModal.hidden) { closeEventQr(); return; }
       if (event.key === 'Escape' && document.body.classList.contains('event-open') && menuToggle.getAttribute('aria-expanded') !== 'true') showIntroPanel();
     });
+    // Installable PWA shell. The alert buttons are intentionally passive until Firebase
+    // messaging and a subscriber store are connected; users are never asked for a permission
+    // that the site cannot yet honor.
+    const pwaInstallButtons = [...document.querySelectorAll('[data-pwa-install]')];
+    let deferredInstallPrompt;
+    const setPwaInstallVisibility = (visible) => pwaInstallButtons.forEach((button) => { button.hidden = !visible; });
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('/service-worker.js').catch(() => {}));
+    }
+    window.addEventListener('beforeinstallprompt', (event) => {
+      event.preventDefault();
+      deferredInstallPrompt = event;
+      setPwaInstallVisibility(true);
+    });
+    window.addEventListener('appinstalled', () => {
+      deferredInstallPrompt = undefined;
+      setPwaInstallVisibility(false);
+      showActionNotice('ONE MORE instalada');
+    });
+    pwaInstallButtons.forEach((button) => button.addEventListener('click', async () => {
+      if (!deferredInstallPrompt) return;
+      deferredInstallPrompt.prompt();
+      try { await deferredInstallPrompt.userChoice; } catch (_) {}
+      deferredInstallPrompt = undefined;
+      setPwaInstallVisibility(false);
+    }));
+
     const requestedEventSlug = new URLSearchParams(window.location.search).get('evento');
     const requestedEventIndex = upcomingEvents.findIndex(({ slug }) => slug === requestedEventSlug);
     if (requestedEventIndex >= 0) {
