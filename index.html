@@ -264,13 +264,10 @@
     .map-frame { border:1px solid rgba(8,8,8,.62); }
     .map-top { display:flex; justify-content:space-between; gap:20px; padding:19px 22px; border-bottom:1px solid rgba(8,8,8,.62); font-size:10px; font-weight:700; letter-spacing:.14em; line-height:1; text-transform:uppercase; }
     .map-main { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(300px,.65fr); min-height:570px; }
-    .map-canvas { position:relative; min-height:570px; overflow:hidden; background:#101010; border-right:1px solid rgba(8,8,8,.62); }
-    .venue-map { position:relative; width:100%; min-height:570px; height:100%; overflow:hidden; background:#101010; }
-    .mapcn-venue-root { width:100%; height:100%; min-height:570px; }
-    .map-status { position:absolute; z-index:14; top:19px; left:20px; margin:0; padding:10px 11px; background:#101010; color:var(--paper); font-size:9px; font-weight:700; letter-spacing:.14em; line-height:1; pointer-events:none; text-transform:uppercase; }
-    .map-open { position:absolute; z-index:14; bottom:20px; left:20px; display:flex; align-items:center; gap:9px; padding:11px 12px; background:#101010; color:var(--paper); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1; text-decoration:none; text-transform:uppercase; }
-    .map-open:hover, .map-open:focus-visible { background:var(--paper); color:var(--ink); }.map-open b { font-size:15px; font-weight:400; }.map-open:focus-visible { outline:2px solid var(--paper); outline-offset:3px; }
-    .map-load-error { display:grid; place-items:center; height:100%; margin:0; padding:28px; color:var(--paper); font-size:11px; font-weight:700; letter-spacing:.1em; line-height:1.4; text-align:center; text-transform:uppercase; }
+    .map-canvas { position:relative; min-height:570px; overflow:hidden; background:#e9e7df; border-right:1px solid rgba(8,8,8,.62); }
+    .google-map-shell { position:relative; width:100%; min-height:570px; height:100%; overflow:hidden; background:#e9e7df; }
+    .google-map-embed { display:block; width:100%; min-width:100%; height:100%; min-height:570px; border:0; background:#e9e7df; }
+    .google-map-noscript { display:grid; place-items:center; height:100%; margin:0; padding:30px; color:var(--ink); font-size:10px; font-weight:700; letter-spacing:.12em; text-align:center; text-transform:uppercase; }
     .map-panel { display:flex; flex-direction:column; justify-content:space-between; min-height:570px; padding:clamp(34px,4vw,58px) clamp(23px,3vw,46px) 27px; background:#101010; color:var(--paper); }
     .map-kicker { display:flex; align-items:center; gap:10px; margin:0; color:rgba(242,240,235,.7); font-size:10px; font-weight:700; letter-spacing:.15em; text-transform:uppercase; }
     .map-kicker::before { content:''; width:27px; height:1px; background:currentColor; }
@@ -280,7 +277,7 @@
     .map-link { display:flex; justify-content:space-between; gap:16px; padding:15px 0 4px; border-bottom:1px solid var(--paper); color:var(--paper); font-size:10px; font-weight:700; letter-spacing:.12em; text-decoration:none; text-transform:uppercase; }
     .map-note { margin:20px 0 0; color:rgba(242,240,235,.62); font-size:10px; line-height:1.4; }
     .map-foot { display:flex; justify-content:space-between; gap:16px; padding:16px 22px; border-top:1px solid rgba(8,8,8,.62); color:rgba(8,8,8,.72); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1.2; text-transform:uppercase; }
-    .faq { padding:15px; background:var(--paper); color:var(--ink); }.faq-frame { display:grid; grid-template-columns:minmax(280px,.68fr) minmax(0,1.32fr); min-height:540px; border:1px solid rgba(8,8,8,.62); }.faq-intro { display:flex; flex-direction:column; justify-content:space-between; padding:clamp(34px,4.8vw,72px) clamp(23px,4.6vw,68px) 29px; border-right:1px solid rgba(8,8,8,.62); }.faq-kicker { display:flex; align-items:center; gap:10px; margin:0; color:rgba(8,8,8,.62); font-size:10px; font-weight:700; letter-spacing:.15em; line-height:1; text-transform:uppercase; }.faq-kicker::before { content:''; width:27px; height:1px; background:currentColor; }.faq-intro h2 { max-width:470px; margin:45px 0; font-size:clamp(52px,7.1vw,108px); font-weight:900; letter-spacing:-.105em; line-height:.74; text-transform:uppercase; }.faq-intro h2 span { display:block; }.faq-intro-copy { max-width:315px; margin:0; font-size:12px; line-height:1.46; }.faq-list { align-self:stretch; }.faq-item { margin:0; border-bottom:1px solid rgba(8,8,8,.62); }.faq-item:last-child { border-bottom:0; }.faq-item summary { display:grid; grid-template-columns:auto minmax(0,1fr) auto; align-items:center; gap:15px; min-height:89px; padding:20px clamp(20px,3vw,43px); list-style:none; cursor:pointer; }.faq-item summary::-webkit-details-marker { display:none; }.faq-index { color:rgba(8,8,8,.52); font-size:9px; font-weight:700; letter-spacing:.13em; }.faq-question { font-size:clamp(15px,1.5vw,21px); font-weight:900; letter-spacing:-.045em; line-height:1; text-transform:uppercase; }.faq-mark { display:grid; place-items:center; width:25px; height:25px; border:1px solid var(--ink); font-size:18px; font-weight:400; line-height:1; transition:transform 180ms ease,background-color 180ms ease,color 180ms ease; }.faq-item[open] .faq-mark { background:var(--ink); color:var(--paper); transform:rotate(45deg); }.faq-item summary:hover .faq-question, .faq-item summary:focus-visible .faq-question { text-decoration:underline; text-underline-offset:4px; }.faq-item summary:focus-visible { outline:2px solid var(--ink); outline-offset:-4px; }.faq-answer { max-width:610px; margin:0; padding:0 clamp(60px,6vw,104px) 25px clamp(62px,5.9vw,101px); color:rgba(8,8,8,.73); font-size:13px; line-height:1.5; }.faq-answer a { color:var(--ink); font-weight:700; text-underline-offset:3px; }
+    .faq { padding:15px; background:var(--paper); color:var(--ink); }.faq-frame { display:grid; grid-template-columns:minmax(280px,.68fr) minmax(0,1.32fr); min-height:540px; border:1px solid rgba(8,8,8,.62); }.faq-intro { display:flex; min-width:0; flex-direction:column; justify-content:space-between; overflow:hidden; padding:clamp(34px,4.8vw,72px) clamp(23px,4.6vw,68px) 29px; border-right:1px solid rgba(8,8,8,.62); }.faq-kicker { display:flex; align-items:center; gap:10px; margin:0; color:rgba(8,8,8,.62); font-size:10px; font-weight:700; letter-spacing:.15em; line-height:1; text-transform:uppercase; }.faq-kicker::before { content:''; width:27px; height:1px; background:currentColor; }.faq-intro h2 { max-width:100%; margin:45px 0; font-size:clamp(42px,4.4vw,66px); font-weight:900; letter-spacing:-.08em; line-height:.79; overflow-wrap:anywhere; text-transform:uppercase; }.faq-intro h2 span { display:block; max-width:100%; }.faq-intro-copy { max-width:315px; margin:0; font-size:12px; line-height:1.46; }.faq-list { align-self:stretch; }.faq-item { margin:0; border-bottom:1px solid rgba(8,8,8,.62); }.faq-item:last-child { border-bottom:0; }.faq-trigger { display:grid; grid-template-columns:auto minmax(0,1fr) auto; align-items:center; gap:15px; width:100%; min-height:89px; padding:20px clamp(20px,3vw,43px); border:0; background:transparent; color:var(--ink); font:inherit; text-align:left; cursor:pointer; }.faq-index { color:rgba(8,8,8,.52); font-size:9px; font-weight:700; letter-spacing:.13em; }.faq-question { font-size:clamp(15px,1.5vw,21px); font-weight:900; letter-spacing:-.045em; line-height:1; text-transform:uppercase; }.faq-mark { display:grid; place-items:center; width:25px; height:25px; border:1px solid var(--ink); font-size:18px; font-weight:400; line-height:1; transition:transform 220ms ease,background-color 180ms ease,color 180ms ease; }.faq-item.is-open .faq-mark { background:var(--ink); color:var(--paper); transform:rotate(45deg); }.faq-trigger:hover .faq-question, .faq-trigger:focus-visible .faq-question { text-decoration:underline; text-underline-offset:4px; }.faq-trigger:focus-visible { outline:2px solid var(--ink); outline-offset:-4px; }.faq-panel { display:grid; grid-template-rows:0fr; transition:grid-template-rows 330ms cubic-bezier(.22,.8,.22,1); }.faq-panel-inner { min-height:0; overflow:hidden; }.faq-answer { max-width:610px; margin:0; padding:0 clamp(60px,6vw,104px) 0 clamp(62px,5.9vw,101px); color:rgba(8,8,8,.73); font-size:13px; line-height:1.5; opacity:0; transform:translate3d(0,-7px,0); transition:opacity 180ms ease,transform 260ms cubic-bezier(.22,.8,.22,1),padding-bottom 330ms cubic-bezier(.22,.8,.22,1); }.faq-item.is-open .faq-panel { grid-template-rows:1fr; }.faq-item.is-open .faq-answer { padding-bottom:25px; opacity:1; transform:translate3d(0,0,0); transition-delay:75ms,75ms,0s; }.faq-answer a { color:var(--ink); font-weight:700; text-underline-offset:3px; }
     .site-footer { padding:15px; background:#080808; color:var(--paper); }
     .footer-frame { border:1px solid rgba(242,240,235,.48); }
     .footer-main { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(150px,.45fr) minmax(200px,.62fr); gap:0; }
@@ -314,7 +311,7 @@
       .archive { padding:10px; }.archive-top { padding:15px; font-size:8px; }.archive-intro { display:block; padding:37px 20px 31px; }.archive-intro h2 { font-size:clamp(56px,17vw,85px); }.archive-intro p { margin-top:25px; font-size:12px; }.archive-rail { grid-auto-columns:87vw; }.archive-card { min-height:430px; padding:18px; }.archive-card-name { font-size:clamp(60px,18vw,88px); }.archive-card-name.small { font-size:clamp(51px,14vw,70px); }
       .manifesto { padding:10px; }.manifesto-frame { min-height:calc(100svh - 20px); }.manifesto-top { padding:15px; font-size:8px; }.manifesto-top span:last-child { display:none; }.manifesto-main { grid-template-columns:1fr; }.manifesto-title { min-height:435px; padding:30px 20px 25px; border-right:0; border-bottom:1px solid rgba(8,8,8,.62); }.manifesto-title h2 { margin:45px 0; font-size:clamp(46px,12.3vw,64px); letter-spacing:-.115em; line-height:.78; }.manifesto-title h2 span { white-space:nowrap; }.manifesto-copy { min-height:440px; padding:29px 20px 25px; }.manifesto-copy p { font-size:24px; }.manifesto-footer { padding:14px 15px; font-size:8px; }.manifesto-footer span:last-child { text-align:right; }
       .gallery { padding:10px; }.gallery-top { padding:15px; font-size:8px; }.gallery-top span:last-child { display:none; }.gallery-head { display:block; padding:39px 20px 33px; }.gallery-kicker { margin-bottom:18px; font-size:9px; }.gallery-head h2 { font-size:clamp(49px,12.8vw,61px); }.gallery-head p { margin-top:28px; font-size:12px; }.gallery-masonry { grid-template-columns:1fr 1fr; grid-template-rows:360px 230px 230px; }.gallery-item--dance { grid-column:span 2; grid-row:auto; }.gallery-item--decks { grid-column:span 1; grid-row:span 1; }.gallery-item--lights { grid-column:span 1; grid-row:span 1; }.gallery-item--community { grid-column:span 2; grid-row:auto; }.gallery-label { right:15px; bottom:15px; left:15px; font-size:9px; }.gallery-footer { padding:14px 15px; font-size:8px; }.gallery-footer span:last-child { text-align:right; }
-      .map-section { padding:10px; }.map-top { padding:15px; font-size:8px; }.map-top span:last-child { display:none; }.map-main { grid-template-columns:1fr; }.faq { padding:10px; }.faq-frame { grid-template-columns:1fr; min-height:0; }.faq-intro { min-height:350px; padding:30px 20px 25px; border-right:0; border-bottom:1px solid rgba(8,8,8,.62); }.faq-intro h2 { margin:38px 0; font-size:clamp(54px,16vw,81px); }.faq-item summary { min-height:76px; gap:11px; padding:17px 15px; }.faq-question { font-size:15px; }.faq-mark { width:23px; height:23px; font-size:17px; }.faq-answer { padding:0 49px 22px 51px; font-size:12px; line-height:1.48; }.map-canvas { min-height:360px; border-right:0; border-bottom:1px solid rgba(8,8,8,.62); }.venue-map, .mapcn-venue-root { height:360px; min-height:0; }.map-status { top:15px; left:15px; }.map-open { left:15px; bottom:15px; }.map-panel { min-height:420px; padding:29px 20px 25px; }.map-panel h2 { margin:35px 0; font-size:clamp(59px,17vw,86px); }.map-foot { padding:14px 15px; font-size:8px; }.map-foot span:last-child { text-align:right; }
+      .map-section { padding:10px; }.map-top { padding:15px; font-size:8px; }.map-top span:last-child { display:none; }.map-main { grid-template-columns:1fr; }.faq { padding:10px; }.faq-frame { grid-template-columns:1fr; min-height:0; }.faq-intro { min-height:350px; padding:30px 20px 25px; border-right:0; border-bottom:1px solid rgba(8,8,8,.62); }.faq-intro h2 { margin:38px 0; font-size:clamp(42px,11.6vw,52px); letter-spacing:-.075em; line-height:.82; }.faq-trigger { min-height:76px; gap:11px; padding:17px 15px; }.faq-question { font-size:15px; }.faq-mark { width:23px; height:23px; font-size:17px; }.faq-answer { padding:0 49px 0 51px; font-size:12px; line-height:1.48; }.faq-item.is-open .faq-answer { padding-bottom:22px; }.map-canvas { min-height:360px; border-right:0; border-bottom:1px solid rgba(8,8,8,.62); }.google-map-shell, .google-map-embed { height:360px; min-height:0; }.map-panel { min-height:420px; padding:29px 20px 25px; }.map-panel h2 { margin:35px 0; font-size:clamp(59px,17vw,86px); }.map-foot { padding:14px 15px; font-size:8px; }.map-foot span:last-child { text-align:right; }
       .signal { padding:10px; }.signal-frame { min-height:calc(100svh - 20px); }.signal-top { padding:15px; font-size:8px; }.signal-top span:last-child { display:none; }.signal-main { grid-template-columns:1fr; }.signal-title { min-height:390px; padding:30px 20px 25px; border-right:0; border-bottom:1px solid rgba(8,8,8,.62); }.signal-title h2 { margin:43px 0; font-size:clamp(59px,17vw,87px); }.signal-side { min-height:380px; padding:29px 20px 25px; }.signal-side p { font-size:24px; }.signal-actions { margin-top:31px; }.signal-foot { padding:14px 15px; font-size:8px; }.signal-foot span:last-child { text-align:right; }.site-footer { padding:10px; }.footer-main { grid-template-columns:1fr; }.footer-identity { min-height:335px; padding:29px 20px 25px; border-right:0; border-bottom:1px solid rgba(242,240,235,.42); }.footer-claim { margin-top:50px; font-size:clamp(51px,16vw,79px); }.footer-column { min-height:auto; padding:27px 20px; border-right:0; border-bottom:1px solid rgba(242,240,235,.42); }.footer-label { margin-bottom:18px; }.footer-event-name { font-size:54px; }.footer-entry-policy { grid-template-columns:1fr; }.footer-policy-item { min-height:0; padding:18px 20px; border-right:0; border-bottom:1px solid rgba(242,240,235,.42); }.footer-policy-item:last-child { border-bottom:0; }.footer-app-row { align-items:flex-start; flex-direction:column; gap:16px; padding:18px 20px; }.footer-app-actions { width:100%; }.footer-install, .footer-alerts, .footer-sound { flex:1; }.footer-bottom { align-items:flex-start; padding:14px 15px; }.footer-bottom p, .footer-bottom a { font-size:8px; }.footer-bottom p { max-width:190px; }.ticket-notice { right:16px; bottom:18px; left:16px; justify-content:space-between; }
     }
 
@@ -371,6 +368,7 @@
       *, *::before, *::after { animation-duration:1ms !important; animation-iteration-count:1 !important; transition-duration:1ms !important; scroll-behavior:auto !important; }.hero-video { display:none !important; }.wordmark { animation:none !important; }.site-mode .quick-home, .site-mode .quick-ticket { animation-delay:0s !important; }
     }
   </style>
+
 </head>
 <body class="intro-active">
     <header class="site-header">
@@ -671,11 +669,9 @@
       </header>
       <div class="map-main">
         <div class="map-canvas">
-          <div id="venue-map" class="venue-map" role="region" aria-label="Mapa interactivo de One More Club en Avenida Francisco Beiró 3334, Villa Devoto.">
-            <div class="mapcn-venue-fallback" aria-hidden="true"><img src="assets/map-fallback-v4.webp" width="1024" height="1024" alt="" /><span class="mapcn-venue-fallback-marker"></span></div>
-            <div id="mapcn-venue-root" class="mapcn-venue-root" aria-label="Mapa interactivo de One More Club"></div>
-            <p class="map-status">Mapa de ubicación · Villa Devoto</p>
-            <a class="map-open" href="https://www.google.com/maps/search/?api=1&amp;query=Av.+Francisco+Beir%C3%B3+3334%2C+Villa+Devoto%2C+Buenos+Aires" target="_blank" rel="noopener noreferrer">Ver Google Maps <b aria-hidden="true">↗</b></a>
+          <div class="google-map-shell" role="region" aria-label="Mapa de Google Maps de One More Club en Avenida Francisco Beiró 3334, Villa Devoto.">
+            <iframe class="google-map-embed" title="Google Maps — One More Club, Avenida Francisco Beiró 3334" src="https://www.google.com/maps/embed?pb=!1m3!2m1!1sAv.+Francisco+Beir%C3%B3+3334%2C+Villa+Devoto%2C+Buenos+Aires!6i15" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <noscript><p class="google-map-noscript">Activá JavaScript para ver el mapa de Google Maps.</p></noscript>
           </div>
         </div>
         <div class="map-panel">
@@ -690,7 +686,7 @@
           </div>
         </div>
       </div>
-      <footer class="map-foot"><span>Villa Devoto · Buenos Aires</span><span>© OpenStreetMap contributors</span></footer>
+      <footer class="map-foot"><span>Villa Devoto · Buenos Aires</span><span>Google Maps</span></footer>
     </div>
   </section>
   <section class="faq" id="preguntas" aria-labelledby="faq-title">
@@ -698,35 +694,35 @@
       <header class="faq-intro">
         <div>
           <p class="faq-kicker">Información esencial</p>
-          <h2 id="faq-title"><span>Antes de</span><span>salir</span></h2>
+          <h2 id="faq-title"><span>Preguntas</span><span>frecuentes</span></h2>
         </div>
         <p class="faq-intro-copy">Todo lo necesario para vivir ONE MORE. Consultá siempre la ficha de la fecha antes de salir.</p>
       </header>
-      <div class="faq-list">
-        <details class="faq-item">
-          <summary><span class="faq-index">01</span><span class="faq-question">¿Dónde es ONE MORE?</span><span class="faq-mark" aria-hidden="true">+</span></summary>
-          <p class="faq-answer">ONE MORE CLUB está en Av. Francisco Beiró 3334, Villa Devoto, Buenos Aires. La ubicación de cada fecha se confirma en su ficha y también podés abrir <a href="https://www.google.com/maps/search/?api=1&amp;query=Av.+Francisco+Beir%C3%B3+3334%2C+Villa+Devoto%2C+Buenos+Aires" target="_blank" rel="noopener noreferrer">Google Maps</a>.</p>
-        </details>
-        <details class="faq-item">
-          <summary><span class="faq-index">02</span><span class="faq-question">¿Cómo consigo entradas?</span><span class="faq-mark" aria-hidden="true">+</span></summary>
-          <p class="faq-answer">Entrá a la próxima fecha y usá el botón Comprar entradas. Las fechas con tickets activos redirigen a su venta oficial en Passline.</p>
-        </details>
-        <details class="faq-item">
-          <summary><span class="faq-index">03</span><span class="faq-question">¿Qué necesito para ingresar?</span><span class="faq-mark" aria-hidden="true">+</span></summary>
-          <p class="faq-answer">El ingreso es exclusivamente para mayores de 18 años. Llevá DNI vigente para acreditar tu edad.</p>
-        </details>
-        <details class="faq-item">
-          <summary><span class="faq-index">04</span><span class="faq-question">¿El ingreso está garantizado?</span><span class="faq-mark" aria-hidden="true">+</span></summary>
-          <p class="faq-answer">El ingreso está sujeto a capacidad, derecho de admisión y permanencia. Tener una entrada no modifica estas condiciones de acceso.</p>
-        </details>
-        <details class="faq-item">
-          <summary><span class="faq-index">05</span><span class="faq-question">¿A qué hora abre?</span><span class="faq-mark" aria-hidden="true">+</span></summary>
-          <p class="faq-answer">Cada fecha publica su horario propio en la ficha del evento. Como referencia, las aperturas se anuncian desde las 23:59 h. Revisá la fecha elegida antes de salir.</p>
-        </details>
-        <details class="faq-item">
-          <summary><span class="faq-index">06</span><span class="faq-question">¿Dónde veo próximas novedades?</span><span class="faq-mark" aria-hidden="true">+</span></summary>
-          <p class="faq-answer">Seguinos en <a href="https://www.instagram.com/more_electronic/" target="_blank" rel="noopener noreferrer">@more_electronic</a> para conocer anuncios, artistas y próximas fechas.</p>
-        </details>
+      <div class="faq-list" data-faq-list>
+        <article class="faq-item">
+          <button class="faq-trigger" type="button" aria-expanded="false" aria-controls="faq-answer-1"><span class="faq-index">01</span><span class="faq-question">¿Dónde es ONE MORE?</span><span class="faq-mark" aria-hidden="true">+</span></button>
+          <div class="faq-panel" id="faq-answer-1" role="region" aria-label="Respuesta: dónde es ONE MORE"><div class="faq-panel-inner"><p class="faq-answer">ONE MORE CLUB está en Av. Francisco Beiró 3334, Villa Devoto, Buenos Aires. La ubicación de cada fecha se confirma en su ficha y también podés abrir <a href="https://www.google.com/maps/search/?api=1&amp;query=Av.+Francisco+Beir%C3%B3+3334%2C+Villa+Devoto%2C+Buenos+Aires" target="_blank" rel="noopener noreferrer">Google Maps</a>.</p></div></div>
+        </article>
+        <article class="faq-item">
+          <button class="faq-trigger" type="button" aria-expanded="false" aria-controls="faq-answer-2"><span class="faq-index">02</span><span class="faq-question">¿Cómo consigo entradas?</span><span class="faq-mark" aria-hidden="true">+</span></button>
+          <div class="faq-panel" id="faq-answer-2" role="region" aria-label="Respuesta: cómo conseguir entradas"><div class="faq-panel-inner"><p class="faq-answer">Entrá a la próxima fecha y usá el botón Comprar entradas. Las fechas con tickets activos redirigen a su venta oficial en Passline.</p></div></div>
+        </article>
+        <article class="faq-item">
+          <button class="faq-trigger" type="button" aria-expanded="false" aria-controls="faq-answer-3"><span class="faq-index">03</span><span class="faq-question">¿Qué necesito para ingresar?</span><span class="faq-mark" aria-hidden="true">+</span></button>
+          <div class="faq-panel" id="faq-answer-3" role="region" aria-label="Respuesta: requisitos de ingreso"><div class="faq-panel-inner"><p class="faq-answer">El ingreso es exclusivamente para mayores de 18 años. Llevá DNI vigente para acreditar tu edad.</p></div></div>
+        </article>
+        <article class="faq-item">
+          <button class="faq-trigger" type="button" aria-expanded="false" aria-controls="faq-answer-4"><span class="faq-index">04</span><span class="faq-question">¿El ingreso está garantizado?</span><span class="faq-mark" aria-hidden="true">+</span></button>
+          <div class="faq-panel" id="faq-answer-4" role="region" aria-label="Respuesta: condiciones de ingreso"><div class="faq-panel-inner"><p class="faq-answer">El ingreso está sujeto a capacidad, derecho de admisión y permanencia. Tener una entrada no modifica estas condiciones de acceso.</p></div></div>
+        </article>
+        <article class="faq-item">
+          <button class="faq-trigger" type="button" aria-expanded="false" aria-controls="faq-answer-5"><span class="faq-index">05</span><span class="faq-question">¿A qué hora abre?</span><span class="faq-mark" aria-hidden="true">+</span></button>
+          <div class="faq-panel" id="faq-answer-5" role="region" aria-label="Respuesta: horario de apertura"><div class="faq-panel-inner"><p class="faq-answer">Cada fecha publica su horario propio en la ficha del evento. Como referencia, las aperturas se anuncian desde las 23:59 h. Revisá la fecha elegida antes de salir.</p></div></div>
+        </article>
+        <article class="faq-item">
+          <button class="faq-trigger" type="button" aria-expanded="false" aria-controls="faq-answer-6"><span class="faq-index">06</span><span class="faq-question">¿Dónde veo próximas novedades?</span><span class="faq-mark" aria-hidden="true">+</span></button>
+          <div class="faq-panel" id="faq-answer-6" role="region" aria-label="Respuesta: próximas novedades"><div class="faq-panel-inner"><p class="faq-answer">Seguinos en <a href="https://www.instagram.com/more_electronic/" target="_blank" rel="noopener noreferrer">@more_electronic</a> para conocer anuncios, artistas y próximas fechas.</p></div></div>
+        </article>
       </div>
     </div>
   </section>
@@ -1008,9 +1004,9 @@ Minimum version required to store current data is: `+i+`.
         const gain = context.createGain();
         const now = context.currentTime;
         const profiles = {
-          tap:[260, .017, .048],
-          nav:[196, .019, .065],
-          confirm:[324, .022, .075]
+          tap:[260, .07, .058],
+          nav:[196, .082, .075],
+          confirm:[324, .105, .09]
         };
         const [frequency, volume, duration] = profiles[kind] || profiles.tap;
         oscillator.type = 'triangle';
@@ -1051,6 +1047,22 @@ Minimum version required to store current data is: `+i+`.
       }
     }));
     syncSoundControls();
+
+    const faqItems = [...document.querySelectorAll('.faq-item')];
+    faqItems.forEach((item) => {
+      const trigger = item.querySelector('.faq-trigger');
+      trigger.addEventListener('click', () => {
+        const shouldOpen = !item.classList.contains('is-open');
+        faqItems.forEach((other) => {
+          other.classList.remove('is-open');
+          other.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
+        });
+        if (shouldOpen) {
+          item.classList.add('is-open');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
 
     const confirmTicketOpening = () => showActionNotice('Abriendo entradas');
     const copyShareLink = async (url) => {
@@ -1743,38 +1755,10 @@ Minimum version required to store current data is: `+i+`.
       updateHeaderNavigation();
     }
 
-    // MapCN is loaded only as the location section approaches the viewport. This keeps
-    // MapLibre/WebGL out of the hero route and removes the former 76 locally stored tiles.
-    const venueMap = document.getElementById('venue-map');
-    const mapcnRoot = document.getElementById('mapcn-venue-root');
-    let mapcnLoading = false;
-    const loadVenueMap = () => {
-      if (!mapcnRoot || mapcnLoading || mapcnRoot.dataset.mounted === 'true') return;
-      mapcnLoading = true;
-      const mapStyles = document.createElement('link');
-      mapStyles.rel = 'stylesheet';
-      mapStyles.href = 'assets/mapcn-venue-v4.css';
-      document.head.appendChild(mapStyles);
-      const mapScript = document.createElement('script');
-      mapScript.src = 'assets/mapcn-venue-v4.js';
-      mapScript.async = true;
-      mapScript.onload = () => { mapcnLoading = false; };
-      mapScript.onerror = () => {
-        mapcnLoading = false;
-        mapcnRoot.innerHTML = '<p class="map-load-error">No se pudo cargar el mapa interactivo.<br>Usá “Ver Google Maps” para llegar.</p>';
-      };
-      document.head.appendChild(mapScript);
-    };
-    if (venueMap && 'IntersectionObserver' in window) {
-      const mapObserver = new IntersectionObserver((entries) => {
-        if (!entries.some((entry) => entry.isIntersecting)) return;
-        loadVenueMap();
-        mapObserver.disconnect();
-      }, { rootMargin:'280px 0px' });
-      mapObserver.observe(venueMap);
-    } else {
-      loadVenueMap();
-    }
+    // Google Maps is embedded directly through Google’s official map endpoint.
+    // No custom JavaScript map runtime, tile proxy, WebGL worker, or alternate
+    // renderer is needed here; the iframe loads lazily when the browser allows it.
+
 
   </script>
 </body>
