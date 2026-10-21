@@ -135,7 +135,7 @@
     .event-lineup { max-width:395px; margin:0; padding-top:14px; border-top:1px solid rgba(8,8,8,.75); }
     .event-lineup span { display:block; margin-bottom:9px; font-size:9px; font-weight:700; letter-spacing:.15em; text-transform:uppercase; }
     .event-lineup p { margin:0; font-size:clamp(13px,1.22vw,18px); font-weight:700; letter-spacing:-.045em; line-height:1.05; text-transform:uppercase; }
-    .event-info { display:flex; flex-direction:column; justify-content:space-between; min-height:570px; padding:clamp(30px,4vw,58px) clamp(22px,3vw,45px) 26px; background:#101010; color:var(--paper); }.event-info > .event-info-content { display:flex; flex:1; flex-direction:column; justify-content:center; padding-bottom:24px; }
+    .event-info { container-type:inline-size; display:flex; min-width:0; flex-direction:column; justify-content:space-between; min-height:570px; padding:clamp(30px,4vw,58px) clamp(22px,3vw,45px) 26px; background:#101010; color:var(--paper); }.event-info > .event-info-content { display:flex; flex:1; flex-direction:column; justify-content:center; padding-bottom:24px; }
     .event-number { display:flex; align-items:baseline; gap:11px; margin:0; font-weight:900; line-height:.66; text-transform:uppercase; }
     .event-number span { font-size:clamp(86px,8vw,128px); letter-spacing:-.11em; }
     .event-number small { font-size:11px; letter-spacing:.16em; }
@@ -277,7 +277,7 @@
     .map-link { display:flex; justify-content:space-between; gap:16px; padding:15px 0 4px; border-bottom:1px solid var(--paper); color:var(--paper); font-size:10px; font-weight:700; letter-spacing:.12em; text-decoration:none; text-transform:uppercase; }
     .map-note { margin:20px 0 0; color:rgba(242,240,235,.62); font-size:10px; line-height:1.4; }
     .map-foot { display:flex; justify-content:space-between; gap:16px; padding:16px 22px; border-top:1px solid rgba(8,8,8,.62); color:rgba(8,8,8,.72); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1.2; text-transform:uppercase; }
-    .faq { padding:15px; background:var(--paper); color:var(--ink); }.faq-frame { display:grid; grid-template-columns:minmax(280px,.68fr) minmax(0,1.32fr); min-height:540px; border:1px solid rgba(8,8,8,.62); }.faq-intro { display:flex; min-width:0; flex-direction:column; justify-content:space-between; overflow:hidden; padding:clamp(34px,4.8vw,72px) clamp(23px,4.6vw,68px) 29px; border-right:1px solid rgba(8,8,8,.62); }.faq-kicker { display:flex; align-items:center; gap:10px; margin:0; color:rgba(8,8,8,.62); font-size:10px; font-weight:700; letter-spacing:.15em; line-height:1; text-transform:uppercase; }.faq-kicker::before { content:''; width:27px; height:1px; background:currentColor; }.faq-intro h2 { max-width:100%; margin:45px 0; font-size:clamp(42px,4.4vw,66px); font-weight:900; letter-spacing:-.08em; line-height:.79; overflow-wrap:anywhere; text-transform:uppercase; }.faq-intro h2 span { display:block; max-width:100%; }.faq-intro-copy { max-width:315px; margin:0; font-size:12px; line-height:1.46; }.faq-list { align-self:stretch; }.faq-item { margin:0; border-bottom:1px solid rgba(8,8,8,.62); }.faq-item:last-child { border-bottom:0; }.faq-trigger { display:grid; grid-template-columns:auto minmax(0,1fr) auto; align-items:center; gap:15px; width:100%; min-height:89px; padding:20px clamp(20px,3vw,43px); border:0; background:transparent; color:var(--ink); font:inherit; text-align:left; cursor:pointer; }.faq-index { color:rgba(8,8,8,.52); font-size:9px; font-weight:700; letter-spacing:.13em; }.faq-question { font-size:clamp(15px,1.5vw,21px); font-weight:900; letter-spacing:-.045em; line-height:1; text-transform:uppercase; }.faq-mark { display:grid; place-items:center; width:25px; height:25px; border:1px solid var(--ink); font-size:18px; font-weight:400; line-height:1; transition:transform 220ms ease,background-color 180ms ease,color 180ms ease; }.faq-item.is-open .faq-mark { background:var(--ink); color:var(--paper); transform:rotate(45deg); }.faq-trigger:hover .faq-question, .faq-trigger:focus-visible .faq-question { text-decoration:underline; text-underline-offset:4px; }.faq-trigger:focus-visible { outline:2px solid var(--ink); outline-offset:-4px; }.faq-panel { display:grid; grid-template-rows:0fr; transition:grid-template-rows 330ms cubic-bezier(.22,.8,.22,1); }.faq-panel-inner { min-height:0; overflow:hidden; }.faq-answer { max-width:610px; margin:0; padding:0 clamp(60px,6vw,104px) 0 clamp(62px,5.9vw,101px); color:rgba(8,8,8,.73); font-size:13px; line-height:1.5; opacity:0; transform:translate3d(0,-7px,0); transition:opacity 180ms ease,transform 260ms cubic-bezier(.22,.8,.22,1),padding-bottom 330ms cubic-bezier(.22,.8,.22,1); }.faq-item.is-open .faq-panel { grid-template-rows:1fr; }.faq-item.is-open .faq-answer { padding-bottom:25px; opacity:1; transform:translate3d(0,0,0); transition-delay:75ms,75ms,0s; }.faq-answer a { color:var(--ink); font-weight:700; text-underline-offset:3px; }
+    .faq { padding:15px; background:var(--paper); color:var(--ink); }.faq-frame { display:grid; grid-template-columns:minmax(280px,.68fr) minmax(0,1.32fr); min-height:540px; border:1px solid rgba(8,8,8,.62); }.faq-intro { display:flex; min-width:0; flex-direction:column; justify-content:space-between; overflow:visible; padding:clamp(34px,4.8vw,72px) clamp(23px,4.6vw,68px) 29px; border-right:1px solid rgba(8,8,8,.62); }.faq-kicker { display:flex; align-items:center; gap:10px; margin:0; color:rgba(8,8,8,.62); font-size:10px; font-weight:700; letter-spacing:.15em; line-height:1; text-transform:uppercase; }.faq-kicker::before { content:''; width:27px; height:1px; background:currentColor; }.faq-intro h2 { max-width:100%; margin:45px 0; font-size:clamp(36px,3.6vw,56px); font-weight:900; letter-spacing:-.07em; line-height:.82; overflow-wrap:normal; text-transform:uppercase; }.faq-intro h2 span { display:block; max-width:100%; white-space:nowrap; }.faq-intro-copy { max-width:315px; margin:0; font-size:12px; line-height:1.46; }.faq-list { align-self:stretch; }.faq-item { margin:0; border-bottom:1px solid rgba(8,8,8,.62); }.faq-item:last-child { border-bottom:0; }.faq-trigger { display:grid; grid-template-columns:auto minmax(0,1fr) auto; align-items:center; gap:15px; width:100%; min-height:89px; padding:20px clamp(20px,3vw,43px); border:0; background:transparent; color:var(--ink); font:inherit; text-align:left; cursor:pointer; }.faq-index { color:rgba(8,8,8,.52); font-size:9px; font-weight:700; letter-spacing:.13em; }.faq-question { font-size:clamp(15px,1.5vw,21px); font-weight:900; letter-spacing:-.045em; line-height:1; text-transform:uppercase; }.faq-mark { display:grid; place-items:center; width:25px; height:25px; border:1px solid var(--ink); font-size:18px; font-weight:400; line-height:1; transition:transform 220ms ease,background-color 180ms ease,color 180ms ease; }.faq-item.is-open .faq-mark { background:var(--ink); color:var(--paper); transform:rotate(45deg); }.faq-trigger:hover .faq-question, .faq-trigger:focus-visible .faq-question { text-decoration:underline; text-underline-offset:4px; }.faq-trigger:focus-visible { outline:2px solid var(--ink); outline-offset:-4px; }.faq-panel { display:grid; grid-template-rows:0fr; transition:grid-template-rows 330ms cubic-bezier(.22,.8,.22,1); }.faq-panel-inner { min-height:0; overflow:hidden; }.faq-answer { max-width:610px; margin:0; padding:0 clamp(60px,6vw,104px) 0 clamp(62px,5.9vw,101px); color:rgba(8,8,8,.73); font-size:13px; line-height:1.5; opacity:0; transform:translate3d(0,-7px,0); transition:opacity 180ms ease,transform 260ms cubic-bezier(.22,.8,.22,1),padding-bottom 330ms cubic-bezier(.22,.8,.22,1); }.faq-item.is-open .faq-panel { grid-template-rows:1fr; }.faq-item.is-open .faq-answer { padding-bottom:25px; opacity:1; transform:translate3d(0,0,0); transition-delay:75ms,75ms,0s; }.faq-answer a { color:var(--ink); font-weight:700; text-underline-offset:3px; }
     .site-footer { padding:15px; background:#080808; color:var(--paper); }
     .footer-frame { border:1px solid rgba(242,240,235,.48); }
     .footer-main { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(150px,.45fr) minmax(200px,.62fr); gap:0; }
@@ -311,7 +311,7 @@
       .archive { padding:10px; }.archive-top { padding:15px; font-size:8px; }.archive-intro { display:block; padding:37px 20px 31px; }.archive-intro h2 { font-size:clamp(56px,17vw,85px); }.archive-intro p { margin-top:25px; font-size:12px; }.archive-rail { grid-auto-columns:87vw; }.archive-card { min-height:430px; padding:18px; }.archive-card-name { font-size:clamp(60px,18vw,88px); }.archive-card-name.small { font-size:clamp(51px,14vw,70px); }
       .manifesto { padding:10px; }.manifesto-frame { min-height:calc(100svh - 20px); }.manifesto-top { padding:15px; font-size:8px; }.manifesto-top span:last-child { display:none; }.manifesto-main { grid-template-columns:1fr; }.manifesto-title { min-height:435px; padding:30px 20px 25px; border-right:0; border-bottom:1px solid rgba(8,8,8,.62); }.manifesto-title h2 { margin:45px 0; font-size:clamp(46px,12.3vw,64px); letter-spacing:-.115em; line-height:.78; }.manifesto-title h2 span { white-space:nowrap; }.manifesto-copy { min-height:440px; padding:29px 20px 25px; }.manifesto-copy p { font-size:24px; }.manifesto-footer { padding:14px 15px; font-size:8px; }.manifesto-footer span:last-child { text-align:right; }
       .gallery { padding:10px; }.gallery-top { padding:15px; font-size:8px; }.gallery-top span:last-child { display:none; }.gallery-head { display:block; padding:39px 20px 33px; }.gallery-kicker { margin-bottom:18px; font-size:9px; }.gallery-head h2 { font-size:clamp(49px,12.8vw,61px); }.gallery-head p { margin-top:28px; font-size:12px; }.gallery-masonry { grid-template-columns:1fr 1fr; grid-template-rows:360px 230px 230px; }.gallery-item--dance { grid-column:span 2; grid-row:auto; }.gallery-item--decks { grid-column:span 1; grid-row:span 1; }.gallery-item--lights { grid-column:span 1; grid-row:span 1; }.gallery-item--community { grid-column:span 2; grid-row:auto; }.gallery-label { right:15px; bottom:15px; left:15px; font-size:9px; }.gallery-footer { padding:14px 15px; font-size:8px; }.gallery-footer span:last-child { text-align:right; }
-      .map-section { padding:10px; }.map-top { padding:15px; font-size:8px; }.map-top span:last-child { display:none; }.map-main { grid-template-columns:1fr; }.faq { padding:10px; }.faq-frame { grid-template-columns:1fr; min-height:0; }.faq-intro { min-height:350px; padding:30px 20px 25px; border-right:0; border-bottom:1px solid rgba(8,8,8,.62); }.faq-intro h2 { margin:38px 0; font-size:clamp(42px,11.6vw,52px); letter-spacing:-.075em; line-height:.82; }.faq-trigger { min-height:76px; gap:11px; padding:17px 15px; }.faq-question { font-size:15px; }.faq-mark { width:23px; height:23px; font-size:17px; }.faq-answer { padding:0 49px 0 51px; font-size:12px; line-height:1.48; }.faq-item.is-open .faq-answer { padding-bottom:22px; }.map-canvas { min-height:360px; border-right:0; border-bottom:1px solid rgba(8,8,8,.62); }.google-map-shell, .google-map-embed { height:360px; min-height:0; }.map-panel { min-height:420px; padding:29px 20px 25px; }.map-panel h2 { margin:35px 0; font-size:clamp(59px,17vw,86px); }.map-foot { padding:14px 15px; font-size:8px; }.map-foot span:last-child { text-align:right; }
+      .map-section { padding:10px; }.map-top { padding:15px; font-size:8px; }.map-top span:last-child { display:none; }.map-main { grid-template-columns:1fr; }.faq { padding:10px; }.faq-frame { grid-template-columns:1fr; min-height:0; }.faq-intro { min-height:350px; padding:30px 20px 25px; border-right:0; border-bottom:1px solid rgba(8,8,8,.62); }.faq-intro h2 { margin:38px 0; font-size:clamp(38px,10.4vw,48px); letter-spacing:-.065em; line-height:.84; }.faq-trigger { min-height:76px; gap:11px; padding:17px 15px; }.faq-question { font-size:15px; }.faq-mark { width:23px; height:23px; font-size:17px; }.faq-answer { padding:0 49px 0 51px; font-size:12px; line-height:1.48; }.faq-item.is-open .faq-answer { padding-bottom:22px; }.map-canvas { min-height:360px; border-right:0; border-bottom:1px solid rgba(8,8,8,.62); }.google-map-shell, .google-map-embed { height:360px; min-height:0; }.map-panel { min-height:420px; padding:29px 20px 25px; }.map-panel h2 { margin:35px 0; font-size:clamp(59px,17vw,86px); }.map-foot { padding:14px 15px; font-size:8px; }.map-foot span:last-child { text-align:right; }
       .signal { padding:10px; }.signal-frame { min-height:calc(100svh - 20px); }.signal-top { padding:15px; font-size:8px; }.signal-top span:last-child { display:none; }.signal-main { grid-template-columns:1fr; }.signal-title { min-height:390px; padding:30px 20px 25px; border-right:0; border-bottom:1px solid rgba(8,8,8,.62); }.signal-title h2 { margin:43px 0; font-size:clamp(59px,17vw,87px); }.signal-side { min-height:380px; padding:29px 20px 25px; }.signal-side p { font-size:24px; }.signal-actions { margin-top:31px; }.signal-foot { padding:14px 15px; font-size:8px; }.signal-foot span:last-child { text-align:right; }.site-footer { padding:10px; }.footer-main { grid-template-columns:1fr; }.footer-identity { min-height:335px; padding:29px 20px 25px; border-right:0; border-bottom:1px solid rgba(242,240,235,.42); }.footer-claim { margin-top:50px; font-size:clamp(51px,16vw,79px); }.footer-column { min-height:auto; padding:27px 20px; border-right:0; border-bottom:1px solid rgba(242,240,235,.42); }.footer-label { margin-bottom:18px; }.footer-event-name { font-size:54px; }.footer-entry-policy { grid-template-columns:1fr; }.footer-policy-item { min-height:0; padding:18px 20px; border-right:0; border-bottom:1px solid rgba(242,240,235,.42); }.footer-policy-item:last-child { border-bottom:0; }.footer-app-row { align-items:flex-start; flex-direction:column; gap:16px; padding:18px 20px; }.footer-app-actions { width:100%; }.footer-install, .footer-alerts, .footer-sound { flex:1; }.footer-bottom { align-items:flex-start; padding:14px 15px; }.footer-bottom p, .footer-bottom a { font-size:8px; }.footer-bottom p { max-width:190px; }.ticket-notice { right:16px; bottom:18px; left:16px; justify-content:space-between; }
     }
 
@@ -366,6 +366,18 @@
     @media (prefers-reduced-motion:reduce) {
       html { scroll-behavior:auto; }
       *, *::before, *::after { animation-duration:1ms !important; animation-iteration-count:1 !important; transition-duration:1ms !important; scroll-behavior:auto !important; }.hero-video { display:none !important; }.wordmark { animation:none !important; }.site-mode .quick-home, .site-mode .quick-ticket { animation-delay:0s !important; }
+    }
+
+    /* Narrow event-detail columns: avoid squeezing the share action out of its grid. */
+    @container (max-width: 390px) {
+      .event-actions { grid-template-columns:minmax(0,1fr) 48px; grid-template-rows:52px 46px; }
+      .event-actions .announce { grid-column:1 / -1; grid-row:1; }
+      .event-actions .event-share { grid-column:1; grid-row:2; min-width:0; padding:0 12px; }
+      .event-actions .event-qr-trigger { grid-column:2; grid-row:2; min-height:46px; }
+      .event-share span { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    }
+    @media (max-width:760px) {
+      .mobile-quick-actions.is-context-hidden { visibility:hidden !important; pointer-events:none !important; opacity:0; transform:translate3d(18px,16px,0); }
     }
   </style>
 
@@ -935,6 +947,20 @@ Minimum version required to store current data is: `+i+`.
     const curtainSerial = document.querySelector('[data-curtain-serial]');
     const sliderEnterButton = document.querySelector('.slider-enter');
     const mobileQuickActions = document.querySelector('.mobile-quick-actions');
+    const quickActionBoundary = document.getElementById('preguntas');
+    const quickActionLinks = mobileQuickActions ? [...mobileQuickActions.querySelectorAll('a')] : [];
+    const updateMobileQuickActionVisibility = () => {
+      if (!mobileQuickActions || !quickActionBoundary) return;
+      const isMobile = window.matchMedia('(max-width: 760px)').matches;
+      const nearEnd = isMobile && document.body.classList.contains('site-mode') && quickActionBoundary.getBoundingClientRect().top < window.innerHeight * .82;
+      mobileQuickActions.classList.toggle('is-context-hidden', nearEnd);
+      mobileQuickActions.setAttribute('aria-hidden', String(nearEnd));
+      quickActionLinks.forEach((link) => {
+        if (nearEnd) link.setAttribute('tabindex', '-1'); else link.removeAttribute('tabindex');
+      });
+    };
+    window.addEventListener('scroll', updateMobileQuickActionVisibility, { passive:true });
+    window.addEventListener('resize', updateMobileQuickActionVisibility, { passive:true });
     const heroVideo = document.querySelector('.hero-video');
     const syncHeroVideoMotion = () => {
       const shouldPlay = !document.hidden && document.body.classList.contains('intro-active') && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -983,6 +1009,7 @@ Minimum version required to store current data is: `+i+`.
       try { return window.localStorage.getItem('one-more-ui-sound') !== 'off'; } catch (_) { return true; }
     })();
     let soundContext;
+    let soundMaster;
     const syncSoundControls = () => soundToggleButtons.forEach((button) => {
       button.setAttribute('aria-pressed', String(soundEnabled));
       const label = button.querySelector('[data-sound-label]');
@@ -992,32 +1019,48 @@ Minimum version required to store current data is: `+i+`.
       if (soundContext) return soundContext;
       const AudioConstructor = window.AudioContext || window.webkitAudioContext;
       if (!AudioConstructor) return null;
-      try { soundContext = new AudioConstructor(); } catch (_) { return null; }
+      try {
+        soundContext = new AudioConstructor();
+        soundMaster = soundContext.createGain();
+        const compressor = soundContext.createDynamicsCompressor();
+        soundMaster.gain.setValueAtTime(1.22, soundContext.currentTime);
+        compressor.threshold.setValueAtTime(-23, soundContext.currentTime);
+        compressor.knee.setValueAtTime(18, soundContext.currentTime);
+        compressor.ratio.setValueAtTime(8, soundContext.currentTime);
+        compressor.attack.setValueAtTime(.003, soundContext.currentTime);
+        compressor.release.setValueAtTime(.14, soundContext.currentTime);
+        soundMaster.connect(compressor).connect(soundContext.destination);
+      } catch (_) { soundContext = null; soundMaster = null; return null; }
       return soundContext;
     };
     const playUiSound = (kind = 'tap') => {
       if (!soundEnabled || document.hidden) return;
       const context = getSoundContext();
-      if (!context) return;
+      if (!context || !soundMaster) return;
       const render = () => {
-        const oscillator = context.createOscillator();
-        const gain = context.createGain();
         const now = context.currentTime;
         const profiles = {
-          tap:[260, .07, .058],
-          nav:[196, .082, .075],
-          confirm:[324, .105, .09]
+          tap:{ frequency:430, volume:.19, duration:.115, glide:.78 },
+          nav:{ frequency:302, volume:.23, duration:.145, glide:.72 },
+          confirm:{ frequency:523, volume:.30, duration:.19, glide:.92 }
         };
-        const [frequency, volume, duration] = profiles[kind] || profiles.tap;
-        oscillator.type = 'triangle';
-        oscillator.frequency.setValueAtTime(frequency, now);
-        oscillator.frequency.exponentialRampToValueAtTime(Math.max(85, frequency * .72), now + duration);
-        gain.gain.setValueAtTime(.0001, now);
-        gain.gain.exponentialRampToValueAtTime(volume, now + .006);
-        gain.gain.exponentialRampToValueAtTime(.0001, now + duration);
-        oscillator.connect(gain).connect(context.destination);
-        oscillator.start(now);
-        oscillator.stop(now + duration + .01);
+        const profile = profiles[kind] || profiles.tap;
+        const voice = (ratio, type, level, delay = 0) => {
+          const oscillator = context.createOscillator();
+          const gain = context.createGain();
+          const start = now + delay;
+          oscillator.type = type;
+          oscillator.frequency.setValueAtTime(profile.frequency * ratio, start);
+          oscillator.frequency.exponentialRampToValueAtTime(Math.max(95, profile.frequency * ratio * profile.glide), start + profile.duration);
+          gain.gain.setValueAtTime(.0001, start);
+          gain.gain.exponentialRampToValueAtTime(profile.volume * level, start + .008);
+          gain.gain.exponentialRampToValueAtTime(.0001, start + profile.duration);
+          oscillator.connect(gain).connect(soundMaster);
+          oscillator.start(start);
+          oscillator.stop(start + profile.duration + .02);
+        };
+        voice(1, 'triangle', 1);
+        voice(kind === 'confirm' ? 1.5 : 2.01, 'sine', .38, .006);
       };
       if (context.state === 'suspended') context.resume().then(render).catch(() => {}); else render();
     };
@@ -1574,6 +1617,7 @@ Minimum version required to store current data is: `+i+`.
       introSlider.setAttribute('aria-hidden', 'false');
       requestAnimationFrame(() => introSlider.classList.add('is-open'));
       updateHeaderNavigation();
+      updateMobileQuickActionVisibility();
     };
     const showEventPanel = () => playCurtain(activateEventPanel, {
       index:'01 / Próxima fecha',
@@ -1732,9 +1776,14 @@ Minimum version required to store current data is: `+i+`.
       }
       try {
         const registration = await navigator.serviceWorker.ready;
-        const worker = registration.active || navigator.serviceWorker.controller;
-        if (!worker) throw new Error('Service worker unavailable');
-        worker.postMessage({ type:'ONE_MORE_NOTIFICATION_PREVIEW', eventSlug:'joyce-23-oct' });
+        await registration.showNotification('ONE MORE ELECTRONIC', {
+          body: 'Nueva fecha: JOYCE · Vie 23 OCT · 23:59 H',
+          icon: '/assets/apple-touch-icon.png?v=3',
+          badge: '/assets/favicon.ico?v=3',
+          tag: 'one-more-notification-preview',
+          renotify: true,
+          data: { url: '/?evento=joyce-23-oct' }
+        });
         showActionNotice('Alerta de prueba enviada');
       } catch (_) {
         showActionNotice('No se pudo enviar la prueba');
@@ -1754,6 +1803,8 @@ Minimum version required to store current data is: `+i+`.
       stageHeroPanel(reducedMotionEnabled() ? 0 : 110);
       updateHeaderNavigation();
     }
+
+    updateMobileQuickActionVisibility();
 
     // Google Maps is embedded directly through Google’s official map endpoint.
     // No custom JavaScript map runtime, tile proxy, WebGL worker, or alternate
