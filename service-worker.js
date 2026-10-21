@@ -1,13 +1,10 @@
-const CACHE_NAME = 'one-more-shell-v2';
+const CACHE_NAME = 'one-more-shell-v3';
 const APP_SHELL = [
   '/',
   '/index.html',
-  '/manifest.webmanifest?v=2',
-  '/assets/one-more-favicon-v2.ico',
-  '/assets/one-more-touch-v2.png',
-  '/assets/pwa-192-v2.png',
-  '/assets/pwa-512-v2.png',
-  '/assets/pwa-512-maskable-v2.png',
+  '/manifest.webmanifest?v=3',
+  '/assets/favicon.ico?v=3',
+  '/assets/apple-touch-icon.png?v=3',
   '/assets/one-logo.webp',
   '/assets/one-more-crowd-hero.webp'
 ];
