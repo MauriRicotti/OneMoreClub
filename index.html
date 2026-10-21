@@ -1,0 +1,1522 @@
+<!doctype html>
+<html lang="es" class="intro-locked">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#080808" />
+  <meta name="description" content="ONE MORE ELECTRONIC — La noche no termina." />
+  <link rel="preload" as="image" href="assets/one-more-crowd-hero.webp" fetchpriority="high" />
+  <link rel="preload" as="image" href="assets/one-logo.webp" fetchpriority="high" />
+  <title>ONE MORE ELECTRONIC — La noche no termina</title>
+  <style>
+    :root { --ink:#080808; --paper:#f2f0eb; --line:rgba(242,240,235,.38); --muted:rgba(242,240,235,.67); }
+    * { box-sizing: border-box; }
+    html,body { margin:0; min-height:100%; max-width:100%; overflow-x:hidden; background:var(--ink); color:var(--paper); font-family:Arial, Helvetica, sans-serif; }
+    button, a { font: inherit; }
+    .hero { isolation:isolate; min-height:100svh; position:relative; overflow:hidden; background:#060606; display:flex; flex-direction:column; }
+    .background { position:absolute; inset:-2%; z-index:-4; overflow:hidden; background:url('assets/one-more-crowd-hero.webp') center center / cover no-repeat; transform:translate3d(0,0,0); }
+    .hero-video { position:absolute; inset:0; display:block; width:100%; height:100%; object-fit:cover; object-position:center center; }
+    @keyframes hero-logo-drift { 0%,100% { transform:translate3d(0,0,0) rotate(0deg); } 50% { transform:translate3d(3px,-6px,0) rotate(.18deg); } }
+    @keyframes quick-control-arrive { 0% { opacity:0; transform:translate3d(22px,18px,0) scale(.76) rotate(3deg); } 58% { opacity:1; transform:translate3d(-3px,-2px,0) scale(1.045) rotate(-.6deg); } 78% { transform:translate3d(1px,1px,0) scale(.985) rotate(.15deg); } 100% { opacity:1; transform:translate3d(0,0,0) scale(1) rotate(0deg); } }
+    @keyframes quick-control-depart { from { opacity:1; transform:translate3d(0,0,0) scale(1) rotate(0deg); } to { opacity:0; transform:translate3d(24px,14px,0) scale(.82) rotate(2deg); } }
+
+    .veil { position:absolute; z-index:-3; inset:0; background:linear-gradient(90deg,rgba(4,4,4,.94) 0%,rgba(5,5,5,.64) 37%,rgba(5,5,5,.13) 73%,rgba(5,5,5,.54) 100%),linear-gradient(0deg,rgba(0,0,0,.94) 0%,rgba(0,0,0,0) 36%,rgba(0,0,0,.24) 100%); }
+    .site-header { min-height:100px; display:flex; align-items:center; justify-content:space-between; padding:22px 29px; position:relative; }
+    .brand { display:flex; align-items:center; gap:12px; color:inherit; text-decoration:none; }
+    .brand img { display:block; width:42px; height:42px; object-fit:contain; }
+    .brand-name { font-size:10px; font-weight:700; line-height:.96; letter-spacing:.105em; text-transform:uppercase; }
+    .header-side { display:flex; gap:25px; align-items:center; }
+    .header-link { color:var(--paper); background:none; border:0; text-decoration:none; padding:3px 0; font-size:10px; line-height:1; letter-spacing:.12em; text-transform:uppercase; cursor:pointer; }
+    .frame { position:absolute; inset:15px; border:1px solid rgba(242,240,235,.22); pointer-events:none; }
+    .hero-main { flex:1; display:flex; position:relative; padding:34px 7.2vw 52px; align-items:flex-end; }
+    .hero-copy { max-width:760px; position:relative; z-index:1; }
+    .eyebrow { display:flex; align-items:center; gap:10px; font-size:10px; letter-spacing:.18em; font-weight:700; text-transform:uppercase; color:var(--muted); margin:0 0 18px; }
+    .eyebrow i { display:block; background:var(--paper); border-radius:50%; width:6px; height:6px; }
+    h1 { margin:0; font-size:clamp(56px, 7.6vw, 134px); font-weight:900; letter-spacing:-.085em; line-height:.79; text-transform:uppercase; max-width:960px; text-shadow:0 3px 10px rgba(0,0,0,.42); }
+    h1 span { display:block; white-space:nowrap; }
+    .tagline { margin:29px 0 0; font-size:clamp(14px,1.45vw,20px); font-weight:600; line-height:1; letter-spacing:-.04em; text-transform:uppercase; }
+    .action-row { display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin-top:33px; }
+    .action { appearance:none; display:inline-flex; align-items:center; justify-content:space-between; gap:46px; border:1px solid var(--paper); color:var(--ink); background:var(--paper); min-width:220px; padding:13px 13px 13px 16px; text-decoration:none; font-size:10px; font-weight:700; letter-spacing:.1em; line-height:1; text-transform:uppercase; cursor:pointer; }
+    .action b { font-size:18px; line-height:8px; font-weight:400; }
+    .status { font-size:9px; color:var(--muted); text-transform:uppercase; letter-spacing:.13em; }
+    .status strong { color:var(--paper); font-weight:700; }
+    .hero-aside { position:absolute; right:29px; bottom:51px; display:flex; align-items:flex-end; gap:13px; writing-mode:vertical-rl; transform:rotate(180deg); font-size:9px; letter-spacing:.16em; line-height:1; text-transform:uppercase; color:var(--muted); }
+    .hero-aside::before { content:''; height:58px; width:1px; background:rgba(242,240,235,.55); }
+    .hero-countdown { position:absolute; right:clamp(28px,6.7vw,108px); bottom:51px; z-index:2; display:grid; grid-template-columns:minmax(0,1fr) auto; width:clamp(248px,19vw,292px); padding:15px 16px 14px; border:1px solid rgba(242,240,235,.66); background:#080808; color:var(--paper); text-decoration:none; transition:border-color 180ms ease,background-color 180ms ease; }
+    .hero-countdown:hover { border-color:var(--paper); background:#111; }.hero-countdown:focus-visible { outline:2px solid var(--paper); outline-offset:4px; }.countdown-kicker { grid-column:1 / -1; margin-bottom:12px; color:rgba(242,240,235,.62); font-size:8px; font-weight:700; letter-spacing:.16em; line-height:1; text-transform:uppercase; }.countdown-event { display:block; font-size:clamp(23px,2.2vw,34px); font-weight:900; letter-spacing:-.09em; line-height:.76; text-transform:uppercase; }.countdown-date { display:block; margin-top:8px; color:rgba(242,240,235,.72); font-size:8px; font-weight:700; letter-spacing:.12em; line-height:1.25; text-transform:uppercase; }.countdown-link { align-self:end; padding:0 0 2px 12px; font-size:15px; line-height:1; }.countdown-clock { grid-column:1 / -1; display:grid; grid-template-columns:repeat(3,1fr); gap:1px; margin-top:14px; border-top:1px solid rgba(242,240,235,.34); border-bottom:1px solid rgba(242,240,235,.34); background:rgba(242,240,235,.3); }.countdown-clock span { display:flex; flex-direction:column; gap:4px; padding:9px 7px 8px; background:#080808; }.countdown-clock b { font-size:20px; font-weight:900; letter-spacing:-.075em; line-height:.75; }.countdown-clock small { color:rgba(242,240,235,.61); font-size:7px; font-weight:700; letter-spacing:.12em; line-height:1; text-transform:uppercase; }
+    .scroll { position:absolute; right:29px; bottom:21px; display:flex; gap:8px; align-items:center; color:var(--paper); font-size:9px; letter-spacing:.13em; text-transform:uppercase; }
+    .scroll i { display:block; height:1px; width:30px; background:var(--paper); }
+    .wordmark { position:absolute; right:clamp(28px,6.7vw,108px); top:45%; translate:0 -50%; width:clamp(142px,15.5vw,246px); height:auto; aspect-ratio:1 / 1; object-fit:contain; opacity:.9; will-change:transform; animation:hero-logo-drift 10s ease-in-out infinite; }
+    .intro-deck.hero-intro .wordmark { opacity:0; animation:none; transition:opacity 430ms ease; }.intro-deck.hero-intro .hero-copy > h1, .intro-deck.hero-intro .hero-copy > .tagline, .intro-deck.hero-intro .hero-copy > .hero-routes, .intro-deck.hero-intro .hero-countdown { opacity:0; will-change:opacity,transform; }
+    .intro-deck.hero-intro .hero-copy > h1 { transform:translate3d(0,18px,0); transition:opacity 350ms ease,transform 520ms cubic-bezier(.22,.8,.22,1); }.intro-deck.hero-intro .hero-copy > .tagline { transform:translate3d(0,12px,0); transition:opacity 300ms ease,transform 440ms cubic-bezier(.22,.8,.22,1); }.intro-deck.hero-intro .hero-copy > .hero-routes { transform:translate3d(0,16px,0); transition:opacity 330ms ease,transform 470ms cubic-bezier(.22,.8,.22,1); }.intro-deck.hero-intro .hero-countdown { transform:translate3d(20px,0,0); transition:opacity 330ms ease,transform 500ms cubic-bezier(.22,.8,.22,1); }
+    .intro-deck.hero-intro.is-hero-ready .wordmark { opacity:.9; animation:hero-logo-drift 10s ease-in-out infinite; transition-delay:65ms; }.intro-deck.hero-intro.is-hero-ready .hero-copy > h1, .intro-deck.hero-intro.is-hero-ready .hero-copy > .tagline, .intro-deck.hero-intro.is-hero-ready .hero-copy > .hero-routes, .intro-deck.hero-intro.is-hero-ready .hero-countdown { opacity:1; transform:translate3d(0,0,0); }.intro-deck.hero-intro.is-hero-ready .hero-copy > h1 { transition-delay:0ms; }.intro-deck.hero-intro.is-hero-ready .hero-copy > .tagline { transition-delay:85ms; }.intro-deck.hero-intro.is-hero-ready .hero-copy > .hero-routes { transition-delay:165ms; }.intro-deck.hero-intro.is-hero-ready .hero-countdown { transition-delay:245ms; }
+    .intro-deck.hero-intro.hero-preparing .wordmark, .intro-deck.hero-intro.hero-preparing .hero-copy > h1, .intro-deck.hero-intro.hero-preparing .hero-copy > .tagline, .intro-deck.hero-intro.hero-preparing .hero-copy > .hero-routes, .intro-deck.hero-intro.hero-preparing .hero-countdown { transition:none !important; }
+    .intro-deck { position:relative; width:100%; height:100svh; min-height:100svh; overflow:hidden; }
+    .intro-deck.is-collapsed { height:96px; min-height:96px; background:#080808; }
+    .intro-deck.is-collapsed > .hero { visibility:hidden; }
+    .intro-deck > .hero { width:100%; height:100svh; min-height:100svh; }
+    .intro-slider { position:fixed; z-index:90; inset:0; overflow:hidden; visibility:hidden; pointer-events:none; opacity:0; transition:opacity 120ms ease,visibility 0s linear 120ms; }
+    .intro-slider.is-open { visibility:visible; pointer-events:auto; opacity:1; transition-delay:0s; }
+    .intro-slider.exit-left { visibility:hidden; pointer-events:none; opacity:0; }
+    .intro-slider.no-motion { transition:none; }
+    .intro-slider > .next-experience { position:relative; width:100%; height:100svh; min-height:100svh; overflow:hidden; padding:15px; }
+    .intro-slider .next-frame { height:calc(100svh - 30px); min-height:0; }
+    .intro-slider .section-top { display:grid; grid-template-columns:1fr auto 1fr; align-items:center; }
+    .intro-slider .section-top .event-back { justify-self:start; }.intro-slider .section-top .event-switcher { grid-column:2; justify-self:center; }.intro-slider .section-top .event-brand { grid-column:3; justify-self:end; }
+    body.event-open .site-header { opacity:0; visibility:hidden; pointer-events:none; }
+    .intro-slider .event-stage { min-height:0; }
+    .intro-slider .event-poster, .intro-slider .event-title, .intro-slider .event-info { min-height:0; }
+    .intro-slider .event-poster img { height:100%; }
+    /* After the brand curtain clears, each event layer settles in as a short editorial sequence. */
+    .intro-slider.panel-intro .section-top, .intro-slider.panel-intro .event-poster, .intro-slider.panel-intro .event-title, .intro-slider.panel-intro .event-info, .intro-slider.panel-intro .event-bottom { opacity:0; will-change:opacity,transform; }
+    .intro-slider.panel-intro .section-top { transform:translate3d(0,-12px,0); transition:opacity 250ms ease,transform 400ms cubic-bezier(.22,.8,.22,1); }
+    .intro-slider.panel-intro .event-poster { transform:translate3d(-26px,0,0) scale(.985); transition:opacity 360ms ease,transform 540ms cubic-bezier(.22,.8,.22,1); }
+    .intro-slider.panel-intro .event-title { transform:translate3d(0,20px,0); transition:opacity 340ms ease,transform 510ms cubic-bezier(.22,.8,.22,1); }
+    .intro-slider.panel-intro .event-info { transform:translate3d(24px,0,0); transition:opacity 340ms ease,transform 510ms cubic-bezier(.22,.8,.22,1); }
+    .intro-slider.panel-intro .event-bottom { transform:translate3d(0,13px,0); transition:opacity 260ms ease,transform 420ms cubic-bezier(.22,.8,.22,1); }
+    .intro-slider.panel-intro.is-stage-ready .section-top, .intro-slider.panel-intro.is-stage-ready .event-poster, .intro-slider.panel-intro.is-stage-ready .event-title, .intro-slider.panel-intro.is-stage-ready .event-info, .intro-slider.panel-intro.is-stage-ready .event-bottom { opacity:1; transform:translate3d(0,0,0) scale(1); }
+    .intro-slider.panel-intro.is-stage-ready .section-top { transition-delay:0ms; }.intro-slider.panel-intro.is-stage-ready .event-poster { transition-delay:70ms; }.intro-slider.panel-intro.is-stage-ready .event-title { transition-delay:145ms; }.intro-slider.panel-intro.is-stage-ready .event-info { transition-delay:215ms; }.intro-slider.panel-intro.is-stage-ready .event-bottom { transition-delay:285ms; }.intro-slider.panel-intro.stage-preparing .section-top, .intro-slider.panel-intro.stage-preparing .event-poster, .intro-slider.panel-intro.stage-preparing .event-title, .intro-slider.panel-intro.stage-preparing .event-info, .intro-slider.panel-intro.stage-preparing .event-bottom { transition:none !important; }
+    body.site-entry-staging .archive-top, body.site-entry-staging .archive-intro, body.site-entry-staging .archive-rail { opacity:0; will-change:opacity,transform; }
+    body.site-entry-staging .archive-top { transform:translate3d(0,-10px,0); transition:opacity 220ms ease,transform 330ms cubic-bezier(.22,.8,.22,1); }
+    body.site-entry-staging .archive-intro { transform:translate3d(0,18px,0); transition:opacity 260ms ease,transform 390ms cubic-bezier(.22,.8,.22,1); }
+    body.site-entry-staging .archive-rail { transform:translate3d(0,24px,0); transition:opacity 300ms ease,transform 430ms cubic-bezier(.22,.8,.22,1); }
+    body.site-entry-staging.site-entry-ready .archive-top, body.site-entry-staging.site-entry-ready .archive-intro, body.site-entry-staging.site-entry-ready .archive-rail { opacity:1; transform:translate3d(0,0,0); }
+    body.site-entry-staging.site-entry-ready .archive-intro { transition-delay:50ms; }body.site-entry-staging.site-entry-ready .archive-rail { transition-delay:110ms; }body.site-entry-staging.site-preparing .archive-top, body.site-entry-staging.site-preparing .archive-intro, body.site-entry-staging.site-preparing .archive-rail { transition:none !important; }
+    /* A single, editorial chapter break. The content does not animate independently:
+       the white panel is the only moving surface, keeping every route fast and deliberate. */
+    .entry-curtain { position:fixed; z-index:95; inset:0; overflow:hidden; background:var(--paper); color:var(--ink); pointer-events:none; transform:translate3d(-100%,0,0); transition:transform 620ms cubic-bezier(.22,.8,.22,1); }
+    .entry-curtain::before { content:''; position:absolute; inset:15px; border:1px solid rgba(8,8,8,.72); pointer-events:none; }
+    .curtain-layout { position:absolute; inset:15px; display:grid; grid-template-columns:minmax(92px,.28fr) minmax(0,1fr) minmax(96px,.29fr); grid-template-rows:auto 1fr auto; gap:18px; padding:clamp(21px,3vw,47px); }
+    .curtain-index, .curtain-serial, .curtain-overline, .curtain-caption { margin:0; font-size:10px; font-weight:700; letter-spacing:.15em; line-height:1.25; text-transform:uppercase; }
+    .curtain-index { grid-column:1; grid-row:1; color:rgba(8,8,8,.62); }.curtain-serial { grid-column:3; grid-row:3; align-self:end; color:rgba(8,8,8,.58); text-align:right; }.curtain-overline { margin-bottom:clamp(17px,2.4vw,33px); color:rgba(8,8,8,.62); }
+    .curtain-main { grid-column:2; grid-row:2; align-self:center; min-width:0; }.curtain-title { margin:0; font-size:clamp(65px,11.5vw,188px); font-weight:900; letter-spacing:-.125em; line-height:.66; text-transform:uppercase; }.curtain-title span { display:block; }.curtain-title span + span { margin-top:.12em; font-size:.76em; letter-spacing:-.14em; }
+    .curtain-rule { width:100%; height:1px; margin:clamp(22px,3vw,42px) 0 13px; background:var(--ink); }.curtain-caption { color:rgba(8,8,8,.72); }
+    .entry-curtain.is-covering { transform:translate3d(0,0,0); }.entry-curtain.exit-right { transform:translate3d(100%,0,0); }.entry-curtain.no-motion { transition:none; }
+    html.intro-locked, html.intro-locked body { height:100%; overflow:hidden; }
+    body.intro-active .site-header .header-side, body.intro-active .site-header .menu-toggle { opacity:1; visibility:visible; pointer-events:auto; }
+    .site-header .header-side, .site-header .menu-toggle { transition:opacity 170ms ease,visibility 0s linear 170ms; }
+    body:not(.intro-active) .site-header .header-side, body:not(.intro-active) .site-header .menu-toggle { transition-delay:0s; }
+    .hero-routes { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; width:min(100%,540px); margin-top:34px; }
+    .hero-route { position:relative; display:grid; grid-template-columns:auto minmax(0,1fr) auto; align-items:center; gap:10px; min-height:62px; padding:12px 14px; border:1px solid var(--paper); background:transparent; color:var(--paper); font-size:10px; font-weight:700; letter-spacing:.11em; line-height:1.15; text-align:left; text-transform:uppercase; cursor:pointer; transition:border-color 180ms ease,background-color 180ms ease,color 180ms ease; }
+    .hero-route--next { background:var(--paper); color:var(--ink); }
+    .hero-route-index { color:rgba(8,8,8,.56); font-size:8px; letter-spacing:.12em; transition:color 180ms ease; }.hero-route--enter .hero-route-index { color:rgba(242,240,235,.58); }
+    .hero-route b { font-size:18px; font-weight:400; line-height:1; transition:transform 180ms cubic-bezier(.22,.8,.22,1); }
+    .hero-route:hover { border-color:#fff; }
+    .hero-route--next:hover { background:var(--paper); color:var(--ink); border-color:var(--paper); }.hero-route--next:hover b { transform:translate3d(5px,0,0); }.hero-route--next:hover .hero-route-index { color:var(--ink); }
+    .hero-route--enter:hover { background:rgba(242,240,235,.1); color:var(--paper); }.hero-route--enter:hover b { transform:translate3d(0,4px,0); }.hero-route--enter:hover .hero-route-index { color:var(--paper); }
+    .hero-route:focus-visible { outline:2px solid var(--paper); outline-offset:3px; }.hero-route:focus-visible b { transform:translate3d(4px,0,0); }.hero-route--enter:focus-visible b { transform:translate3d(0,4px,0); }
+    .event-back { display:inline-flex; align-items:center; gap:8px; min-height:34px; padding:0 12px; border:1px solid var(--ink); background:var(--ink); color:var(--paper); font-size:9px; font-weight:700; letter-spacing:.14em; line-height:1; text-transform:uppercase; cursor:pointer; }
+    .event-back span { font-size:17px; font-weight:400; }.event-back:hover { background:var(--paper); color:var(--ink); }.event-back:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }
+    .event-switcher { display:inline-flex; align-items:center; justify-content:center; gap:9px; color:var(--ink); }.event-nav-control { display:grid; place-items:center; width:29px; height:29px; padding:0; border:1px solid rgba(8,8,8,.75); background:transparent; color:var(--ink); font-size:17px; line-height:1; cursor:pointer; }.event-nav-control:hover { background:var(--ink); color:var(--paper); }.event-nav-control:disabled { cursor:wait; opacity:.45; }.event-nav-control:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }.event-nav-copy { display:flex; flex-direction:column; align-items:center; min-width:108px; gap:3px; line-height:1; text-align:center; text-transform:uppercase; }.event-nav-copy strong { font-size:8px; font-weight:700; letter-spacing:.15em; }.event-nav-copy small { font-size:8px; font-weight:700; letter-spacing:.13em; color:rgba(8,8,8,.63); }.event-nav-copy b { color:var(--ink); font-weight:700; }.event-nav-copy i { font-style:normal; }
+    .slider-enter { display:inline-flex; align-items:center; gap:10px; min-height:36px; padding:0 13px; border:1px solid var(--ink); background:var(--ink); color:var(--paper); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1; text-transform:uppercase; cursor:pointer; }.slider-enter b { font-size:16px; font-weight:400; }.slider-enter:hover { background:var(--paper); color:var(--ink); }.slider-enter:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }
+    .next-experience { position:relative; overflow:hidden; padding:15px; background:var(--paper); color:var(--ink); }
+    .next-frame { min-height:calc(100svh - 30px); display:flex; flex-direction:column; border:1px solid rgba(8,8,8,.6); }
+    .section-top { display:flex; justify-content:space-between; gap:20px; padding:19px 22px; border-bottom:1px solid rgba(8,8,8,.6); font-size:10px; font-weight:700; letter-spacing:.13em; line-height:1; text-transform:uppercase; }
+    /* The flyer owns its column: its width is derived from its real intrinsic ratio,
+       not from an arbitrary grid fraction. This keeps every event poster edge-to-edge. */
+    .event-stage { --poster-ratio:606 / 750; flex:1; min-height:0; display:flex; transition:opacity 180ms ease,transform 210ms cubic-bezier(.22,.8,.22,1); will-change:opacity,transform; }
+    .event-stage.is-switching-next { opacity:0; transform:translate3d(-22px,0,0); }.event-stage.is-switching-prev { opacity:0; transform:translate3d(22px,0,0); }.event-stage.is-preparing-next { opacity:0; transform:translate3d(22px,0,0); transition:none; }.event-stage.is-preparing-prev { opacity:0; transform:translate3d(-22px,0,0); transition:none; }
+    .event-poster { flex:0 0 auto; width:auto; height:100%; min-height:0; aspect-ratio:var(--poster-ratio); margin:0; display:flex; align-items:center; justify-content:center; overflow:hidden; border-right:1px solid rgba(8,8,8,.6); }
+    .event-poster img { display:block; width:100%; height:100%; object-fit:contain; }
+    .event-content { flex:1 1 0; min-width:0; display:grid; grid-template-columns:minmax(0,1.18fr) minmax(260px,.82fr); }
+    .event-title { display:grid; grid-template-rows:auto 1fr auto; min-height:570px; padding:clamp(30px,5vw,74px) clamp(22px,4.4vw,70px) 26px; border-right:1px solid rgba(8,8,8,.6); }
+    .event-title h2 { align-self:center; justify-self:center; width:100%; text-align:center; }
+    .event-label { display:flex; align-items:center; gap:9px; margin:0; font-size:10px; font-weight:700; letter-spacing:.15em; text-transform:uppercase; }
+    .event-label::before { content:''; display:block; width:25px; height:1px; background:currentColor; }
+    .event-title h2 { max-width:100%; margin:0; font-size:clamp(72px,5.4vw,108px); font-weight:900; letter-spacing:-.105em; line-height:.74; text-align:center; text-transform:uppercase; }
+    .event-title.is-long-title h2 { font-size:clamp(46px,4.5vw,78px); letter-spacing:-.1em; line-height:.82; white-space:nowrap; }
+    .event-title h2 span { display:block; }
+    .event-lineup { max-width:395px; margin:0; padding-top:14px; border-top:1px solid rgba(8,8,8,.75); }
+    .event-lineup span { display:block; margin-bottom:9px; font-size:9px; font-weight:700; letter-spacing:.15em; text-transform:uppercase; }
+    .event-lineup p { margin:0; font-size:clamp(13px,1.22vw,18px); font-weight:700; letter-spacing:-.045em; line-height:1.05; text-transform:uppercase; }
+    .event-info { display:flex; flex-direction:column; justify-content:space-between; min-height:570px; padding:clamp(30px,4vw,58px) clamp(22px,3vw,45px) 26px; background:#101010; color:var(--paper); }.event-info > .event-info-content { display:flex; flex:1; flex-direction:column; justify-content:center; padding-bottom:24px; }
+    .event-number { display:flex; align-items:baseline; gap:11px; margin:0; font-weight:900; line-height:.66; text-transform:uppercase; }
+    .event-number span { font-size:clamp(86px,8vw,128px); letter-spacing:-.11em; }
+    .event-number small { font-size:11px; letter-spacing:.16em; }
+    .detail-list { margin:46px 0 0; border-top:1px solid rgba(242,240,235,.45); }
+    .detail { display:grid; grid-template-columns:78px 1fr; gap:13px; padding:15px 0; border-bottom:1px solid rgba(242,240,235,.45); }
+    .detail dt { color:rgba(242,240,235,.62); font-size:9px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; }
+    .detail dd { margin:0; color:var(--paper); font-size:11px; font-weight:700; letter-spacing:.06em; line-height:1.25; text-transform:uppercase; }
+    .event-countdown { margin-top:22px; border-top:1px solid rgba(242,240,235,.45); border-bottom:1px solid rgba(242,240,235,.45); }
+    .event-countdown-head { display:flex; justify-content:space-between; gap:12px; padding:9px 0 8px; color:rgba(242,240,235,.64); font-size:8px; font-weight:700; letter-spacing:.14em; line-height:1; text-transform:uppercase; }
+    .event-countdown-clock { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; background:rgba(242,240,235,.35); }.event-countdown-clock span { display:flex; flex-direction:column; gap:5px; padding:9px 7px 8px; background:#101010; }.event-countdown-clock b { font-size:clamp(20px,2.1vw,31px); font-weight:900; letter-spacing:-.08em; line-height:.76; }.event-countdown-clock small { color:rgba(242,240,235,.58); font-size:7px; font-weight:700; letter-spacing:.12em; line-height:1; text-transform:uppercase; }
+    .announce { display:flex; align-items:center; justify-content:space-between; gap:20px; min-height:52px; padding:0 15px; border:1px solid var(--paper); background:var(--paper); color:var(--ink); font-size:10px; font-weight:700; letter-spacing:.12em; text-decoration:none; text-transform:uppercase; transition:background-color 180ms ease,color 180ms ease; }
+    .event-actions { display:grid; grid-template-columns:minmax(0,1.5fr) minmax(0,1fr); gap:7px; }.event-actions .announce { min-width:0; }.event-share { display:flex; align-items:center; justify-content:space-between; gap:8px; min-height:52px; padding:0 13px; border:1px solid rgba(242,240,235,.72); background:transparent; color:var(--paper); font:inherit; font-size:9px; font-weight:700; letter-spacing:.11em; line-height:1; text-align:left; text-transform:uppercase; cursor:pointer; transition:background-color 180ms ease,color 180ms ease; }.event-share:hover, .event-share:focus-visible { background:var(--paper); color:var(--ink); }.event-share:focus-visible { outline:2px solid var(--paper); outline-offset:4px; }.event-share b { font-size:17px; font-weight:400; }
+    .announce:hover, .announce:focus-visible { background:transparent; color:var(--paper); }.announce:focus-visible { outline:2px solid var(--paper); outline-offset:4px; }.announce b { font-size:18px; font-weight:400; }
+    .ticket-notice { position:fixed; z-index:150; bottom:22px; left:22px; display:flex; align-items:center; gap:11px; padding:11px 13px; border:1px solid var(--ink); background:var(--paper); color:var(--ink); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1; text-transform:uppercase; opacity:0; pointer-events:none; transform:translate3d(0,10px,0); transition:opacity 170ms ease,transform 170ms ease; }
+    .ticket-notice.is-visible { opacity:1; transform:translate3d(0,0,0); }.ticket-notice b { font-size:14px; font-weight:400; }
+    .event-bottom { display:flex; justify-content:space-between; gap:16px; padding:16px 22px; border-top:1px solid rgba(8,8,8,.6); color:rgba(8,8,8,.72); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1.2; text-transform:uppercase; }
+    .archive { overflow:hidden; padding:15px; background:#080808; color:var(--paper); }
+    .archive-frame { border:1px solid rgba(242,240,235,.48); }
+    .archive-top { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:18px 22px; border-bottom:1px solid rgba(242,240,235,.42); font-size:10px; font-weight:700; letter-spacing:.14em; line-height:1; text-transform:uppercase; }
+    .archive-controls { display:flex; align-items:center; gap:7px; }.archive-progress { display:flex; align-items:center; gap:7px; margin:0 5px 0 0; color:rgba(242,240,235,.68); font-size:8px; font-weight:700; letter-spacing:.14em; line-height:1; }.archive-progress i { display:block; width:21px; height:1px; background:rgba(242,240,235,.52); }
+    .archive-controls button { display:grid; place-items:center; width:29px; height:25px; padding:0; border:1px solid rgba(242,240,235,.65); color:var(--paper); background:transparent; cursor:pointer; font-size:15px; line-height:1; transition:background-color 160ms ease,color 160ms ease,opacity 160ms ease; }
+    .archive-controls button:hover:not(:disabled) { background:var(--paper); color:var(--ink); }.archive-controls button:disabled { opacity:.28; cursor:default; }.archive-controls button:focus-visible { outline:2px solid var(--paper); outline-offset:3px; }
+    .archive-intro { display:flex; align-items:end; justify-content:space-between; gap:30px; padding:clamp(30px,5vw,72px) clamp(22px,4.4vw,70px) 38px; }
+    .archive-intro h2 { max-width:730px; margin:0; font-size:clamp(54px,8.9vw,142px); font-weight:900; letter-spacing:-.1em; line-height:.72; text-transform:uppercase; }
+    .archive-intro h2 span { display:block; }
+    .archive-intro p { max-width:250px; margin:0 0 2px; font-size:12px; line-height:1.36; color:var(--muted); }
+    .archive-rail { display:grid; grid-auto-columns:minmax(420px,39vw); grid-auto-flow:column; gap:1px; overflow-x:auto; overscroll-behavior-x:contain; scroll-behavior:smooth; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scrollbar-width:none; background:rgba(242,240,235,.5); box-shadow:inset -22px 0 22px -24px rgba(242,240,235,.9),inset 22px 0 22px -24px rgba(242,240,235,.9); transition:box-shadow 180ms ease; }
+    .archive-rail::-webkit-scrollbar { display:none; }.archive-rail.can-scroll-left { box-shadow:inset 22px 0 22px -24px rgba(242,240,235,.9); }.archive-rail.can-scroll-right { box-shadow:inset -22px 0 22px -24px rgba(242,240,235,.9); }.archive-rail.can-scroll-left.can-scroll-right { box-shadow:inset 22px 0 22px -24px rgba(242,240,235,.9),inset -22px 0 22px -24px rgba(242,240,235,.9); }.archive-rail.is-dragging { cursor:grabbing; scroll-snap-type:none; user-select:none; }
+    @media (hover:hover) and (pointer:fine) { .archive-rail { cursor:grab; } }
+    .archive-card { min-height:470px; display:flex; flex-direction:column; justify-content:space-between; overflow:hidden; padding:22px; background-color:#171717; background-position:center; background-size:cover; color:var(--paper); scroll-snap-align:start; scroll-snap-stop:always; }
+    .archive-card-top, .archive-card-bottom { display:flex; justify-content:space-between; gap:15px; font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1; text-transform:uppercase; }
+    .archive-card-name { margin:0; max-width:100%; font-size:clamp(60px,6.5vw,102px); font-weight:900; letter-spacing:-.095em; line-height:.75; text-transform:uppercase; word-break:normal; }
+    .archive-card-name.small { font-size:clamp(52px,5vw,78px); }
+    .archive-card-bottom { padding-top:12px; border-top:1px solid rgba(242,240,235,.75); }
+    .manifesto { padding:15px; background:var(--paper); color:var(--ink); }
+    .manifesto-frame { min-height:calc(88svh - 30px); display:flex; flex-direction:column; border:1px solid rgba(8,8,8,.62); }
+    .manifesto-top { display:flex; justify-content:space-between; gap:20px; padding:19px 22px; border-bottom:1px solid rgba(8,8,8,.62); font-size:10px; font-weight:700; letter-spacing:.14em; line-height:1; text-transform:uppercase; }
+    .manifesto-main { flex:1; display:grid; grid-template-columns:minmax(0,1.24fr) minmax(290px,.76fr); }
+    .manifesto-title { display:flex; flex-direction:column; justify-content:space-between; min-width:0; min-height:560px; padding:clamp(34px,5vw,78px) clamp(23px,4.6vw,72px) 27px; border-right:1px solid rgba(8,8,8,.62); }
+    .manifesto-kicker { display:flex; align-items:center; gap:10px; margin:0; font-size:10px; font-weight:700; letter-spacing:.15em; text-transform:uppercase; }
+    .manifesto-kicker::before { content:''; width:27px; height:1px; background:currentColor; }
+    .manifesto-title h2 { max-width:100%; margin:29px 0; font-size:clamp(58px,7vw,116px); font-weight:900; letter-spacing:-.105em; line-height:.74; text-transform:uppercase; overflow-wrap:anywhere; }
+    .manifesto-title h2 span { display:block; }
+    .manifesto-mark { display:flex; align-items:center; gap:10px; color:rgba(8,8,8,.68); font-size:10px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; }
+    .manifesto-mark i { width:7px; height:7px; background:var(--ink); display:block; border-radius:50%; }
+    .manifesto-copy { display:flex; flex-direction:column; justify-content:space-between; min-height:560px; padding:clamp(34px,4vw,59px) clamp(23px,3vw,46px) 27px; background:#d9d7d2; }
+    .manifesto-copy p { max-width:330px; margin:0; font-size:clamp(19px,2.15vw,32px); font-weight:700; letter-spacing:-.055em; line-height:1.02; text-transform:uppercase; }
+    .manifesto-values { margin:42px 0 0; border-top:1px solid rgba(8,8,8,.64); }
+    .manifesto-values div { display:flex; justify-content:space-between; gap:20px; padding:14px 0; border-bottom:1px solid rgba(8,8,8,.64); font-size:10px; font-weight:700; letter-spacing:.13em; text-transform:uppercase; }
+    .manifesto-values span:last-child { color:rgba(8,8,8,.58); }
+    .manifesto-footer { display:flex; justify-content:space-between; gap:16px; padding:16px 22px; border-top:1px solid rgba(8,8,8,.62); color:rgba(8,8,8,.72); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1.2; text-transform:uppercase; }
+    .founders { border-top:1px solid rgba(8,8,8,.62); background:var(--paper); color:var(--ink); }
+    .founders-head { display:grid; grid-template-columns:minmax(0,1fr) minmax(190px,.38fr); align-items:end; gap:30px; padding:clamp(34px,4.6vw,62px) clamp(23px,4.6vw,72px) 31px; }
+    .founders-head p { margin:0; color:rgba(8,8,8,.6); font-size:10px; font-weight:700; letter-spacing:.14em; line-height:1.4; text-transform:uppercase; }
+    .founders-head h3 { max-width:760px; margin:0; font-size:clamp(51px,7.4vw,112px); font-weight:900; letter-spacing:-.1em; line-height:.79; text-transform:uppercase; }
+    .founders-head h3 span { display:block; }
+    .founders-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; border-top:1px solid rgba(8,8,8,.62); background:rgba(8,8,8,.62); }
+    .founder-card { display:flex; flex-direction:column; min-width:0; overflow:hidden; background:#e8e6e0; color:var(--ink); }
+    .founder-card figure { width:100%; aspect-ratio:4 / 4.35; margin:0; overflow:hidden; background:#b6b5b0; }
+    .founder-card img { display:block; width:100%; height:100%; max-width:100%; object-fit:cover; object-position:center top; }
+    .founder-body { display:flex; flex:1; flex-direction:column; min-width:0; min-height:240px; padding:21px 22px 25px; }
+    .founder-number { margin:0 0 34px; color:rgba(8,8,8,.58); font-size:9px; font-weight:700; letter-spacing:.14em; line-height:1; text-transform:uppercase; }
+    .founder-name { margin:0; font-size:clamp(46px,5vw,76px); font-weight:900; letter-spacing:-.1em; line-height:.74; overflow-wrap:normal; white-space:nowrap; text-transform:uppercase; }
+    .founder-role { margin:14px 0 0; color:rgba(8,8,8,.63); font-size:9px; font-weight:700; letter-spacing:.14em; line-height:1.25; text-transform:uppercase; }
+    .founder-bio { max-width:330px; margin:24px 0 0; font-size:12px; line-height:1.42; }
+    .gallery { padding:15px; background:#080808; color:var(--paper); }
+    .gallery-frame { border:1px solid rgba(242,240,235,.48); }
+    .gallery-top { display:flex; justify-content:space-between; gap:20px; padding:19px 22px; border-bottom:1px solid rgba(242,240,235,.42); font-size:10px; font-weight:700; letter-spacing:.14em; line-height:1; text-transform:uppercase; }
+    .gallery-head { display:grid; grid-template-columns:minmax(0,1.15fr) minmax(220px,.4fr); align-items:end; gap:35px; padding:clamp(38px,5vw,76px) clamp(23px,4.6vw,70px) 44px; }
+    .gallery-kicker { display:flex; align-items:center; gap:10px; margin:0 0 21px; font-size:10px; font-weight:700; letter-spacing:.15em; text-transform:uppercase; color:var(--muted); }
+    .gallery-kicker::before { content:''; width:27px; height:1px; background:currentColor; }
+    .gallery-head h2 { max-width:900px; margin:0; font-size:clamp(64px,7.6vw,124px); font-weight:900; letter-spacing:-.1em; line-height:.82; text-transform:uppercase; }
+    .gallery-head h2 span { display:block; }
+    .gallery-head h2 span + span { margin-top:.07em; }
+    .gallery-head p { max-width:280px; margin:0 0 3px; font-size:13px; line-height:1.4; color:var(--muted); }.gallery-aside { display:flex; flex-direction:column; align-items:flex-start; gap:20px; align-self:end; }.gallery-instagram { display:inline-flex; align-items:center; justify-content:space-between; gap:22px; min-height:38px; padding:0 12px; border:1px solid rgba(242,240,235,.65); color:var(--paper); font-size:9px; font-weight:700; letter-spacing:.12em; line-height:1; text-decoration:none; text-transform:uppercase; transition:background-color 180ms ease,color 180ms ease; }.gallery-instagram:hover, .gallery-instagram:focus-visible { background:var(--paper); color:var(--ink); }.gallery-instagram:focus-visible { outline:2px solid var(--paper); outline-offset:4px; }.gallery-instagram b { font-size:15px; font-weight:400; }
+    .gallery-masonry { display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); grid-template-rows:repeat(9,76px); gap:1px; background:rgba(242,240,235,.52); }
+    .gallery-item { position:relative; min-height:0; margin:0; overflow:hidden; background:#161616; }
+    .gallery-item--dance { grid-column:span 7; grid-row:span 5; }.gallery-item--decks { grid-column:span 5; grid-row:span 5; }.gallery-item--lights { grid-column:span 4; grid-row:span 4; }.gallery-item--community { grid-column:span 8; grid-row:span 4; }
+    .gallery-item img { display:block; width:100%; height:100%; object-fit:cover; }
+    .gallery-item::after { content:''; position:absolute; inset:0; background:linear-gradient(0deg,rgba(0,0,0,.7),transparent 55%); pointer-events:none; }
+    .gallery-label { position:absolute; z-index:1; right:18px; bottom:17px; left:18px; display:flex; justify-content:space-between; gap:14px; font-size:10px; font-weight:700; letter-spacing:.13em; line-height:1; text-transform:uppercase; }
+    .gallery-label span:last-child { color:rgba(242,240,235,.68); }
+    .gallery-footer { display:flex; justify-content:space-between; gap:16px; padding:16px 22px; border-top:1px solid rgba(242,240,235,.42); color:rgba(242,240,235,.72); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1.2; text-transform:uppercase; }
+    html { scroll-padding-top:94px; scroll-behavior:smooth; }
+    .site-header { position:fixed; z-index:100; top:0; right:0; left:0; display:flex; align-items:center; min-height:78px; padding:14px 29px; background:transparent; border-bottom:1px solid transparent; transition:background-color 180ms ease,border-color 180ms ease,opacity 240ms ease,transform 300ms cubic-bezier(.22,.8,.22,1),visibility 0s; }
+    .site-header.is-solid { background:#080808; border-bottom-color:rgba(242,240,235,.32); }.site-nav-pending .site-header { opacity:0; visibility:hidden; pointer-events:none; transform:translate3d(0,-10px,0); }.site-nav-ready .site-header { opacity:1; visibility:visible; pointer-events:auto; transform:translate3d(0,0,0); }
+    .hero { padding-top:76px; }
+    .site-header .brand { position:relative; z-index:2; }
+    .site-header .brand img { width:39px; height:39px; }
+    .header-side { display:flex; align-items:center; gap:20px; margin-left:auto; }
+    .header-link { position:relative; display:inline-flex; align-items:center; min-height:38px; color:rgba(242,240,235,.74); background:none; border:0; text-decoration:none; font-size:9px; font-weight:700; letter-spacing:.135em; line-height:1; text-transform:uppercase; }
+    .header-link::after { content:''; position:absolute; right:0; bottom:3px; left:0; height:1px; background:var(--paper); opacity:0; transform:scaleX(.35); transform-origin:left center; transition:opacity 150ms ease,transform 150ms ease; }
+    .header-link:hover, .header-link:focus-visible, .header-link.active { color:var(--paper); }
+    .header-link.active::after, .header-link:hover::after, .header-link:focus-visible::after { opacity:1; transform:scaleX(1); }
+    .nav-home { margin-right:-3px; }
+    .nav-ticket { display:inline-flex; align-items:center; justify-content:center; min-height:38px; margin-left:4px; padding:0 13px; border:1px solid var(--paper); color:var(--ink); background:var(--paper); text-decoration:none; font-size:9px; font-weight:700; letter-spacing:.12em; line-height:1; text-transform:uppercase; }
+    .nav-ticket { transition:background-color 150ms ease,color 150ms ease; }
+    .nav-ticket:hover, .nav-ticket:focus-visible { background:transparent; color:var(--paper); }
+    .header-link:focus-visible, .nav-ticket:focus-visible, .menu-toggle:focus-visible { outline:2px solid var(--paper); outline-offset:4px; }
+    .mobile-quick-actions { display:none; }
+    .menu-toggle { position:relative; z-index:62; display:none; width:42px; height:42px; padding:10px; border:0; background:transparent; color:var(--paper); cursor:pointer; }
+    .menu-toggle span { position:absolute; left:10px; display:block; width:20px; height:1px; background:currentColor; transition:transform 170ms ease,top 170ms ease,opacity 120ms ease; }
+    .menu-toggle span:nth-child(1) { top:14px; }.menu-toggle span:nth-child(2) { top:20px; }.menu-toggle span:nth-child(3) { top:26px; }
+    .menu-toggle.is-open span:nth-child(1) { top:20px; transform:rotate(45deg); }.menu-toggle.is-open span:nth-child(2) { opacity:0; }.menu-toggle.is-open span:nth-child(3) { top:20px; transform:rotate(-45deg); }
+    .mobile-nav { display:none; }
+    .signal { padding:15px; background:var(--paper); color:var(--ink); }
+    .signal-frame { min-height:calc(82svh - 30px); display:flex; flex-direction:column; border:1px solid rgba(8,8,8,.62); }
+    .signal-top { display:flex; justify-content:space-between; gap:20px; padding:19px 22px; border-bottom:1px solid rgba(8,8,8,.62); font-size:10px; font-weight:700; letter-spacing:.14em; line-height:1; text-transform:uppercase; }
+    .signal-main { flex:1; display:grid; grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr); }
+    .signal-title { display:flex; flex-direction:column; justify-content:space-between; min-height:520px; padding:clamp(35px,5vw,77px) clamp(23px,4.6vw,72px) 28px; border-right:1px solid rgba(8,8,8,.62); }
+    .signal-kicker { display:flex; align-items:center; gap:10px; margin:0; font-size:10px; font-weight:700; letter-spacing:.15em; text-transform:uppercase; }
+    .signal-kicker::before { content:''; width:27px; height:1px; background:currentColor; }
+    .signal-title h2 { max-width:810px; margin:28px 0; font-size:clamp(65px,9.5vw,154px); font-weight:900; letter-spacing:-.105em; line-height:.7; text-transform:uppercase; }
+    .signal-title h2 span { display:block; }
+    .signal-title p { max-width:360px; margin:0; font-size:12px; line-height:1.4; }
+    .signal-side { display:flex; flex-direction:column; justify-content:space-between; min-height:520px; padding:clamp(35px,4vw,58px) clamp(23px,3vw,46px) 28px; background:#d9d7d2; }
+    .signal-side p { max-width:305px; margin:0; font-size:clamp(20px,2.2vw,31px); font-weight:700; letter-spacing:-.055em; line-height:1.02; text-transform:uppercase; }
+    .signal-actions { width:100%; margin-top:40px; border-top:1px solid rgba(8,8,8,.65); }
+    .signal-actions a { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:17px 0; border-bottom:1px solid rgba(8,8,8,.65); color:var(--ink); font-size:10px; font-weight:700; letter-spacing:.12em; text-decoration:none; text-transform:uppercase; }
+    .signal-actions b { font-size:17px; font-weight:400; }
+    .signal-foot { display:flex; justify-content:space-between; gap:16px; padding:16px 22px; border-top:1px solid rgba(8,8,8,.62); color:rgba(8,8,8,.72); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1.2; text-transform:uppercase; }
+    .section-heading { letter-spacing:-.095em !important; line-height:.82 !important; }
+    .section-heading span + span { margin-top:.06em; }
+    .map-section { padding:15px; background:var(--paper); color:var(--ink); }
+    .map-frame { border:1px solid rgba(8,8,8,.62); }
+    .map-top { display:flex; justify-content:space-between; gap:20px; padding:19px 22px; border-bottom:1px solid rgba(8,8,8,.62); font-size:10px; font-weight:700; letter-spacing:.14em; line-height:1; text-transform:uppercase; }
+    .map-main { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(300px,.65fr); min-height:570px; }
+    .map-canvas { position:relative; min-height:570px; overflow:hidden; background:#d8d8d4; border-right:1px solid rgba(8,8,8,.62); }
+    .venue-map { position:relative; width:100%; min-height:570px; height:100%; overflow:hidden; background:#d8d8d4; cursor:grab; touch-action:none; }
+    .venue-map.is-dragging { cursor:grabbing; }
+    .venue-map:focus-visible { outline:3px solid var(--ink); outline-offset:-5px; }
+    .map-tiles { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
+    .map-tile { position:absolute; top:0; left:0; display:block; width:256px; height:256px; max-width:none; will-change:transform; user-select:none; }
+    .map-marker { position:absolute; z-index:3; display:flex; align-items:center; gap:9px; pointer-events:none; transform:translate(-18px,-18px); white-space:nowrap; }
+    .map-marker-pin { display:grid; place-items:center; width:36px; height:36px; border:6px solid var(--paper); border-radius:50%; background:var(--ink); box-shadow:0 0 0 2px var(--ink); }
+    .map-marker-pin::after { content:''; width:7px; height:7px; border-radius:50%; background:var(--paper); }
+    .map-marker-label { padding:10px 12px; background:var(--ink); color:var(--paper); font-size:10px; font-weight:700; letter-spacing:.12em; line-height:1; text-transform:uppercase; }
+    .map-status { position:absolute; z-index:4; top:19px; left:20px; margin:0; padding:10px 11px; background:#101010; color:var(--paper); font-size:9px; font-weight:700; letter-spacing:.14em; line-height:1; pointer-events:none; text-transform:uppercase; }
+    .map-open { position:absolute; z-index:4; bottom:20px; left:20px; display:flex; align-items:center; gap:9px; padding:11px 12px; background:#101010; color:var(--paper); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1; text-decoration:none; text-transform:uppercase; }
+    .map-open b { font-size:15px; font-weight:400; }
+    .map-controls { position:absolute; z-index:4; right:20px; bottom:20px; display:flex; flex-direction:column; gap:5px; }
+    .map-controls button { display:grid; place-items:center; width:38px; height:38px; border:1px solid rgba(242,240,235,.72); background:#101010; color:var(--paper); font-size:20px; line-height:1; cursor:pointer; }
+    .map-controls button:last-child { margin-top:4px; font-size:14px; }
+    .map-controls button:focus-visible, .map-open:focus-visible { outline:2px solid var(--paper); outline-offset:3px; }
+    .map-panel { display:flex; flex-direction:column; justify-content:space-between; min-height:570px; padding:clamp(34px,4vw,58px) clamp(23px,3vw,46px) 27px; background:#101010; color:var(--paper); }
+    .map-kicker { display:flex; align-items:center; gap:10px; margin:0; color:rgba(242,240,235,.7); font-size:10px; font-weight:700; letter-spacing:.15em; text-transform:uppercase; }
+    .map-kicker::before { content:''; width:27px; height:1px; background:currentColor; }
+    .map-panel h2 { max-width:400px; margin:34px 0; font-size:clamp(56px,7vw,108px); font-weight:900; text-transform:uppercase; }
+    .map-panel h2 span { display:block; }
+    .map-address { margin:0; padding:17px 0; border-top:1px solid rgba(242,240,235,.45); border-bottom:1px solid rgba(242,240,235,.45); font-size:11px; font-weight:700; letter-spacing:.1em; line-height:1.45; text-transform:uppercase; }
+    .map-link { display:flex; justify-content:space-between; gap:16px; padding:15px 0 4px; border-bottom:1px solid var(--paper); color:var(--paper); font-size:10px; font-weight:700; letter-spacing:.12em; text-decoration:none; text-transform:uppercase; }
+    .map-note { margin:20px 0 0; color:rgba(242,240,235,.62); font-size:10px; line-height:1.4; }
+    .map-foot { display:flex; justify-content:space-between; gap:16px; padding:16px 22px; border-top:1px solid rgba(8,8,8,.62); color:rgba(8,8,8,.72); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1.2; text-transform:uppercase; }
+    .site-footer { padding:15px; background:#080808; color:var(--paper); }
+    .footer-frame { border:1px solid rgba(242,240,235,.48); }
+    .footer-main { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(150px,.45fr) minmax(200px,.62fr); gap:0; }
+    .footer-identity { display:flex; flex-direction:column; justify-content:space-between; min-height:325px; padding:34px clamp(23px,4vw,58px) 29px; border-right:1px solid rgba(242,240,235,.42); }
+    .footer-brand { display:flex; align-items:center; gap:12px; font-size:10px; font-weight:700; letter-spacing:.11em; line-height:1; text-transform:uppercase; }
+    .footer-brand img { display:block; width:39px; height:39px; object-fit:contain; }
+    .footer-claim { max-width:620px; margin:46px 0 0; font-size:clamp(42px,6.1vw,95px); font-weight:900; letter-spacing:-.085em; line-height:.84; text-transform:uppercase; }
+    .footer-claim span { display:block; }.footer-claim span + span { margin-top:.07em; }
+    .footer-column { min-height:325px; padding:34px 28px 29px; border-right:1px solid rgba(242,240,235,.42); }
+    .footer-column:last-child { border-right:0; }
+    .footer-label { margin:0 0 23px; color:rgba(242,240,235,.64); font-size:9px; font-weight:700; letter-spacing:.15em; text-transform:uppercase; }
+    .footer-nav { display:flex; flex-direction:column; align-items:flex-start; gap:12px; }
+    .footer-nav a, .footer-event-link { color:var(--paper); font-size:11px; font-weight:700; letter-spacing:.08em; line-height:1.2; text-decoration:none; text-transform:uppercase; }
+    .footer-nav a:hover, .footer-event-link:hover { text-decoration:underline; text-underline-offset:4px; }
+    .footer-event-name { margin:0; font-size:clamp(35px,4vw,61px); font-weight:900; letter-spacing:-.09em; line-height:.72; text-transform:uppercase; }
+    .footer-event-meta { margin:22px 0; color:rgba(242,240,235,.74); font-size:10px; font-weight:700; letter-spacing:.1em; line-height:1.55; text-transform:uppercase; }
+    .footer-event-link { display:flex; justify-content:space-between; gap:12px; width:100%; padding-top:13px; border-top:1px solid rgba(242,240,235,.48); }
+    .footer-entry-policy { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); border-top:1px solid rgba(242,240,235,.42); }
+    .footer-policy-item { min-height:103px; display:flex; flex-direction:column; justify-content:center; gap:9px; padding:18px 22px; border-right:1px solid rgba(242,240,235,.42); }
+    .footer-policy-item:last-child { border-right:0; }.footer-policy-label { margin:0; color:rgba(242,240,235,.6); font-size:8px; font-weight:700; letter-spacing:.15em; line-height:1; text-transform:uppercase; }.footer-policy-copy { margin:0; color:var(--paper); font-size:10px; font-weight:700; letter-spacing:.075em; line-height:1.35; text-transform:uppercase; }.footer-map-link { display:inline-flex; align-items:center; justify-content:space-between; gap:12px; color:var(--paper); font-size:10px; font-weight:700; letter-spacing:.1em; line-height:1.25; text-decoration:none; text-transform:uppercase; }.footer-map-link:hover, .footer-map-link:focus-visible { text-decoration:underline; text-underline-offset:4px; }.footer-map-link b { font-size:16px; font-weight:400; }
+    .footer-bottom { display:flex; justify-content:space-between; align-items:center; gap:18px; padding:16px 22px; border-top:1px solid rgba(242,240,235,.42); }
+    .footer-bottom p, .footer-bottom a { margin:0; color:rgba(242,240,235,.68); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1.2; text-decoration:none; text-transform:uppercase; }
+    .footer-bottom a { color:var(--paper); }
+    @media (max-width:650px) {
+      .site-header { min-height:84px; padding:19px 20px; }.header-side { gap:15px; }.header-link { display:none; }.frame { inset:10px; }.brand img { width:37px; height:37px; }.brand-name { font-size:9px; }
+      .site-header { min-height:70px; padding:14px 20px; }.hero { padding-top:70px; }.header-side { display:none; }.menu-toggle { display:block; }.mobile-nav { position:fixed; z-index:49; top:70px; right:10px; left:10px; flex-direction:column; gap:0; padding:10px 20px 20px; border:1px solid rgba(242,240,235,.45); background:#080808; }.mobile-nav.open { display:flex; }.mobile-nav a { padding:16px 0; border-bottom:1px solid rgba(242,240,235,.25); color:var(--paper); font-size:11px; font-weight:700; letter-spacing:.12em; text-decoration:none; text-transform:uppercase; }.mobile-nav .mobile-ticket { margin-top:10px; padding:15px; border:1px solid var(--paper); background:var(--paper); color:var(--ink); text-align:center; }
+      .hero-main { padding:20px 29px 46px; flex-direction:column; justify-content:flex-end; align-items:stretch; }.hero-copy { width:100%; }.hero-countdown { position:relative; right:auto; bottom:auto; width:100%; margin-top:12px; padding:10px 12px; grid-template-columns:minmax(0,1fr) auto; }.countdown-kicker, .countdown-link { display:none; }.countdown-event { font-size:18px; line-height:.82; }.countdown-date { margin-top:4px; font-size:7px; }.countdown-clock { grid-column:2; display:flex; gap:6px; margin:0; border:0; background:transparent; align-self:center; }.countdown-clock span { flex-direction:row; gap:2px; padding:0; background:transparent; }.countdown-clock b { font-size:15px; line-height:1; }.countdown-clock small { align-self:end; font-size:6px; }.eyebrow { font-size:9px; margin-bottom:16px; } h1 { font-size:clamp(48px,13.7vw,64px); letter-spacing:-.1em; line-height:.78; } .tagline { margin-top:23px; font-size:13px; }.action-row { gap:14px; margin-top:27px; }.action { min-width:100%; }.status { font-size:8px; }.wordmark { width:96px; right:22px; top:20%; opacity:.74; }.hero-aside { right:20px; bottom:86px; }.scroll { right:20px; bottom:22px; }
+      .intro-slider > .next-experience { height:100svh; min-height:100svh; overflow-y:auto; padding:10px; }.intro-slider .next-frame { height:auto; min-height:calc(100svh - 20px); }.intro-slider .section-top { grid-template-columns:1fr auto; }.intro-slider .section-top .event-switcher { grid-column:2; justify-self:end; }.intro-slider .section-top .event-brand { display:none; }.event-nav-copy { min-width:84px; }.event-nav-copy strong { font-size:7px; }.hero-routes { grid-template-columns:1fr; width:100%; margin-top:25px; }.hero-route { min-height:54px; }.hero-aside { display:none; }.entry-curtain::before { inset:10px; }.curtain-layout { inset:10px; grid-template-columns:1fr auto; grid-template-rows:auto 1fr auto; gap:10px; padding:21px 20px; }.curtain-index { grid-column:1; }.curtain-serial { grid-column:2; font-size:7px; }.curtain-main { grid-column:1 / -1; }.curtain-overline { margin-bottom:20px; font-size:8px; }.curtain-title { font-size:clamp(59px,17vw,102px); line-height:.68; }.curtain-rule { margin:25px 0 11px; }.curtain-caption { max-width:245px; font-size:8px; }.mobile-home .menu-arrow { font-size:19px; }
+      .next-experience { padding:10px; }.next-frame { min-height:calc(100svh - 20px); }.section-top { padding:15px; font-size:8px; }.section-top > .event-brand { display:none; }.event-stage { display:grid; grid-template-columns:1fr; }.event-poster { width:100%; height:auto; min-height:0; max-height:640px; aspect-ratio:auto; border-right:0; border-bottom:1px solid rgba(8,8,8,.6); }.intro-slider .event-poster img { width:100%; height:auto; max-height:640px; object-fit:contain; }.event-content { grid-template-columns:1fr; }.intro-slider .event-title { min-height:340px; padding:27px 20px 25px; row-gap:18px; border-right:0; border-bottom:1px solid rgba(8,8,8,.6); }.intro-slider .event-title h2 { margin:0; font-size:clamp(62px,19vw,90px); line-height:.76; }.intro-slider .event-title.is-long-title { min-height:360px; }.intro-slider .event-title.is-long-title h2 { font-size:clamp(46px,12vw,66px); letter-spacing:-.1em; line-height:.86; }.event-info { min-height:450px; padding:29px 20px 24px; }.event-number span { font-size:114px; }.detail-list { margin-top:38px; }.detail { grid-template-columns:80px 1fr; }.event-actions { grid-template-columns:minmax(0,1.38fr) minmax(0,1fr); }.event-share { padding:0 11px; font-size:8px; }.event-bottom { align-items:center; padding:12px 15px; font-size:8px; }.event-bottom > span:first-child { max-width:100px; }.intro-slider .slider-enter { flex:0 0 auto; min-height:32px; gap:6px; padding:0 9px; font-size:7px; letter-spacing:.08em; white-space:nowrap; }.event-bottom span:last-child { text-align:right; }
+      .archive { padding:10px; }.archive-top { padding:15px; font-size:8px; }.archive-intro { display:block; padding:37px 20px 31px; }.archive-intro h2 { font-size:clamp(56px,17vw,85px); }.archive-intro p { margin-top:25px; font-size:12px; }.archive-rail { grid-auto-columns:87vw; }.archive-card { min-height:430px; padding:18px; }.archive-card-name { font-size:clamp(60px,18vw,88px); }.archive-card-name.small { font-size:clamp(51px,14vw,70px); }
+      .manifesto { padding:10px; }.manifesto-frame { min-height:calc(100svh - 20px); }.manifesto-top { padding:15px; font-size:8px; }.manifesto-top span:last-child { display:none; }.manifesto-main { grid-template-columns:1fr; }.manifesto-title { min-height:435px; padding:30px 20px 25px; border-right:0; border-bottom:1px solid rgba(8,8,8,.62); }.manifesto-title h2 { margin:45px 0; font-size:clamp(46px,12.3vw,64px); letter-spacing:-.115em; line-height:.78; }.manifesto-title h2 span { white-space:nowrap; }.manifesto-copy { min-height:440px; padding:29px 20px 25px; }.manifesto-copy p { font-size:24px; }.manifesto-footer { padding:14px 15px; font-size:8px; }.manifesto-footer span:last-child { text-align:right; }
+      .gallery { padding:10px; }.gallery-top { padding:15px; font-size:8px; }.gallery-top span:last-child { display:none; }.gallery-head { display:block; padding:39px 20px 33px; }.gallery-kicker { margin-bottom:18px; font-size:9px; }.gallery-head h2 { font-size:clamp(49px,12.8vw,61px); }.gallery-head p { margin-top:28px; font-size:12px; }.gallery-masonry { grid-template-columns:1fr 1fr; grid-template-rows:360px 230px 230px; }.gallery-item--dance { grid-column:span 2; grid-row:auto; }.gallery-item--decks { grid-column:span 1; grid-row:span 1; }.gallery-item--lights { grid-column:span 1; grid-row:span 1; }.gallery-item--community { grid-column:span 2; grid-row:auto; }.gallery-label { right:15px; bottom:15px; left:15px; font-size:9px; }.gallery-footer { padding:14px 15px; font-size:8px; }.gallery-footer span:last-child { text-align:right; }
+      .map-section { padding:10px; }.map-top { padding:15px; font-size:8px; }.map-top span:last-child { display:none; }.map-main { grid-template-columns:1fr; }.map-canvas { min-height:360px; border-right:0; border-bottom:1px solid rgba(8,8,8,.62); }.venue-map { height:360px; min-height:0; }.map-status { top:15px; left:15px; }.map-open { left:15px; bottom:15px; }.map-controls { right:15px; bottom:15px; }.map-marker-label { font-size:8px; padding:8px 9px; }.map-panel { min-height:420px; padding:29px 20px 25px; }.map-panel h2 { margin:35px 0; font-size:clamp(59px,17vw,86px); }.map-foot { padding:14px 15px; font-size:8px; }.map-foot span:last-child { text-align:right; }
+      .signal { padding:10px; }.signal-frame { min-height:calc(100svh - 20px); }.signal-top { padding:15px; font-size:8px; }.signal-top span:last-child { display:none; }.signal-main { grid-template-columns:1fr; }.signal-title { min-height:390px; padding:30px 20px 25px; border-right:0; border-bottom:1px solid rgba(8,8,8,.62); }.signal-title h2 { margin:43px 0; font-size:clamp(59px,17vw,87px); }.signal-side { min-height:380px; padding:29px 20px 25px; }.signal-side p { font-size:24px; }.signal-actions { margin-top:31px; }.signal-foot { padding:14px 15px; font-size:8px; }.signal-foot span:last-child { text-align:right; }.site-footer { padding:10px; }.footer-main { grid-template-columns:1fr; }.footer-identity { min-height:335px; padding:29px 20px 25px; border-right:0; border-bottom:1px solid rgba(242,240,235,.42); }.footer-claim { margin-top:50px; font-size:clamp(51px,16vw,79px); }.footer-column { min-height:auto; padding:27px 20px; border-right:0; border-bottom:1px solid rgba(242,240,235,.42); }.footer-label { margin-bottom:18px; }.footer-event-name { font-size:54px; }.footer-entry-policy { grid-template-columns:1fr; }.footer-policy-item { min-height:0; padding:18px 20px; border-right:0; border-bottom:1px solid rgba(242,240,235,.42); }.footer-policy-item:last-child { border-bottom:0; }.footer-bottom { align-items:flex-start; padding:14px 15px; }.footer-bottom p, .footer-bottom a { font-size:8px; }.footer-bottom p { max-width:190px; }.ticket-notice { right:16px; bottom:18px; left:16px; justify-content:space-between; }
+    }
+
+    @media (max-width:780px) {
+      .site-header { min-height:72px; padding:14px 20px; }
+      .site-header .brand img { width:36px; height:36px; }
+      .site-header .brand-name { font-size:9px; }
+      .header-side { display:none; }
+      .menu-toggle { display:block; margin-left:auto; }
+      .mobile-nav { position:fixed; z-index:61; inset:0; display:flex; flex-direction:column; min-height:100dvh; padding:92px 20px 22px; background:#080808; color:var(--paper); overflow-y:auto; opacity:0; visibility:hidden; pointer-events:none; transform:translateY(-8px); transition:opacity 180ms ease,transform 180ms ease,visibility 0s linear 180ms; }
+      .mobile-nav.open { opacity:1; visibility:visible; pointer-events:auto; transform:translateY(0); transition-delay:0s; }
+      .mobile-nav-top { display:flex; justify-content:space-between; gap:18px; padding:0 0 17px; border-bottom:1px solid rgba(242,240,235,.36); color:rgba(242,240,235,.62); font-size:9px; font-weight:700; letter-spacing:.14em; line-height:1; text-transform:uppercase; opacity:0; transform:translateY(8px); transition:opacity 160ms ease,transform 160ms ease; }
+      .mobile-nav-links { display:flex; flex:1; flex-direction:column; justify-content:center; padding:16px 0 19px; }
+      .mobile-nav a { color:var(--paper); text-decoration:none; }
+      .mobile-nav-links a { display:grid; grid-template-columns:28px minmax(0,1fr) auto; align-items:center; gap:10px; min-height:74px; padding:13px 0; border-bottom:1px solid rgba(242,240,235,.27); opacity:0; transform:translateY(10px); transition:opacity 170ms ease,transform 170ms ease; }
+      .menu-index { align-self:start; padding-top:3px; color:rgba(242,240,235,.56); font-size:9px; font-weight:700; letter-spacing:.12em; }
+      .menu-copy { display:flex; flex-direction:column; gap:7px; }
+      .menu-copy b { font-size:clamp(25px,8.7vw,43px); font-weight:900; letter-spacing:-.075em; line-height:.78; text-transform:uppercase; }
+      .menu-copy small { color:rgba(242,240,235,.6); font-size:9px; font-weight:700; letter-spacing:.12em; line-height:1.1; text-transform:uppercase; }
+      .menu-arrow { padding-bottom:3px; font-size:22px; font-weight:400; line-height:1; }
+      .mobile-nav-links a:focus-visible, .mobile-nav-links a:hover { color:#fff; outline:0; }
+      .mobile-nav-links a:focus-visible .menu-copy b, .mobile-nav-links a:hover .menu-copy b { text-decoration:underline; text-underline-offset:5px; }
+      .mobile-ticket { display:flex; align-items:center; justify-content:space-between; min-height:54px; margin-top:auto; padding:0 15px; border:1px solid var(--paper); background:var(--paper); color:var(--ink) !important; font-size:10px; font-weight:700; letter-spacing:.13em; text-transform:uppercase; opacity:0; transform:translateY(10px); transition:opacity 170ms ease,transform 170ms ease; }
+      .mobile-nav.open .mobile-nav-top, .mobile-nav.open .mobile-nav-links a, .mobile-nav.open .mobile-ticket { opacity:1; transform:translateY(0); }
+      .mobile-nav.open .mobile-nav-top { transition-delay:40ms; }
+      .mobile-nav.open .mobile-nav-links a:nth-child(1) { transition-delay:70ms; }
+      .mobile-nav.open .mobile-nav-links a:nth-child(2) { transition-delay:100ms; }
+      .mobile-nav.open .mobile-nav-links a:nth-child(3) { transition-delay:130ms; }
+      .mobile-nav.open .mobile-nav-links a:nth-child(4) { transition-delay:160ms; }
+      .mobile-nav.open .mobile-nav-links a:nth-child(5) { transition-delay:190ms; }
+      .mobile-nav.open .mobile-ticket { transition-delay:220ms; }
+      .founders-head { display:block; padding:31px 20px 27px; }.founders-head h3 { font-size:clamp(49px,15vw,77px); }.founders-head p { margin-top:20px; }.founders-grid { grid-template-columns:1fr; }.founder-card { display:grid; grid-template-columns:minmax(0,39%) minmax(0,1fr); }.founder-card figure { width:100%; min-height:214px; aspect-ratio:auto; }.founder-body { min-height:0; padding:18px 16px 19px; }.founder-number { margin-bottom:27px; }.founder-name { font-size:clamp(29px,8.7vw,40px); white-space:nowrap; }.founder-role { margin-top:11px; font-size:8px; }.founder-bio { margin-top:18px; font-size:12px; line-height:1.36; }
+      .hero { padding-top:70px; }
+      body.menu-open { overflow:hidden; }
+      .mobile-quick-actions { position:fixed; z-index:110; right:18px; bottom:18px; display:flex; visibility:hidden; pointer-events:none; flex-direction:column; align-items:flex-end; gap:10px; }.site-mode .mobile-quick-actions { visibility:visible; pointer-events:auto; }.menu-open .mobile-quick-actions { display:none !important; }.quick-home, .quick-ticket { opacity:0; will-change:transform,opacity; }.site-mode .quick-home { animation:quick-control-arrive 620ms cubic-bezier(.18,.86,.27,1.2) 760ms both; }.site-mode .quick-ticket { animation:quick-control-arrive 650ms cubic-bezier(.18,.86,.27,1.2) 860ms both; }.mobile-quick-actions.is-leaving { visibility:visible; pointer-events:none; }.mobile-quick-actions.is-leaving .quick-ticket { animation:quick-control-depart 220ms cubic-bezier(.4,0,.8,.3) 0ms both; }.mobile-quick-actions.is-leaving .quick-home { animation:quick-control-depart 220ms cubic-bezier(.4,0,.8,.3) 55ms both; }.quick-home { display:grid; place-items:center; width:48px; height:48px; border:2px solid var(--paper); border-radius:11px; outline:2px solid var(--ink); outline-offset:0; background:#080808; color:var(--paper); font-size:21px; text-decoration:none; }.quick-ticket { display:flex; align-items:center; justify-content:space-between; gap:16px; min-height:48px; padding:0 15px; border:2px solid var(--ink); border-radius:11px; outline:2px solid var(--paper); outline-offset:0; background:var(--paper); color:var(--ink); font-size:9px; font-weight:700; letter-spacing:.13em; text-decoration:none; text-transform:uppercase; }.quick-ticket span:last-child { font-size:16px; font-weight:400; }
+    }
+
+    @media (min-width:651px) and (max-width:980px) {
+      .footer-entry-policy { grid-template-columns:repeat(2,minmax(0,1fr)); }.footer-policy-item:nth-child(2) { border-right:0; }.footer-policy-item:nth-child(-n+2) { border-bottom:1px solid rgba(242,240,235,.42); }
+    }
+
+    @media (min-width:781px) and (max-height:780px) {
+      .intro-slider > .next-experience { padding-top:12px; }
+      .intro-slider .next-frame { height:calc(100svh - 27px); }
+      .intro-slider .event-title, .intro-slider .event-info { padding-top:24px; padding-bottom:20px; }
+      .intro-slider .event-title h2 { margin:0; font-size:clamp(64px,5.2vw,96px); }
+      .intro-slider .event-title.is-long-title h2 { font-size:clamp(46px,4.5vw,78px); }
+      .intro-slider .event-number span { font-size:clamp(74px,7vw,102px); }
+      .intro-slider .detail-list { margin-top:23px; }.intro-slider .detail { padding:10px 0; }.intro-slider .event-countdown { margin-top:17px; }.intro-slider .event-countdown-clock span { padding-top:7px; padding-bottom:7px; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      html { scroll-behavior:auto; }
+      *, *::before, *::after { animation-duration:1ms !important; animation-iteration-count:1 !important; transition-duration:1ms !important; scroll-behavior:auto !important; }.hero-video { display:none !important; }.wordmark { animation:none !important; }.site-mode .quick-home, .site-mode .quick-ticket { animation-delay:0s !important; }
+    }
+  </style>
+</head>
+<body class="intro-active">
+    <header class="site-header">
+      <div class="brand" aria-label="ONE MORE ELECTRONIC">
+        <img src="assets/one-logo.webp" alt="" />
+        <span class="brand-name">ONE MORE<br />ELECTRONIC</span>
+      </div>
+      <nav class="header-side" aria-label="Navegación principal">
+        <a class="header-link nav-home" href="#inicio">Inicio</a>
+        <a class="header-link" href="#proxima-experiencia">Próxima</a>
+        <a class="header-link" href="#archivo">Archivo</a>
+        <a class="header-link" href="#el-club">El club</a>
+        <a class="header-link" href="#experiencia">Experiencia</a>
+        <a class="header-link" href="#ubicacion">Ubicación</a>
+        <a class="nav-ticket" href="#proxima-experiencia">Entradas <span aria-hidden="true">↗</span></a>
+      </nav>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+      <nav id="mobile-menu" class="mobile-nav" aria-label="Navegación móvil" aria-hidden="true">
+        <div class="mobile-nav-top"><span>Índice</span><span>ONE MORE ELECTRONIC</span></div>
+        <div class="mobile-nav-links">
+          <a class="mobile-home" href="#inicio"><span class="menu-index">00</span><span class="menu-copy"><b>Inicio</b><small>Volver a la portada</small></span><span class="menu-arrow" aria-hidden="true">↘</span></a>
+          <a href="#proxima-experiencia"><span class="menu-index">01</span><span class="menu-copy"><b>Próxima fecha</b><small>JOYCE · 23 OCT</small></span><span class="menu-arrow" aria-hidden="true">↘</span></a>
+          <a href="#archivo"><span class="menu-index">02</span><span class="menu-copy"><b>Archivo</b><small>Fechas anteriores</small></span><span class="menu-arrow" aria-hidden="true">↘</span></a>
+          <a href="#el-club"><span class="menu-index">03</span><span class="menu-copy"><b>El club</b><small>Origen · Fundadores</small></span><span class="menu-arrow" aria-hidden="true">↘</span></a>
+          <a href="#experiencia"><span class="menu-index">04</span><span class="menu-copy"><b>Experiencia</b><small>La noche desde adentro</small></span><span class="menu-arrow" aria-hidden="true">↘</span></a>
+          <a href="#ubicacion"><span class="menu-index">05</span><span class="menu-copy"><b>Ubicación</b><small>One More Club · Devoto</small></span><span class="menu-arrow" aria-hidden="true">↘</span></a>
+        </div>
+        <a class="mobile-ticket" href="#proxima-experiencia"><span>Entradas</span><span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+
+  <div id="intro-deck" class="intro-deck hero-intro hero-preparing">
+  <main class="hero" aria-label="ONE MORE ELECTRONIC">
+    <div class="background" aria-hidden="true"><video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="assets/one-more-crowd-hero.webp"><source src="assets/one-more-hero.mp4" type="video/mp4" /></video></div>
+    <div class="veil" aria-hidden="true"></div>
+    <div class="frame" aria-hidden="true"></div>
+
+    <section id="inicio" class="hero-main">
+      <img class="wordmark" src="assets/one-logo.webp" width="480" height="480" decoding="async" fetchpriority="high" alt="" aria-hidden="true" />
+      <div class="hero-copy">
+        <h1><span>ONE MORE</span><span>ELECTRONIC</span></h1>
+        <p class="tagline">La noche no termina</p>
+        <div class="hero-routes" aria-label="Elegí cómo entrar a ONE MORE">
+          <button class="hero-route hero-route--next" type="button">
+            <span class="hero-route-index">01</span>
+            <span>Ver próxima fecha</span>
+            <b aria-hidden="true">→</b>
+          </button>
+          <button class="hero-route hero-route--enter" type="button">
+            <span class="hero-route-index">02</span>
+            <span>Entrar a ONE MORE</span>
+            <b aria-hidden="true">↓</b>
+          </button>
+        </div>
+      </div>
+      <a class="hero-countdown" data-hero-countdown href="?evento=joyce-23-oct" aria-label="Ver próxima fecha: Joyce, viernes 23 de octubre">
+        <span class="countdown-kicker">Próxima experiencia</span>
+        <span><strong class="countdown-event" data-countdown-event>JOYCE</strong><small class="countdown-date" data-countdown-date>Vie 23 OCT · 23:59 H</small></span>
+        <span class="countdown-link" aria-hidden="true">→</span>
+        <span class="countdown-clock" aria-label="Tiempo restante"><span><b data-countdown-days>00</b><small>Días</small></span><span><b data-countdown-hours>00</b><small>Horas</small></span><span><b data-countdown-minutes>00</b><small>Min</small></span></span>
+      </a>
+    </section>
+
+    <div class="hero-aside" aria-hidden="true">Tacto · Ritmo · Comunidad</div>
+  </main>
+  </div>
+  <div id="intro-slider" class="intro-slider" aria-hidden="true">
+  <section id="proxima-experiencia" class="next-experience" aria-labelledby="next-title">
+    <div class="next-frame">
+      <header class="section-top">
+        <button class="event-back" type="button" aria-label="Volver a la pantalla de inicio"><span aria-hidden="true">←</span> Inicio</button>
+        <nav class="event-switcher" aria-label="Cambiar entre próximas fechas">
+          <button class="event-nav-control" data-event-prev type="button" aria-label="Ver fecha anterior"><span aria-hidden="true">←</span></button>
+          <span class="event-nav-copy"><strong>Próximas fechas</strong><small><b data-event-position>01</b> <i aria-hidden="true">/</i> <b data-event-total>03</b></small></span>
+          <button class="event-nav-control" data-event-next type="button" aria-label="Ver fecha siguiente"><span aria-hidden="true">→</span></button>
+        </nav>
+        <span class="event-brand">ONE MORE ELECTRONIC</span>
+      </header>
+      <div class="event-stage">
+        <figure class="event-poster">
+          <img src="assets/joyce-23-octubre.webp" width="606" height="750" decoding="async" alt="Flyer de Joyce Argentina: viernes 23 de octubre, Av. Beiro 3334, Devoto." />
+        </figure>
+        <div class="event-content">
+          <div class="event-title" data-event-title-wrap>
+            <p class="event-label" data-event-label>More electronic music presenta</p>
+            <h2 id="next-title" class="section-heading" data-event-title aria-live="polite"><span>JOYCE</span></h2>
+            <div class="event-lineup" aria-label="Artistas confirmados">
+              <span data-event-lineup-label>Artistas confirmados</span>
+              <p data-event-lineup>Joyce · Jonny Vidal · Viken · Day Sanchez</p>
+            </div>
+          </div>
+          <aside class="event-info" aria-label="Detalles de la próxima fecha" data-event-info>
+            <div class="event-info-content">
+              <p class="event-number"><span data-event-day>23</span><small data-event-month>OCT</small></p>
+              <dl class="detail-list">
+                <div class="detail"><dt>Fecha</dt><dd data-event-date>Viernes 23 de octubre</dd></div>
+                <div class="detail"><dt>Horario</dt><dd data-event-time>23:59 h</dd></div>
+                <div class="detail"><dt>Lugar</dt><dd data-event-place>Av. Beiro 3334 · Devoto</dd></div>
+                <div class="detail"><dt>Line-up</dt><dd data-event-detail-lineup>Joyce · Jonny Vidal · Viken · Day Sanchez</dd></div>
+              </dl>
+              <div class="event-countdown" data-event-countdown aria-label="Cuenta regresiva para Joyce">
+                <div class="event-countdown-head"><span>Faltan</span></div>
+                <div class="event-countdown-clock" aria-hidden="true"><span><b data-event-countdown-days>00</b><small>Días</small></span><span><b data-event-countdown-hours>00</b><small>Horas</small></span><span><b data-event-countdown-minutes>00</b><small>Min</small></span></div>
+              </div>
+            </div>
+            <div class="event-actions">
+              <a class="announce" data-event-ticket href="https://www.passline.com/eventos/viernes-2310-more-joyce-arg" target="_blank" rel="noopener noreferrer">Comprar entradas <b aria-hidden="true">↗</b></a>
+              <button class="event-share" type="button" data-event-share aria-label="Compartir la fecha JOYCE"><span>Compartir</span><b aria-hidden="true">↗</b></button>
+            </div>
+          </aside>
+        </div>
+      </div>
+      <footer class="event-bottom"><span data-event-footer>JOYCE · Viernes 23 de octubre</span><button class="slider-enter" type="button">Entrar a ONE MORE</button></footer>
+    </div>
+  </section>  </div>
+  <div id="entry-curtain" class="entry-curtain" aria-hidden="true">
+    <div class="curtain-layout">
+      <p class="curtain-index" data-curtain-index>01 / Próxima fecha</p>
+      <div class="curtain-main">
+        <p class="curtain-overline">ONE MORE ELECTRONIC · Buenos Aires</p>
+        <h2 class="curtain-title"><span>ONE MORE</span><span>ELECTRONIC</span></h2>
+        <div class="curtain-rule"></div>
+        <p class="curtain-caption" data-curtain-caption>La noche no termina</p>
+      </div>
+      <p class="curtain-serial" data-curtain-serial>OM / BA / 2026</p>
+    </div>
+  </div>
+  <nav class="mobile-quick-actions" aria-label="Accesos rápidos">
+    <a class="quick-home" href="#inicio" aria-label="Volver al inicio"><span aria-hidden="true">⌂</span></a>
+    <a class="quick-ticket" href="#proxima-experiencia"><span>Próxima fecha</span><span aria-hidden="true">↗</span></a>
+  </nav>
+  <section id="archivo" class="archive" aria-labelledby="archive-title">
+    <div class="archive-frame">
+      <header class="archive-top">
+        <span>Archivo · DJs que pasaron por la cabina</span>
+        <div class="archive-controls" aria-label="Controles del carrusel">
+          <p class="archive-progress" aria-live="polite"><span data-archive-current>01</span><i aria-hidden="true"></i><span data-archive-total>05</span></p>
+          <button type="button" class="archive-prev" aria-label="Ver DJs anteriores">←</button>
+          <button type="button" class="archive-next" aria-label="Ver más DJs">→</button>
+        </div>
+      </header>
+      <div class="archive-intro">
+        <h2 id="archive-title" class="section-heading"><span>Archivo</span><span>ONE MORE</span></h2>
+        <p>Una selección desplazable de artistas y sesiones que forman parte de nuestra historia en la cabina.</p>
+      </div>
+      <div class="archive-rail" id="archive-carousel" tabindex="0" aria-label="Carrusel de DJs de fechas anteriores">
+        <article class="archive-card" aria-label="DJ en cabina durante una sesión de archivo" style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-01.webp');">
+          <div class="archive-card-top"><span>Archivo</span><span>DJ set</span></div>
+          <h3 class="archive-card-name">TBT</h3>
+          <div class="archive-card-bottom"><span>Fecha anterior</span><span>ONE MORE</span></div>
+        </article>
+        <article class="archive-card" aria-label="DJ en cabina durante una sesión de archivo" style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-02.webp');">
+          <div class="archive-card-top"><span>Archivo</span><span>DJ set</span></div>
+          <h3 class="archive-card-name">Denial</h3>
+          <div class="archive-card-bottom"><span>Fecha anterior</span><span>ONE MORE</span></div>
+        </article>
+        <article class="archive-card" aria-label="DJ en cabina durante una sesión de archivo" style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-03.webp');">
+          <div class="archive-card-top"><span>Archivo</span><span>DJ set</span></div>
+          <h3 class="archive-card-name">Zambe</h3>
+          <div class="archive-card-bottom"><span>Fecha anterior</span><span>ONE MORE</span></div>
+        </article>
+        <article class="archive-card" aria-label="DJ en cabina durante una sesión de archivo" style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-04.webp');">
+          <div class="archive-card-top"><span>Archivo</span><span>DJ set</span></div>
+          <h3 class="archive-card-name small">Luca<br>Sanchez</h3>
+          <div class="archive-card-bottom"><span>Fecha anterior</span><span>ONE MORE</span></div>
+        </article>
+        <article class="archive-card" aria-label="DJ en cabina durante una sesión de archivo" style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-05.webp');">
+          <div class="archive-card-top"><span>Archivo</span><span>DJ set</span></div>
+          <h3 class="archive-card-name small">Mike<br>Moore</h3>
+          <div class="archive-card-bottom"><span>Fecha anterior</span><span>ONE MORE</span></div>
+        </article>
+        <article class="archive-card" aria-label="Juanci Correia en cabina durante una sesión de archivo" style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-02.webp'); background-position:65% center;">
+          <div class="archive-card-top"><span>Archivo</span><span>DJ set</span></div>
+          <h3 class="archive-card-name small">Juanci<br>Correia</h3>
+          <div class="archive-card-bottom"><span>Fecha anterior</span><span>ONE MORE</span></div>
+        </article>
+        <article class="archive-card" aria-label="Miloop en cabina durante una sesión de archivo" style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-04.webp'); background-position:68% center;">
+          <div class="archive-card-top"><span>Archivo</span><span>DJ set</span></div>
+          <h3 class="archive-card-name">Miloop</h3>
+          <div class="archive-card-bottom"><span>Fecha anterior</span><span>ONE MORE</span></div>
+        </article>
+        <article class="archive-card" aria-label="Sophia Fulcito en cabina durante una sesión de archivo" style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-01.webp'); background-position:74% center;">
+          <div class="archive-card-top"><span>Archivo</span><span>DJ set</span></div>
+          <h3 class="archive-card-name small">Sophia<br>Fulcito</h3>
+          <div class="archive-card-bottom"><span>Fecha anterior</span><span>ONE MORE</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section id="el-club" class="manifesto" aria-labelledby="club-title">
+    <div class="manifesto-frame">
+      <header class="manifesto-top">
+        <span>El club</span>
+        <span>Origen · Equipo fundador</span>
+      </header>
+      <div class="manifesto-main">
+        <div class="manifesto-title">
+          <p class="manifesto-kicker">El origen de ONE MORE</p>
+          <h2 id="club-title" class="section-heading"><span>Una idea</span><span>compartida</span></h2>
+          <div class="manifesto-mark"><i></i> La noche no termina</div>
+        </div>
+        <div class="manifesto-copy">
+          <div>
+            <p>ONE MORE nace de una búsqueda compartida: hacer de cada fecha un punto de encuentro para vivir la electrónica más allá de una sola noche.</p>
+            <div class="manifesto-values" aria-label="Punto de partida de ONE MORE ELECTRONIC">
+              <div><span>El origen</span><span>Una idea</span></div>
+              <div><span>El lugar</span><span>Sonido y comunidad</span></div>
+              <div><span>El impulso</span><span>Una noche más</span></div>
+            </div>
+          </div>
+          <div class="manifesto-mark"><i></i> ONE MORE ELECTRONIC</div>
+        </div>
+      </div>
+      <section class="founders" aria-labelledby="founders-title">
+        <div class="founders-head">
+          <h3 id="founders-title"><span>El equipo</span><span>fundador</span></h3>
+          <p>03 fundadores<br />Una visión compartida</p>
+        </div>
+        <div class="founders-grid">
+          <article class="founder-card">
+            <figure><img src="assets/founder-diego-bw.webp" decoding="async" alt="Retrato editorial monocromático de muestra de Diego" /></figure>
+            <div class="founder-body">
+              <p class="founder-number">01 · Fundador</p>
+              <h4 class="founder-name">Diego</h4>
+              <p class="founder-role">Dirección creativa</p>
+              <p class="founder-bio">Piensa la identidad de cada fecha, desde el pulso visual hasta la atmósfera que recibe a la pista. Para él, los detalles son parte del sonido.</p>
+            </div>
+          </article>
+          <article class="founder-card">
+            <figure><img src="assets/founder-damian-bw.webp" decoding="async" alt="Retrato editorial monocromático de muestra de Damian" /></figure>
+            <div class="founder-body">
+              <p class="founder-number">02 · Fundador</p>
+              <h4 class="founder-name">Damian</h4>
+              <p class="founder-role">Producción y operación</p>
+              <p class="founder-bio">Convierte las ideas en una experiencia concreta. Coordina tiempos, espacio y energía para que cada noche fluya cuando se apagan las luces.</p>
+            </div>
+          </article>
+          <article class="founder-card">
+            <figure><img src="assets/founder-federico-bw.webp" decoding="async" alt="Retrato editorial monocromático de muestra de Federico" /></figure>
+            <div class="founder-body">
+              <p class="founder-number">03 · Fundador</p>
+              <h4 class="founder-name">Federico</h4>
+              <p class="founder-role">Curaduría y comunidad</p>
+              <p class="founder-bio">Conecta artistas, sonidos y personas para que la cabina y la pista hablen el mismo idioma. Su foco está en lo que la gente se lleva después.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+      <footer class="manifesto-footer"><span>Una idea · tres miradas</span><span>ONE MORE ELECTRONIC</span></footer>
+    </div>
+  </section>
+  <section id="experiencia" class="gallery" aria-labelledby="experience-title">
+    <div class="gallery-frame">
+      <header class="gallery-top">
+        <span>La experiencia</span>
+        <span>ONE MORE ELECTRONIC</span>
+      </header>
+      <div class="gallery-head">
+        <div>
+          <p class="gallery-kicker">Cuando la pista despierta</p>
+          <h2 id="experience-title" class="section-heading"><span>La noche</span><span>desde adentro</span></h2>
+        </div>
+        <div class="gallery-aside">
+          <p>Color, presión y sonido. Cada fecha deja su propia huella sobre la pista.</p>
+          <a class="gallery-instagram" href="https://www.instagram.com/more_electronic/" target="_blank" rel="noopener noreferrer"><span>Seguir en Instagram</span><b aria-hidden="true">↗</b></a>
+        </div>
+      </div>
+      <div class="gallery-masonry">
+        <figure class="gallery-item gallery-item--dance">
+          <img src="assets/gallery-dancefloor.webp" decoding="async" alt="Público bailando en la pista de ONE MORE ELECTRONIC" />
+          <figcaption class="gallery-label"><span>Pista</span><span>El pulso</span></figcaption>
+        </figure>
+        <figure class="gallery-item gallery-item--decks">
+          <img src="assets/gallery-decks.webp" decoding="async" alt="Consola de DJ durante una sesión electrónica" />
+          <figcaption class="gallery-label"><span>Cabina</span><span>Control</span></figcaption>
+        </figure>
+        <figure class="gallery-item gallery-item--lights">
+          <img src="assets/gallery-lights.webp" decoding="async" alt="Iluminación y arquitectura de una pista electrónica" />
+          <figcaption class="gallery-label"><span>Espacio</span><span>Sin pausa</span></figcaption>
+        </figure>
+        <figure class="gallery-item gallery-item--community">
+          <img src="assets/gallery-community.webp" decoding="async" alt="Grupo de personas compartiendo la pista de baile" />
+          <figcaption class="gallery-label"><span>Comunidad</span><span>Una pista</span></figcaption>
+        </figure>
+      </div>
+      <footer class="gallery-footer"><span>Archivo visual en construcción</span><span>La noche no termina</span></footer>
+    </div>
+  </section>
+  <section id="ubicacion" class="map-section" aria-labelledby="map-title">
+    <div class="map-frame">
+      <header class="map-top">
+        <span>Ubicación</span>
+        <span>One More Club · Villa Devoto</span>
+      </header>
+      <div class="map-main">
+        <div class="map-canvas">
+          <div id="venue-map" class="venue-map" role="application" tabindex="0" aria-label="Mapa interactivo de One More Club en Avenida Francisco Beiró 3334, Villa Devoto. Arrastrá para explorar o usá los controles de zoom.">
+            <div id="map-tiles" class="map-tiles" aria-hidden="true"></div>
+            <div id="map-marker" class="map-marker" aria-hidden="true"><span class="map-marker-pin"></span><span class="map-marker-label">One More Club</span></div>
+            <p class="map-status">Mapa de ubicación · Villa Devoto</p>
+            <a class="map-open" href="https://www.google.com/maps/search/?api=1&amp;query=Av.+Francisco+Beir%C3%B3+3334%2C+Villa+Devoto%2C+Buenos+Aires" target="_blank" rel="noopener noreferrer">Ver Google Maps <b aria-hidden="true">↗</b></a>
+            <div class="map-controls" aria-label="Controles del mapa">
+              <button type="button" data-map-action="zoom-in" aria-label="Acercar mapa">+</button>
+              <button type="button" data-map-action="zoom-out" aria-label="Alejar mapa">−</button>
+              <button type="button" data-map-action="reset" aria-label="Recentrar mapa">⌖</button>
+            </div>
+          </div>
+        </div>
+        <div class="map-panel">
+          <div>
+            <p class="map-kicker">El lugar</p>
+            <h2 id="map-title" class="section-heading"><span>One More</span><span>Club</span></h2>
+            <p class="map-address">Av. Francisco Beiró 3334<br>Villa Devoto · Buenos Aires</p>
+          </div>
+          <div>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=Av.+Francisco+Beir%C3%B3+3334%2C+Villa+Devoto%2C+Buenos+Aires" target="_blank" rel="noopener noreferrer">Cómo llegar <span aria-hidden="true">↗</span></a>
+            <p class="map-note">Consultá siempre la ubicación indicada en cada fecha antes de salir.</p>
+          </div>
+        </div>
+      </div>
+      <footer class="map-foot"><span>Villa Devoto · Buenos Aires</span><span>© OpenStreetMap contributors</span></footer>
+    </div>
+  </section>
+  <footer class="site-footer">
+    <div class="footer-frame">
+      <div class="footer-main">
+        <div class="footer-identity">
+          <div class="footer-brand"><img src="assets/one-logo.webp" alt="" /><span>ONE MORE<br>ELECTRONIC</span></div>
+          <p class="footer-claim"><span>La noche</span><span>no termina</span></p>
+        </div>
+        <nav class="footer-column" aria-label="Navegación del pie de página">
+          <p class="footer-label">Explorar</p>
+          <div class="footer-nav">
+            <a href="#proxima-experiencia">Próxima fecha</a>
+            <a href="#archivo">Archivo</a>
+            <a href="#el-club">El club</a>
+            <a href="#experiencia">La experiencia</a>
+          </div>
+        </nav>
+        <div class="footer-column">
+          <p class="footer-label">Próxima experiencia</p>
+          <p class="footer-event-name">JOYCE</p>
+          <p class="footer-event-meta">Viernes 23 de octubre<br>23:59 h · Devoto</p>
+          <a class="footer-event-link" href="#proxima-experiencia"><span>Ver información</span><span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <aside class="footer-entry-policy" aria-label="Información de ingreso">
+        <div class="footer-policy-item">
+          <p class="footer-policy-label">Edad mínima</p>
+          <p class="footer-policy-copy">+18 · DNI vigente obligatorio</p>
+        </div>
+        <div class="footer-policy-item">
+          <p class="footer-policy-label">Apertura</p>
+          <p class="footer-policy-copy">Desde 23:59 h · Consultá cada fecha</p>
+        </div>
+        <div class="footer-policy-item">
+          <p class="footer-policy-label">Ingreso</p>
+          <p class="footer-policy-copy">Sujeto a capacidad, derecho de admisión y permanencia</p>
+        </div>
+        <div class="footer-policy-item">
+          <p class="footer-policy-label">Ubicación</p>
+          <a class="footer-map-link" href="https://www.google.com/maps/search/?api=1&amp;query=Av.+Francisco+Beir%C3%B3+3334%2C+Villa+Devoto%2C+Buenos+Aires" target="_blank" rel="noopener noreferrer"><span>Cómo llegar<br>Google Maps</span><b aria-hidden="true">↗</b></a>
+        </div>
+      </aside>
+      <div class="footer-bottom">
+        <p>© 2026 ONE MORE ELECTRONIC · Todos los derechos reservados</p>
+        <a href="#archivo" aria-label="Volver al comienzo de ONE MORE">Volver arriba ↑</a>
+      </div>
+    </div>
+  </footer>
+  <div id="ticket-notice" class="ticket-notice" role="status" aria-live="polite" aria-atomic="true"><span>Abriendo entradas</span><b aria-hidden="true">↗</b></div>
+  <script>
+    const archiveRail = document.getElementById('archive-carousel');
+    const archiveCards = [...archiveRail.querySelectorAll('.archive-card')];
+    const archivePrevButton = document.querySelector('.archive-prev');
+    const archiveNextButton = document.querySelector('.archive-next');
+    const archiveCurrent = document.querySelector('[data-archive-current]');
+    const archiveTotal = document.querySelector('[data-archive-total]');
+    const archiveReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const archiveMaxScroll = () => Math.max(0, archiveRail.scrollWidth - archiveRail.clientWidth);
+    const getArchiveCardLeft = (card) => card.getBoundingClientRect().left - archiveRail.getBoundingClientRect().left + archiveRail.scrollLeft;
+    const getActiveArchiveIndex = () => {
+      const scrollLeft = archiveRail.scrollLeft;
+      return archiveCards.reduce((closest, card, index) => Math.abs(getArchiveCardLeft(card) - scrollLeft) < Math.abs(getArchiveCardLeft(archiveCards[closest]) - scrollLeft) ? index : closest, 0);
+    };
+    const updateArchiveUI = () => {
+      const max = archiveMaxScroll();
+      const index = getActiveArchiveIndex();
+      archivePrevButton.disabled = archiveRail.scrollLeft <= 2;
+      archiveNextButton.disabled = archiveRail.scrollLeft >= max - 2;
+      archiveRail.classList.toggle('can-scroll-left', archiveRail.scrollLeft > 2);
+      archiveRail.classList.toggle('can-scroll-right', archiveRail.scrollLeft < max - 2);
+      archiveCurrent.textContent = String(index + 1).padStart(2, '0');
+      archiveTotal.textContent = String(archiveCards.length).padStart(2, '0');
+    };
+    const scrollArchiveTo = (index, behavior = 'smooth') => {
+      const target = archiveCards[Math.max(0, Math.min(archiveCards.length - 1, index))];
+      archiveRail.scrollTo({ left:getArchiveCardLeft(target), behavior });
+    };
+    archiveNextButton.addEventListener('click', () => { pauseArchiveAutoplay(); scrollArchiveTo(getActiveArchiveIndex() + 1); });
+    archivePrevButton.addEventListener('click', () => { pauseArchiveAutoplay(); scrollArchiveTo(getActiveArchiveIndex() - 1); });
+    let archiveAutoTimer;
+    let archiveResumeTimer;
+    let archiveVisible = false;
+    let archiveAutoScrolling = false;
+    const clearArchiveTimers = () => { window.clearTimeout(archiveAutoTimer); window.clearTimeout(archiveResumeTimer); };
+    const scheduleArchiveAutoplay = () => {
+      window.clearTimeout(archiveAutoTimer);
+      if (!archiveVisible || archiveReducedMotion() || document.hidden || getActiveArchiveIndex() >= archiveCards.length - 1) return;
+      archiveAutoTimer = window.setTimeout(() => {
+        archiveAutoScrolling = true;
+        scrollArchiveTo(getActiveArchiveIndex() + 1);
+        window.setTimeout(() => { archiveAutoScrolling = false; scheduleArchiveAutoplay(); }, 700);
+      }, 3800);
+    };
+    const pauseArchiveAutoplay = ({ resume = true } = {}) => {
+      clearArchiveTimers();
+      if (!resume || archiveReducedMotion() || archiveDrag) return;
+      archiveResumeTimer = window.setTimeout(scheduleArchiveAutoplay, 4500);
+    };
+    archiveRail.addEventListener('scroll', () => {
+      updateArchiveUI();
+      if (!archiveAutoScrolling) pauseArchiveAutoplay();
+    }, { passive:true });
+    let archiveDrag = null;
+    let archiveMomentumFrame;
+    const stopArchiveMomentum = () => window.cancelAnimationFrame(archiveMomentumFrame);
+    archiveRail.addEventListener('pointerdown', (event) => {
+      if (event.pointerType === 'touch') return;
+      stopArchiveMomentum();
+      archiveDrag = { pointerId:event.pointerId, startX:event.clientX, startScroll:archiveRail.scrollLeft, lastX:event.clientX, lastTime:event.timeStamp, velocity:0 };
+      archiveRail.setPointerCapture(event.pointerId);
+      archiveRail.classList.add('is-dragging');
+      pauseArchiveAutoplay({ resume:false });
+    });
+    archiveRail.addEventListener('pointermove', (event) => {
+      if (!archiveDrag || event.pointerId !== archiveDrag.pointerId) return;
+      const delta = event.clientX - archiveDrag.startX;
+      const elapsed = Math.max(1, event.timeStamp - archiveDrag.lastTime);
+      archiveDrag.velocity = (event.clientX - archiveDrag.lastX) / elapsed;
+      archiveDrag.lastX = event.clientX;
+      archiveDrag.lastTime = event.timeStamp;
+      event.preventDefault();
+      archiveRail.scrollLeft = archiveDrag.startScroll - delta;
+    });
+    const finishArchiveDrag = (event) => {
+      if (!archiveDrag || (event && event.pointerId !== archiveDrag.pointerId)) return;
+      const velocity = archiveDrag.velocity;
+      if (event && archiveRail.hasPointerCapture(event.pointerId)) archiveRail.releasePointerCapture(event.pointerId);
+      archiveDrag = null;
+      archiveRail.classList.remove('is-dragging');
+      let momentum = -velocity * 26;
+      const glide = () => {
+        if (Math.abs(momentum) < .35 || archiveRail.scrollLeft <= 0 || archiveRail.scrollLeft >= archiveMaxScroll()) {
+          scrollArchiveTo(getActiveArchiveIndex());
+          return;
+        }
+        archiveRail.scrollLeft += momentum;
+        momentum *= .925;
+        archiveMomentumFrame = window.requestAnimationFrame(glide);
+      };
+      if (!archiveReducedMotion()) archiveMomentumFrame = window.requestAnimationFrame(glide); else scrollArchiveTo(getActiveArchiveIndex(), 'auto');
+      pauseArchiveAutoplay();
+    };
+    archiveRail.addEventListener('pointerup', finishArchiveDrag);
+    archiveRail.addEventListener('pointercancel', finishArchiveDrag);
+    archiveRail.addEventListener('mouseenter', () => pauseArchiveAutoplay({ resume:false }));
+    archiveRail.addEventListener('mouseleave', scheduleArchiveAutoplay);
+    archiveRail.addEventListener('focusin', () => pauseArchiveAutoplay({ resume:false }));
+    archiveRail.addEventListener('focusout', () => window.setTimeout(scheduleArchiveAutoplay, 0));
+    window.addEventListener('resize', updateArchiveUI);
+    document.addEventListener('visibilitychange', () => document.hidden ? clearArchiveTimers() : scheduleArchiveAutoplay());
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(([entry]) => { archiveVisible = entry.isIntersecting; if (archiveVisible) scheduleArchiveAutoplay(); else clearArchiveTimers(); }, { threshold:.35 }).observe(archiveRail);
+    } else { archiveVisible = true; scheduleArchiveAutoplay(); }
+    updateArchiveUI();
+
+    const siteHeader = document.querySelector('.site-header');
+    const menuToggle = document.querySelector('.menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const primaryLinks = [...document.querySelectorAll('.header-link')];
+    const introDeck = document.getElementById('intro-deck');
+    const archiveSection = document.getElementById('archivo');
+    const heroNextButton = document.querySelector('.hero-route--next');
+    const heroEnterButton = document.querySelector('.hero-route--enter');
+    const eventBackButton = document.querySelector('.event-back');
+    const introSlider = document.getElementById('intro-slider');
+    const entryCurtain = document.getElementById('entry-curtain');
+    const curtainIndex = document.querySelector('[data-curtain-index]');
+    const curtainCaption = document.querySelector('[data-curtain-caption]');
+    const curtainSerial = document.querySelector('[data-curtain-serial]');
+    const sliderEnterButton = document.querySelector('.slider-enter');
+    const mobileQuickActions = document.querySelector('.mobile-quick-actions');
+    const heroVideo = document.querySelector('.hero-video');
+    const syncHeroVideoMotion = () => {
+      const shouldPlay = !document.hidden && document.body.classList.contains('intro-active') && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!shouldPlay) { heroVideo.pause(); return; }
+      heroVideo.play().catch(() => {});
+    };
+    syncHeroVideoMotion();
+    window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', syncHeroVideoMotion);
+    document.addEventListener('visibilitychange', syncHeroVideoMotion);
+    // Each upcoming date is a real, independently navigable item. Images are read
+    // for their intrinsic ratio, so changing a flyer also changes the poster column.
+    const eventPosterImage = document.querySelector('.event-poster img');
+    const eventTitleWrap = document.querySelector('[data-event-title-wrap]');
+    const eventTitle = document.querySelector('[data-event-title]');
+    const eventLabel = document.querySelector('[data-event-label]');
+    const eventLineupLabel = document.querySelector('[data-event-lineup-label]');
+    const eventLineup = document.querySelector('[data-event-lineup]');
+    const eventDay = document.querySelector('[data-event-day]');
+    const eventMonth = document.querySelector('[data-event-month]');
+    const eventDate = document.querySelector('[data-event-date]');
+    const eventTime = document.querySelector('[data-event-time]');
+    const eventPlace = document.querySelector('[data-event-place]');
+    const eventDetailLineup = document.querySelector('[data-event-detail-lineup]');
+    const eventTicket = document.querySelector('[data-event-ticket]');
+    const eventShareButton = document.querySelector('[data-event-share]');
+    const ticketNotice = document.getElementById('ticket-notice');
+    const ticketNoticeText = ticketNotice.querySelector('span');
+    let ticketNoticeTimer;
+    const showActionNotice = (message) => {
+      window.clearTimeout(ticketNoticeTimer);
+      ticketNoticeText.textContent = message;
+      ticketNotice.classList.add('is-visible');
+      ticketNoticeTimer = window.setTimeout(() => ticketNotice.classList.remove('is-visible'), 2600);
+    };
+    const confirmTicketOpening = () => showActionNotice('Abriendo entradas');
+    const copyShareLink = async (url) => {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(url);
+        return;
+      }
+      const field = document.createElement('textarea');
+      field.value = url;
+      field.setAttribute('readonly', '');
+      field.style.cssText = 'position:fixed;opacity:0;pointer-events:none;';
+      document.body.appendChild(field);
+      field.select();
+      const copied = document.execCommand('copy');
+      field.remove();
+      if (!copied) throw new Error('copy failed');
+    };
+    const shareCurrentEvent = async () => {
+      const event = upcomingEvents[activeEventIndex];
+      const url = new URL(window.location.href);
+      url.search = '';
+      url.hash = '';
+      url.searchParams.set('evento', event.slug);
+      const shareUrl = url.toString();
+      const title = `ONE MORE ELECTRONIC — ${event.titleHtml.replace(/<[^>]+>/g, '')}`;
+      const text = `${event.footer} · ${event.place}`;
+      if (navigator.share) {
+        try {
+          await navigator.share({ title, text, url:shareUrl });
+          showActionNotice('Fecha compartida');
+          return;
+        } catch (error) {
+          if (error && error.name === 'AbortError') return;
+        }
+      }
+      try {
+        await copyShareLink(shareUrl);
+        showActionNotice('Link copiado');
+      } catch (_) {
+        showActionNotice('No se pudo copiar el link');
+      }
+    };
+    eventTicket.addEventListener('click', confirmTicketOpening);
+    eventShareButton.addEventListener('click', shareCurrentEvent);
+    const eventFooter = document.querySelector('[data-event-footer]');
+    const eventInfo = document.querySelector('[data-event-info]');
+    const eventPosition = document.querySelector('[data-event-position]');
+    const eventTotal = document.querySelector('[data-event-total]');
+    const upcomingEvents = [
+      {
+        slug:'joyce-23-oct', startsAt:'2026-10-23T23:59:00-03:00', countdownLabel:'Vie 23 OCT · 23:59 H', titleHtml:'<span>JOYCE</span>', longTitle:false,
+        label:'More electronic music presenta', image:'assets/joyce-23-octubre.webp', width:606, height:750,
+        alt:'Flyer de Joyce Argentina: viernes 23 de octubre, Av. Beiro 3334, Devoto.', day:'23', month:'OCT',
+        date:'Viernes 23 de octubre', time:'23:59 Hs', place:'Av. Beiro 3334 · Devoto',
+        lineupLabel:'Artistas confirmados', lineup:'Joyce · Jonny Vidal · Viken · Day Sanchez',
+        ticket:'Comprar entradas', ticketUrl:'https://www.passline.com/eventos/viernes-2310-more-joyce-arg', footer:'JOYCE · Viernes 23 de octubre'
+      },
+      {
+        slug:'goth-24-oct', startsAt:'2026-10-24T23:59:00-03:00', countdownLabel:'Sáb 24 OCT · 23:59 H', titleHtml:'<span>GOTH</span>', longTitle:false,
+        label:'More electronic music presenta', image:'assets/goth-24-octubre.webp', width:606, height:750,
+        alt:'Flyer de GOTH: sábado 24 de octubre, Av. Beiro 3334, Devoto.', day:'24', month:'OCT',
+        date:'Sábado 24 de octubre', time:'23:59 Hs', place:'Av. Beiro 3334 · Devoto',
+        lineupLabel:'Artistas confirmados', lineup:'Juanci Correia · TBT · Denial · Zambe · Miloop · Luca Sanchez · Mike Moore · Sophia Fulcito',
+        ticket:'Comprar entradas', ticketUrl:'https://www.passline.com/eventos/sabado-2410-more-goth', footer:'GOTH · Sábado 24 de octubre'
+      },
+      {
+        slug:'halloween-31-oct', startsAt:'2026-10-31T00:00:00-03:00', countdownLabel:'Sáb 31 OCT · Save the date', titleHtml:'<span>HALLOWEEN</span>', longTitle:true,
+        label:'ONE MORE ELECTRONIC presenta', image:'assets/halloween-31-octubre.webp', width:566, height:750,
+        alt:'Flyer Save the Date de Halloween para el 31 de octubre.', day:'31', month:'OCT',
+        date:'Sábado 31 de octubre', time:'Próximamente', place:'Por confirmar',
+        lineupLabel:'Save the date', lineup:'Información y line-up próximamente',
+        ticket:'Comprar entradas', ticketUrl:'https://www.passline.com/eventos/sabado-3110-more', footer:'HALLOWEEN · Sábado 31 de octubre'
+      }
+    ];
+    const heroCountdown = document.querySelector('[data-hero-countdown]');
+    const countdownEvent = document.querySelector('[data-countdown-event]');
+    const countdownDate = document.querySelector('[data-countdown-date]');
+    const countdownDays = document.querySelector('[data-countdown-days]');
+    const countdownHours = document.querySelector('[data-countdown-hours]');
+    const countdownMinutes = document.querySelector('[data-countdown-minutes]');
+    const getNextCountdownEvent = () => upcomingEvents.find(({ startsAt }) => Date.parse(startsAt) > Date.now()) || upcomingEvents[upcomingEvents.length - 1];
+    const refreshHeroCountdown = () => {
+      const event = getNextCountdownEvent();
+      const remaining = Math.max(0, Date.parse(event.startsAt) - Date.now());
+      const totalMinutes = Math.floor(remaining / 60000);
+      const days = Math.floor(totalMinutes / 1440);
+      const hours = Math.floor((totalMinutes % 1440) / 60);
+      const minutes = totalMinutes % 60;
+      heroCountdown.href = `?evento=${event.slug}`;
+      heroCountdown.dataset.eventSlug = event.slug;
+      heroCountdown.setAttribute('aria-label', `Ver próxima fecha: ${event.footer}`);
+      countdownEvent.textContent = event.footer.split(' · ')[0];
+      countdownDate.textContent = event.countdownLabel;
+      countdownDays.textContent = String(days).padStart(2, '0');
+      countdownHours.textContent = String(hours).padStart(2, '0');
+      countdownMinutes.textContent = String(minutes).padStart(2, '0');
+    };
+    heroCountdown.addEventListener('click', (event) => {
+      event.preventDefault();
+      const index = upcomingEvents.findIndex(({ slug }) => slug === heroCountdown.dataset.eventSlug);
+      if (index < 0) return;
+      const eventUrl = new URL(window.location.href);
+      eventUrl.searchParams.set('evento', upcomingEvents[index].slug);
+      window.history.pushState({}, '', `${eventUrl.pathname}?${eventUrl.searchParams.toString()}${eventUrl.hash}`);
+      void renderUpcomingEvent(index);
+      showEventPanel();
+    });
+    refreshHeroCountdown();
+    window.setInterval(refreshHeroCountdown, 1000);
+    let activeEventIndex = 0;
+    const eventCountdown = document.querySelector('[data-event-countdown]');
+    const eventCountdownDays = document.querySelector('[data-event-countdown-days]');
+    const eventCountdownHours = document.querySelector('[data-event-countdown-hours]');
+    const eventCountdownMinutes = document.querySelector('[data-event-countdown-minutes]');
+    const refreshEventCountdown = () => {
+      const event = upcomingEvents[activeEventIndex];
+      const remaining = Math.max(0, Date.parse(event.startsAt) - Date.now());
+      const totalMinutes = Math.floor(remaining / 60000);
+      eventCountdownDays.textContent = String(Math.floor(totalMinutes / 1440)).padStart(2, '0');
+      eventCountdownHours.textContent = String(Math.floor((totalMinutes % 1440) / 60)).padStart(2, '0');
+      eventCountdownMinutes.textContent = String(totalMinutes % 60).padStart(2, '0');
+      eventCountdown.setAttribute('aria-label', `Cuenta regresiva para ${event.footer}`);
+    };
+    window.setInterval(refreshEventCountdown, 1000);
+    const syncPosterRatio = () => {
+      if (!eventPosterImage.naturalWidth || !eventPosterImage.naturalHeight) return;
+      const ratio = eventPosterImage.naturalWidth / eventPosterImage.naturalHeight;
+      eventPosterImage.closest('.event-stage').style.setProperty('--poster-ratio', String(ratio));
+    };
+    // Preload and decode every flyer once. The visible poster changes only after the
+    // target is ready, so a prior flyer can never remain on screen during a switch.
+    const flyerPreloads = new Map();
+    const preloadFlyer = (source) => {
+      if (flyerPreloads.has(source)) return flyerPreloads.get(source);
+      const preloader = new Image();
+      preloader.decoding = 'async';
+      const ready = new Promise((resolve) => {
+        preloader.onload = async () => {
+          if (preloader.decode) { try { await preloader.decode(); } catch (_) {} }
+          resolve();
+        };
+        preloader.onerror = () => resolve();
+      });
+      preloader.src = source;
+      flyerPreloads.set(source, ready);
+      return ready;
+    };
+    const renderUpcomingEvent = async (index) => {
+      activeEventIndex = (index + upcomingEvents.length) % upcomingEvents.length;
+      const event = upcomingEvents[activeEventIndex];
+      eventTitle.innerHTML = event.titleHtml;
+      eventTitleWrap.classList.toggle('is-long-title', event.longTitle);
+      eventLabel.textContent = event.label;
+      eventLineupLabel.textContent = event.lineupLabel;
+      eventLineup.textContent = event.lineup;
+      eventDay.textContent = event.day;
+      eventMonth.textContent = event.month;
+      eventDate.textContent = event.date;
+      eventTime.textContent = event.time;
+      eventPlace.textContent = event.place;
+      eventDetailLineup.textContent = event.lineup;
+      refreshEventCountdown();
+      eventInfo.setAttribute('aria-label', `Detalles de ${event.titleHtml.replace(/<[^>]+>/g, ' ')}`);
+      eventTicket.href = event.ticketUrl;
+      eventTicket.replaceChildren(document.createTextNode(event.ticket), Object.assign(document.createElement('b'), { textContent:'↗', ariaHidden:'true' }));
+      eventShareButton.setAttribute('aria-label', `Compartir la fecha ${event.titleHtml.replace(/<[^>]+>/g, '')}`);
+      if (document.body.classList.contains('event-open')) {
+        const eventUrl = new URL(window.location.href);
+        eventUrl.searchParams.set('evento', event.slug);
+        window.history.replaceState({}, '', `${eventUrl.pathname}?${eventUrl.searchParams.toString()}${eventUrl.hash}`);
+      }
+      eventFooter.textContent = event.footer;
+      eventPosition.textContent = String(activeEventIndex + 1).padStart(2, '0');
+      eventTotal.textContent = String(upcomingEvents.length).padStart(2, '0');
+      eventPosterImage.closest('.event-stage').style.setProperty('--poster-ratio', String(event.width / event.height));
+      eventPosterImage.width = event.width;
+      eventPosterImage.height = event.height;
+      eventPosterImage.alt = event.alt;
+      if (eventPosterImage.getAttribute('src') !== event.image) {
+        eventPosterImage.src = event.image;
+        if (eventPosterImage.decode) { try { await eventPosterImage.decode(); } catch (_) {} }
+      }
+      syncPosterRatio();
+    };
+    eventPosterImage.addEventListener('load', syncPosterRatio);
+    const eventStage = document.querySelector('.event-stage');
+    const eventPrevButton = document.querySelector('[data-event-prev]');
+    const eventNextButton = document.querySelector('[data-event-next]');
+    let isEventTransitioning = false;
+    const changeUpcomingEvent = (direction) => {
+      if (isEventTransitioning) return;
+      isEventTransitioning = true;
+      const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const outgoingClass = direction > 0 ? 'is-switching-next' : 'is-switching-prev';
+      const incomingClass = direction > 0 ? 'is-preparing-next' : 'is-preparing-prev';
+      eventPrevButton.disabled = true;
+      eventNextButton.disabled = true;
+      eventStage.setAttribute('aria-busy', 'true');
+      eventStage.classList.add(outgoingClass);
+      window.setTimeout(async () => {
+        const nextIndex = activeEventIndex + direction;
+        const nextEvent = upcomingEvents[(nextIndex + upcomingEvents.length) % upcomingEvents.length];
+        await preloadFlyer(nextEvent.image);
+        await renderUpcomingEvent(nextIndex);
+        eventStage.classList.remove(outgoingClass);
+        eventStage.classList.add(incomingClass);
+        void eventStage.offsetWidth;
+        eventStage.classList.remove(incomingClass);
+        window.setTimeout(() => {
+          eventStage.removeAttribute('aria-busy');
+          eventPrevButton.disabled = false;
+          eventNextButton.disabled = false;
+          isEventTransitioning = false;
+        }, isReducedMotion ? 0 : 220);
+      }, isReducedMotion ? 0 : 180);
+    };
+    eventPrevButton.addEventListener('click', () => changeUpcomingEvent(-1));
+    eventNextButton.addEventListener('click', () => changeUpcomingEvent(1));
+    upcomingEvents.forEach(({ image }) => preloadFlyer(image));
+    void renderUpcomingEvent(0);
+    const closeMobileMenu = ({ returnFocus = false } = {}) => {
+      mobileMenu.classList.remove('open');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      menuToggle.classList.remove('is-open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Abrir menú');
+      document.body.classList.remove('menu-open');
+      if (returnFocus) menuToggle.focus();
+    };
+    const openMobileMenu = () => {
+      mobileMenu.classList.add('open');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+      menuToggle.classList.add('is-open');
+      menuToggle.setAttribute('aria-expanded', 'true');
+      menuToggle.setAttribute('aria-label', 'Cerrar menú');
+      document.body.classList.add('menu-open');
+      mobileMenu.querySelector('a').focus();
+    };
+    menuToggle.addEventListener('click', () => {
+      const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+      if (isOpen) closeMobileMenu(); else openMobileMenu();
+    });
+    mobileMenu.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => closeMobileMenu()));
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && menuToggle.getAttribute('aria-expanded') === 'true') closeMobileMenu({ returnFocus:true });
+    });
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 780 && menuToggle.getAttribute('aria-expanded') === 'true') closeMobileMenu();
+    });
+
+    const updateHeaderNavigation = () => {
+      siteHeader.classList.toggle('is-solid', window.scrollY > 24 || document.body.classList.contains('event-open') || document.body.classList.contains('site-mode'));
+      let currentId = '';
+      if (document.body.classList.contains('intro-active')) {
+        currentId = 'inicio';
+      } else if (document.body.classList.contains('event-open')) {
+        currentId = 'proxima-experiencia';
+      } else {
+        primaryLinks.forEach((link) => {
+          const section = document.querySelector(link.getAttribute('href'));
+          if (section && section.getBoundingClientRect().top <= siteHeader.offsetHeight + 34) currentId = section.id;
+        });
+      }
+      primaryLinks.forEach((link) => {
+        const active = link.getAttribute('href') === `#${currentId}`;
+        link.classList.toggle('active', active);
+        if (active) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current');
+      });
+      mobileMenu.querySelectorAll('.mobile-nav-links a').forEach((link) => {
+        const active = link.getAttribute('href') === `#${currentId}`;
+        link.classList.toggle('active', active);
+        if (active) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current');
+      });
+    };
+    window.addEventListener('scroll', updateHeaderNavigation, { passive:true });
+
+    const setIntroLock = (locked) => {
+      document.documentElement.classList.toggle('intro-locked', locked);
+    };
+    let eventStageTimer;
+    let siteStageTimer;
+    let heroStageTimer;
+    let siteHeaderTimer;
+    const reducedMotionEnabled = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const clearSiteHeaderStaging = () => {
+      window.clearTimeout(siteHeaderTimer);
+      document.body.classList.remove('site-nav-pending', 'site-nav-ready');
+    };
+    const hideSiteHeaderForTransition = () => {
+      clearSiteHeaderStaging();
+      document.body.classList.add('site-nav-pending');
+    };
+    const revealSiteHeaderAfterCurtain = () => {
+      window.clearTimeout(siteHeaderTimer);
+      document.body.classList.add('site-nav-pending');
+      siteHeaderTimer = window.setTimeout(() => {
+        document.body.classList.remove('site-nav-pending');
+        document.body.classList.add('site-nav-ready');
+        window.setTimeout(() => document.body.classList.remove('site-nav-ready'), reducedMotionEnabled() ? 0 : 320);
+      }, reducedMotionEnabled() ? 0 : 680);
+    };
+    const clearQuickActionExit = () => mobileQuickActions.classList.remove('is-leaving');
+    const clearHeroStaging = () => {
+      window.clearTimeout(heroStageTimer);
+      introDeck.classList.remove('hero-intro', 'hero-preparing', 'is-hero-ready');
+    };
+    const stageHeroPanel = (delay = 520) => {
+      clearHeroStaging();
+      introDeck.classList.add('hero-intro', 'hero-preparing');
+      void introDeck.offsetWidth;
+      introDeck.classList.remove('hero-preparing');
+      heroStageTimer = window.setTimeout(() => introDeck.classList.add('is-hero-ready'), reducedMotionEnabled() ? 0 : delay);
+    };
+    const clearEventStaging = () => {
+      window.clearTimeout(eventStageTimer);
+      introSlider.classList.remove('panel-intro', 'stage-preparing', 'is-stage-ready');
+    };
+    const stageEventPanel = () => {
+      clearEventStaging();
+      introSlider.classList.add('panel-intro', 'stage-preparing');
+      void introSlider.offsetWidth;
+      introSlider.classList.remove('stage-preparing');
+      eventStageTimer = window.setTimeout(() => introSlider.classList.add('is-stage-ready'), reducedMotionEnabled() ? 0 : 520);
+    };
+    const clearWebsiteStaging = () => {
+      window.clearTimeout(siteStageTimer);
+      document.body.classList.remove('site-entry-staging', 'site-preparing', 'site-entry-ready');
+    };
+    const stageWebsiteEntry = (destination) => {
+      clearWebsiteStaging();
+      clearQuickActionExit();
+      if (destination !== archiveSection) return;
+      document.body.classList.add('site-entry-staging', 'site-preparing');
+      void archiveSection.offsetWidth;
+      document.body.classList.remove('site-preparing');
+      siteStageTimer = window.setTimeout(() => document.body.classList.add('site-entry-ready'), reducedMotionEnabled() ? 0 : 520);
+    };
+    const exitQuickActionsThen = (next) => {
+      if (!document.body.classList.contains('site-mode') || reducedMotionEnabled()) { next(); return; }
+      mobileQuickActions.classList.add('is-leaving');
+      window.setTimeout(next, 285);
+    };
+    const resetSliderOffscreen = () => {
+      introSlider.classList.add('no-motion');
+      introSlider.classList.remove('is-open', 'exit-left');
+      introSlider.setAttribute('aria-hidden', 'true');
+      void introSlider.offsetWidth;
+      introSlider.classList.remove('no-motion');
+    };
+    const resetCurtainOffscreen = () => {
+      entryCurtain.classList.add('no-motion');
+      entryCurtain.classList.remove('is-covering', 'exit-right');
+      void entryCurtain.offsetWidth;
+      entryCurtain.classList.remove('no-motion');
+    };
+    const setCurtainContext = ({ index = '01 / ONE MORE', caption = 'La noche no termina', serial = 'OM / BA / 2026' } = {}) => {
+      curtainIndex.textContent = index;
+      curtainCaption.textContent = caption;
+      curtainSerial.textContent = serial;
+    };
+    const playCurtain = (reveal, context) => {
+      setCurtainContext(context);
+      resetCurtainOffscreen();
+      const duration = reducedMotionEnabled() ? 0 : 620;
+      const hold = reducedMotionEnabled() ? 0 : 160;
+      requestAnimationFrame(() => entryCurtain.classList.add('is-covering'));
+      window.setTimeout(() => {
+        reveal();
+        window.setTimeout(() => {
+          entryCurtain.classList.remove('is-covering');
+          entryCurtain.classList.add('exit-right');
+          window.setTimeout(resetCurtainOffscreen, duration + 20);
+        }, hold);
+      }, duration);
+    };
+    const activateEventPanel = () => {
+      window.scrollTo({ top:0, behavior:'auto' });
+      introDeck.classList.remove('is-collapsed');
+      clearHeroStaging();
+      clearWebsiteStaging();
+      clearSiteHeaderStaging();
+      clearQuickActionExit();
+      document.body.classList.remove('intro-active', 'site-mode');
+      document.body.classList.add('event-open');
+      syncHeroVideoMotion();
+      setIntroLock(true);
+      introSlider.classList.remove('exit-left');
+      stageEventPanel();
+      introSlider.setAttribute('aria-hidden', 'false');
+      requestAnimationFrame(() => introSlider.classList.add('is-open'));
+      updateHeaderNavigation();
+    };
+    const showEventPanel = () => playCurtain(activateEventPanel, {
+      index:'01 / Próxima fecha',
+      caption:upcomingEvents[activeEventIndex].footer,
+      serial:`OM / FECHAS / ${String(activeEventIndex + 1).padStart(2, '0')}`
+    });
+    const revealHeroPanel = () => {
+      introDeck.classList.remove('is-collapsed');
+      clearEventStaging();
+      clearWebsiteStaging();
+      clearSiteHeaderStaging();
+      introSlider.classList.remove('is-open');
+      introSlider.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('event-open', 'site-mode');
+      document.body.classList.add('intro-active');
+      syncHeroVideoMotion();
+      stageHeroPanel();
+      setIntroLock(true);
+      window.scrollTo({ top:0, behavior:'auto' });
+      updateHeaderNavigation();
+    };
+    const showIntroPanel = () => playCurtain(revealHeroPanel, {
+      index:'00 / Inicio',
+      caption:'La noche no termina · Buenos Aires',
+      serial:'OM / INICIO / 00'
+    });
+    const finalizeWebsiteEntry = (selector = '#archivo') => {
+      const destination = document.querySelector(selector) || archiveSection;
+      const fromEvent = document.body.classList.contains('event-open');
+      clearHeroStaging();
+      clearEventStaging();
+      introDeck.classList.add('is-collapsed');
+      if (fromEvent) {
+        introSlider.classList.remove('is-open');
+        introSlider.classList.add('exit-left');
+      } else {
+        resetSliderOffscreen();
+      }
+      introSlider.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('intro-active', 'event-open');
+      document.body.classList.add('site-mode');
+      syncHeroVideoMotion();
+      stageWebsiteEntry(destination);
+      revealSiteHeaderAfterCurtain();
+      window.scrollTo({ top:0, behavior:'auto' });
+      setIntroLock(false);
+      updateHeaderNavigation();
+      requestAnimationFrame(() => destination.scrollIntoView({ behavior:'smooth', block:'start' }));
+    };
+    const getWebsiteCurtainContext = (selector) => {
+      const contexts = {
+        '#archivo': { index:'02 / Archivo', caption:'DJs que pasaron por la cabina', serial:'OM / ARCHIVO / 02' },
+        '#el-club': { index:'03 / El club', caption:'La casa de ONE MORE · Villa Devoto', serial:'OM / CLUB / 03' },
+        '#experiencia': { index:'04 / Experiencia', caption:'La noche desde adentro', serial:'OM / EXPERIENCIA / 04' },
+        '#ubicacion': { index:'05 / Ubicación', caption:'Av. Francisco Beiró 3334 · Devoto', serial:'OM / MAPA / 05' }
+      };
+      return contexts[selector] || contexts['#archivo'];
+    };
+    const enterWebsite = (selector = '#archivo') => {
+      hideSiteHeaderForTransition();
+      playCurtain(() => finalizeWebsiteEntry(selector), getWebsiteCurtainContext(selector));
+    };
+
+    heroNextButton.addEventListener('click', showEventPanel);
+    heroEnterButton.addEventListener('click', () => enterWebsite('#archivo'));
+    eventBackButton.addEventListener('click', showIntroPanel);
+    sliderEnterButton.addEventListener('click', () => enterWebsite('#archivo'));
+
+    document.addEventListener('click', (event) => {
+      const link = event.target.closest('a[href^="#"]');
+      if (!link) return;
+      const target = link.getAttribute('href');
+      if (target === '#proxima-experiencia') {
+        event.preventDefault();
+        closeMobileMenu();
+        const openEvent = () => showEventPanel();
+        if (link.closest('.mobile-quick-actions')) exitQuickActionsThen(openEvent); else openEvent();
+        return;
+      }
+      if (target === '#inicio') {
+        event.preventDefault();
+        closeMobileMenu();
+        if (document.body.classList.contains('intro-active')) {
+          window.scrollTo({ top:0, behavior:'auto' });
+          window.history.replaceState({}, '', `${window.location.pathname}${window.location.search}`);
+          return;
+        }
+        const openHero = () => showIntroPanel();
+        if (link.closest('.mobile-quick-actions')) exitQuickActionsThen(openHero); else openHero();
+        return;
+      }
+      if (document.documentElement.classList.contains('intro-locked') && target !== '#inicio') {
+        event.preventDefault();
+        enterWebsite(target);
+      }
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && document.body.classList.contains('event-open') && menuToggle.getAttribute('aria-expanded') !== 'true') showIntroPanel();
+    });
+    const requestedEventSlug = new URLSearchParams(window.location.search).get('evento');
+    const requestedEventIndex = upcomingEvents.findIndex(({ slug }) => slug === requestedEventSlug);
+    if (requestedEventIndex >= 0) {
+      void renderUpcomingEvent(requestedEventIndex);
+      showEventPanel();
+    } else if (window.location.hash && window.location.hash !== '#inicio') {
+      if (window.location.hash === '#proxima-experiencia') showEventPanel();
+      else enterWebsite(window.location.hash);
+    } else {
+      stageHeroPanel(reducedMotionEnabled() ? 0 : 110);
+      updateHeaderNavigation();
+    }
+
+    // Local map: real OpenStreetMap tiles are stored with the project, so it remains
+    // navigable in the preview without an iframe, network map requests, or API keys.
+    const venueMap = document.getElementById('venue-map');
+    const mapTiles = document.getElementById('map-tiles');
+    const mapMarker = document.getElementById('map-marker');
+    const venue = { lat: -34.605347, lon: -58.5110705 };
+    const tileSets = {
+      15: { xmin: 11056, ymin: 19743, cols: 4, rows: 4 },
+      16: { xmin: 22114, ymin: 39488, cols: 5, rows: 4 },
+      17: { xmin: 44229, ymin: 78977, cols: 7, rows: 5 }
+    };
+    let mapZoom = 16;
+    let mapCenter = { ...venue };
+    let mapDrag = null;
+    let activeTiles = [];
+
+    const projectPoint = (lat, lon, zoom) => {
+      const scale = 256 * (2 ** zoom);
+      const x = ((lon + 180) / 360) * scale;
+      const latRad = lat * Math.PI / 180;
+      const y = (1 - Math.asinh(Math.tan(latRad)) / Math.PI) * scale / 2;
+      return { x, y };
+    };
+    const unprojectPoint = (x, y, zoom) => {
+      const scale = 256 * (2 ** zoom);
+      const lon = (x / scale) * 360 - 180;
+      const lat = (Math.atan(Math.sinh(Math.PI * (1 - (2 * y / scale)))) * 180) / Math.PI;
+      return { lat, lon };
+    };
+    const limitMapCenter = () => {
+      const set = tileSets[mapZoom];
+      const width = venueMap.clientWidth;
+      const height = venueMap.clientHeight;
+      const point = projectPoint(mapCenter.lat, mapCenter.lon, mapZoom);
+      const minX = set.xmin * 256 + width / 2;
+      const maxX = (set.xmin + set.cols) * 256 - width / 2;
+      const minY = set.ymin * 256 + height / 2;
+      const maxY = (set.ymin + set.rows) * 256 - height / 2;
+      point.x = minX > maxX ? (minX + maxX) / 2 : Math.max(minX, Math.min(maxX, point.x));
+      point.y = minY > maxY ? (minY + maxY) / 2 : Math.max(minY, Math.min(maxY, point.y));
+      mapCenter = unprojectPoint(point.x, point.y, mapZoom);
+    };
+    const positionMap = () => {
+      limitMapCenter();
+      const center = projectPoint(mapCenter.lat, mapCenter.lon, mapZoom);
+      const marker = projectPoint(venue.lat, venue.lon, mapZoom);
+      const halfWidth = venueMap.clientWidth / 2;
+      const halfHeight = venueMap.clientHeight / 2;
+      activeTiles.forEach(({ image, x, y }) => {
+        image.style.transform = `translate3d(${Math.round(x * 256 - center.x + halfWidth)}px, ${Math.round(y * 256 - center.y + halfHeight)}px, 0)`;
+      });
+      mapMarker.style.left = `${Math.round(marker.x - center.x + halfWidth)}px`;
+      mapMarker.style.top = `${Math.round(marker.y - center.y + halfHeight)}px`;
+    };
+    const buildTiles = () => {
+      const set = tileSets[mapZoom];
+      const fragment = document.createDocumentFragment();
+      activeTiles = [];
+      for (let y = set.ymin; y < set.ymin + set.rows; y += 1) {
+        for (let x = set.xmin; x < set.xmin + set.cols; x += 1) {
+          const image = new Image(256, 256);
+          image.className = 'map-tile';
+          image.alt = '';
+          image.decoding = 'async';
+          image.src = `assets/map-tiles/${mapZoom}/${x}_${y}.webp`;
+          activeTiles.push({ image, x, y });
+          fragment.appendChild(image);
+        }
+      }
+      mapTiles.replaceChildren(fragment);
+      positionMap();
+    };
+    const setMapZoom = (nextZoom) => {
+      const requested = Math.max(15, Math.min(17, nextZoom));
+      if (requested === mapZoom) return;
+      mapZoom = requested;
+      buildTiles();
+    };
+    venueMap.querySelectorAll('[data-map-action]').forEach((button) => button.addEventListener('click', () => {
+      const action = button.dataset.mapAction;
+      if (action === 'zoom-in') setMapZoom(mapZoom + 1);
+      if (action === 'zoom-out') setMapZoom(mapZoom - 1);
+      if (action === 'reset') { mapZoom = 16; mapCenter = { ...venue }; buildTiles(); }
+    }));
+    venueMap.addEventListener('pointerdown', (event) => {
+      if (event.target.closest('a, button')) return;
+      const start = projectPoint(mapCenter.lat, mapCenter.lon, mapZoom);
+      mapDrag = { x: event.clientX, y: event.clientY, center: start };
+      venueMap.classList.add('is-dragging');
+      venueMap.setPointerCapture(event.pointerId);
+    });
+    venueMap.addEventListener('pointermove', (event) => {
+      if (!mapDrag) return;
+      mapCenter = unprojectPoint(mapDrag.center.x - (event.clientX - mapDrag.x), mapDrag.center.y - (event.clientY - mapDrag.y), mapZoom);
+      positionMap();
+    });
+    const endMapDrag = () => { mapDrag = null; venueMap.classList.remove('is-dragging'); };
+    venueMap.addEventListener('pointerup', endMapDrag);
+    venueMap.addEventListener('pointercancel', endMapDrag);
+    venueMap.addEventListener('wheel', (event) => {
+      event.preventDefault();
+      setMapZoom(mapZoom + (event.deltaY < 0 ? 1 : -1));
+    }, { passive: false });
+    venueMap.addEventListener('keydown', (event) => {
+      if (event.target.closest('a, button')) return;
+      const moves = { ArrowLeft: [-80, 0], ArrowRight: [80, 0], ArrowUp: [0, -80], ArrowDown: [0, 80] };
+      if (event.key === '+' || event.key === '=') { event.preventDefault(); setMapZoom(mapZoom + 1); return; }
+      if (event.key === '-') { event.preventDefault(); setMapZoom(mapZoom - 1); return; }
+      if (!moves[event.key]) return;
+      event.preventDefault();
+      const point = projectPoint(mapCenter.lat, mapCenter.lon, mapZoom);
+      mapCenter = unprojectPoint(point.x + moves[event.key][0], point.y + moves[event.key][1], mapZoom);
+      positionMap();
+    });
+    window.addEventListener('resize', positionMap);
+    buildTiles();
+
+  </script>
+</body>
+</html>
