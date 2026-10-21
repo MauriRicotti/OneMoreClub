@@ -1,4 +1,4 @@
-const CACHE_NAME = 'one-more-shell-v23';
+const CACHE_NAME = 'one-more-shell-v24';
 const APP_SHELL = [
   '/',
   '/index.html',
@@ -6,6 +6,8 @@ const APP_SHELL = [
   '/assets/favicon.ico?v=3',
   '/assets/apple-touch-icon.png?v=3',
   '/assets/one-logo.webp',
+  '/assets/notification-icon.png?v=1',
+  '/assets/notification-badge.png?v=1',
   '/assets/one-more-crowd-hero.webp'
 ];
 
@@ -50,19 +52,22 @@ self.addEventListener('message', (event) => {
   const eventSlug = event.data.eventSlug || 'joyce-23-oct';
   const details = {
     'joyce-23-oct': {
-      body: 'Nueva fecha: JOYCE · Vie 23 OCT · 23:59 H',
+      body: '23:59 H · ONE MORE CLUB · DEVOTO',
+      title: 'JOYCE · VIE 23 OCT',
       url: '/?evento=joyce-23-oct'
     }
   }[eventSlug] || {
     body: 'Hay una nueva fecha en ONE MORE ELECTRONIC.',
     url: '/#proxima-experiencia'
   };
-  event.waitUntil(self.registration.showNotification('ONE MORE ELECTRONIC', {
+  event.waitUntil(self.registration.showNotification(details.title || 'ONE MORE ELECTRONIC', {
     body: details.body,
-    icon: '/assets/apple-touch-icon.png?v=3',
-    badge: '/assets/favicon.ico?v=3',
+    icon: '/assets/notification-icon.png?v=1',
+    badge: '/assets/notification-badge.png?v=1',
     tag: 'one-more-notification-preview',
     renotify: true,
+    requireInteraction: false,
+    actions: [{ action:'open-event', title:'Ver fecha' }],
     data: { url: details.url }
   }));
 });

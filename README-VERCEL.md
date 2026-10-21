@@ -2,39 +2,40 @@
 
 Sitio estático: subí esta carpeta o el ZIP a Vercel; no requiere build.
 
-## Ubicación — Google Maps Embed oficial
+## Ubicación
 
-La sección Ubicación usa exclusivamente Google Maps Embed, dirigido a Av. Francisco Beiró 3334, Villa Devoto, Buenos Aires. El visor aislado de Arena bloquea iframes/red de terceros, por lo que el embed se debe comprobar en el dominio HTTPS desplegado.
+La sección Ubicación usa exclusivamente Google Maps Embed oficial, dirigido a Av. Francisco Beiró 3334, Villa Devoto, Buenos Aires. El visor aislado de Arena bloquea iframes/red de terceros; el embed se debe comprobar en el dominio HTTPS desplegado.
 
-## Correcciones de interfaz
+## Ajustes de esta versión
 
-### Preguntas frecuentes
+### Accesos rápidos móviles
 
-`Preguntas frecuentes` ya no recorta palabras ni se sale de su columna:
+Los botones flotantes ya no desaparecen al llegar a FAQ. Se mantienen activos durante toda la web y comienzan a salir solo cuando el bloque real de controles finales (`ONE MORE APP`, sonido y alerta) se aproxima al viewport. La salida usa la misma animación editorial de departure que se utiliza en la transición de Archivo; al volver hacia arriba, los botones regresan animados y recuperan foco/interacción.
 
-- cada palabra conserva una línea completa;
-- el tamaño responde al ancho de su propia columna;
-- los límites de escritorio y móvil se ajustaron de forma independiente;
-- se quitó el recorte del contenedor.
+### Acciones de la fecha
 
-### Acciones de entradas y compartir
-
-En columnas angostas del detalle de fecha, el CTA de entradas pasa a una primera fila completa y Compartir / QR pasan a una segunda fila. Esto evita que el botón Compartir desborde, tanto en escritorio estrecho como en móvil.
+En detalles estrechos, Comprar entradas ocupa la primera fila y Compartir / QR la segunda. Ambos botones de la segunda fila miden exactamente 52 px de alto.
 
 ### Sonido
 
-Los sonidos sintetizados siguen sin usar archivos y se activan tras la primera interacción. Ahora emplean doble voz tonal, compresión dinámica y niveles sensiblemente más altos:
+Los tonos agudos dobles se reemplazaron por una señal corta y cálida: seno de baja frecuencia con un toque de ruido filtrado, compresión suave y un segundo pulso discreto solo para confirmaciones. No usa assets ni autoplay.
 
-- tap: volumen base `0.19`;
-- navegación: `0.23`;
-- confirmación: `0.30`;
-- ganancia general `1.22` con compresión para mantener claridad sin clipping brusco.
+### Notificación de prueba
 
-### Controles flotantes y alerta instalada
+La prueba mantiene el envío local desde la PWA instalada y rediseña los datos que Android sí permite controlar:
 
-- Los accesos flotantes móviles se ocultan desde que la sección Preguntas frecuentes entra en el tramo final. Reaparecen al desplazarse hacia arriba y se eliminan también del orden de foco mientras están ocultos.
-- `Probar alerta` ahora llama directamente a `registration.showNotification()` una vez concedido el permiso, la ruta más fiable en una PWA instalada. La notificación conserva el enlace a JOYCE.
+- título: `JOYCE · VIE 23 OCT`;
+- cuerpo: `23:59 H · ONE MORE CLUB · DEVOTO`;
+- acción: `Ver fecha`;
+- nuevo icono principal transparente de ONE MORE;
+- nuevo badge monocromo transparente para la barra de estado.
+
+El panel de Android sigue siendo UI del sistema y no permite CSS propio; título, cuerpo, icono, badge y acciones son las partes personalizables desde web push.
+
+### Menú móvil
+
+Se quitó `Instalar ONE MORE` del menú hamburguesa y cualquier control de prueba de alertas en ese menú. El control de sonido se conserva allí. La instalación y la prueba de alerta siguen disponibles en el footer (la instalación se oculta dentro de la PWA instalada).
 
 ## PWA
 
-Service worker: `one-more-shell-v23`.
+Service worker: `one-more-shell-v24`. Tras desplegar, abrí o recargá una vez la PWA instalada para adoptar el service worker y los nuevos iconos de notificación.

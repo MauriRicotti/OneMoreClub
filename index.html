@@ -370,14 +370,17 @@
 
     /* Narrow event-detail columns: avoid squeezing the share action out of its grid. */
     @container (max-width: 390px) {
-      .event-actions { grid-template-columns:minmax(0,1fr) 48px; grid-template-rows:52px 46px; }
+      .event-actions { grid-template-columns:minmax(0,1fr) 48px; grid-template-rows:52px 52px; }
       .event-actions .announce { grid-column:1 / -1; grid-row:1; }
-      .event-actions .event-share { grid-column:1; grid-row:2; min-width:0; padding:0 12px; }
-      .event-actions .event-qr-trigger { grid-column:2; grid-row:2; min-height:46px; }
+      .event-actions .event-share { grid-column:1; grid-row:2; min-width:0; min-height:52px; height:52px; padding:0 12px; }
+      .event-actions .event-qr-trigger { grid-column:2; grid-row:2; min-height:52px; height:52px; }
       .event-share span { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
     }
     @media (max-width:760px) {
       .mobile-quick-actions.is-context-hidden { visibility:hidden !important; pointer-events:none !important; opacity:0; transform:translate3d(18px,16px,0); }
+      .mobile-quick-actions.is-returning { visibility:visible !important; pointer-events:auto !important; }
+      .mobile-quick-actions.is-returning .quick-home { animation:quick-control-arrive 500ms cubic-bezier(.18,.86,.27,1.2) both; }
+      .mobile-quick-actions.is-returning .quick-ticket { animation:quick-control-arrive 560ms cubic-bezier(.18,.86,.27,1.2) 65ms both; }
     }
   </style>
 
@@ -409,9 +412,7 @@
           <a href="#ubicacion"><span class="menu-index">05</span><span class="menu-copy"><b>Ubicación</b><small>One More Club · Devoto</small></span><span class="menu-arrow" aria-hidden="true">↘</span></a>
         </div>
         <a class="mobile-ticket" href="#proxima-experiencia"><span>Entradas</span><span aria-hidden="true">↗</span></a>
-        <button class="mobile-install" type="button" data-pwa-install><span>Instalar ONE MORE</span><span aria-hidden="true">↓</span></button>
         <button class="mobile-sound" type="button" data-sound-toggle aria-pressed="true"><span data-sound-label>Sonido: ON</span><span aria-hidden="true">⌁</span></button>
-        <button class="mobile-alerts notification-preview" type="button" data-notification-preview><span>Probar alerta</span><small>Test</small></button>
       </nav>
     </header>
 
@@ -947,17 +948,35 @@ Minimum version required to store current data is: `+i+`.
     const curtainSerial = document.querySelector('[data-curtain-serial]');
     const sliderEnterButton = document.querySelector('.slider-enter');
     const mobileQuickActions = document.querySelector('.mobile-quick-actions');
-    const quickActionBoundary = document.getElementById('preguntas');
+    const quickActionBoundary = document.querySelector('.footer-app-row');
     const quickActionLinks = mobileQuickActions ? [...mobileQuickActions.querySelectorAll('a')] : [];
+    let quickActionsAtEnd = false;
+    let quickActionMotionTimer;
     const updateMobileQuickActionVisibility = () => {
       if (!mobileQuickActions || !quickActionBoundary) return;
       const isMobile = window.matchMedia('(max-width: 760px)').matches;
-      const nearEnd = isMobile && document.body.classList.contains('site-mode') && quickActionBoundary.getBoundingClientRect().top < window.innerHeight * .82;
-      mobileQuickActions.classList.toggle('is-context-hidden', nearEnd);
-      mobileQuickActions.setAttribute('aria-hidden', String(nearEnd));
+      const nearEnd = isMobile && document.body.classList.contains('site-mode') && quickActionBoundary.getBoundingClientRect().top < window.innerHeight * .78;
+      if (nearEnd === quickActionsAtEnd) return;
+      quickActionsAtEnd = nearEnd;
+      window.clearTimeout(quickActionMotionTimer);
       quickActionLinks.forEach((link) => {
         if (nearEnd) link.setAttribute('tabindex', '-1'); else link.removeAttribute('tabindex');
       });
+      mobileQuickActions.setAttribute('aria-hidden', String(nearEnd));
+      if (nearEnd) {
+        mobileQuickActions.classList.remove('is-returning', 'is-context-hidden');
+        mobileQuickActions.classList.add('is-leaving');
+        quickActionMotionTimer = window.setTimeout(() => {
+          if (!quickActionsAtEnd) return;
+          mobileQuickActions.classList.remove('is-leaving');
+          mobileQuickActions.classList.add('is-context-hidden');
+        }, 290);
+      } else {
+        mobileQuickActions.classList.remove('is-context-hidden', 'is-leaving');
+        if (!document.body.classList.contains('site-mode')) return;
+        mobileQuickActions.classList.add('is-returning');
+        quickActionMotionTimer = window.setTimeout(() => mobileQuickActions.classList.remove('is-returning'), 680);
+      }
     };
     window.addEventListener('scroll', updateMobileQuickActionVisibility, { passive:true });
     window.addEventListener('resize', updateMobileQuickActionVisibility, { passive:true });
@@ -1010,6 +1029,7 @@ Minimum version required to store current data is: `+i+`.
     })();
     let soundContext;
     let soundMaster;
+    let soundNoiseBuffer;
     const syncSoundControls = () => soundToggleButtons.forEach((button) => {
       button.setAttribute('aria-pressed', String(soundEnabled));
       const label = button.querySelector('[data-sound-label]');
@@ -1023,15 +1043,23 @@ Minimum version required to store current data is: `+i+`.
         soundContext = new AudioConstructor();
         soundMaster = soundContext.createGain();
         const compressor = soundContext.createDynamicsCompressor();
-        soundMaster.gain.setValueAtTime(1.22, soundContext.currentTime);
-        compressor.threshold.setValueAtTime(-23, soundContext.currentTime);
-        compressor.knee.setValueAtTime(18, soundContext.currentTime);
-        compressor.ratio.setValueAtTime(8, soundContext.currentTime);
-        compressor.attack.setValueAtTime(.003, soundContext.currentTime);
-        compressor.release.setValueAtTime(.14, soundContext.currentTime);
+        soundMaster.gain.setValueAtTime(1.15, soundContext.currentTime);
+        compressor.threshold.setValueAtTime(-19, soundContext.currentTime);
+        compressor.knee.setValueAtTime(16, soundContext.currentTime);
+        compressor.ratio.setValueAtTime(5, soundContext.currentTime);
+        compressor.attack.setValueAtTime(.004, soundContext.currentTime);
+        compressor.release.setValueAtTime(.12, soundContext.currentTime);
         soundMaster.connect(compressor).connect(soundContext.destination);
       } catch (_) { soundContext = null; soundMaster = null; return null; }
       return soundContext;
+    };
+    const getUiNoise = (context) => {
+      if (soundNoiseBuffer) return soundNoiseBuffer;
+      const frames = Math.floor(context.sampleRate * .11);
+      soundNoiseBuffer = context.createBuffer(1, frames, context.sampleRate);
+      const data = soundNoiseBuffer.getChannelData(0);
+      for (let index = 0; index < frames; index += 1) data[index] = (Math.random() * 2 - 1) * (1 - index / frames);
+      return soundNoiseBuffer;
     };
     const playUiSound = (kind = 'tap') => {
       if (!soundEnabled || document.hidden) return;
@@ -1040,27 +1068,39 @@ Minimum version required to store current data is: `+i+`.
       const render = () => {
         const now = context.currentTime;
         const profiles = {
-          tap:{ frequency:430, volume:.19, duration:.115, glide:.78 },
-          nav:{ frequency:302, volume:.23, duration:.145, glide:.72 },
-          confirm:{ frequency:523, volume:.30, duration:.19, glide:.92 }
+          tap:{ frequency:185, volume:.23, duration:.095, noise:.045 },
+          nav:{ frequency:165, volume:.26, duration:.11, noise:.052 },
+          confirm:{ frequency:215, volume:.30, duration:.14, noise:.06 }
         };
         const profile = profiles[kind] || profiles.tap;
-        const voice = (ratio, type, level, delay = 0) => {
+        const tone = (frequency, volume, delay = 0) => {
           const oscillator = context.createOscillator();
           const gain = context.createGain();
           const start = now + delay;
-          oscillator.type = type;
-          oscillator.frequency.setValueAtTime(profile.frequency * ratio, start);
-          oscillator.frequency.exponentialRampToValueAtTime(Math.max(95, profile.frequency * ratio * profile.glide), start + profile.duration);
+          oscillator.type = 'sine';
+          oscillator.frequency.setValueAtTime(frequency * .92, start);
+          oscillator.frequency.exponentialRampToValueAtTime(Math.max(105, frequency * .62), start + profile.duration);
           gain.gain.setValueAtTime(.0001, start);
-          gain.gain.exponentialRampToValueAtTime(profile.volume * level, start + .008);
+          gain.gain.exponentialRampToValueAtTime(volume, start + .009);
           gain.gain.exponentialRampToValueAtTime(.0001, start + profile.duration);
           oscillator.connect(gain).connect(soundMaster);
           oscillator.start(start);
           oscillator.stop(start + profile.duration + .02);
         };
-        voice(1, 'triangle', 1);
-        voice(kind === 'confirm' ? 1.5 : 2.01, 'sine', .38, .006);
+        const noise = context.createBufferSource();
+        const filter = context.createBiquadFilter();
+        const noiseGain = context.createGain();
+        noise.buffer = getUiNoise(context);
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(1250, now);
+        filter.Q.setValueAtTime(.55, now);
+        noiseGain.gain.setValueAtTime(.0001, now);
+        noiseGain.gain.exponentialRampToValueAtTime(profile.noise, now + .004);
+        noiseGain.gain.exponentialRampToValueAtTime(.0001, now + .075);
+        noise.connect(filter).connect(noiseGain).connect(soundMaster);
+        noise.start(now);
+        tone(profile.frequency, profile.volume);
+        if (kind === 'confirm') tone(profile.frequency * 1.18, profile.volume * .42, .047);
       };
       if (context.state === 'suspended') context.resume().then(render).catch(() => {}); else render();
     };
@@ -1776,12 +1816,14 @@ Minimum version required to store current data is: `+i+`.
       }
       try {
         const registration = await navigator.serviceWorker.ready;
-        await registration.showNotification('ONE MORE ELECTRONIC', {
-          body: 'Nueva fecha: JOYCE · Vie 23 OCT · 23:59 H',
-          icon: '/assets/apple-touch-icon.png?v=3',
-          badge: '/assets/favicon.ico?v=3',
+        await registration.showNotification('JOYCE · VIE 23 OCT', {
+          body: '23:59 H · ONE MORE CLUB · DEVOTO',
+          icon: '/assets/notification-icon.png?v=1',
+          badge: '/assets/notification-badge.png?v=1',
           tag: 'one-more-notification-preview',
           renotify: true,
+          requireInteraction: false,
+          actions: [{ action:'open-event', title:'Ver fecha' }],
           data: { url: '/?evento=joyce-23-oct' }
         });
         showActionNotice('Alerta de prueba enviada');
