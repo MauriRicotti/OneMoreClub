@@ -8,10 +8,12 @@ Este paquete es un sitio estático: no necesita instalar dependencias ni ejecuta
 3. Importá el repositorio en Vercel, sin Build Command ni Output Directory.
 4. Alternativamente, desde la carpeta extraída ejecutá `npx vercel --prod`.
 
-## PWA robusta
+## PWA instalable
 La PWA incluye manifest, service worker, favicon y Apple Touch Icon.
 
-Los íconos Android requeridos de 192 y 512 están incorporados dentro del manifest para evitar fallos cuando un deploy parcial no sube assets nuevos. El generador QR también está incorporado dentro de `index.html`; por tanto no depende de una librería JavaScript externa en producción.
+Los íconos Android requeridos de 192 y 512 están incorporados dentro del manifest para no depender de assets nuevos en un deploy parcial. El generador QR también está incorporado dentro de `index.html`.
+
+El botón interno usa el prompt nativo cuando Chrome lo ofrece. Si Chrome no expone el prompt a la página, muestra la instrucción manual: `⋮ → Instalar app`. El botón se oculta automáticamente en el modo app instalado (`display-mode: standalone`).
 
 Abrí el dominio final directamente en Chrome Android, no dentro de un preview/iframe. Si ya hubo un intento fallido de PWA, cerrá las pestañas del sitio o eliminá sus datos en Chrome antes de volver a probar.
 
@@ -21,7 +23,9 @@ La interfaz de alertas está preparada y marcada como `Próximamente`. No solici
 Para activar notificaciones reales más adelante se necesitarán: `firebaseConfig` público, VAPID public key, Firebase Cloud Messaging y una colección/función segura para guardar tokens y enviar campañas. Nunca incluyas claves privadas o service-account JSON en estos archivos estáticos.
 
 ## QR y fechas
-Cada fecha tiene un botón `QR`. El QR se genera localmente y abre esa fecha junto con su compra de entradas. Las rutas cortas impresas están en `vercel.json`:
+Dentro de cada fecha hay un botón `QR`. El QR se genera localmente y abre esa fecha junto con su compra de entradas. El botón de descarga crea un JPG editorial con nombre del evento, código QR y llamado a la acción, listo para compartir.
+
+Las rutas cortas impresas están en `vercel.json`:
 - `/q/joyce`
 - `/q/goth`
 - `/q/halloween`

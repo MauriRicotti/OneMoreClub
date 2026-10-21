@@ -151,7 +151,7 @@
     .announce:hover, .announce:focus-visible { background:transparent; color:var(--paper); }.announce:focus-visible { outline:2px solid var(--paper); outline-offset:4px; }.announce b { font-size:18px; font-weight:400; }
     .ticket-notice { position:fixed; z-index:150; bottom:22px; left:22px; display:flex; align-items:center; gap:11px; padding:11px 13px; border:1px solid var(--ink); background:var(--paper); color:var(--ink); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1; text-transform:uppercase; opacity:0; pointer-events:none; transform:translate3d(0,10px,0); transition:opacity 170ms ease,transform 170ms ease; }
     .ticket-notice.is-visible { opacity:1; transform:translate3d(0,0,0); }.ticket-notice b { font-size:14px; font-weight:400; }
-    .qr-modal[hidden] { display:none; }.qr-modal { position:fixed; z-index:170; inset:0; display:grid; place-items:center; padding:18px; background:rgba(8,8,8,.82); }.qr-dialog { position:relative; width:min(100%,420px); border:1px solid var(--ink); background:var(--paper); color:var(--ink); box-shadow:8px 8px 0 #080808; }.qr-dialog-head { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; padding:17px 18px 15px; border-bottom:1px solid rgba(8,8,8,.7); }.qr-dialog-kicker { margin:0 0 7px; color:rgba(8,8,8,.6); font-size:8px; font-weight:700; letter-spacing:.15em; line-height:1; text-transform:uppercase; }.qr-dialog-title { margin:0; font-size:clamp(31px,7vw,47px); font-weight:900; letter-spacing:-.1em; line-height:.74; text-transform:uppercase; }.qr-close { display:grid; place-items:center; width:32px; height:32px; padding:0; border:1px solid var(--ink); background:transparent; color:var(--ink); font:inherit; font-size:20px; line-height:1; cursor:pointer; }.qr-close:hover, .qr-close:focus-visible { background:var(--ink); color:var(--paper); }.qr-close:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }.qr-dialog-main { display:flex; flex-direction:column; align-items:center; padding:23px 18px 20px; }.qr-code { display:grid; place-items:center; width:min(100%,264px); min-height:264px; padding:10px; border:1px solid var(--ink); background:var(--paper); }.qr-code svg { display:block; width:100%; height:auto; }.qr-code-status { margin:0; color:rgba(8,8,8,.62); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1.35; text-align:center; text-transform:uppercase; }.qr-description { max-width:275px; margin:17px 0 0; font-size:11px; font-weight:700; letter-spacing:.02em; line-height:1.35; text-align:center; text-transform:uppercase; }.qr-dialog-actions { display:grid; grid-template-columns:1fr 1fr; width:100%; gap:7px; margin-top:20px; }.qr-dialog-actions button { display:flex; align-items:center; justify-content:space-between; min-height:42px; padding:0 12px; border:1px solid var(--ink); background:transparent; color:var(--ink); font:inherit; font-size:8px; font-weight:700; letter-spacing:.11em; line-height:1; text-align:left; text-transform:uppercase; cursor:pointer; }.qr-dialog-actions button:hover, .qr-dialog-actions button:focus-visible { background:var(--ink); color:var(--paper); }.qr-dialog-actions button:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }body.qr-open { overflow:hidden; }
+    .qr-modal[hidden] { display:none; }.qr-modal { position:fixed; z-index:170; inset:0; display:grid; place-items:center; padding:18px; background:rgba(8,8,8,.82); }.qr-dialog { position:relative; width:min(100%,420px); border:1px solid var(--ink); background:var(--paper); color:var(--ink); box-shadow:8px 8px 0 #080808; }.qr-dialog-head { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; padding:17px 18px 15px; border-bottom:1px solid rgba(8,8,8,.7); }.qr-dialog-kicker { margin:0 0 7px; color:rgba(8,8,8,.6); font-size:8px; font-weight:700; letter-spacing:.15em; line-height:1; text-transform:uppercase; }.qr-dialog-title { margin:0; font-size:clamp(31px,7vw,47px); font-weight:900; letter-spacing:-.1em; line-height:.74; text-transform:uppercase; }.qr-close { display:grid; place-items:center; width:32px; height:32px; padding:0; border:1px solid var(--ink); background:transparent; color:var(--ink); font:inherit; font-size:20px; line-height:1; cursor:pointer; }.qr-close:hover, .qr-close:focus-visible { background:var(--ink); color:var(--paper); }.qr-close:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }.qr-dialog-main { display:flex; flex-direction:column; align-items:center; padding:23px 18px 20px; }.qr-code { display:grid; place-items:center; width:min(100%,264px); min-height:264px; padding:10px; border:1px solid var(--ink); background:var(--paper); }.qr-code svg { display:block; width:100%; height:auto; }.qr-code-status { margin:0; color:rgba(8,8,8,.62); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1.35; text-align:center; text-transform:uppercase; }.qr-description { max-width:275px; margin:17px 0 0; font-size:11px; font-weight:700; letter-spacing:.02em; line-height:1.35; text-align:center; text-transform:uppercase; }.qr-dialog-actions { display:grid; grid-template-columns:1fr 1fr; width:100%; gap:7px; margin-top:20px; }.qr-dialog-actions button { display:flex; align-items:center; justify-content:space-between; min-height:42px; padding:0 12px; border:1px solid var(--ink); background:transparent; color:var(--ink); font:inherit; font-size:8px; font-weight:700; letter-spacing:.11em; line-height:1; text-align:left; text-transform:uppercase; cursor:pointer; }.qr-dialog-actions button:hover:not(:disabled), .qr-dialog-actions button:focus-visible { background:var(--ink); color:var(--paper); }.qr-dialog-actions button:disabled { cursor:wait; opacity:.45; }.qr-dialog-actions button:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }body.qr-open { overflow:hidden; }
     .event-bottom { display:flex; justify-content:space-between; gap:16px; padding:16px 22px; border-top:1px solid rgba(8,8,8,.6); color:rgba(8,8,8,.72); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1.2; text-transform:uppercase; }
     .archive { overflow:hidden; padding:15px; background:#080808; color:var(--paper); }
     .archive-frame { border:1px solid rgba(242,240,235,.48); }
@@ -408,7 +408,7 @@
           <a href="#ubicacion"><span class="menu-index">05</span><span class="menu-copy"><b>Ubicación</b><small>One More Club · Devoto</small></span><span class="menu-arrow" aria-hidden="true">↘</span></a>
         </div>
         <a class="mobile-ticket" href="#proxima-experiencia"><span>Entradas</span><span aria-hidden="true">↗</span></a>
-        <button class="mobile-install" type="button" data-pwa-install hidden><span>Instalar ONE MORE</span><span aria-hidden="true">↓</span></button>
+        <button class="mobile-install" type="button" data-pwa-install><span>Instalar ONE MORE</span><span aria-hidden="true">↓</span></button>
         <button class="mobile-alerts" type="button" disabled><span>Alertas de fechas</span><small>Próximamente</small></button>
       </nav>
     </header>
@@ -753,7 +753,7 @@
           <p class="footer-app-copy">Instalá la app para tener ONE MORE a un toque.</p>
         </div>
         <div class="footer-app-actions">
-          <button type="button" class="footer-install" data-pwa-install hidden><span>Instalar app</span><b aria-hidden="true">↓</b></button>
+          <button type="button" class="footer-install" data-pwa-install><span>Instalar app</span><b aria-hidden="true">↓</b></button>
           <button type="button" class="footer-alerts" disabled><span>Alertas de fechas</span><small>Próximamente</small></button>
         </div>
       </section>
@@ -774,7 +774,7 @@
         <div class="qr-code" data-qr-code aria-label="Código QR de la fecha"><p class="qr-code-status">Generando QR</p></div>
         <p id="qr-description" class="qr-description">Escaneá para ver esta fecha y conseguir tus entradas.</p>
         <div class="qr-dialog-actions">
-          <button type="button" data-qr-download><span>Descargar<br>SVG</span><b aria-hidden="true">↓</b></button>
+          <button type="button" data-qr-download disabled><span>Descargar<br>JPG</span><b aria-hidden="true">↓</b></button>
           <button type="button" data-qr-copy><span>Copiar<br>link</span><b aria-hidden="true">↗</b></button>
         </div>
       </div>
@@ -1017,6 +1017,7 @@ Minimum version required to store current data is: `+i+`.
       document.body.classList.add('qr-open');
       qrTitle.textContent = event.titleHtml.replace(/<[^>]+>/g, '');
       qrCode.innerHTML = '<p class="qr-code-status">Generando QR</p>';
+      qrDownloadButton.disabled = true;
       activeQrSvg = '';
       activeQrUrl = url;
       qrCloseButton.focus();
@@ -1027,22 +1028,74 @@ Minimum version required to store current data is: `+i+`.
           color:{ dark:'#080808', light:'#f2f0eb' }
         });
         qrCode.innerHTML = activeQrSvg;
+        qrDownloadButton.disabled = false;
       } catch (_) {
         qrCode.innerHTML = '<p class="qr-code-status">No se pudo generar el QR</p>';
       }
     };
-    const downloadEventQr = () => {
+    const loadQrImage = (svg) => new Promise((resolve, reject) => {
+      const image = new Image();
+      const objectUrl = URL.createObjectURL(new Blob([svg], { type:'image/svg+xml;charset=utf-8' }));
+      image.onload = () => { URL.revokeObjectURL(objectUrl); resolve(image); };
+      image.onerror = () => { URL.revokeObjectURL(objectUrl); reject(new Error('QR image unavailable')); };
+      image.src = objectUrl;
+    });
+    const downloadEventQr = async () => {
       if (!activeQrSvg) return;
       const { event } = getCurrentEventShareDetails();
-      const file = new Blob([activeQrSvg], { type:'image/svg+xml;charset=utf-8' });
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(file);
-      link.download = `one-more-${event.slug}.svg`;
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      URL.revokeObjectURL(link.href);
-      showActionNotice('QR descargado');
+      qrDownloadButton.disabled = true;
+      try {
+        const qrImage = await loadQrImage(activeQrSvg);
+        const canvas = document.createElement('canvas');
+        canvas.width = 1200;
+        canvas.height = 1440;
+        const context = canvas.getContext('2d');
+        context.fillStyle = '#f2f0eb';
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        context.strokeStyle = '#080808';
+        context.lineWidth = 4;
+        context.strokeRect(32, 32, canvas.width - 64, canvas.height - 64);
+        context.fillStyle = '#080808';
+        context.font = '700 24px Arial, Helvetica, sans-serif';
+        context.fillText('ONE MORE ELECTRONIC', 84, 105);
+        const title = event.titleHtml.replace(/<[^>]+>/g, '').toUpperCase();
+        const titleSize = title.length > 8 ? 116 : 150;
+        context.font = `900 ${titleSize}px Arial, Helvetica, sans-serif`;
+        context.fillText(title, 84, 252);
+        context.fillRect(84, 294, 1032, 3);
+        const qrSize = 820;
+        const qrX = Math.round((canvas.width - qrSize) / 2);
+        const qrY = 356;
+        context.fillStyle = '#f2f0eb';
+        context.fillRect(qrX - 16, qrY - 16, qrSize + 32, qrSize + 32);
+        context.strokeStyle = '#080808';
+        context.lineWidth = 3;
+        context.strokeRect(qrX - 16, qrY - 16, qrSize + 32, qrSize + 32);
+        context.drawImage(qrImage, qrX, qrY, qrSize, qrSize);
+        context.fillStyle = '#080808';
+        context.font = '700 25px Arial, Helvetica, sans-serif';
+        context.textAlign = 'center';
+        context.fillText('ESCANEÁ PARA VER ESTA FECHA Y CONSEGUIR', canvas.width / 2, 1270);
+        context.fillText('TUS ENTRADAS.', canvas.width / 2, 1306);
+        context.textAlign = 'left';
+        context.fillStyle = 'rgba(8,8,8,.64)';
+        context.font = '700 18px Arial, Helvetica, sans-serif';
+        context.fillText(event.footer.toUpperCase(), 84, 1360);
+        const imageBlob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/jpeg', .94));
+        if (!imageBlob) throw new Error('JPEG unavailable');
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(imageBlob);
+        link.download = `one-more-${event.slug}-qr.jpg`;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        URL.revokeObjectURL(link.href);
+        showActionNotice('QR descargado en JPG');
+      } catch (_) {
+        showActionNotice('No se pudo crear el JPG');
+      } finally {
+        qrDownloadButton.disabled = false;
+      }
     };
     const copyCurrentQrLink = async () => {
       try {
@@ -1512,27 +1565,42 @@ Minimum version required to store current data is: `+i+`.
     // messaging and a subscriber store are connected; users are never asked for a permission
     // that the site cannot yet honor.
     const pwaInstallButtons = [...document.querySelectorAll('[data-pwa-install]')];
+    const pwaDisplayMode = window.matchMedia('(display-mode: standalone)');
+    const isPwaInstalled = () => pwaDisplayMode.matches || window.navigator.standalone === true;
+    const isAppleMobile = () => /iphone|ipad|ipod/i.test(navigator.userAgent);
     let deferredInstallPrompt;
-    const setPwaInstallVisibility = (visible) => pwaInstallButtons.forEach((button) => { button.hidden = !visible; });
+    const setPwaInstallVisibility = (visible = true) => pwaInstallButtons.forEach((button) => { button.hidden = !visible || isPwaInstalled(); });
+    const showInstallInstructions = () => {
+      showActionNotice(isAppleMobile() ? 'Compartir → Agregar a inicio' : 'Abrí ⋮ y elegí Instalar app');
+    };
+    setPwaInstallVisibility();
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => navigator.serviceWorker.register('/service-worker.js').catch(() => {}));
     }
     window.addEventListener('beforeinstallprompt', (event) => {
       event.preventDefault();
       deferredInstallPrompt = event;
-      setPwaInstallVisibility(true);
+      setPwaInstallVisibility();
     });
     window.addEventListener('appinstalled', () => {
       deferredInstallPrompt = undefined;
       setPwaInstallVisibility(false);
       showActionNotice('ONE MORE instalada');
     });
+    pwaDisplayMode.addEventListener('change', () => setPwaInstallVisibility(!isPwaInstalled()));
+    window.addEventListener('pageshow', () => setPwaInstallVisibility(!isPwaInstalled()));
     pwaInstallButtons.forEach((button) => button.addEventListener('click', async () => {
-      if (!deferredInstallPrompt) return;
-      deferredInstallPrompt.prompt();
-      try { await deferredInstallPrompt.userChoice; } catch (_) {}
+      if (isPwaInstalled()) { setPwaInstallVisibility(false); return; }
+      if (!deferredInstallPrompt) { showInstallInstructions(); return; }
+      try {
+        deferredInstallPrompt.prompt();
+        const choice = await deferredInstallPrompt.userChoice;
+        if (choice && choice.outcome === 'dismissed') showActionNotice('Instalación cancelada');
+      } catch (_) {
+        showInstallInstructions();
+      }
       deferredInstallPrompt = undefined;
-      setPwaInstallVisibility(false);
+      setPwaInstallVisibility(!isPwaInstalled());
     }));
 
     const requestedEventSlug = new URLSearchParams(window.location.search).get('evento');
