@@ -118,7 +118,7 @@
     .section-top { display:flex; justify-content:space-between; gap:20px; padding:19px 22px; border-bottom:1px solid rgba(8,8,8,.6); font-size:10px; font-weight:700; letter-spacing:.13em; line-height:1; text-transform:uppercase; }
     /* The flyer owns its column: its width is derived from its real intrinsic ratio,
        not from an arbitrary grid fraction. This keeps every event poster edge-to-edge. */
-    .event-stage { --poster-ratio:606 / 750; flex:1; min-height:0; display:flex; touch-action:pan-y; transition:opacity 180ms ease,transform 210ms cubic-bezier(.22,.8,.22,1); will-change:opacity,transform; }
+    .next-experience { touch-action:pan-y; }.event-stage { --poster-ratio:606 / 750; flex:1; min-height:0; display:flex; touch-action:pan-y; user-select:none; -webkit-user-select:none; transition:opacity 180ms ease,transform 210ms cubic-bezier(.22,.8,.22,1); will-change:opacity,transform; }.event-stage img { -webkit-user-drag:none; }
     .event-stage.is-switching-next { opacity:0; transform:translate3d(-22px,0,0); }.event-stage.is-switching-prev { opacity:0; transform:translate3d(22px,0,0); }.event-stage.is-preparing-next { opacity:0; transform:translate3d(22px,0,0); transition:none; }.event-stage.is-preparing-prev { opacity:0; transform:translate3d(-22px,0,0); transition:none; }
     .event-poster { position:relative; flex:0 0 auto; width:auto; height:100%; min-height:0; aspect-ratio:var(--poster-ratio); margin:0; display:flex; align-items:center; justify-content:center; overflow:hidden; border-right:1px solid rgba(8,8,8,.6); }
     .event-poster img { display:block; width:100%; height:100%; object-fit:contain; }.event-poster.is-finished img { filter:grayscale(1) contrast(.82) brightness(.9); }.event-status-badge { position:absolute; z-index:2; top:18px; left:18px; display:none; padding:10px 12px 9px; border:1px solid var(--paper); background:#080808; color:var(--paper); font-size:10px; font-weight:900; letter-spacing:.14em; line-height:1; text-transform:uppercase; box-shadow:4px 4px 0 rgba(242,240,235,.72); }.event-poster.is-finished .event-status-badge { display:block; }
@@ -149,7 +149,7 @@
     .announce:hover, .announce:focus-visible { background:transparent; color:var(--paper); }.announce:focus-visible { outline:2px solid var(--paper); outline-offset:4px; }.announce b { font-size:18px; font-weight:400; }.announce.is-finished { cursor:default; border-color:rgba(242,240,235,.5); background:transparent; color:rgba(242,240,235,.72); pointer-events:none; }
     .ticket-notice { position:fixed; z-index:150; bottom:22px; left:22px; display:flex; align-items:center; gap:11px; padding:11px 13px; border:1px solid var(--ink); background:var(--paper); color:var(--ink); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1; text-transform:uppercase; opacity:0; pointer-events:none; transform:translate3d(0,10px,0); transition:opacity 170ms ease,transform 170ms ease; }
     .ticket-notice.is-visible { opacity:1; transform:translate3d(0,0,0); }.ticket-notice b { font-size:14px; font-weight:400; }
-    .qr-modal[hidden] { display:none; }.qr-modal { position:fixed; z-index:170; inset:0; display:grid; place-items:center; padding:18px; background:rgba(8,8,8,.82); }.qr-dialog { position:relative; width:min(100%,420px); border:1px solid var(--ink); background:var(--paper); color:var(--ink); box-shadow:8px 8px 0 #080808; }.qr-dialog-head { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; padding:17px 18px 15px; border-bottom:1px solid rgba(8,8,8,.7); }.qr-dialog-kicker { margin:0 0 7px; color:rgba(8,8,8,.6); font-size:8px; font-weight:700; letter-spacing:.15em; line-height:1; text-transform:uppercase; }.qr-dialog-title { margin:0; font-size:clamp(31px,7vw,47px); font-weight:900; letter-spacing:-.1em; line-height:.74; text-transform:uppercase; }.qr-close { display:grid; place-items:center; width:32px; height:32px; padding:0; border:1px solid var(--ink); background:transparent; color:var(--ink); font:inherit; font-size:20px; line-height:1; cursor:pointer; }.qr-close:hover, .qr-close:focus-visible { background:var(--ink); color:var(--paper); }.qr-close:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }.qr-dialog-main { display:flex; flex-direction:column; align-items:center; padding:23px 18px 20px; }.qr-code { display:grid; place-items:center; width:min(100%,264px); min-height:264px; padding:10px; border:1px solid var(--ink); background:var(--paper); }.qr-code svg { display:block; width:100%; height:auto; }.qr-code-status { margin:0; color:rgba(8,8,8,.62); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1.35; text-align:center; text-transform:uppercase; }.qr-description { max-width:275px; margin:17px 0 0; font-size:11px; font-weight:700; letter-spacing:.02em; line-height:1.35; text-align:center; text-transform:uppercase; }.qr-dialog-actions { display:grid; grid-template-columns:1fr 1fr; width:100%; gap:7px; margin-top:20px; }.qr-dialog-actions button { display:flex; align-items:center; justify-content:space-between; min-height:42px; padding:0 12px; border:1px solid var(--ink); background:transparent; color:var(--ink); font:inherit; font-size:8px; font-weight:700; letter-spacing:.11em; line-height:1; text-align:left; text-transform:uppercase; cursor:pointer; }.qr-dialog-actions button:hover:not(:disabled), .qr-dialog-actions button:focus-visible { background:var(--ink); color:var(--paper); }.qr-dialog-actions button:disabled { cursor:wait; opacity:.45; }.qr-dialog-actions button:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }body.qr-open { overflow:hidden; }
+    .qr-modal[hidden] { display:none; }.qr-modal { position:fixed; z-index:170; inset:0; display:grid; place-items:center; padding:18px; background:rgba(8,8,8,.82); opacity:0; visibility:hidden; transition:opacity 180ms ease,visibility 0s linear 180ms; }.qr-modal.is-open { opacity:1; visibility:visible; transition-delay:0s; }.qr-dialog { position:relative; width:min(100%,420px); border:1px solid var(--ink); background:var(--paper); color:var(--ink); box-shadow:8px 8px 0 #080808; opacity:0; transform:translate3d(0,12px,0); transition:opacity 180ms ease,transform 220ms cubic-bezier(.22,.8,.22,1); }.qr-modal.is-open .qr-dialog { opacity:1; transform:translate3d(0,0,0); }.qr-dialog-head { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; padding:17px 18px 15px; border-bottom:1px solid rgba(8,8,8,.7); }.qr-dialog-kicker { margin:0 0 7px; color:rgba(8,8,8,.6); font-size:8px; font-weight:700; letter-spacing:.15em; line-height:1; text-transform:uppercase; }.qr-dialog-title { margin:0; font-size:clamp(31px,7vw,47px); font-weight:900; letter-spacing:-.1em; line-height:.74; text-transform:uppercase; }.qr-close { display:grid; place-items:center; width:32px; height:32px; padding:0; border:1px solid var(--ink); background:transparent; color:var(--ink); font:inherit; font-size:20px; line-height:1; cursor:pointer; }.qr-close:hover, .qr-close:focus-visible { background:var(--ink); color:var(--paper); }.qr-close:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }.qr-dialog-main { display:flex; flex-direction:column; align-items:center; padding:23px 18px 20px; }.qr-code { display:grid; place-items:center; width:min(100%,264px); min-height:264px; padding:10px; border:1px solid var(--ink); background:var(--paper); }.qr-code svg { display:block; width:100%; height:auto; }.qr-code-status { margin:0; color:rgba(8,8,8,.62); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1.35; text-align:center; text-transform:uppercase; }.qr-description { max-width:275px; margin:17px 0 0; font-size:11px; font-weight:700; letter-spacing:.02em; line-height:1.35; text-align:center; text-transform:uppercase; }.qr-dialog-actions { display:grid; grid-template-columns:1fr 1fr; width:100%; gap:7px; margin-top:20px; }.qr-dialog-actions button { display:flex; align-items:center; justify-content:space-between; min-height:42px; padding:0 12px; border:1px solid var(--ink); background:transparent; color:var(--ink); font:inherit; font-size:8px; font-weight:700; letter-spacing:.11em; line-height:1; text-align:left; text-transform:uppercase; cursor:pointer; }.qr-dialog-actions button:hover:not(:disabled), .qr-dialog-actions button:focus-visible { background:var(--ink); color:var(--paper); }.qr-dialog-actions button:disabled { cursor:wait; opacity:.45; }.qr-dialog-actions button:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }body.qr-open { overflow:hidden; }
     .event-bottom { display:flex; justify-content:space-between; gap:16px; padding:16px 22px; border-top:1px solid rgba(8,8,8,.6); color:rgba(8,8,8,.72); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1.2; text-transform:uppercase; }
     .archive { overflow:hidden; padding:15px; background:#080808; color:var(--paper); }
     .archive-frame { border:1px solid rgba(242,240,235,.48); }
@@ -442,18 +442,20 @@
     .footer-next-event.is-empty .footer-next-status { color:var(--paper); }
     .gallery-hire { max-width:305px; padding-top:14px; border-top:1px solid rgba(242,240,235,.42); }
     .gallery-hire-title { margin:0 0 9px !important; color:var(--paper) !important; font-size:9px !important; font-weight:700; letter-spacing:.14em; line-height:1 !important; text-transform:uppercase; }
-    .map-foot { border-top-color:rgba(242,240,235,.42); background:#080808; color:rgba(242,240,235,.72); }
+    .map-foot { border-top-color:rgba(8,8,8,.62); background:var(--paper); color:rgba(8,8,8,.72); }
+    @media (max-width:780px) { .mobile-nav { border:0; } }
     .gallery-head { display:block; }
     .venue-hire { display:grid; grid-template-columns:minmax(0,1fr) minmax(300px,.8fr); border-top:1px solid rgba(242,240,235,.42); background:#151515; color:var(--paper); }
     .venue-hire-intro { min-height:270px; padding:clamp(30px,4.4vw,66px) clamp(23px,4.6vw,70px); border-right:1px solid rgba(242,240,235,.42); }
     .venue-hire-intro > p { margin:0; color:rgba(242,240,235,.62); font-size:9px; font-weight:700; letter-spacing:.15em; line-height:1; text-transform:uppercase; }
-    .venue-hire h3 { margin:clamp(40px,5vw,74px) 0 0; font-size:clamp(50px,6.6vw,104px); font-weight:900; letter-spacing:-.1em; line-height:.76; text-transform:uppercase; }
+    .venue-hire h3 { margin:clamp(40px,5vw,74px) 0 0; font-size:clamp(50px,6.6vw,104px); font-weight:900; letter-spacing:-.085em; line-height:.82; text-transform:uppercase; }
     .venue-hire h3 span { display:block; }
+    .venue-hire h3 span + span { margin-top:.12em; }
     .venue-hire-copy { display:flex; flex-direction:column; justify-content:space-between; min-height:270px; padding:clamp(30px,4vw,56px) clamp(23px,3vw,46px); }
     .venue-hire-copy p { max-width:360px; margin:0; color:rgba(242,240,235,.78); font-size:clamp(15px,1.35vw,19px); font-weight:700; letter-spacing:-.035em; line-height:1.15; text-transform:uppercase; }
     .venue-hire-copy p strong { color:var(--paper); font-weight:900; text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:4px; }
     /* Matches the high-contrast Entradas action in the hamburger: one clean warm-white surface, dark copy, arrow at the end. */
-    .venue-hire-copy a { display:flex; align-items:center; justify-content:space-between; gap:18px; width:100%; min-height:54px; margin-top:38px; padding:0 15px; border:1px solid var(--paper); background:var(--paper); color:var(--ink); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1; text-decoration:none; text-transform:uppercase; }
+    .venue-hire-copy a { display:flex; align-items:center; justify-content:space-between; gap:18px; width:100%; min-height:54px; margin-top:38px; padding:0 15px; border:1px solid var(--paper); background:var(--paper); color:var(--ink); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1; text-decoration:none; text-transform:uppercase; transition:background-color 240ms ease,color 240ms ease,border-color 240ms ease; }
     .venue-hire-copy a:hover, .venue-hire-copy a:focus-visible { border-color:var(--paper); background:transparent; color:var(--paper); outline:0; }
     .venue-hire-copy b { flex:0 0 auto; font-size:17px; font-weight:400; }
     /* The outlined mobile reservation route uses an explicit two-column grid so label and arrow share the same vertical centre. */
@@ -481,6 +483,24 @@
     .mobile-reservations > span { display:block; align-self:center; line-height:1; }
     .mobile-reservations > span:last-child { justify-self:end; font-size:17px; line-height:1; }
     @media (min-width:761px) { .gallery-kicker { white-space:nowrap; } }
+    /* Experience heading: desktop uses the available horizontal field; mobile keeps its established three-line rhythm. */
+    .gallery-title-block { min-width:0; }
+    .gallery-head h2 i { font-style:normal; }
+    .gallery-aside-label { margin:0 !important; color:rgba(242,240,235,.58) !important; font-size:9px !important; font-weight:700; letter-spacing:.14em; line-height:1.2 !important; text-transform:uppercase; }
+    @media (min-width:1050px) {
+      .gallery-head { display:grid; grid-template-columns:minmax(0,1.7fr) minmax(255px,.52fr); align-items:end; gap:clamp(42px,6vw,100px); }
+      .gallery-head h2 { max-width:none; font-size:clamp(64px,7.6vw,124px); }
+      .gallery-head h2 span:first-child { white-space:nowrap; }
+      .gallery-aside { display:flex; flex-direction:column; align-items:flex-start; gap:17px; align-self:end; max-width:300px; padding:0 0 5px; }
+      .gallery-aside > p:last-child { max-width:270px; margin:0; color:rgba(242,240,235,.72); font-size:13px; line-height:1.42; }
+    }
+    @media (max-width:1049px) {
+      .gallery-aside { display:none; }
+    }
+    @media (max-width:760px) {
+      .gallery-head h2 span:first-child { white-space:normal; }
+      .gallery-head h2 i { display:block; }
+    }
     @media (max-width:760px) {
       .gallery-head { padding:50px 20px 48px; }
       .venue-hire { grid-template-columns:1fr; }
@@ -491,6 +511,32 @@
       .venue-hire-copy a { margin-top:30px; }
       .reservation-form { border-top-color:rgba(242,240,235,.28); }
     }
+  
+    /* Minimal footer, enlarged for legibility and arranged as one clear reading flow on mobile. */
+    .site-footer { padding:0; background:#080808; color:var(--paper); }
+    .footer-simple-frame { overflow:hidden; border:0; }
+    .footer-simple-grid { display:grid; grid-template-columns:minmax(275px,1.5fr) minmax(185px,.8fr) minmax(270px,1fr); gap:clamp(48px,8vw,155px); padding:clamp(64px,7.5vw,124px) clamp(34px,5.5vw,90px) clamp(52px,5.5vw,86px); }
+    .footer-simple-brand, .footer-simple-nav, .footer-simple-contact { min-width:0; }
+    .footer-simple-name { margin:0; color:var(--paper); font-size:clamp(29px,2.45vw,42px); font-weight:900; letter-spacing:-.035em; line-height:.84; text-transform:uppercase; }
+    .footer-simple-brand > p:last-of-type { max-width:340px; margin:27px 0 0; color:rgba(242,240,235,.74); font-size:16px; line-height:1.45; }
+    .footer-simple-label { margin:0 0 21px; color:rgba(242,240,235,.68); font-size:13px; font-weight:700; letter-spacing:.02em; line-height:1; }
+    .footer-simple-nav > div { display:flex; flex-direction:column; align-items:flex-start; gap:14px; }
+    .footer-simple-nav a, .footer-simple-contact a { color:rgba(242,240,235,.84); font-size:15px; line-height:1.42; text-decoration:none; }
+    .footer-simple-nav a:hover, .footer-simple-contact a:hover, .footer-simple-meta a:hover { color:var(--paper); text-decoration:underline; text-underline-offset:4px; }
+    .footer-simple-contact { display:flex; flex-direction:column; align-items:flex-start; gap:20px; }
+    .footer-simple-contact .footer-simple-label { margin-bottom:3px; }
+    .footer-simple-contact a span { margin-left:6px; }
+    .footer-simple-ctas { display:flex; flex-wrap:wrap; gap:9px; margin-top:29px; }
+    .footer-simple-cta { display:inline-flex; align-items:center; justify-content:space-between; gap:22px; min-height:43px; padding:0 14px; border:1px solid rgba(242,240,235,.68); color:var(--paper); font-size:11px; font-weight:700; letter-spacing:.02em; line-height:1; text-decoration:none; transition:background-color 180ms ease,color 180ms ease,border-color 180ms ease; }
+    .footer-simple-cta b { font-size:15px; font-weight:400; }
+    .footer-simple-cta:hover, .footer-simple-cta:focus-visible { border-color:var(--paper); background:var(--paper); color:var(--ink); outline:0; }
+    .footer-simple-cta--primary { border-color:var(--paper); background:var(--paper); color:var(--ink); }
+    .footer-simple-cta--primary:hover, .footer-simple-cta--primary:focus-visible { background:transparent; color:var(--paper); }
+    .footer-simple-meta { display:flex; align-items:center; justify-content:flex-start; gap:25px; padding:0 clamp(34px,5.5vw,90px) 30px; }
+    .footer-simple-meta p, .footer-simple-meta a { margin:0; color:rgba(242,240,235,.68); font-size:11px; line-height:1.35; text-decoration:none; }
+    .footer-simple-meta a { color:rgba(242,240,235,.9); white-space:nowrap; }
+    .footer-simple-wordmark { box-sizing:border-box; position:relative; left:50%; display:block; width:max-content; max-width:none; margin:0; padding:clamp(16px,2.2vw,34px) clamp(12px,2.8vw,46px) clamp(42px,5.5vw,84px); color:var(--paper); font-size:clamp(90px,calc((100vw - 32px) / 5.5),305px); font-weight:900; letter-spacing:-.13em; line-height:.59; white-space:nowrap; text-align:center; text-transform:uppercase; transform:translateX(-51%); }
+    @media (max-width:700px) { .footer-simple-grid { grid-template-columns:1fr; gap:41px; padding:54px 24px 46px; }.footer-simple-name { font-size:34px; }.footer-simple-brand > p:last-of-type { margin-top:20px; font-size:16px; }.footer-simple-ctas { flex-direction:column; gap:8px; margin-top:25px; }.footer-simple-cta { width:100%; min-height:48px; padding:0 15px; font-size:12px; }.footer-simple-label { margin-bottom:17px; font-size:13px; }.footer-simple-nav > div { display:flex; flex-direction:column; align-items:flex-start; gap:15px; }.footer-simple-nav a, .footer-simple-contact a { font-size:15px; }.footer-simple-contact { gap:18px; }.footer-simple-meta { align-items:flex-start; flex-direction:column; gap:10px; padding:0 24px 22px; }.footer-simple-meta p, .footer-simple-meta a { font-size:11px; }.footer-simple-wordmark { padding:20px 8px 42px; font-size:clamp(64px,calc((100vw - 34px) / 5.5),94px); line-height:.62; transform:translateX(-51%); } }
   </style>
 
 </head>
@@ -528,7 +574,7 @@
 
   <div id="intro-deck" class="intro-deck hero-intro hero-preparing">
   <main class="hero" aria-label="ONE MORE ELECTRONIC">
-    <div class="background" aria-hidden="true"><video class="hero-video" autoplay muted playsinline preload="auto" poster="assets/one-more-crowd-hero.webp"><source src="assets/one-more-hero.mp4" type="video/mp4" /></video></div>
+    <div class="background" aria-hidden="true"><video class="hero-video" autoplay muted loop playsinline preload="auto" poster="assets/one-more-crowd-hero.webp"><source src="assets/one-more-hero.mp4" type="video/mp4" /></video></div>
     <div class="veil" aria-hidden="true"></div>
     <div class="frame" aria-hidden="true"></div>
 
@@ -707,7 +753,6 @@
               <div><span>El impulso</span><span>Una noche más</span></div>
             </div>
           </div>
-          <div class="manifesto-mark"><i></i> ONE MORE ELECTRONIC</div>
         </div>
       </div>
       <section class="founders" aria-labelledby="founders-title">
@@ -755,10 +800,14 @@
         <span>ONE MORE ELECTRONIC</span>
       </header>
       <div class="gallery-head">
-        <div>
+        <div class="gallery-title-block">
           <p class="gallery-kicker">Cuando la pista despierta</p>
-          <h2 id="experience-title" class="section-heading"><span>La noche</span><span>desde adentro</span></h2>
+          <h2 id="experience-title" class="section-heading"><span>La noche <i>desde</i></span><span>adentro</span></h2>
         </div>
+        <aside class="gallery-aside" aria-label="Sobre la experiencia">
+          <p class="gallery-aside-label">ONE MORE CLUB · DEVOTO</p>
+          <p>La pista se construye entre el pulso de la cabina, las luces y quienes la hacen propia hasta que amanece.</p>
+        </aside>
       </div>
       <div class="gallery-masonry">
         <figure class="gallery-item gallery-item--dance">
@@ -832,8 +881,8 @@
         <p class="faq-intro-copy">Todo lo necesario para vivir ONE MORE. Consultá siempre la ficha de la fecha antes de salir.</p>
       </header>
       <div class="faq-list" data-faq-list>
-        <article class="faq-item">
-          <button class="faq-trigger" type="button" aria-expanded="false" aria-controls="faq-answer-1"><span class="faq-index">01</span><span class="faq-question">¿Dónde es ONE MORE?</span><span class="faq-mark" aria-hidden="true">+</span></button>
+        <article class="faq-item is-open">
+          <button class="faq-trigger" type="button" aria-expanded="true" aria-controls="faq-answer-1"><span class="faq-index">01</span><span class="faq-question">¿Dónde es ONE MORE?</span><span class="faq-mark" aria-hidden="true">+</span></button>
           <div class="faq-panel" id="faq-answer-1" role="region" aria-label="Respuesta: dónde es ONE MORE"><div class="faq-panel-inner"><p class="faq-answer">ONE MORE CLUB está en Av. Francisco Beiró 3334, Villa Devoto, Buenos Aires. La ubicación de cada fecha se confirma en su ficha y también podés abrir <a href="https://www.google.com/maps/search/?api=1&amp;query=Av.+Francisco+Beir%C3%B3+3334%2C+Villa+Devoto%2C+Buenos+Aires" target="_blank" rel="noopener noreferrer">Google Maps</a>.</p></div></div>
         </article>
         <article class="faq-item">
@@ -860,53 +909,35 @@
     </div>
   </section>
   <footer class="site-footer">
-    <div class="footer-frame">
-      <div class="footer-main">
-        <div class="footer-identity">
-          <div class="footer-brand"><img src="assets/one-logo.webp" alt="" /><span>ONE MORE<br>ELECTRONIC</span></div>
-          <p class="footer-claim"><span>La noche</span><span>no termina</span></p>
-        </div>
-        <nav class="footer-column footer-nav-column" aria-label="Navegación del pie de página">
-          <p class="footer-label">Explorar</p>
-          <div class="footer-nav">
+    <div class="footer-frame footer-simple-frame">
+      <div class="footer-simple-grid">
+        <section class="footer-simple-brand" aria-label="ONE MORE ELECTRONIC">
+          <p class="footer-simple-name">ONE MORE<br>ELECTRONIC</p>
+          <p>Electrónica, comunidad y una noche que no termina.</p>
+          <div class="footer-simple-ctas">
+            <a class="footer-simple-cta footer-simple-cta--primary" href="#proxima-experiencia"><span>Ver próxima fecha</span><b aria-hidden="true">↗</b></a>
+            <a class="footer-simple-cta" href="#mesas"><span>Reservar mesa</span><b aria-hidden="true">↘</b></a>
+          </div>
+        </section>
+        <nav class="footer-simple-nav" aria-label="Navegación del pie de página">
+          <p class="footer-simple-label">Explorar</p>
+          <div>
             <a href="#proxima-experiencia">Próxima fecha</a>
             <a href="#archivo">Archivo</a>
             <a href="#el-club">El club</a>
             <a href="#experiencia">La experiencia</a>
-            <a href="#preguntas">Preguntas frecuentes</a>
           </div>
         </nav>
-        <section class="footer-next-event" data-footer-next-event aria-labelledby="footer-next-title">
-          <div class="footer-next-top"><p class="footer-label">Próxima fecha</p><span class="footer-next-status" data-footer-event-status>Disponible</span></div>
-          <p id="footer-next-title" class="footer-event-name" data-footer-event-name>Próximamente</p>
-          <p class="footer-event-meta" data-footer-event-meta>Las próximas fechas se anuncian por nuestros canales oficiales.</p>
-          <a class="footer-event-link" data-footer-event-link href="#proxima-experiencia"><span data-footer-event-action>Ver próximas fechas</span><span aria-hidden="true">↗</span></a>
+        <section class="footer-simple-contact" aria-label="Ubicación y redes">
+          <p class="footer-simple-label">Encontranos</p>
+          <a href="https://www.google.com/maps/search/?api=1&amp;query=Av.+Francisco+Beir%C3%B3+3334%2C+Villa+Devoto%2C+Buenos+Aires" target="_blank" rel="noopener noreferrer">Av. Francisco Beiró 3334<br>Villa Devoto · Buenos Aires <span aria-hidden="true">↗</span></a>
+          <a href="https://www.instagram.com/more_electronic/" target="_blank" rel="noopener noreferrer">Instagram · @more_electronic <span aria-hidden="true">↗</span></a>
         </section>
       </div>
-      <aside class="footer-info-panel" aria-label="Información de ingreso y ubicación">
-        <div class="footer-info-head"><p class="footer-label">Información para tu visita</p><p>Todo lo esencial para llegar, ingresar y disfrutar de la fecha.</p></div>
-        <div class="footer-info-list">
-          <div class="footer-info-item"><p class="footer-policy-label">Edad mínima</p><p class="footer-policy-copy">+18 · DNI vigente obligatorio</p></div>
-          <div class="footer-info-item"><p class="footer-policy-label">Apertura</p><p class="footer-policy-copy">Desde 23:59 h · Consultá cada fecha</p></div>
-          <div class="footer-info-item"><p class="footer-policy-label">Ingreso</p><p class="footer-policy-copy">Sujeto a capacidad, derecho de admisión y permanencia</p></div>
-          <div class="footer-info-item footer-location-item"><p class="footer-policy-label">Ubicación</p><a class="footer-map-link" href="https://www.google.com/maps/search/?api=1&amp;query=Av.+Francisco+Beir%C3%B3+3334%2C+Villa+Devoto%2C+Buenos+Aires" target="_blank" rel="noopener noreferrer"><span>Av. Francisco Beiró 3334<br>Villa Devoto · Google Maps</span><b aria-hidden="true">↗</b></a></div>
-        </div>
-      </aside>
-      <section class="footer-app-row" aria-label="ONE MORE app, sonido y alertas">
-        <div>
-          <p class="footer-app-label">ONE MORE APP</p>
-          <p class="footer-app-copy">Instalá la app para tener ONE MORE a un toque.</p>
-        </div>
-        <div class="footer-app-actions">
-          <button type="button" class="footer-install" data-pwa-install><span>Instalar app</span><b aria-hidden="true">↓</b></button>
-          <button type="button" class="footer-sound" data-sound-toggle aria-pressed="true"><span data-sound-label>Sonido: ON</span><b aria-hidden="true">⌁</b></button>
-          <button type="button" class="footer-alerts notification-preview" data-notification-preview><span>Probar alerta</span><small>Test</small></button>
-        </div>
-      </section>
-      <div class="footer-bottom">
+      <div class="footer-simple-meta">
         <p>© 2026 ONE MORE ELECTRONIC · Todos los derechos reservados</p>
-        <a href="#archivo" aria-label="Volver al comienzo de ONE MORE">Volver arriba ↑</a>
       </div>
+      <p class="footer-simple-wordmark" aria-hidden="true">ONE MORE</p>
     </div>
   </footer>
   <div id="ticket-notice" class="ticket-notice" role="status" aria-live="polite" aria-atomic="true"><span>Abriendo entradas</span><b aria-hidden="true">↗</b></div>
@@ -1092,10 +1123,8 @@ Minimum version required to store current data is: `+i+`.
     window.addEventListener('scroll', updateMobileQuickActionVisibility, { passive:true });
     window.addEventListener('resize', updateMobileQuickActionVisibility, { passive:true });
     const heroVideo = document.querySelector('.hero-video');
-    let heroVideoFinished = false;
-    heroVideo.addEventListener('ended', () => { heroVideoFinished = true; });
     const syncHeroVideoMotion = () => {
-      const shouldPlay = !document.hidden && document.body.classList.contains('intro-active') && !window.matchMedia('(prefers-reduced-motion: reduce)').matches && !heroVideoFinished;
+      const shouldPlay = !document.hidden && document.body.classList.contains('intro-active') && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (!shouldPlay) { heroVideo.pause(); return; }
       heroVideo.play().catch(() => {});
     };
@@ -1371,16 +1400,23 @@ Minimum version required to store current data is: `+i+`.
     let activeQrSvg = '';
     let activeQrUrl = '';
     let qrReturnFocus;
+    let qrCloseTimer;
     const closeEventQr = ({ returnFocus = true } = {}) => {
-      if (qrModal.hidden) return;
-      qrModal.hidden = true;
+      if (qrModal.hidden || !qrModal.classList.contains('is-open')) return;
+      qrModal.classList.remove('is-open');
       document.body.classList.remove('qr-open');
+      window.clearTimeout(qrCloseTimer);
+      qrCloseTimer = window.setTimeout(() => {
+        if (!qrModal.classList.contains('is-open')) qrModal.hidden = true;
+      }, 230);
       if (returnFocus && qrReturnFocus) qrReturnFocus.focus();
     };
     const openEventQr = async () => {
       const { event, url } = getCurrentEventShareDetails();
+      window.clearTimeout(qrCloseTimer);
       qrReturnFocus = document.activeElement;
       qrModal.hidden = false;
+      requestAnimationFrame(() => qrModal.classList.add('is-open'));
       document.body.classList.add('qr-open');
       qrTitle.textContent = event.titleHtml.replace(/<[^>]+>/g, '');
       qrCode.innerHTML = '<p class="qr-code-status">Generando QR</p>';
@@ -1609,38 +1645,6 @@ Minimum version required to store current data is: `+i+`.
     const countdownMinutes = document.querySelector('[data-countdown-minutes]');
     const getNextCountdownEvent = () => upcomingEvents.find(({ startsAt }) => Date.parse(startsAt) > Date.now()) || upcomingEvents[upcomingEvents.length - 1];
     const getFirstAvailableEventIndex = () => { const index = upcomingEvents.findIndex(({ startsAt }) => Date.parse(startsAt) > Date.now()); return index >= 0 ? index : 0; };
-    const footerNextEvent = document.querySelector('[data-footer-next-event]');
-    const footerEventName = document.querySelector('[data-footer-event-name]');
-    const footerEventMeta = document.querySelector('[data-footer-event-meta]');
-    const footerEventStatus = document.querySelector('[data-footer-event-status]');
-    const footerEventLink = document.querySelector('[data-footer-event-link]');
-    const footerEventAction = document.querySelector('[data-footer-event-action]');
-    const getNextFooterEvent = () => upcomingEvents.find(({ startsAt }) => Date.parse(startsAt) > Date.now()) || null;
-    const syncFooterNextEvent = () => {
-      const event = getNextFooterEvent();
-      if (!event) {
-        footerNextEvent.classList.add('is-empty');
-        footerEventStatus.textContent = 'Muy pronto';
-        footerEventName.textContent = 'Próximamente';
-        footerEventMeta.textContent = 'Las nuevas fechas se anuncian primero en nuestro Instagram oficial.';
-        footerEventLink.href = 'https://www.instagram.com/more_electronic/';
-        footerEventLink.target = '_blank';
-        footerEventLink.rel = 'noopener noreferrer';
-        footerEventAction.textContent = 'Ver novedades';
-        return;
-      }
-      footerNextEvent.classList.remove('is-empty');
-      footerEventStatus.textContent = 'Próxima fecha';
-      footerEventName.textContent = event.titleHtml.replace(/<[^>]+>/g, '');
-      footerEventMeta.textContent = `${event.date} · ${event.time}
-${event.place}`;
-      footerEventLink.href = `?evento=${event.slug}`;
-      footerEventLink.removeAttribute('target');
-      footerEventLink.removeAttribute('rel');
-      footerEventAction.textContent = 'Ver información';
-    };
-    syncFooterNextEvent();
-    window.setInterval(syncFooterNextEvent, 60000);
     const refreshHeroCountdown = () => {
       const event = getNextCountdownEvent();
       const remaining = Math.max(0, Date.parse(event.startsAt) - Date.now());
@@ -1728,7 +1732,7 @@ ${event.place}`;
       return ready;
     };
     const renderUpcomingEvent = async (index) => {
-      activeEventIndex = (index + upcomingEvents.length) % upcomingEvents.length;
+      activeEventIndex = Math.min(Math.max(index, 0), upcomingEvents.length - 1);
       const event = upcomingEvents[activeEventIndex];
       eventTitle.innerHTML = event.titleHtml;
       eventTitleWrap.classList.toggle('is-long-title', event.longTitle);
@@ -1770,8 +1774,20 @@ ${event.place}`;
     const eventPrevButton = document.querySelector('[data-event-prev]');
     const eventNextButton = document.querySelector('[data-event-next]');
     let isEventTransitioning = false;
+    const syncUpcomingEventNavigation = () => {
+      const atFirstEvent = activeEventIndex <= 0;
+      const atLastEvent = activeEventIndex >= upcomingEvents.length - 1;
+      eventPrevButton.disabled = atFirstEvent;
+      eventNextButton.disabled = atLastEvent;
+      eventPrevButton.setAttribute('aria-disabled', String(atFirstEvent));
+      eventNextButton.setAttribute('aria-disabled', String(atLastEvent));
+    };
     const changeUpcomingEvent = (direction) => {
-      if (isEventTransitioning) return;
+      const nextIndex = activeEventIndex + direction;
+      if (isEventTransitioning || nextIndex < 0 || nextIndex >= upcomingEvents.length) {
+        syncUpcomingEventNavigation();
+        return;
+      }
       isEventTransitioning = true;
       const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const outgoingClass = direction > 0 ? 'is-switching-next' : 'is-switching-prev';
@@ -1781,8 +1797,7 @@ ${event.place}`;
       eventStage.setAttribute('aria-busy', 'true');
       eventStage.classList.add(outgoingClass);
       window.setTimeout(async () => {
-        const nextIndex = activeEventIndex + direction;
-        const nextEvent = upcomingEvents[(nextIndex + upcomingEvents.length) % upcomingEvents.length];
+        const nextEvent = upcomingEvents[nextIndex];
         await preloadFlyer(nextEvent.image);
         await renderUpcomingEvent(nextIndex);
         eventStage.classList.remove(outgoingClass);
@@ -1791,42 +1806,83 @@ ${event.place}`;
         eventStage.classList.remove(incomingClass);
         window.setTimeout(() => {
           eventStage.removeAttribute('aria-busy');
-          eventPrevButton.disabled = false;
-          eventNextButton.disabled = false;
           isEventTransitioning = false;
+          syncUpcomingEventNavigation();
         }, isReducedMotion ? 0 : 220);
       }, isReducedMotion ? 0 : 180);
     };
     eventPrevButton.addEventListener('click', () => changeUpcomingEvent(-1));
     eventNextButton.addEventListener('click', () => changeUpcomingEvent(1));
-    let eventSwipe = null;
-    const clearEventSwipe = () => { eventSwipe = null; };
-    eventStage.addEventListener('pointerdown', (event) => {
-      if (event.pointerType === 'mouse' || event.target.closest('a,button,input,select,textarea,label,[role="button"]')) return;
-      eventSwipe = { id:event.pointerId, x:event.clientX, y:event.clientY, horizontal:false };
-    });
-    eventStage.addEventListener('pointermove', (event) => {
-      if (!eventSwipe || eventSwipe.id !== event.pointerId) return;
-      const deltaX = event.clientX - eventSwipe.x;
-      const deltaY = event.clientY - eventSwipe.y;
-      if (!eventSwipe.horizontal && Math.abs(deltaX) > 12 && Math.abs(deltaX) > Math.abs(deltaY)) {
-        eventSwipe.horizontal = true;
-        eventStage.setPointerCapture?.(event.pointerId);
+    // Date navigation is captured on the whole date screen, not only on the inner card.
+    // This preserves vertical scroll, leaves controls tappable, and works in iOS/embedded webviews.
+    let eventPointerSwipe = null;
+    let eventTouchSwipe = null;
+    let lastEventSwipeAt = 0;
+    const isEventGestureTarget = (target) => target instanceof Element && target.closest('#proxima-experiencia');
+    const eventSwipeInteractiveTarget = (target) => target instanceof Element && target.closest('a,button,input,select,textarea,label,[role="button"]');
+    const requestEventSwipe = (direction) => {
+      const now = Date.now();
+      if (now - lastEventSwipeAt < 340 || isEventTransitioning) return;
+      lastEventSwipeAt = now;
+      changeUpcomingEvent(direction);
+    };
+    const getSwipeDirection = (startX, startY, endX, endY) => {
+      const deltaX = endX - startX;
+      const deltaY = endY - startY;
+      if (Math.abs(deltaX) < 32 || Math.abs(deltaX) <= Math.abs(deltaY)) return 0;
+      return deltaX < 0 ? 1 : -1;
+    };
+    document.addEventListener('pointerdown', (event) => {
+      if (!isEventGestureTarget(event.target) || eventSwipeInteractiveTarget(event.target)) return;
+      eventPointerSwipe = { id:event.pointerId, x:event.clientX, y:event.clientY, horizontal:false };
+    }, true);
+    document.addEventListener('pointermove', (event) => {
+      if (!eventPointerSwipe || eventPointerSwipe.id !== event.pointerId) return;
+      const deltaX = event.clientX - eventPointerSwipe.x;
+      const deltaY = event.clientY - eventPointerSwipe.y;
+      if (Math.abs(deltaX) > 8 && Math.abs(deltaX) > Math.abs(deltaY)) {
+        eventPointerSwipe.horizontal = true;
+        eventStage.classList.add('is-dragging');
+        event.preventDefault();
       }
-      if (eventSwipe.horizontal) event.preventDefault();
-    }, { passive:false });
-    eventStage.addEventListener('pointerup', (event) => {
-      if (!eventSwipe || eventSwipe.id !== event.pointerId) return;
-      const deltaX = event.clientX - eventSwipe.x;
-      const isHorizontalSwipe = eventSwipe.horizontal && Math.abs(deltaX) >= 56;
-      clearEventSwipe();
-      if (!isHorizontalSwipe) return;
-      changeUpcomingEvent(deltaX < 0 ? 1 : -1);
-    });
-    eventStage.addEventListener('pointercancel', clearEventSwipe);
-    eventStage.addEventListener('lostpointercapture', clearEventSwipe);
+    }, { capture:true, passive:false });
+    document.addEventListener('pointerup', (event) => {
+      if (!eventPointerSwipe || eventPointerSwipe.id !== event.pointerId) return;
+      const swipeDirection = getSwipeDirection(eventPointerSwipe.x, eventPointerSwipe.y, event.clientX, event.clientY);
+      eventPointerSwipe = null;
+      eventStage.classList.remove('is-dragging');
+      if (swipeDirection) requestEventSwipe(swipeDirection);
+    }, true);
+    document.addEventListener('pointercancel', () => { eventPointerSwipe = null; eventStage.classList.remove('is-dragging'); }, true);
+    document.addEventListener('dragstart', (event) => {
+      if (eventPointerSwipe && isEventGestureTarget(event.target)) event.preventDefault();
+    }, true);
+    // Touch Events are deliberately also registered: some mobile browsers cancel Pointer Events while a page can scroll.
+    document.addEventListener('touchstart', (event) => {
+      if (!isEventGestureTarget(event.target) || eventSwipeInteractiveTarget(event.target) || event.touches.length !== 1) return;
+      const touch = event.touches[0];
+      eventTouchSwipe = { x:touch.clientX, y:touch.clientY, horizontal:false };
+    }, { capture:true, passive:true });
+    document.addEventListener('touchmove', (event) => {
+      if (!eventTouchSwipe || event.touches.length !== 1) return;
+      const touch = event.touches[0];
+      const deltaX = touch.clientX - eventTouchSwipe.x;
+      const deltaY = touch.clientY - eventTouchSwipe.y;
+      if (Math.abs(deltaX) > 8 && Math.abs(deltaX) > Math.abs(deltaY)) {
+        eventTouchSwipe.horizontal = true;
+        event.preventDefault();
+      }
+    }, { capture:true, passive:false });
+    document.addEventListener('touchend', (event) => {
+      if (!eventTouchSwipe || !event.changedTouches.length) return;
+      const touch = event.changedTouches[0];
+      const swipeDirection = getSwipeDirection(eventTouchSwipe.x, eventTouchSwipe.y, touch.clientX, touch.clientY);
+      eventTouchSwipe = null;
+      if (swipeDirection) requestEventSwipe(swipeDirection);
+    }, { capture:true, passive:true });
+    document.addEventListener('touchcancel', () => { eventTouchSwipe = null; }, { capture:true, passive:true });
     upcomingEvents.forEach(({ image }) => preloadFlyer(image));
-    void renderUpcomingEvent(getFirstAvailableEventIndex());
+    void renderUpcomingEvent(getFirstAvailableEventIndex()).then(syncUpcomingEventNavigation);
     const closeMobileMenu = ({ returnFocus = false } = {}) => {
       mobileMenu.classList.remove('open');
       mobileMenu.setAttribute('aria-hidden', 'true');
