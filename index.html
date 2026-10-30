@@ -15,18 +15,17 @@
   <link rel="preload" as="image" href="assets/one-logo.webp" fetchpriority="high" />
   <title>ONE MORE ELECTRONIC — La noche no termina</title>
   <style>
-    :root { --ink:#080808; --paper:#f2f0eb; --line:rgba(242,240,235,.38); --muted:rgba(242,240,235,.67); }
+    :root { --ink:#080808; --paper:#f2f0eb; --line:rgba(242,240,235,.38); --muted:rgba(242,240,235,.67); --accent:#f2f0eb; --accent-deep:#ffffff; --accent-soft:rgba(242,240,235,.22); }
     * { box-sizing: border-box; }
     html,body { margin:0; min-height:100%; max-width:100%; overflow-x:hidden; background:var(--ink); color:var(--paper); font-family:Arial, Helvetica, sans-serif; }
     button, a { font: inherit; }
     .hero { isolation:isolate; min-height:100svh; position:relative; overflow:hidden; background:#060606; display:flex; flex-direction:column; }
     .background { position:absolute; inset:-2%; z-index:-4; overflow:hidden; background:url('assets/one-more-crowd-hero.webp') center center / cover no-repeat; transform:translate3d(0,0,0); }
     .hero-video { position:absolute; inset:0; display:block; width:100%; height:100%; object-fit:cover; object-position:center center; }
-    @keyframes hero-logo-drift { 0%,100% { transform:translate3d(0,0,0) rotate(0deg); } 50% { transform:translate3d(3px,-6px,0) rotate(.18deg); } }
     @keyframes quick-control-arrive { 0% { opacity:0; transform:translate3d(22px,18px,0) scale(.76) rotate(3deg); } 58% { opacity:1; transform:translate3d(-3px,-2px,0) scale(1.045) rotate(-.6deg); } 78% { transform:translate3d(1px,1px,0) scale(.985) rotate(.15deg); } 100% { opacity:1; transform:translate3d(0,0,0) scale(1) rotate(0deg); } }
     @keyframes quick-control-depart { from { opacity:1; transform:translate3d(0,0,0) scale(1) rotate(0deg); } to { opacity:0; transform:translate3d(24px,14px,0) scale(.82) rotate(2deg); } }
 
-    .veil { position:absolute; z-index:-3; inset:0; background:linear-gradient(90deg,rgba(4,4,4,.94) 0%,rgba(5,5,5,.64) 37%,rgba(5,5,5,.13) 73%,rgba(5,5,5,.54) 100%),linear-gradient(0deg,rgba(0,0,0,.94) 0%,rgba(0,0,0,0) 36%,rgba(0,0,0,.24) 100%); }
+    .veil { position:absolute; z-index:-3; inset:0; background:linear-gradient(90deg,rgba(4,4,4,.94) 0%,rgba(5,5,5,.64) 37%,rgba(5,5,5,.13) 73%,rgba(5,5,5,.54) 100%),linear-gradient(0deg,rgba(0,0,0,.94) 0%,rgba(0,0,0,0) 36%,rgba(0,0,0,.24) 100%),linear-gradient(rgba(0,0,0,.10),rgba(0,0,0,.10)); }
     .site-header { min-height:100px; display:flex; align-items:center; justify-content:space-between; padding:22px 29px; position:relative; }
     .brand { display:flex; align-items:center; gap:12px; color:inherit; text-decoration:none; }
     .brand img { display:block; width:42px; height:42px; object-fit:contain; }
@@ -52,11 +51,10 @@
     .hero-countdown:hover { border-color:var(--paper); background:#111; }.hero-countdown:focus-visible { outline:2px solid var(--paper); outline-offset:4px; }.countdown-kicker { grid-column:1 / -1; margin-bottom:12px; color:rgba(242,240,235,.62); font-size:8px; font-weight:700; letter-spacing:.16em; line-height:1; text-transform:uppercase; }.countdown-event { display:block; font-size:clamp(23px,2.2vw,34px); font-weight:900; letter-spacing:-.09em; line-height:.76; text-transform:uppercase; }.countdown-date { display:block; margin-top:8px; color:rgba(242,240,235,.72); font-size:8px; font-weight:700; letter-spacing:.12em; line-height:1.25; text-transform:uppercase; }.countdown-link { align-self:end; padding:0 0 2px 12px; font-size:15px; line-height:1; }.countdown-clock { grid-column:1 / -1; display:grid; grid-template-columns:repeat(3,1fr); gap:1px; margin-top:14px; border-top:1px solid rgba(242,240,235,.34); border-bottom:1px solid rgba(242,240,235,.34); background:rgba(242,240,235,.3); }.countdown-clock span { display:flex; flex-direction:column; gap:4px; padding:9px 7px 8px; background:#080808; }.countdown-clock b { font-size:20px; font-weight:900; letter-spacing:-.075em; line-height:.75; }.countdown-clock small { color:rgba(242,240,235,.61); font-size:7px; font-weight:700; letter-spacing:.12em; line-height:1; text-transform:uppercase; }
     .scroll { position:absolute; right:29px; bottom:21px; display:flex; gap:8px; align-items:center; color:var(--paper); font-size:9px; letter-spacing:.13em; text-transform:uppercase; }
     .scroll i { display:block; height:1px; width:30px; background:var(--paper); }
-    .wordmark { position:absolute; right:clamp(28px,6.7vw,108px); top:45%; translate:0 -50%; width:clamp(142px,15.5vw,246px); height:auto; aspect-ratio:1 / 1; object-fit:contain; opacity:.9; will-change:transform; animation:hero-logo-drift 10s ease-in-out infinite; }
-    .intro-deck.hero-intro .wordmark { opacity:0; animation:none; transition:opacity 430ms ease; }.intro-deck.hero-intro .hero-copy > h1, .intro-deck.hero-intro .hero-copy > .tagline, .intro-deck.hero-intro .hero-copy > .hero-routes, .intro-deck.hero-intro .hero-countdown { opacity:0; will-change:opacity,transform; }
+    .intro-deck.hero-intro .hero-copy > h1, .intro-deck.hero-intro .hero-copy > .tagline, .intro-deck.hero-intro .hero-copy > .hero-routes, .intro-deck.hero-intro .hero-countdown { opacity:0; will-change:opacity,transform; }
     .intro-deck.hero-intro .hero-copy > h1 { transform:translate3d(0,18px,0); transition:opacity 350ms ease,transform 520ms cubic-bezier(.22,.8,.22,1); }.intro-deck.hero-intro .hero-copy > .tagline { transform:translate3d(0,12px,0); transition:opacity 300ms ease,transform 440ms cubic-bezier(.22,.8,.22,1); }.intro-deck.hero-intro .hero-copy > .hero-routes { transform:translate3d(0,16px,0); transition:opacity 330ms ease,transform 470ms cubic-bezier(.22,.8,.22,1); }.intro-deck.hero-intro .hero-countdown { transform:translate3d(20px,0,0); transition:opacity 330ms ease,transform 500ms cubic-bezier(.22,.8,.22,1); }
-    .intro-deck.hero-intro.is-hero-ready .wordmark { opacity:.9; animation:hero-logo-drift 10s ease-in-out infinite; transition-delay:65ms; }.intro-deck.hero-intro.is-hero-ready .hero-copy > h1, .intro-deck.hero-intro.is-hero-ready .hero-copy > .tagline, .intro-deck.hero-intro.is-hero-ready .hero-copy > .hero-routes, .intro-deck.hero-intro.is-hero-ready .hero-countdown { opacity:1; transform:translate3d(0,0,0); }.intro-deck.hero-intro.is-hero-ready .hero-copy > h1 { transition-delay:0ms; }.intro-deck.hero-intro.is-hero-ready .hero-copy > .tagline { transition-delay:85ms; }.intro-deck.hero-intro.is-hero-ready .hero-copy > .hero-routes { transition-delay:165ms; }.intro-deck.hero-intro.is-hero-ready .hero-countdown { transition-delay:245ms; }
-    .intro-deck.hero-intro.hero-preparing .wordmark, .intro-deck.hero-intro.hero-preparing .hero-copy > h1, .intro-deck.hero-intro.hero-preparing .hero-copy > .tagline, .intro-deck.hero-intro.hero-preparing .hero-copy > .hero-routes, .intro-deck.hero-intro.hero-preparing .hero-countdown { transition:none !important; }
+    .intro-deck.hero-intro.is-hero-ready .hero-copy > h1, .intro-deck.hero-intro.is-hero-ready .hero-copy > .tagline, .intro-deck.hero-intro.is-hero-ready .hero-copy > .hero-routes, .intro-deck.hero-intro.is-hero-ready .hero-countdown { opacity:1; transform:translate3d(0,0,0); }.intro-deck.hero-intro.is-hero-ready .hero-copy > h1 { transition-delay:0ms; }.intro-deck.hero-intro.is-hero-ready .hero-copy > .tagline { transition-delay:85ms; }.intro-deck.hero-intro.is-hero-ready .hero-copy > .hero-routes { transition-delay:165ms; }.intro-deck.hero-intro.is-hero-ready .hero-countdown { transition-delay:245ms; }
+    .intro-deck.hero-intro.hero-preparing .hero-copy > h1, .intro-deck.hero-intro.hero-preparing .hero-copy > .tagline, .intro-deck.hero-intro.hero-preparing .hero-copy > .hero-routes, .intro-deck.hero-intro.hero-preparing .hero-countdown { transition:none !important; }
     .intro-deck { position:relative; width:100%; height:100svh; min-height:100svh; overflow:hidden; }
     .intro-deck.is-collapsed { height:96px; min-height:96px; background:#080808; }
     .intro-deck.is-collapsed > .hero { visibility:hidden; }
@@ -120,10 +118,10 @@
     .section-top { display:flex; justify-content:space-between; gap:20px; padding:19px 22px; border-bottom:1px solid rgba(8,8,8,.6); font-size:10px; font-weight:700; letter-spacing:.13em; line-height:1; text-transform:uppercase; }
     /* The flyer owns its column: its width is derived from its real intrinsic ratio,
        not from an arbitrary grid fraction. This keeps every event poster edge-to-edge. */
-    .event-stage { --poster-ratio:606 / 750; flex:1; min-height:0; display:flex; transition:opacity 180ms ease,transform 210ms cubic-bezier(.22,.8,.22,1); will-change:opacity,transform; }
+    .event-stage { --poster-ratio:606 / 750; flex:1; min-height:0; display:flex; touch-action:pan-y; transition:opacity 180ms ease,transform 210ms cubic-bezier(.22,.8,.22,1); will-change:opacity,transform; }
     .event-stage.is-switching-next { opacity:0; transform:translate3d(-22px,0,0); }.event-stage.is-switching-prev { opacity:0; transform:translate3d(22px,0,0); }.event-stage.is-preparing-next { opacity:0; transform:translate3d(22px,0,0); transition:none; }.event-stage.is-preparing-prev { opacity:0; transform:translate3d(-22px,0,0); transition:none; }
-    .event-poster { flex:0 0 auto; width:auto; height:100%; min-height:0; aspect-ratio:var(--poster-ratio); margin:0; display:flex; align-items:center; justify-content:center; overflow:hidden; border-right:1px solid rgba(8,8,8,.6); }
-    .event-poster img { display:block; width:100%; height:100%; object-fit:contain; }
+    .event-poster { position:relative; flex:0 0 auto; width:auto; height:100%; min-height:0; aspect-ratio:var(--poster-ratio); margin:0; display:flex; align-items:center; justify-content:center; overflow:hidden; border-right:1px solid rgba(8,8,8,.6); }
+    .event-poster img { display:block; width:100%; height:100%; object-fit:contain; }.event-poster.is-finished img { filter:grayscale(1) contrast(.82) brightness(.9); }.event-status-badge { position:absolute; z-index:2; top:18px; left:18px; display:none; padding:10px 12px 9px; border:1px solid var(--paper); background:#080808; color:var(--paper); font-size:10px; font-weight:900; letter-spacing:.14em; line-height:1; text-transform:uppercase; box-shadow:4px 4px 0 rgba(242,240,235,.72); }.event-poster.is-finished .event-status-badge { display:block; }
     .event-content { flex:1 1 0; min-width:0; display:grid; grid-template-columns:minmax(0,1.18fr) minmax(260px,.82fr); }
     .event-title { display:grid; grid-template-rows:auto 1fr auto; min-height:570px; padding:clamp(30px,5vw,74px) clamp(22px,4.4vw,70px) 26px; border-right:1px solid rgba(8,8,8,.6); }
     .event-title h2 { align-self:center; justify-self:center; width:100%; text-align:center; }
@@ -147,8 +145,8 @@
     .event-countdown-head { display:flex; justify-content:space-between; gap:12px; padding:9px 0 8px; color:rgba(242,240,235,.64); font-size:8px; font-weight:700; letter-spacing:.14em; line-height:1; text-transform:uppercase; }
     .event-countdown-clock { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; background:rgba(242,240,235,.35); }.event-countdown-clock span { display:flex; flex-direction:column; gap:5px; padding:9px 7px 8px; background:#101010; }.event-countdown-clock b { font-size:clamp(20px,2.1vw,31px); font-weight:900; letter-spacing:-.08em; line-height:.76; }.event-countdown-clock small { color:rgba(242,240,235,.58); font-size:7px; font-weight:700; letter-spacing:.12em; line-height:1; text-transform:uppercase; }
     .announce { display:flex; align-items:center; justify-content:space-between; gap:20px; min-height:52px; padding:0 15px; border:1px solid var(--paper); background:var(--paper); color:var(--ink); font-size:10px; font-weight:700; letter-spacing:.12em; text-decoration:none; text-transform:uppercase; transition:background-color 180ms ease,color 180ms ease; }
-    .event-actions { display:grid; grid-template-columns:minmax(0,1.45fr) minmax(0,1fr) 48px; gap:7px; }.event-actions .announce { min-width:0; }.event-share { display:flex; align-items:center; justify-content:space-between; gap:8px; min-height:52px; padding:0 13px; border:1px solid rgba(242,240,235,.72); background:transparent; color:var(--paper); font:inherit; font-size:9px; font-weight:700; letter-spacing:.11em; line-height:1; text-align:left; text-transform:uppercase; cursor:pointer; transition:background-color 180ms ease,color 180ms ease; }.event-share:hover, .event-share:focus-visible { background:var(--paper); color:var(--ink); }.event-share:focus-visible { outline:2px solid var(--paper); outline-offset:4px; }.event-share svg { flex:0 0 auto; width:17px; height:17px; fill:none; stroke:currentColor; stroke-linecap:square; stroke-linejoin:miter; stroke-width:1.7; }.event-qr-trigger { display:grid; place-items:center; min-height:52px; padding:0; border:1px solid rgba(242,240,235,.72); background:transparent; color:var(--paper); font:inherit; font-size:9px; font-weight:700; letter-spacing:.05em; line-height:1; text-transform:uppercase; cursor:pointer; transition:background-color 180ms ease,color 180ms ease; }.event-qr-trigger:hover, .event-qr-trigger:focus-visible { background:var(--paper); color:var(--ink); }.event-qr-trigger:focus-visible { outline:2px solid var(--paper); outline-offset:4px; }
-    .announce:hover, .announce:focus-visible { background:transparent; color:var(--paper); }.announce:focus-visible { outline:2px solid var(--paper); outline-offset:4px; }.announce b { font-size:18px; font-weight:400; }
+    .event-actions { display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) 48px 48px; gap:7px; }.event-actions .announce { min-width:0; }.event-share { display:flex; align-items:center; justify-content:space-between; gap:8px; min-height:52px; padding:0 13px; border:1px solid rgba(242,240,235,.72); background:transparent; color:var(--paper); font:inherit; font-size:9px; font-weight:700; letter-spacing:.11em; line-height:1; text-align:left; text-transform:uppercase; cursor:pointer; transition:background-color 180ms ease,color 180ms ease; }.event-share:hover, .event-share:focus-visible { background:var(--paper); color:var(--ink); }.event-share:focus-visible { outline:2px solid var(--paper); outline-offset:4px; }.event-share svg { flex:0 0 auto; width:17px; height:17px; fill:none; stroke:currentColor; stroke-linecap:square; stroke-linejoin:miter; stroke-width:1.7; }.event-reminder-wrap { position:relative; min-width:0; }.event-reminder { display:grid; place-items:center; width:100%; min-height:52px; padding:0; border:1px solid rgba(242,240,235,.72); background:transparent; color:var(--paper); cursor:pointer; transition:background-color 180ms ease,color 180ms ease,border-color 180ms ease; }.event-reminder svg { width:18px; height:18px; fill:none; stroke:currentColor; stroke-linecap:square; stroke-linejoin:miter; stroke-width:1.6; }.event-reminder:hover, .event-reminder:focus-visible, .event-reminder.is-active { border-color:var(--paper); background:var(--paper); color:var(--ink); }.event-reminder:focus-visible { outline:2px solid var(--paper); outline-offset:4px; }.event-reminder:disabled { cursor:not-allowed; opacity:.42; }.event-reminder-tooltip { position:absolute; z-index:8; right:0; bottom:calc(100% + 8px); padding:9px 10px; border:1px solid var(--paper); background:#080808; color:var(--paper); font-size:8px; font-weight:700; letter-spacing:.12em; line-height:1; text-transform:uppercase; white-space:nowrap; pointer-events:none; opacity:0; transform:translate3d(0,4px,0); transition:opacity 150ms ease,transform 150ms ease; }.event-reminder-tooltip.is-visible { opacity:1; transform:translate3d(0,0,0); }.event-qr-trigger { display:grid; place-items:center; min-height:52px; padding:0; border:1px solid rgba(242,240,235,.72); background:transparent; color:var(--paper); font:inherit; font-size:9px; font-weight:700; letter-spacing:.05em; line-height:1; text-transform:uppercase; cursor:pointer; transition:background-color 180ms ease,color 180ms ease; }.event-qr-trigger:hover, .event-qr-trigger:focus-visible { background:var(--paper); color:var(--ink); }.event-qr-trigger:focus-visible { outline:2px solid var(--paper); outline-offset:4px; }
+    .announce:hover, .announce:focus-visible { background:transparent; color:var(--paper); }.announce:focus-visible { outline:2px solid var(--paper); outline-offset:4px; }.announce b { font-size:18px; font-weight:400; }.announce.is-finished { cursor:default; border-color:rgba(242,240,235,.5); background:transparent; color:rgba(242,240,235,.72); pointer-events:none; }
     .ticket-notice { position:fixed; z-index:150; bottom:22px; left:22px; display:flex; align-items:center; gap:11px; padding:11px 13px; border:1px solid var(--ink); background:var(--paper); color:var(--ink); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1; text-transform:uppercase; opacity:0; pointer-events:none; transform:translate3d(0,10px,0); transition:opacity 170ms ease,transform 170ms ease; }
     .ticket-notice.is-visible { opacity:1; transform:translate3d(0,0,0); }.ticket-notice b { font-size:14px; font-weight:400; }
     .qr-modal[hidden] { display:none; }.qr-modal { position:fixed; z-index:170; inset:0; display:grid; place-items:center; padding:18px; background:rgba(8,8,8,.82); }.qr-dialog { position:relative; width:min(100%,420px); border:1px solid var(--ink); background:var(--paper); color:var(--ink); box-shadow:8px 8px 0 #080808; }.qr-dialog-head { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; padding:17px 18px 15px; border-bottom:1px solid rgba(8,8,8,.7); }.qr-dialog-kicker { margin:0 0 7px; color:rgba(8,8,8,.6); font-size:8px; font-weight:700; letter-spacing:.15em; line-height:1; text-transform:uppercase; }.qr-dialog-title { margin:0; font-size:clamp(31px,7vw,47px); font-weight:900; letter-spacing:-.1em; line-height:.74; text-transform:uppercase; }.qr-close { display:grid; place-items:center; width:32px; height:32px; padding:0; border:1px solid var(--ink); background:transparent; color:var(--ink); font:inherit; font-size:20px; line-height:1; cursor:pointer; }.qr-close:hover, .qr-close:focus-visible { background:var(--ink); color:var(--paper); }.qr-close:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }.qr-dialog-main { display:flex; flex-direction:column; align-items:center; padding:23px 18px 20px; }.qr-code { display:grid; place-items:center; width:min(100%,264px); min-height:264px; padding:10px; border:1px solid var(--ink); background:var(--paper); }.qr-code svg { display:block; width:100%; height:auto; }.qr-code-status { margin:0; color:rgba(8,8,8,.62); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1.35; text-align:center; text-transform:uppercase; }.qr-description { max-width:275px; margin:17px 0 0; font-size:11px; font-weight:700; letter-spacing:.02em; line-height:1.35; text-align:center; text-transform:uppercase; }.qr-dialog-actions { display:grid; grid-template-columns:1fr 1fr; width:100%; gap:7px; margin-top:20px; }.qr-dialog-actions button { display:flex; align-items:center; justify-content:space-between; min-height:42px; padding:0 12px; border:1px solid var(--ink); background:transparent; color:var(--ink); font:inherit; font-size:8px; font-weight:700; letter-spacing:.11em; line-height:1; text-align:left; text-transform:uppercase; cursor:pointer; }.qr-dialog-actions button:hover:not(:disabled), .qr-dialog-actions button:focus-visible { background:var(--ink); color:var(--paper); }.qr-dialog-actions button:disabled { cursor:wait; opacity:.45; }.qr-dialog-actions button:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }body.qr-open { overflow:hidden; }
@@ -280,24 +278,25 @@
     .faq { padding:15px; background:var(--paper); color:var(--ink); }.faq-frame { display:grid; grid-template-columns:minmax(280px,.68fr) minmax(0,1.32fr); min-height:540px; border:1px solid rgba(8,8,8,.62); }.faq-intro { display:flex; min-width:0; flex-direction:column; justify-content:space-between; overflow:visible; padding:clamp(34px,4.8vw,72px) clamp(23px,4.6vw,68px) 29px; border-right:1px solid rgba(8,8,8,.62); }.faq-kicker { display:flex; align-items:center; gap:10px; margin:0; color:rgba(8,8,8,.62); font-size:10px; font-weight:700; letter-spacing:.15em; line-height:1; text-transform:uppercase; }.faq-kicker::before { content:''; width:27px; height:1px; background:currentColor; }.faq-intro h2 { max-width:100%; margin:45px 0; font-size:clamp(36px,3.6vw,56px); font-weight:900; letter-spacing:-.07em; line-height:.82; overflow-wrap:normal; text-transform:uppercase; }.faq-intro h2 span { display:block; max-width:100%; white-space:nowrap; }.faq-intro-copy { max-width:315px; margin:0; font-size:12px; line-height:1.46; }.faq-list { align-self:stretch; }.faq-item { margin:0; border-bottom:1px solid rgba(8,8,8,.62); }.faq-item:last-child { border-bottom:0; }.faq-trigger { display:grid; grid-template-columns:auto minmax(0,1fr) auto; align-items:center; gap:15px; width:100%; min-height:89px; padding:20px clamp(20px,3vw,43px); border:0; background:transparent; color:var(--ink); font:inherit; text-align:left; cursor:pointer; }.faq-index { color:rgba(8,8,8,.52); font-size:9px; font-weight:700; letter-spacing:.13em; }.faq-question { font-size:clamp(15px,1.5vw,21px); font-weight:900; letter-spacing:-.045em; line-height:1; text-transform:uppercase; }.faq-mark { display:grid; place-items:center; width:25px; height:25px; border:1px solid var(--ink); font-size:18px; font-weight:400; line-height:1; transition:transform 220ms ease,background-color 180ms ease,color 180ms ease; }.faq-item.is-open .faq-mark { background:var(--ink); color:var(--paper); transform:rotate(45deg); }.faq-trigger:hover .faq-question, .faq-trigger:focus-visible .faq-question { text-decoration:underline; text-underline-offset:4px; }.faq-trigger:focus-visible { outline:2px solid var(--ink); outline-offset:-4px; }.faq-panel { display:grid; grid-template-rows:0fr; transition:grid-template-rows 330ms cubic-bezier(.22,.8,.22,1); }.faq-panel-inner { min-height:0; overflow:hidden; }.faq-answer { max-width:610px; margin:0; padding:0 clamp(60px,6vw,104px) 0 clamp(62px,5.9vw,101px); color:rgba(8,8,8,.73); font-size:13px; line-height:1.5; opacity:0; transform:translate3d(0,-7px,0); transition:opacity 180ms ease,transform 260ms cubic-bezier(.22,.8,.22,1),padding-bottom 330ms cubic-bezier(.22,.8,.22,1); }.faq-item.is-open .faq-panel { grid-template-rows:1fr; }.faq-item.is-open .faq-answer { padding-bottom:25px; opacity:1; transform:translate3d(0,0,0); transition-delay:75ms,75ms,0s; }.faq-answer a { color:var(--ink); font-weight:700; text-underline-offset:3px; }
     .site-footer { padding:15px; background:#080808; color:var(--paper); }
     .footer-frame { border:1px solid rgba(242,240,235,.48); }
-    .footer-main { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(150px,.45fr) minmax(200px,.62fr); gap:0; }
+    .footer-main { display:grid; grid-template-columns:minmax(0,1.18fr) minmax(170px,.45fr) minmax(265px,.7fr); gap:0; }
     .footer-identity { display:flex; flex-direction:column; justify-content:space-between; min-height:325px; padding:34px clamp(23px,4vw,58px) 29px; border-right:1px solid rgba(242,240,235,.42); }
     .footer-brand { display:flex; align-items:center; gap:12px; font-size:10px; font-weight:700; letter-spacing:.11em; line-height:1; text-transform:uppercase; }
     .footer-brand img { display:block; width:39px; height:39px; object-fit:contain; }
     .footer-claim { max-width:620px; margin:46px 0 0; font-size:clamp(42px,6.1vw,95px); font-weight:900; letter-spacing:-.085em; line-height:.84; text-transform:uppercase; }
     .footer-claim span { display:block; }.footer-claim span + span { margin-top:.07em; }
     .footer-column { min-height:325px; padding:34px 28px 29px; border-right:1px solid rgba(242,240,235,.42); }
-    .footer-column:last-child { border-right:0; }
-    .footer-label { margin:0 0 23px; color:rgba(242,240,235,.64); font-size:9px; font-weight:700; letter-spacing:.15em; text-transform:uppercase; }
+    .footer-label { margin:0 0 18px; color:rgba(242,240,235,.64); font-size:9px; font-weight:700; letter-spacing:.15em; line-height:1; text-transform:uppercase; }
     .footer-nav { display:flex; flex-direction:column; align-items:flex-start; gap:12px; }
     .footer-nav a, .footer-event-link { color:var(--paper); font-size:11px; font-weight:700; letter-spacing:.08em; line-height:1.2; text-decoration:none; text-transform:uppercase; }
     .footer-nav a:hover, .footer-event-link:hover { text-decoration:underline; text-underline-offset:4px; }
-    .footer-event-name { margin:0; font-size:clamp(35px,4vw,61px); font-weight:900; letter-spacing:-.09em; line-height:.72; text-transform:uppercase; }
-    .footer-event-meta { margin:22px 0; color:rgba(242,240,235,.74); font-size:10px; font-weight:700; letter-spacing:.1em; line-height:1.55; text-transform:uppercase; }
-    .footer-event-link { display:flex; justify-content:space-between; gap:12px; width:100%; padding-top:13px; border-top:1px solid rgba(242,240,235,.48); }
-    .footer-entry-policy { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); border-top:1px solid rgba(242,240,235,.42); }
-    .footer-policy-item { min-height:103px; display:flex; flex-direction:column; justify-content:center; gap:9px; padding:18px 22px; border-right:1px solid rgba(242,240,235,.42); }
-    .footer-policy-item:last-child { border-right:0; }.footer-policy-label { margin:0; color:rgba(242,240,235,.6); font-size:8px; font-weight:700; letter-spacing:.15em; line-height:1; text-transform:uppercase; }.footer-policy-copy { margin:0; color:var(--paper); font-size:10px; font-weight:700; letter-spacing:.075em; line-height:1.35; text-transform:uppercase; }.footer-map-link { display:inline-flex; align-items:center; justify-content:space-between; gap:12px; color:var(--paper); font-size:10px; font-weight:700; letter-spacing:.1em; line-height:1.25; text-decoration:none; text-transform:uppercase; }.footer-map-link:hover, .footer-map-link:focus-visible { text-decoration:underline; text-underline-offset:4px; }.footer-map-link b { font-size:16px; font-weight:400; }
+    .footer-next-event { display:flex; min-width:0; min-height:293px; flex-direction:column; margin:15px; padding:23px 22px 20px; background:var(--paper); color:var(--ink); }
+    .footer-next-top { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }.footer-next-event .footer-label { color:rgba(8,8,8,.64); }.footer-next-status { flex:0 0 auto; padding:5px 6px; border:1px solid rgba(8,8,8,.72); font-size:7px; font-weight:700; letter-spacing:.12em; line-height:1; text-transform:uppercase; }
+    .footer-event-name { margin:18px 0 0; font-size:clamp(37px,4vw,61px); font-weight:900; letter-spacing:-.09em; line-height:.74; overflow-wrap:anywhere; text-transform:uppercase; }
+    .footer-event-meta { margin:20px 0 auto; white-space:pre-line; color:rgba(8,8,8,.72); font-size:10px; font-weight:700; letter-spacing:.09em; line-height:1.45; text-transform:uppercase; }
+    .footer-next-event.is-empty { background:#151515; color:var(--paper); border:1px solid rgba(242,240,235,.44); }.footer-next-event.is-empty .footer-label,.footer-next-event.is-empty .footer-event-meta { color:rgba(242,240,235,.68); }.footer-next-event.is-empty .footer-next-status { border-color:rgba(242,240,235,.55); }.footer-next-event.is-empty .footer-event-link { border-color:rgba(242,240,235,.52); color:var(--paper); }.footer-event-link { display:flex; justify-content:space-between; gap:12px; width:100%; padding-top:13px; border-top:1px solid rgba(8,8,8,.6); color:var(--ink); }
+    .footer-info-panel { display:grid; grid-template-columns:minmax(230px,.7fr) minmax(0,1.3fr); border-top:1px solid rgba(242,240,235,.42); }
+    .footer-info-head { display:flex; flex-direction:column; justify-content:center; min-height:145px; padding:25px 30px; border-right:1px solid rgba(242,240,235,.42); }.footer-info-head .footer-label { margin-bottom:11px; }.footer-info-head > p:last-child { max-width:265px; margin:0; color:rgba(242,240,235,.72); font-size:11px; font-weight:700; letter-spacing:.035em; line-height:1.42; }
+    .footer-info-list { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); }.footer-info-item { display:flex; min-width:0; flex-direction:column; justify-content:center; gap:9px; padding:21px 20px; border-right:1px solid rgba(242,240,235,.42); }.footer-info-item:last-child { border-right:0; }.footer-policy-label { margin:0; color:rgba(242,240,235,.6); font-size:8px; font-weight:700; letter-spacing:.15em; line-height:1; text-transform:uppercase; }.footer-policy-copy { margin:0; color:var(--paper); font-size:10px; font-weight:700; letter-spacing:.06em; line-height:1.38; text-transform:uppercase; }.footer-map-link { display:inline-flex; align-items:center; justify-content:space-between; gap:10px; color:var(--paper); font-size:10px; font-weight:700; letter-spacing:.065em; line-height:1.35; text-decoration:none; text-transform:uppercase; }.footer-map-link:hover, .footer-map-link:focus-visible { text-decoration:underline; text-underline-offset:4px; }.footer-map-link:focus-visible { outline:2px solid var(--paper); outline-offset:3px; }.footer-map-link b { flex:0 0 auto; font-size:16px; font-weight:400; }
     .footer-app-row { display:flex; align-items:center; justify-content:space-between; gap:24px; padding:18px 22px; border-top:1px solid rgba(242,240,235,.42); }.footer-app-label { margin:0 0 8px; color:rgba(242,240,235,.6); font-size:8px; font-weight:700; letter-spacing:.15em; line-height:1; text-transform:uppercase; }.footer-app-copy { margin:0; color:var(--paper); font-size:10px; font-weight:700; letter-spacing:.075em; line-height:1.3; text-transform:uppercase; }.footer-app-actions { display:flex; align-items:center; gap:7px; }[data-pwa-install][hidden] { display:none !important; }.footer-install, .footer-alerts, .footer-sound { display:flex; align-items:center; justify-content:space-between; gap:15px; min-height:40px; padding:0 12px; border:1px solid rgba(242,240,235,.72); background:transparent; color:var(--paper); font:inherit; font-size:8px; font-weight:700; letter-spacing:.12em; line-height:1; text-transform:uppercase; }.footer-install, .footer-sound { cursor:pointer; }.footer-install:hover, .footer-install:focus-visible, .footer-sound:hover, .footer-sound:focus-visible { background:var(--paper); color:var(--ink); }.footer-install:focus-visible, .footer-sound:focus-visible { outline:2px solid var(--paper); outline-offset:3px; }.footer-install b, .footer-sound b { font-size:15px; font-weight:400; }.footer-alerts { color:rgba(242,240,235,.58); cursor:not-allowed; }.footer-alerts small { color:var(--paper); font-size:7px; font-weight:700; letter-spacing:.12em; }.footer-alerts.notification-preview { color:var(--paper); cursor:pointer; }.footer-alerts.notification-preview:hover, .footer-alerts.notification-preview:focus-visible { background:var(--paper); color:var(--ink); }.footer-alerts.notification-preview:focus-visible { outline:2px solid var(--paper); outline-offset:3px; }
     .footer-bottom { display:flex; justify-content:space-between; align-items:center; gap:18px; padding:16px 22px; border-top:1px solid rgba(242,240,235,.42); }
     .footer-bottom p, .footer-bottom a { margin:0; color:rgba(242,240,235,.68); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1.2; text-decoration:none; text-transform:uppercase; }
@@ -305,14 +304,15 @@
     @media (max-width:650px) {
       .site-header { min-height:84px; padding:19px 20px; }.header-side { gap:15px; }.header-link { display:none; }.frame { inset:10px; }.brand img { width:37px; height:37px; }.brand-name { font-size:9px; }
       .site-header { min-height:70px; padding:14px 20px; }.hero { padding-top:70px; }.header-side { display:none; }.menu-toggle { display:block; }.mobile-nav { position:fixed; z-index:49; top:70px; right:10px; left:10px; flex-direction:column; gap:0; padding:10px 20px 20px; border:1px solid rgba(242,240,235,.45); background:#080808; }.mobile-nav.open { display:flex; }.mobile-nav a { padding:16px 0; border-bottom:1px solid rgba(242,240,235,.25); color:var(--paper); font-size:11px; font-weight:700; letter-spacing:.12em; text-decoration:none; text-transform:uppercase; }.mobile-nav .mobile-ticket { margin-top:10px; padding:15px; border:1px solid var(--paper); background:var(--paper); color:var(--ink); text-align:center; }
-      .hero-main { padding:20px 29px 46px; flex-direction:column; justify-content:flex-end; align-items:stretch; }.hero-copy { width:100%; }.hero-countdown { position:relative; right:auto; bottom:auto; width:100%; margin-top:12px; padding:10px 12px; grid-template-columns:minmax(0,1fr) auto; }.countdown-kicker, .countdown-link { display:none; }.countdown-event { font-size:18px; line-height:.82; }.countdown-date { margin-top:4px; font-size:7px; }.countdown-clock { grid-column:2; display:flex; gap:6px; margin:0; border:0; background:transparent; align-self:center; }.countdown-clock span { flex-direction:row; gap:2px; padding:0; background:transparent; }.countdown-clock b { font-size:15px; line-height:1; }.countdown-clock small { align-self:end; font-size:6px; }.eyebrow { font-size:9px; margin-bottom:16px; } h1 { font-size:clamp(48px,13.7vw,64px); letter-spacing:-.1em; line-height:.78; } .tagline { margin-top:23px; font-size:13px; }.action-row { gap:14px; margin-top:27px; }.action { min-width:100%; }.status { font-size:8px; }.wordmark { width:96px; right:22px; top:20%; opacity:.74; }.hero-aside { right:20px; bottom:86px; }.scroll { right:20px; bottom:22px; }
+      .hero-main { padding:20px 29px 46px; flex-direction:column; justify-content:flex-end; align-items:stretch; }.hero-copy { width:100%; }.hero-countdown { position:relative; right:auto; bottom:auto; width:100%; margin-top:12px; padding:10px 12px; grid-template-columns:minmax(0,1fr) auto; }.countdown-kicker, .countdown-link { display:none; }.countdown-event { font-size:18px; line-height:.82; }.countdown-date { margin-top:4px; font-size:7px; }.countdown-clock { grid-column:2; display:flex; gap:6px; margin:0; border:0; background:transparent; align-self:center; }.countdown-clock span { flex-direction:row; gap:2px; padding:0; background:transparent; }.countdown-clock b { font-size:15px; line-height:1; }.countdown-clock small { align-self:end; font-size:6px; }.eyebrow { font-size:9px; margin-bottom:16px; } h1 { width:100%; max-width:none; font-size:clamp(46px,12.75vw,60px); letter-spacing:-.075em; line-height:.78; text-align:left; } .tagline { margin-top:23px; font-size:13px; }.action-row { gap:14px; margin-top:27px; }.action { min-width:100%; }.status { font-size:8px; }.hero-aside { right:20px; bottom:86px; }.scroll { right:20px; bottom:22px; }
       .intro-slider > .next-experience { height:100svh; min-height:100svh; overflow-y:auto; padding:10px; }.intro-slider .next-frame { height:auto; min-height:calc(100svh - 20px); }.intro-slider .section-top { grid-template-columns:1fr auto; }.intro-slider .section-top .event-switcher { grid-column:2; justify-self:end; }.intro-slider .section-top .event-brand { display:none; }.event-nav-copy { min-width:84px; }.event-nav-copy strong { font-size:7px; }.hero-routes { grid-template-columns:1fr; width:100%; margin-top:25px; }.hero-route { min-height:54px; }.hero-aside { display:none; }.entry-curtain::before { inset:10px; }.curtain-layout { inset:10px; grid-template-columns:1fr auto; grid-template-rows:auto 1fr auto; gap:10px; padding:21px 20px; }.curtain-index { grid-column:1; }.curtain-serial { grid-column:2; font-size:7px; }.curtain-main { grid-column:1 / -1; }.curtain-overline { margin-bottom:20px; font-size:8px; }.curtain-title { font-size:clamp(59px,17vw,102px); line-height:.73; }.curtain-rule { margin:25px 0 11px; }.curtain-caption { max-width:245px; font-size:8px; }.mobile-home .menu-arrow { font-size:19px; }
-      .next-experience { padding:10px; }.next-frame { min-height:calc(100svh - 20px); }.section-top { padding:15px; font-size:8px; }.section-top > .event-brand { display:none; }.event-stage { display:grid; grid-template-columns:1fr; }.event-poster { width:100%; height:auto; min-height:0; max-height:640px; aspect-ratio:auto; border-right:0; border-bottom:1px solid rgba(8,8,8,.6); }.intro-slider .event-poster img { width:100%; height:auto; max-height:640px; object-fit:contain; }.event-content { grid-template-columns:1fr; }.intro-slider .event-title { min-height:340px; padding:27px 20px 25px; row-gap:18px; border-right:0; border-bottom:1px solid rgba(8,8,8,.6); }.intro-slider .event-title h2 { margin:0; font-size:clamp(62px,19vw,90px); line-height:.8; }.intro-slider .event-title.is-long-title { min-height:360px; }.intro-slider .event-title.is-long-title h2 { font-size:clamp(46px,12vw,66px); letter-spacing:-.1em; line-height:.9; }.event-info { min-height:450px; padding:29px 20px 24px; }.event-number span { font-size:114px; }.detail-list { margin-top:38px; }.detail { grid-template-columns:80px 1fr; }.event-actions { grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) 44px; }.event-share { padding:0 10px; font-size:8px; }.event-qr-trigger { min-height:52px; font-size:8px; }.qr-modal { padding:12px; }.qr-dialog { box-shadow:5px 5px 0 #080808; }.qr-code { width:min(100%,244px); min-height:244px; }.event-bottom { align-items:center; padding:12px 15px; font-size:8px; }.event-bottom > span:first-child { max-width:100px; }.intro-slider .slider-enter { flex:0 0 auto; min-height:32px; gap:6px; padding:0 9px; font-size:7px; letter-spacing:.08em; white-space:nowrap; }.event-bottom span:last-child { text-align:right; }
+      .next-experience { padding:10px; }.next-frame { min-height:calc(100svh - 20px); }.section-top { padding:15px; font-size:8px; }.section-top > .event-brand { display:none; }.event-stage { display:grid; grid-template-columns:1fr; }.event-poster { width:100%; height:auto; min-height:0; max-height:640px; aspect-ratio:auto; border-right:0; border-bottom:1px solid rgba(8,8,8,.6); }.intro-slider .event-poster img { width:100%; height:auto; max-height:640px; object-fit:contain; }.event-content { grid-template-columns:1fr; }.intro-slider .event-title { min-height:340px; padding:27px 20px 25px; row-gap:18px; border-right:0; border-bottom:1px solid rgba(8,8,8,.6); }.intro-slider .event-title h2 { margin:0; font-size:clamp(62px,19vw,90px); line-height:.8; }.intro-slider .event-title.is-long-title { min-height:360px; }.intro-slider .event-title.is-long-title h2 { font-size:clamp(46px,12vw,66px); letter-spacing:-.1em; line-height:.9; }.event-info { min-height:450px; padding:29px 20px 24px; }.event-number span { font-size:114px; }.detail-list { margin-top:38px; }.detail { grid-template-columns:80px 1fr; }.event-actions { grid-template-columns:minmax(0,1.15fr) minmax(0,1fr) 44px 44px; }.event-share { padding:0 10px; font-size:8px; }.event-qr-trigger { min-height:52px; font-size:8px; }.qr-modal { padding:12px; }.qr-dialog { box-shadow:5px 5px 0 #080808; }.qr-code { width:min(100%,244px); min-height:244px; }.event-bottom { align-items:center; padding:12px 15px; font-size:8px; }.event-bottom > span:first-child { max-width:100px; }.intro-slider .slider-enter { flex:0 0 auto; min-height:32px; gap:6px; padding:0 9px; font-size:7px; letter-spacing:.08em; white-space:nowrap; }.event-bottom span:last-child { text-align:right; }
       .archive { padding:10px; }.archive-top { padding:15px; font-size:8px; }.archive-intro { display:block; padding:37px 20px 31px; }.archive-intro h2 { font-size:clamp(56px,17vw,85px); }.archive-intro p { margin-top:25px; font-size:12px; }.archive-rail { grid-auto-columns:87vw; }.archive-card { min-height:430px; padding:18px; }.archive-card-name { font-size:clamp(60px,18vw,88px); }.archive-card-name.small { font-size:clamp(51px,14vw,70px); }
       .manifesto { padding:10px; }.manifesto-frame { min-height:calc(100svh - 20px); }.manifesto-top { padding:15px; font-size:8px; }.manifesto-top span:last-child { display:none; }.manifesto-main { grid-template-columns:1fr; }.manifesto-title { min-height:435px; padding:30px 20px 25px; border-right:0; border-bottom:1px solid rgba(8,8,8,.62); }.manifesto-title h2 { margin:45px 0; font-size:clamp(46px,12.3vw,64px); letter-spacing:-.115em; line-height:.78; }.manifesto-title h2 span { white-space:nowrap; }.manifesto-copy { min-height:440px; padding:29px 20px 25px; }.manifesto-copy p { font-size:24px; }.manifesto-footer { padding:14px 15px; font-size:8px; }.manifesto-footer span:last-child { text-align:right; }
       .gallery { padding:10px; }.gallery-top { padding:15px; font-size:8px; }.gallery-top span:last-child { display:none; }.gallery-head { display:block; padding:39px 20px 33px; }.gallery-kicker { margin-bottom:18px; font-size:9px; }.gallery-head h2 { font-size:clamp(49px,12.8vw,61px); }.gallery-head p { margin-top:28px; font-size:12px; }.gallery-masonry { grid-template-columns:1fr 1fr; grid-template-rows:360px 230px 230px; }.gallery-item--dance { grid-column:span 2; grid-row:auto; }.gallery-item--decks { grid-column:span 1; grid-row:span 1; }.gallery-item--lights { grid-column:span 1; grid-row:span 1; }.gallery-item--community { grid-column:span 2; grid-row:auto; }.gallery-label { right:15px; bottom:15px; left:15px; font-size:9px; }.gallery-footer { padding:14px 15px; font-size:8px; }.gallery-footer span:last-child { text-align:right; }
       .map-section { padding:10px; }.map-top { padding:15px; font-size:8px; }.map-top span:last-child { display:none; }.map-main { grid-template-columns:1fr; }.faq { padding:10px; }.faq-frame { grid-template-columns:1fr; min-height:0; }.faq-intro { min-height:350px; padding:30px 20px 25px; border-right:0; border-bottom:1px solid rgba(8,8,8,.62); }.faq-intro h2 { margin:38px 0; font-size:clamp(38px,10.4vw,48px); letter-spacing:-.065em; line-height:.84; }.faq-trigger { min-height:76px; gap:11px; padding:17px 15px; }.faq-question { font-size:15px; }.faq-mark { width:23px; height:23px; font-size:17px; }.faq-answer { padding:0 49px 0 51px; font-size:12px; line-height:1.48; }.faq-item.is-open .faq-answer { padding-bottom:22px; }.map-canvas { min-height:360px; border-right:0; border-bottom:1px solid rgba(8,8,8,.62); }.google-map-shell, .google-map-embed { height:360px; min-height:0; }.map-panel { min-height:420px; padding:29px 20px 25px; }.map-panel h2 { margin:35px 0; font-size:clamp(59px,17vw,86px); }.map-foot { padding:14px 15px; font-size:8px; }.map-foot span:last-child { text-align:right; }
-      .signal { padding:10px; }.signal-frame { min-height:calc(100svh - 20px); }.signal-top { padding:15px; font-size:8px; }.signal-top span:last-child { display:none; }.signal-main { grid-template-columns:1fr; }.signal-title { min-height:390px; padding:30px 20px 25px; border-right:0; border-bottom:1px solid rgba(8,8,8,.62); }.signal-title h2 { margin:43px 0; font-size:clamp(59px,17vw,87px); }.signal-side { min-height:380px; padding:29px 20px 25px; }.signal-side p { font-size:24px; }.signal-actions { margin-top:31px; }.signal-foot { padding:14px 15px; font-size:8px; }.signal-foot span:last-child { text-align:right; }.site-footer { padding:10px; }.footer-main { grid-template-columns:1fr; }.footer-identity { min-height:335px; padding:29px 20px 25px; border-right:0; border-bottom:1px solid rgba(242,240,235,.42); }.footer-claim { margin-top:50px; font-size:clamp(51px,16vw,79px); }.footer-column { min-height:auto; padding:27px 20px; border-right:0; border-bottom:1px solid rgba(242,240,235,.42); }.footer-label { margin-bottom:18px; }.footer-event-name { font-size:54px; }.footer-entry-policy { grid-template-columns:1fr; }.footer-policy-item { min-height:0; padding:18px 20px; border-right:0; border-bottom:1px solid rgba(242,240,235,.42); }.footer-policy-item:last-child { border-bottom:0; }.footer-app-row { align-items:flex-start; flex-direction:column; gap:16px; padding:18px 20px; }.footer-app-actions { width:100%; }.footer-install, .footer-alerts, .footer-sound { flex:1; }.footer-bottom { align-items:flex-start; padding:14px 15px; }.footer-bottom p, .footer-bottom a { font-size:8px; }.footer-bottom p { max-width:190px; }.ticket-notice { right:16px; bottom:18px; left:16px; justify-content:space-between; }
+      .signal { padding:10px; }.signal-frame { min-height:calc(100svh - 20px); }.signal-top { padding:15px; font-size:8px; }.signal-top span:last-child { display:none; }.signal-main { grid-template-columns:1fr; }.signal-title { min-height:390px; padding:30px 20px 25px; border-right:0; border-bottom:1px solid rgba(8,8,8,.62); }.signal-title h2 { margin:43px 0; font-size:clamp(59px,17vw,87px); }.signal-side { min-height:380px; padding:29px 20px 25px; }.signal-side p { font-size:24px; }.signal-actions { margin-top:31px; }.signal-foot { padding:14px 15px; font-size:8px; }.signal-foot span:last-child { text-align:right; }      .footer-next-event { min-height:278px; margin:10px; padding:23px 20px 19px; }.footer-event-name { font-size:clamp(52px,16vw,78px); }.footer-info-panel { grid-template-columns:1fr; }.footer-info-head { min-height:0; padding:25px 20px; border-right:0; border-bottom:1px solid rgba(242,240,235,.42); }.footer-info-list { grid-template-columns:1fr; }.footer-info-item { min-height:0; padding:18px 20px; border-right:0; border-bottom:1px solid rgba(242,240,235,.42); }.footer-info-item:last-child { border-bottom:0; }.footer-location-item { padding-bottom:21px; }
+      .site-footer { padding:10px; }.footer-main { grid-template-columns:1fr; }.footer-identity { min-height:335px; padding:29px 20px 25px; border-right:0; border-bottom:1px solid rgba(242,240,235,.42); }.footer-claim { margin-top:50px; font-size:clamp(51px,16vw,79px); }.footer-column { min-height:auto; padding:27px 20px; border-right:0; border-bottom:1px solid rgba(242,240,235,.42); }.footer-label { margin-bottom:18px; }.footer-event-name { font-size:54px; }.footer-entry-policy { grid-template-columns:1fr; }.footer-policy-item { min-height:0; padding:18px 20px; border-right:0; border-bottom:1px solid rgba(242,240,235,.42); }.footer-policy-item:last-child { border-bottom:0; }.footer-app-row { align-items:flex-start; flex-direction:column; gap:16px; padding:18px 20px; }.footer-app-actions { width:100%; }.footer-install, .footer-alerts, .footer-sound { flex:1; }.footer-bottom { align-items:flex-start; padding:14px 15px; }.footer-bottom p, .footer-bottom a { font-size:8px; }.footer-bottom p { max-width:190px; }.ticket-notice { right:16px; bottom:18px; left:16px; justify-content:space-between; }
     }
 
     @media (max-width:780px) {
@@ -335,7 +335,7 @@
       .mobile-nav-links a:focus-visible, .mobile-nav-links a:hover { color:#fff; outline:0; }
       .mobile-nav-links a:focus-visible .menu-copy b, .mobile-nav-links a:hover .menu-copy b { text-decoration:underline; text-underline-offset:5px; }
       .mobile-ticket { display:flex; align-items:center; justify-content:space-between; min-height:54px; margin-top:auto; padding:0 15px; border:1px solid var(--paper); background:var(--paper); color:var(--ink) !important; font-size:10px; font-weight:700; letter-spacing:.13em; text-transform:uppercase; opacity:0; transform:translateY(10px); transition:opacity 170ms ease,transform 170ms ease; }
-      .mobile-install, .mobile-alerts, .mobile-sound { display:flex; align-items:center; justify-content:space-between; width:100%; min-height:48px; margin-top:8px; padding:0 15px; border:1px solid rgba(242,240,235,.55); background:transparent; color:var(--paper); font:inherit; font-size:9px; font-weight:700; letter-spacing:.12em; line-height:1; text-transform:uppercase; }.mobile-install, .mobile-sound { cursor:pointer; }.mobile-alerts { color:rgba(242,240,235,.58); cursor:not-allowed; }.mobile-sound:hover, .mobile-sound:focus-visible { background:var(--paper); color:var(--ink); }.mobile-sound:focus-visible { outline:2px solid var(--paper); outline-offset:3px; }.mobile-alerts.notification-preview { color:var(--paper); cursor:pointer; }.mobile-alerts.notification-preview:hover, .mobile-alerts.notification-preview:focus-visible { background:var(--paper); color:var(--ink); }.mobile-alerts.notification-preview:focus-visible { outline:2px solid var(--paper); outline-offset:3px; }.mobile-alerts small { color:var(--paper); font-size:7px; font-weight:700; letter-spacing:.12em; }.mobile-alerts.notification-preview:hover small, .mobile-alerts.notification-preview:focus-visible small { color:var(--ink); }.mobile-nav.open .mobile-install, .mobile-nav.open .mobile-alerts, .mobile-nav.open .mobile-sound { opacity:1; transform:translateY(0); }
+      .mobile-install, .mobile-alerts, .mobile-reservations { display:flex; align-items:center; justify-content:space-between; width:100%; min-height:48px; margin-top:8px; padding:0 15px; border:1px solid rgba(242,240,235,.55); background:transparent; color:var(--paper); font:inherit; font-size:9px; font-weight:700; letter-spacing:.12em; line-height:1; text-transform:uppercase; }.mobile-install, .mobile-reservations { cursor:pointer; }.mobile-alerts { color:rgba(242,240,235,.58); cursor:not-allowed; }.mobile-reservations:hover, .mobile-reservations:focus-visible { background:var(--paper); color:var(--ink); }.mobile-reservations:focus-visible { outline:2px solid var(--paper); outline-offset:3px; }.mobile-alerts.notification-preview { color:var(--paper); cursor:pointer; }.mobile-alerts.notification-preview:hover, .mobile-alerts.notification-preview:focus-visible { background:var(--paper); color:var(--ink); }.mobile-alerts.notification-preview:focus-visible { outline:2px solid var(--paper); outline-offset:3px; }.mobile-alerts small { color:var(--paper); font-size:7px; font-weight:700; letter-spacing:.12em; }.mobile-alerts.notification-preview:hover small, .mobile-alerts.notification-preview:focus-visible small { color:var(--ink); }.mobile-nav.open .mobile-install, .mobile-nav.open .mobile-alerts, .mobile-nav.open .mobile-reservations { opacity:1; transform:translateY(0); }
       .mobile-nav.open .mobile-nav-top, .mobile-nav.open .mobile-nav-links a, .mobile-nav.open .mobile-ticket { opacity:1; transform:translateY(0); }
       .mobile-nav.open .mobile-nav-top { transition-delay:40ms; }
       .mobile-nav.open .mobile-nav-links a:nth-child(1) { transition-delay:70ms; }
@@ -343,7 +343,8 @@
       .mobile-nav.open .mobile-nav-links a:nth-child(3) { transition-delay:130ms; }
       .mobile-nav.open .mobile-nav-links a:nth-child(4) { transition-delay:160ms; }
       .mobile-nav.open .mobile-nav-links a:nth-child(5) { transition-delay:190ms; }
-      .mobile-nav.open .mobile-ticket { transition-delay:220ms; }.mobile-nav.open .mobile-install { transition-delay:245ms; }.mobile-nav.open .mobile-sound { transition-delay:270ms; }.mobile-nav.open .mobile-alerts { transition-delay:295ms; }
+      .mobile-nav.open .mobile-nav-links a:nth-child(6) { transition-delay:220ms; }
+      .mobile-nav.open .mobile-ticket { transition-delay:250ms; }.mobile-nav.open .mobile-install { transition-delay:245ms; }.mobile-nav.open .mobile-reservations { transition-delay:270ms; }.mobile-nav.open .mobile-alerts { transition-delay:295ms; }
       .founders-head { display:block; padding:31px 20px 27px; }.founders-head h3 { font-size:clamp(49px,15vw,77px); }.founders-head p { margin-top:20px; }.founders-grid { grid-template-columns:1fr; }.founder-card { display:grid; grid-template-columns:minmax(0,39%) minmax(0,1fr); }.founder-card figure { width:100%; min-height:214px; aspect-ratio:auto; }.founder-body { min-height:0; padding:18px 16px 19px; }.founder-number { margin-bottom:27px; }.founder-name { font-size:clamp(29px,8.7vw,40px); letter-spacing:-.06em; white-space:nowrap; }.founder-role { margin-top:11px; font-size:8px; }.founder-bio { margin-top:18px; font-size:12px; line-height:1.36; }
       .hero { padding-top:70px; }
       body.menu-open { overflow:hidden; }
@@ -365,15 +366,16 @@
     }
     @media (prefers-reduced-motion:reduce) {
       html { scroll-behavior:auto; }
-      *, *::before, *::after { animation-duration:1ms !important; animation-iteration-count:1 !important; transition-duration:1ms !important; scroll-behavior:auto !important; }.hero-video { display:none !important; }.wordmark { animation:none !important; }.site-mode .quick-home, .site-mode .quick-ticket { animation-delay:0s !important; }
+      *, *::before, *::after { animation-duration:1ms !important; animation-iteration-count:1 !important; transition-duration:1ms !important; scroll-behavior:auto !important; }.hero-video { display:none !important; }.site-mode .quick-home, .site-mode .quick-ticket { animation-delay:0s !important; }
     }
 
     /* Narrow event-detail columns: avoid squeezing the share action out of its grid. */
     @container (max-width: 390px) {
-      .event-actions { grid-template-columns:minmax(0,1fr) 48px; grid-template-rows:52px 52px; }
+      .event-actions { grid-template-columns:minmax(0,1fr) 48px 48px; grid-template-rows:52px 52px; }
       .event-actions .announce { grid-column:1 / -1; grid-row:1; }
       .event-actions .event-share { grid-column:1; grid-row:2; min-width:0; min-height:52px; height:52px; padding:0 12px; }
-      .event-actions .event-qr-trigger { grid-column:2; grid-row:2; min-height:52px; height:52px; }
+      .event-actions .event-reminder-wrap { grid-column:2; grid-row:2; min-height:52px; height:52px; }
+      .event-actions .event-qr-trigger { grid-column:3; grid-row:2; min-height:52px; height:52px; }
       .event-share span { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
     }
     @media (max-width:760px) {
@@ -381,6 +383,113 @@
       .mobile-quick-actions.is-returning { visibility:visible !important; pointer-events:auto !important; }
       .mobile-quick-actions.is-returning .quick-home { animation:quick-control-arrive 500ms cubic-bezier(.18,.86,.27,1.2) both; }
       .mobile-quick-actions.is-returning .quick-ticket { animation:quick-control-arrive 560ms cubic-bezier(.18,.86,.27,1.2) 65ms both; }
+    }
+
+    .tables-section { padding:15px; background:var(--paper); color:var(--ink); }
+    .tables-frame { border:1px solid rgba(8,8,8,.62); }.tables-head { display:flex; align-items:end; justify-content:space-between; gap:28px; padding:clamp(28px,4.4vw,58px) clamp(22px,4.5vw,62px) 25px; border-bottom:1px solid rgba(8,8,8,.62); }.tables-kicker,.reservation-eyebrow { margin:0; color:rgba(8,8,8,.58); font-size:9px; font-weight:700; letter-spacing:.15em; line-height:1; text-transform:uppercase; }.tables-head h2 { margin:20px 0 0; font-size:clamp(52px,6vw,92px); font-weight:900; letter-spacing:-.1em; line-height:.76; text-transform:uppercase; }.tables-head h2 span { display:block; }.tables-head h2 span + span { margin-top:.06em; }.tables-head > p { max-width:310px; margin:0; color:rgba(8,8,8,.72); font-size:12px; line-height:1.45; }
+    .tables-main { display:grid; grid-template-columns:minmax(300px,.94fr) minmax(300px,.72fr); }.table-plan-wrap { min-width:0; padding:clamp(18px,3.5vw,45px); background:#0a0a0a; }.table-plan { position:relative; width:min(100%,540px); aspect-ratio:580 / 870; margin:auto; overflow:hidden; border:1px solid rgba(242,240,235,.58); border-radius:4px; background:#0b0c0b; box-shadow:0 16px 30px rgba(0,0,0,.28); }.om-venue-plan { --neon:#d7de4a; --neon-soft:rgba(215,222,74,.55); --amber:#ffb648; --wall-edge:#565a58; --ink:#f2f0e8; position:relative; width:100%; height:100%; container-type:size; overflow:hidden; background:radial-gradient(ellipse at 50% 44%,rgba(70,74,48,.18),transparent 58%),#0b0c0b; }.om-venue-plan *,.om-venue-plan *::before,.om-venue-plan *::after { box-sizing:border-box; }.om-venue-plan > .om-slab,.om-venue-plan > .om-inner-floor,.om-venue-plan > .om-wall,.om-venue-plan > .om-lamp-strip,.om-venue-plan > .om-zone,.om-venue-plan > .om-vip-frame,.om-venue-plan > .om-stage,.om-venue-plan > .om-dancefloor,.om-venue-plan > .om-table,.om-venue-plan > .om-bar-zone { position:absolute; left:var(--x); top:var(--y); width:var(--w); height:var(--h); }.om-slab { z-index:0; border-radius:3px; background:#050606; }.om-inner-floor { z-index:1; border:2px solid var(--wall-edge); border-radius:2px; background:linear-gradient(160deg,#212424,#141616 45%,#1c1f1e); box-shadow:inset 0 0 40px rgba(0,0,0,.52); }.om-wall { z-index:3; border:1px solid #4d5150; background:linear-gradient(180deg,#333736,#212524); }.om-lamp-strip { z-index:2; opacity:.9; background-image:radial-gradient(circle,#ffe6a8 0 12%,var(--amber) 26%,rgba(255,150,30,.35) 46%,transparent 66%); background-size:100% 8.7%; background-repeat:repeat-y; background-position:center top; }.om-zone { z-index:5; display:grid; place-items:center; border:4px solid #4b4f4e; border-radius:2px; background:#101212; box-shadow:inset 0 0 20px rgba(0,0,0,.48); }.om-zone-label,.om-booth-label,.om-stage-label,.om-bar-label,.om-table-name,.om-reserved-label { color:#ebe9de; font-family:Arial,Helvetica,sans-serif; font-size:1.7cqw; font-weight:700; letter-spacing:.14em; text-align:center; text-transform:uppercase; }.om-access { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6%; overflow:hidden; border-width:4px; }.om-access-arrow { width:0; height:0; border-right:7px solid transparent; border-left:7px solid transparent; border-top:9px solid #eae8dd; }.om-vip-frame { z-index:5; border:4px solid #4b4f4e; border-radius:2px; background:#101212; box-shadow:inset 0 0 22px rgba(0,0,0,.54); }.om-table { z-index:7; display:grid; place-content:center; gap:4%; border:2px solid #454838; border-radius:3px; background:#141717; box-shadow:0 4px 9px rgba(0,0,0,.44); }.om-table::before { position:absolute; inset:9%; border:2px solid var(--neon); border-radius:2px; box-shadow:0 0 8px var(--neon-soft),inset 0 0 8px rgba(215,222,74,.18); content:""; }.om-table::after { position:absolute; inset:20%; background:#0b0d0b; content:""; }.om-table.reserved { border-color:#6f4b45; background:#201312; }.om-table.reserved::before { border-color:#e15f55; border-style:dashed; box-shadow:none; }.om-table-number,.om-table-name,.om-reserved-label { z-index:1; }.om-table-number { color:var(--ink); font-family:Georgia,"Times New Roman",serif; font-size:2.7cqw; line-height:1; }.om-table-name { font-size:1.55cqw; letter-spacing:.1em; }.om-reserved-label { position:absolute; bottom:6%; left:50%; color:#ffaaa2; font-size:1.02cqw; letter-spacing:.06em; transform:translateX(-50%); }.om-stage { z-index:6; display:grid; place-items:end center; border:4px solid #4b4f4e; background:#0c0e0e; clip-path:polygon(0 0,100% 0,92% 100%,8% 100%); }.om-stage::before { position:absolute; inset:12% 7% 14%; border:1px solid var(--neon); box-shadow:0 0 10px var(--neon-soft); clip-path:polygon(0 0,100% 0,92% 100%,8% 100%); content:""; }.om-dj-booth { position:absolute; top:16%; left:20%; display:grid; place-items:center; grid-template-columns:1fr 1fr; width:60%; height:48%; border:1px solid #8a8a52; background:#1a1d1d; }.om-dj-deck { width:34%; aspect-ratio:1; border:1px solid var(--neon); border-radius:50%; background:#0d0f0f; }.om-dj-leds { position:absolute; top:44%; left:50%; width:26%; height:12%; border-radius:2px; background:linear-gradient(90deg,#f4d661 0 20%,#8ee6c6 20% 40%,#e0776a 40% 60%,#f4d661 60% 80%,#8ee6c6 80%); transform:translateX(-50%); }.om-booth-label { position:absolute; top:5%; left:0; width:100%; font-size:1.5cqw; }.om-stage-label { position:absolute; bottom:6%; left:0; width:100%; font-size:1.5cqw; }.om-dancefloor { z-index:2; display:grid; place-items:center; border:1px solid #555847; background:linear-gradient(150deg,#1d201f,#141717 52%,#101212); box-shadow:inset 0 0 55px rgba(0,0,0,.55); }.om-dancefloor-title { color:#dedfd4; font-family:Georgia,"Times New Roman",serif; font-size:2.4cqw; letter-spacing:.16em; text-transform:uppercase; }.om-floor-line { position:absolute; top:1.2%; bottom:1.2%; width:1.4%; background:linear-gradient(180deg,var(--neon),rgba(215,222,74,.55)); box-shadow:0 0 10px var(--neon-soft); }.om-floor-line-left { left:4%; }.om-floor-line-right { right:4%; }.om-banos-inner { position:absolute; inset:12% 8% 14%; border:2px solid #6f7372; background:#171a1a; clip-path:polygon(0 0,100% 0,100% 74%,76% 74%,76% 100%,40% 100%,40% 74%,0 74%); }.om-banos .om-zone-label { z-index:1; }.om-bar-zone { z-index:5; display:grid; grid-template-columns:46% 1fr; gap:6%; padding:4%; border:3px solid #454847; border-radius:2px; background:#101111; }.om-bar-counter { border:1px solid rgba(255,214,130,.45); background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.55)),repeating-linear-gradient(64deg,#6d4a1e 0 6%,#b8863a 12%,#4a331a 22%,#a97c33 34%,#5b3f1c 46%); }.om-bar-stools { background-image:radial-gradient(circle,#4e4335 0 26%,#8a733d 34%,transparent 46%); background-size:100% 9.5%; background-repeat:repeat-y; background-position:center top; }.om-bar-label { position:absolute; top:50%; left:58%; transform:translateY(-50%); }.table-plan-button { position:absolute; z-index:10; display:block; left:var(--x); top:var(--y); width:var(--w); height:var(--h); border:1px solid transparent; background:transparent; color:transparent; cursor:pointer; transition:border-color 160ms ease,background-color 160ms ease,box-shadow 160ms ease; }.table-plan-button:hover,.table-plan-button:focus-visible,.table-plan-button.is-selected { z-index:11; border-color:#f2f0eb; background:rgba(232,255,40,.12); box-shadow:0 0 0 2px rgba(232,255,40,.26),0 0 16px rgba(232,255,40,.6); outline:0; }.table-plan-button.is-reserved { cursor:not-allowed; }.table-plan-caption { display:flex; align-items:center; flex-wrap:wrap; gap:8px; margin:14px auto 0; width:min(100%,540px); color:rgba(242,240,235,.7); font-size:9px; font-weight:700; letter-spacing:.1em; line-height:1; text-transform:uppercase; }.table-plan-caption span,.table-plan-caption i { display:inline-block; width:10px; height:10px; border:1px solid #d9ed24; background:#141414; box-shadow:0 0 7px rgba(232,255,40,.55); }.table-plan-caption i { margin-left:10px; border-color:#e15f55; background:#321513; box-shadow:none; }
+    .reservation-form { display:flex; flex-direction:column; min-width:0; padding:clamp(27px,4vw,52px) clamp(20px,3.5vw,45px); border-left:1px solid rgba(8,8,8,.62); background:#111; color:var(--paper); }.reservation-eyebrow { color:rgba(242,240,235,.58); }.reservation-steps { display:flex; flex-direction:column; gap:22px; margin:29px 0 0; padding:0; list-style:none; }.reservation-steps li { display:grid; grid-template-columns:28px minmax(0,1fr); gap:11px; padding-bottom:20px; border-bottom:1px solid rgba(242,240,235,.28); }.reservation-steps li > span { color:rgba(242,240,235,.5); font-size:9px; font-weight:700; letter-spacing:.13em; }.reservation-steps label,.reservation-steps b { display:block; font-size:10px; font-weight:700; letter-spacing:.12em; line-height:1.2; text-transform:uppercase; }.reservation-steps p { margin:9px 0 0; color:rgba(242,240,235,.72); font-size:12px; line-height:1.35; }.reservation-steps select,.reservation-steps input { display:block; width:100%; min-height:42px; margin-top:10px; border:1px solid rgba(242,240,235,.64); border-radius:0; padding:0 10px; background:#111; color:var(--paper); font:700 10px/1 Arial,Helvetica,sans-serif; letter-spacing:.07em; outline:0; text-transform:uppercase; }.reservation-steps input + input { margin-top:7px; }.reservation-steps select:focus-visible,.reservation-steps input:focus-visible { outline:2px solid var(--paper); outline-offset:3px; }.reservation-submit { display:flex; align-items:center; justify-content:space-between; gap:14px; width:100%; min-height:53px; margin-top:auto; border:1px solid var(--paper); background:var(--paper); color:var(--ink); padding:0 14px; font:700 9px/1 Arial,Helvetica,sans-serif; letter-spacing:.12em; text-transform:uppercase; cursor:pointer; }.reservation-submit:disabled { cursor:not-allowed; opacity:.42; }.reservation-submit:not(:disabled):hover,.reservation-submit:not(:disabled):focus-visible { background:#111; color:var(--paper); }.reservation-submit:focus-visible { outline:2px solid var(--paper); outline-offset:4px; }.reservation-submit b { font-size:16px; font-weight:400; }.reservation-result { min-height:34px; margin:14px 0 0; color:rgba(242,240,235,.64); font-size:10px; font-weight:700; letter-spacing:.06em; line-height:1.35; }.tables-foot { display:flex; justify-content:space-between; gap:18px; padding:15px 22px; border-top:1px solid rgba(8,8,8,.62); color:rgba(8,8,8,.62); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1.25; text-transform:uppercase; }
+    @media (min-width:761px) { .table-plan { width:min(100%,840px); padding:8px; aspect-ratio:870 / 580; }.om-venue-plan { position:absolute; left:15%; top:-19%; width:70%; height:140%; transform:rotate(90deg); transform-origin:center; }.om-table-number,.om-table-name,.om-zone-label,.om-dancefloor-title { transform:rotate(-90deg); }.om-reserved-label { transform:translateX(-50%) rotate(-90deg); }.om-bar-label { transform:translateY(-50%) rotate(-90deg); }.om-access-arrow { transform:rotate(-90deg); }.om-table.om-vip .om-table-name,.om-stage .om-booth-label,.om-stage .om-stage-label,.om-table.reserved .om-reserved-label { display:none; }.om-table.om-vip .om-table-number { font-size:3.1cqw; }.om-table.reserved .om-table-number { color:#ffaaa2; }.table-plan-caption { width:min(100%,840px); }.table-plan-vip-key { margin-left:auto; color:rgba(242,240,235,.72); font-style:normal; white-space:nowrap; } }
+    @media (max-width:760px) { .event-status-badge { top:13px; left:13px; padding:8px 9px; font-size:8px; }.tables-section { padding:10px; }.tables-head { display:block; padding:30px 20px 27px; }.tables-head h2 { margin-top:20px; font-size:clamp(52px,15vw,73px); }.tables-head > p { max-width:310px; margin-top:22px; }.tables-main { grid-template-columns:1fr; }.table-plan-wrap { padding:14px; }.reservation-form { border-top:1px solid rgba(8,8,8,.62); border-left:0; padding:28px 20px 24px; }.reservation-steps { gap:20px; margin-top:25px; }.reservation-submit { margin-top:4px; }.tables-foot { align-items:flex-start; flex-direction:column; gap:8px; padding:14px 15px; font-size:8px; } }
+  
+    /* Monochrome white accent system: the permanent signal color; orange remains campaign-specific and red stays reserved for unavailable states. */
+    .header-link::after { background:var(--accent); }.header-link.active { color:var(--accent); }
+    .hero-aside::before { background:var(--accent); }.hero-countdown { border-color:var(--accent); }.hero-countdown:hover { border-color:#ffffff; }
+    .event-nav-control:hover { border-color:var(--accent); background:var(--accent); color:var(--ink); }.event-nav-control:focus-visible { outline-color:var(--accent-deep); }
+    .gallery-instagram { border-color:var(--accent); }.gallery-instagram:hover, .gallery-instagram:focus-visible { background:var(--accent); border-color:var(--accent); color:var(--ink); }.gallery-instagram:focus-visible { outline-color:var(--accent-deep); }
+    .map-link { border-bottom-color:var(--accent); }.map-link:hover, .map-link:focus-visible { color:var(--accent); }.map-link:focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
+    .faq-item.is-open .faq-mark { border-color:var(--accent); background:var(--accent); color:var(--ink); }.faq-trigger:focus-visible { outline-color:var(--accent-deep); }
+    .footer-next-status { border-color:var(--accent); color:var(--accent-deep); }
+    .reservation-steps select:focus-visible,.reservation-steps input:focus-visible { outline-color:var(--accent); }.reservation-submit:not(:disabled) { border-color:var(--accent); background:var(--accent); color:var(--ink); }.reservation-submit:not(:disabled):hover,.reservation-submit:not(:disabled):focus-visible { border-color:var(--accent); background:#111; color:var(--paper); }
+    .om-venue-plan { --neon:var(--accent); --neon-soft:var(--accent-soft); background:radial-gradient(ellipse at 50% 44%,rgba(242,240,235,.08),transparent 58%),#0b0c0b; }.om-table::before { box-shadow:0 0 8px var(--neon-soft),inset 0 0 8px rgba(242,240,235,.18); }.om-floor-line { background:linear-gradient(180deg,var(--neon),rgba(242,240,235,.55)); }.table-plan-button:hover,.table-plan-button:focus-visible,.table-plan-button.is-selected { border-color:var(--accent); background:rgba(242,240,235,.12); box-shadow:0 0 0 2px rgba(242,240,235,.26),0 0 16px rgba(242,240,235,.6); }.table-plan-caption span { border-color:var(--accent); box-shadow:0 0 7px rgba(242,240,235,.55); }
+  
+    /* Frame-free section system: remove repeated exterior boxes, preserve editorial dividers inside each section. */
+    .frame { display:none; }
+    .next-experience, .archive, .manifesto, .gallery, .signal, .map-section, .tables-section, .faq, .site-footer { padding:0; }
+    .next-frame, .archive-frame, .manifesto-frame, .gallery-frame, .signal-frame, .map-frame, .tables-frame, .faq-frame, .footer-frame { border:0; }
+    .entry-curtain::before { inset:0; border-color:transparent; }
+  
+    /* Primary-action use of white: visible in the first viewport and ticket flows. */
+    .hero-route--next, .nav-ticket, .mobile-nav .mobile-ticket, .quick-ticket, .announce, .ticket-notice { border-color:var(--accent); background:var(--accent); color:var(--ink); }
+    /* Restore the established interaction contrast: light surfaces always keep dark copy;
+       controls that invert on hover return to the dark field with warm-white copy. */
+    .hero-route--next .hero-route-index { color:rgba(8,8,8,.56); }
+    .hero-route--next:hover, .hero-route--next:focus-visible { border-color:var(--paper); background:var(--paper); color:var(--ink); }
+    .hero-route--next:hover .hero-route-index, .hero-route--next:focus-visible .hero-route-index { color:var(--ink); }
+    .nav-ticket:hover, .nav-ticket:focus-visible, .announce:hover, .announce:focus-visible { border-color:var(--paper); background:transparent; color:var(--paper); }
+    .mobile-nav .mobile-ticket:hover, .mobile-nav .mobile-ticket:focus-visible, .quick-ticket:hover, .quick-ticket:focus-visible { border-color:var(--paper); background:var(--paper); color:var(--ink); }
+    .hero-countdown .countdown-event { color:var(--accent); }.hero-countdown:hover .countdown-event { color:#ffffff; }
+
+    /* Reservation chapter: a light editorial header leads into the club plan on black and a softer charcoal booking column. */
+    .tables-main { background:#080808; }
+    .table-plan-wrap { background:#080808; }
+    .table-plan { border-color:rgba(242,240,235,.58); }
+    .table-plan-caption { color:rgba(242,240,235,.7); }
+    .table-plan-caption span { border-color:var(--accent); background:#141414; box-shadow:0 0 7px rgba(242,240,235,.55); }
+    .table-plan-vip-key { color:rgba(242,240,235,.72); }
+    .reservation-form { border-left-color:rgba(242,240,235,.28); background:#1b1b1b; color:var(--paper); }
+    .reservation-eyebrow { color:rgba(242,240,235,.58); }
+    .reservation-steps li { border-bottom-color:rgba(242,240,235,.28); }
+    .reservation-steps li > span { color:rgba(242,240,235,.5); }
+    .reservation-steps p, .reservation-result { color:rgba(242,240,235,.72); }
+    .reservation-steps select, .reservation-steps input { border-color:rgba(242,240,235,.64); background:#151515; color:var(--paper); }
+    .reservation-steps select:focus-visible, .reservation-steps input:focus-visible { outline-color:var(--paper); }
+    .reservation-submit { border-color:var(--paper); background:var(--paper); color:var(--ink); }
+    .reservation-submit:not(:disabled):hover, .reservation-submit:not(:disabled):focus-visible { border-color:var(--paper); background:#151515; color:var(--paper); }
+    .reservation-submit:focus-visible { outline-color:var(--paper); }
+    .tables-foot { background:#080808; border-top-color:rgba(242,240,235,.42); color:rgba(242,240,235,.72); }
+    .footer-next-event:not(.is-empty) .footer-next-status { border-color:var(--ink); color:var(--ink); }
+    .footer-next-event.is-empty .footer-next-status { color:var(--paper); }
+    .gallery-hire { max-width:305px; padding-top:14px; border-top:1px solid rgba(242,240,235,.42); }
+    .gallery-hire-title { margin:0 0 9px !important; color:var(--paper) !important; font-size:9px !important; font-weight:700; letter-spacing:.14em; line-height:1 !important; text-transform:uppercase; }
+    .map-foot { border-top-color:rgba(242,240,235,.42); background:#080808; color:rgba(242,240,235,.72); }
+    .gallery-head { display:block; }
+    .venue-hire { display:grid; grid-template-columns:minmax(0,1fr) minmax(300px,.8fr); border-top:1px solid rgba(242,240,235,.42); background:#151515; color:var(--paper); }
+    .venue-hire-intro { min-height:270px; padding:clamp(30px,4.4vw,66px) clamp(23px,4.6vw,70px); border-right:1px solid rgba(242,240,235,.42); }
+    .venue-hire-intro > p { margin:0; color:rgba(242,240,235,.62); font-size:9px; font-weight:700; letter-spacing:.15em; line-height:1; text-transform:uppercase; }
+    .venue-hire h3 { margin:clamp(40px,5vw,74px) 0 0; font-size:clamp(50px,6.6vw,104px); font-weight:900; letter-spacing:-.1em; line-height:.76; text-transform:uppercase; }
+    .venue-hire h3 span { display:block; }
+    .venue-hire-copy { display:flex; flex-direction:column; justify-content:space-between; min-height:270px; padding:clamp(30px,4vw,56px) clamp(23px,3vw,46px); }
+    .venue-hire-copy p { max-width:360px; margin:0; color:rgba(242,240,235,.78); font-size:clamp(15px,1.35vw,19px); font-weight:700; letter-spacing:-.035em; line-height:1.15; text-transform:uppercase; }
+    .venue-hire-copy p strong { color:var(--paper); font-weight:900; text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:4px; }
+    /* Matches the high-contrast Entradas action in the hamburger: one clean warm-white surface, dark copy, arrow at the end. */
+    .venue-hire-copy a { display:flex; align-items:center; justify-content:space-between; gap:18px; width:100%; min-height:54px; margin-top:38px; padding:0 15px; border:1px solid var(--paper); background:var(--paper); color:var(--ink); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1; text-decoration:none; text-transform:uppercase; }
+    .venue-hire-copy a:hover, .venue-hire-copy a:focus-visible { border-color:var(--paper); background:transparent; color:var(--paper); outline:0; }
+    .venue-hire-copy b { flex:0 0 auto; font-size:17px; font-weight:400; }
+    /* The outlined mobile reservation route uses an explicit two-column grid so label and arrow share the same vertical centre. */
+    .mobile-nav .mobile-reservations { display:grid !important; grid-template-columns:minmax(0,1fr) auto; align-items:center !important; min-height:54px; padding:0 15px; border:1px solid rgba(242,240,235,.55); }
+    .nav-reservations { display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:38px; margin-left:4px; padding:0 13px; border:1px solid rgba(242,240,235,.72); color:var(--paper); background:transparent; font-size:9px; font-weight:700; letter-spacing:.12em; line-height:1; text-decoration:none; text-transform:uppercase; transition:background-color 150ms ease,color 150ms ease; }
+    .nav-reservations:hover, .nav-reservations:focus-visible { border-color:var(--paper); background:var(--paper); color:var(--ink); }
+    .nav-reservations:focus-visible { outline:2px solid var(--paper); outline-offset:4px; }
+    @media (min-width:781px) and (max-width:1120px) {
+      .header-side { gap:12px; }
+      .header-link { font-size:8px; letter-spacing:.1em; }
+      .nav-ticket, .nav-reservations { margin-left:0; padding-right:9px; padding-left:9px; font-size:8px; letter-spacing:.1em; }
+    }
+    @media (min-width:761px) {
+      .tables-main { grid-template-columns:minmax(340px,1.08fr) minmax(300px,.72fr); }
+      .table-plan-wrap { padding-right:clamp(14px,2.5vw,32px); padding-left:clamp(14px,2.5vw,32px); }
+      /* The plan itself—not only its column—expands to the usable desktop canvas. */
+      .table-plan { width:100% !important; max-width:none; }
+      /* Inset the two edge modules and the invisible hit-area for table 13 together. */
+      .om-access { --y:6.5% !important; }
+      .om-table-13, .table-13 { --y:82.75% !important; }
+    }
+    .om-venue-plan, .om-venue-plan .om-table-number, .om-venue-plan .om-dancefloor-title { font-family:Arial,Helvetica,sans-serif; }
+    .om-venue-plan .om-table-number, .om-venue-plan .om-dancefloor-title { font-weight:900; }
+    .om-venue-plan .om-table-number { letter-spacing:-.035em; }
+    .mobile-reservations > span { display:block; align-self:center; line-height:1; }
+    .mobile-reservations > span:last-child { justify-self:end; font-size:17px; line-height:1; }
+    @media (min-width:761px) { .gallery-kicker { white-space:nowrap; } }
+    @media (max-width:760px) {
+      .gallery-head { padding:50px 20px 48px; }
+      .venue-hire { grid-template-columns:1fr; }
+      .venue-hire-intro { min-height:0; padding:31px 20px 29px; border-right:0; border-bottom:1px solid rgba(242,240,235,.42); }
+      .venue-hire h3 { margin-top:43px; font-size:clamp(52px,15vw,76px); }
+      .venue-hire-copy { min-height:0; padding:28px 20px 30px; }
+      .venue-hire-copy p { font-size:16px; }
+      .venue-hire-copy a { margin-top:30px; }
+      .reservation-form { border-top-color:rgba(242,240,235,.28); }
     }
   </style>
 
@@ -399,31 +508,31 @@
         <a class="header-link" href="#experiencia">Experiencia</a>
         <a class="header-link" href="#ubicacion">Ubicación</a>
         <a class="nav-ticket" href="#proxima-experiencia">Entradas <span aria-hidden="true">↗</span></a>
+        <a class="nav-reservations" href="#mesas">Reservas <span aria-hidden="true">↘</span></a>
       </nav>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menú"><span></span><span></span><span></span></button>
       <nav id="mobile-menu" class="mobile-nav" aria-label="Navegación móvil" aria-hidden="true">
         <div class="mobile-nav-top"><span>Índice</span><span>ONE MORE ELECTRONIC</span></div>
         <div class="mobile-nav-links">
           <a class="mobile-home" href="#inicio"><span class="menu-index">00</span><span class="menu-copy"><b>Inicio</b><small>Volver a la portada</small></span><span class="menu-arrow" aria-hidden="true">↘</span></a>
-          <a href="#proxima-experiencia"><span class="menu-index">01</span><span class="menu-copy"><b>Próxima fecha</b><small>JOYCE · 23 OCT</small></span><span class="menu-arrow" aria-hidden="true">↘</span></a>
+          <a href="#proxima-experiencia"><span class="menu-index">01</span><span class="menu-copy"><b>Próxima fecha</b><small>FESTA BROS · 31 OCT</small></span><span class="menu-arrow" aria-hidden="true">↘</span></a>
           <a href="#archivo"><span class="menu-index">02</span><span class="menu-copy"><b>Archivo</b><small>Fechas anteriores</small></span><span class="menu-arrow" aria-hidden="true">↘</span></a>
           <a href="#el-club"><span class="menu-index">03</span><span class="menu-copy"><b>El club</b><small>Origen · Fundadores</small></span><span class="menu-arrow" aria-hidden="true">↘</span></a>
           <a href="#experiencia"><span class="menu-index">04</span><span class="menu-copy"><b>Experiencia</b><small>La noche desde adentro</small></span><span class="menu-arrow" aria-hidden="true">↘</span></a>
           <a href="#ubicacion"><span class="menu-index">05</span><span class="menu-copy"><b>Ubicación</b><small>One More Club · Devoto</small></span><span class="menu-arrow" aria-hidden="true">↘</span></a>
         </div>
         <a class="mobile-ticket" href="#proxima-experiencia"><span>Entradas</span><span aria-hidden="true">↗</span></a>
-        <button class="mobile-sound" type="button" data-sound-toggle aria-pressed="true"><span data-sound-label>Sonido: ON</span><span aria-hidden="true">⌁</span></button>
+        <a class="mobile-reservations" href="#mesas"><span>Reservar mesa</span><span aria-hidden="true">↘</span></a>
       </nav>
     </header>
 
   <div id="intro-deck" class="intro-deck hero-intro hero-preparing">
   <main class="hero" aria-label="ONE MORE ELECTRONIC">
-    <div class="background" aria-hidden="true"><video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="assets/one-more-crowd-hero.webp"><source src="assets/one-more-hero.mp4" type="video/mp4" /></video></div>
+    <div class="background" aria-hidden="true"><video class="hero-video" autoplay muted playsinline preload="auto" poster="assets/one-more-crowd-hero.webp"><source src="assets/one-more-hero.mp4" type="video/mp4" /></video></div>
     <div class="veil" aria-hidden="true"></div>
     <div class="frame" aria-hidden="true"></div>
 
     <section id="inicio" class="hero-main">
-      <img class="wordmark" src="assets/one-logo.webp" width="480" height="480" decoding="async" fetchpriority="high" alt="" aria-hidden="true" />
       <div class="hero-copy">
         <h1><span>ONE MORE</span><span>ELECTRONIC</span></h1>
         <p class="tagline">La noche no termina</p>
@@ -440,9 +549,9 @@
           </button>
         </div>
       </div>
-      <a class="hero-countdown" data-hero-countdown href="?evento=joyce-23-oct" aria-label="Ver próxima fecha: Joyce, viernes 23 de octubre">
+      <a class="hero-countdown" data-hero-countdown href="?evento=festa-bros-31-oct" aria-label="Ver próxima fecha: Festa Bros, sábado 31 de octubre">
         <span class="countdown-kicker">Próxima experiencia</span>
-        <span><strong class="countdown-event" data-countdown-event>JOYCE</strong><small class="countdown-date" data-countdown-date>Vie 23 OCT · 23:59 H</small></span>
+        <span><strong class="countdown-event" data-countdown-event>FESTA BROS</strong><small class="countdown-date" data-countdown-date>Sáb 31 OCT · 23:59 H</small></span>
         <span class="countdown-link" aria-hidden="true">→</span>
         <span class="countdown-clock" aria-label="Tiempo restante"><span><b data-countdown-days>00</b><small>Días</small></span><span><b data-countdown-hours>00</b><small>Horas</small></span><span><b data-countdown-minutes>00</b><small>Min</small></span></span>
       </a>
@@ -458,47 +567,49 @@
         <button class="event-back" type="button" aria-label="Volver a la pantalla de inicio"><span aria-hidden="true">←</span> Inicio</button>
         <nav class="event-switcher" aria-label="Cambiar entre próximas fechas">
           <button class="event-nav-control" data-event-prev type="button" aria-label="Ver fecha anterior"><span aria-hidden="true">←</span></button>
-          <span class="event-nav-copy"><strong>Próximas fechas</strong><small><b data-event-position>01</b> <i aria-hidden="true">/</i> <b data-event-total>03</b></small></span>
+          <span class="event-nav-copy"><strong>Próximas fechas</strong><small><b data-event-position>01</b> <i aria-hidden="true">/</i> <b data-event-total>04</b></small></span>
           <button class="event-nav-control" data-event-next type="button" aria-label="Ver fecha siguiente"><span aria-hidden="true">→</span></button>
         </nav>
         <span class="event-brand">ONE MORE ELECTRONIC</span>
       </header>
       <div class="event-stage">
         <figure class="event-poster">
-          <img src="assets/joyce-23-octubre.webp" width="606" height="750" decoding="async" alt="Flyer de Joyce Argentina: viernes 23 de octubre, Av. Beiro 3334, Devoto." />
+          <img src="assets/festa-bros-31-octubre.webp" width="598" height="748" decoding="async" alt="Flyer de Festa Bros: sábado 31 de octubre, ONE MORE CLUB, Av. Beiro 3334, Devoto." />
+          <span class="event-status-badge" data-event-status>Fecha finalizada</span>
         </figure>
         <div class="event-content">
-          <div class="event-title" data-event-title-wrap>
-            <p class="event-label" data-event-label>More electronic music presenta</p>
-            <h2 id="next-title" class="section-heading" data-event-title aria-live="polite"><span>JOYCE</span></h2>
+          <div class="event-title is-long-title" data-event-title-wrap>
+            <p class="event-label" data-event-label>MORE HALLOWEEN presenta</p>
+            <h2 id="next-title" class="section-heading" data-event-title aria-live="polite"><span>FESTA</span><span>BROS</span></h2>
             <div class="event-lineup" aria-label="Artistas confirmados">
               <span data-event-lineup-label>Artistas confirmados</span>
-              <p data-event-lineup>Joyce · Jonny Vidal · Viken · Day Sanchez</p>
+              <p data-event-lineup>Festa Bros · Gonzalo Salinas · Oddone b2b Ariel Ladereche · Dana</p>
             </div>
           </div>
           <aside class="event-info" aria-label="Detalles de la próxima fecha" data-event-info>
             <div class="event-info-content">
-              <p class="event-number"><span data-event-day>23</span><small data-event-month>OCT</small></p>
+              <p class="event-number"><span data-event-day>31</span><small data-event-month>OCT</small></p>
               <dl class="detail-list">
-                <div class="detail"><dt>Fecha</dt><dd data-event-date>Viernes 23 de octubre</dd></div>
-                <div class="detail"><dt>Horario</dt><dd data-event-time>23:59 h</dd></div>
+                <div class="detail"><dt>Fecha</dt><dd data-event-date>Sábado 31 de octubre</dd></div>
+                <div class="detail"><dt>Horario</dt><dd data-event-time>23:59 Hs</dd></div>
                 <div class="detail"><dt>Lugar</dt><dd data-event-place>Av. Beiro 3334 · Devoto</dd></div>
-                <div class="detail"><dt>Line-up</dt><dd data-event-detail-lineup>Joyce · Jonny Vidal · Viken · Day Sanchez</dd></div>
+                <div class="detail"><dt>Line-up</dt><dd data-event-detail-lineup>Festa Bros · Gonzalo Salinas · Oddone b2b Ariel Ladereche · Dana</dd></div>
               </dl>
               <div class="event-countdown" data-event-countdown aria-label="Cuenta regresiva para Joyce">
-                <div class="event-countdown-head"><span>Faltan</span></div>
+                <div class="event-countdown-head"><span data-event-countdown-label>Faltan</span></div>
                 <div class="event-countdown-clock" aria-hidden="true"><span><b data-event-countdown-days>00</b><small>Días</small></span><span><b data-event-countdown-hours>00</b><small>Horas</small></span><span><b data-event-countdown-minutes>00</b><small>Min</small></span></div>
               </div>
             </div>
             <div class="event-actions">
-              <a class="announce" data-event-ticket href="https://www.passline.com/eventos/viernes-2310-more-joyce-arg" target="_blank" rel="noopener noreferrer">Comprar entradas <b aria-hidden="true">↗</b></a>
-              <button class="event-share" type="button" data-event-share aria-label="Compartir la fecha JOYCE"><span>Compartir</span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 16V3m0 0L7.5 7.5M12 3l4.5 4.5M5 13v7h14v-7" /></svg></button>
-              <button class="event-qr-trigger" type="button" data-event-qr aria-label="Ver código QR de la fecha JOYCE">QR</button>
+              <a class="announce" data-event-ticket href="https://www.passline.com/eventos/sabado-3110-more" target="_blank" rel="noopener noreferrer">Comprar entradas <b aria-hidden="true">↗</b></a>
+              <button class="event-share" type="button" data-event-share aria-label="Compartir la fecha FESTA BROS"><span>Compartir</span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 16V3m0 0L7.5 7.5M12 3l4.5 4.5M5 13v7h14v-7" /></svg></button>
+              <span class="event-reminder-wrap"><button class="event-reminder" type="button" data-event-reminder aria-label="Agregar recordatorio para FESTA BROS" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9" /><path d="M10 21h4" /></svg></button><span class="event-reminder-tooltip" data-reminder-tooltip role="status" aria-live="polite">Recordatorio agregado</span></span>
+              <button class="event-qr-trigger" type="button" data-event-qr aria-label="Ver código QR de la fecha FESTA BROS">QR</button>
             </div>
           </aside>
         </div>
       </div>
-      <footer class="event-bottom"><span data-event-footer>JOYCE · Viernes 23 de octubre</span><button class="slider-enter" type="button">Entrar a ONE MORE</button></footer>
+      <footer class="event-bottom"><span data-event-footer>FESTA BROS · Sábado 31 de octubre</span><button class="slider-enter" type="button">Entrar a ONE MORE</button></footer>
     </div>
   </section>  </div>
   <div id="entry-curtain" class="entry-curtain" aria-hidden="true">
@@ -648,10 +759,6 @@
           <p class="gallery-kicker">Cuando la pista despierta</p>
           <h2 id="experience-title" class="section-heading"><span>La noche</span><span>desde adentro</span></h2>
         </div>
-        <div class="gallery-aside">
-          <p>Color, presión y sonido. Cada fecha deja su propia huella sobre la pista.</p>
-          <a class="gallery-instagram" href="https://www.instagram.com/more_electronic/" target="_blank" rel="noopener noreferrer"><span>Seguir en Instagram</span><b aria-hidden="true">↗</b></a>
-        </div>
       </div>
       <div class="gallery-masonry">
         <figure class="gallery-item gallery-item--dance">
@@ -671,6 +778,16 @@
           <figcaption class="gallery-label"><span>Comunidad</span><span>Una pista</span></figcaption>
         </figure>
       </div>
+      <section class="venue-hire" aria-labelledby="venue-hire-title">
+        <div class="venue-hire-intro">
+          <p>Alquiler del club</p>
+          <h3 id="venue-hire-title"><span>Tu evento</span><span>en ONE MORE</span></h3>
+        </div>
+        <div class="venue-hire-copy">
+          <p>ONE MORE CLUB está disponible para <strong>productoras</strong>, <strong>fiestas privadas</strong> y <strong>cumpleaños</strong>. Consultá disponibilidad, formato y producción para tu fecha.</p>
+          <a href="https://www.instagram.com/more_electronic/" target="_blank" rel="noopener noreferrer"><span>Consultar disponibilidad</span><b aria-hidden="true">↗</b></a>
+        </div>
+      </section>
       <footer class="gallery-footer"><span>Archivo visual en construcción</span><span>La noche no termina</span></footer>
     </div>
   </section>
@@ -702,6 +819,9 @@
       <footer class="map-foot"><span>Villa Devoto · Buenos Aires</span><span>Google Maps</span></footer>
     </div>
   </section>
+  <section id="mesas" class="tables-section" aria-labelledby="tables-title">
+    <div class="tables-frame"><header class="tables-head"><div><p class="tables-kicker">ONE MORE CLUB · DEVOTO</p><h2 id="tables-title"><span>Mesas</span><span>y reservas</span></h2></div><p>Elegí la fecha y una mesa disponible. En PC el plano se presenta en horizontal; en móvil conserva la vista vertical para mantener cada mesa legible.</p></header><div class="tables-main"><div class="table-plan-wrap"><div class="table-plan" data-table-plan aria-label="Plano interactivo de mesas del lugar"><div class="om-venue-plan" role="group" aria-label="Plano en planta de ONE MORE: acceso y VIP arriba, escenario y cabina DJ, pista central, baños y barra a la izquierda, y trece mesas laterales."><div class="om-slab" style="--x:6.0345%;--y:3.908%;--w:87.931%;--h:91.264%;"></div><div class="om-inner-floor" style="--x:7.931%;--y:5.172%;--w:84.138%;--h:88.966%;"></div><div class="om-wall" style="--x:8.276%;--y:5.402%;--w:2.241%;--h:88.736%;"></div><div class="om-wall" style="--x:89.655%;--y:5.402%;--w:2.241%;--h:88.736%;"></div><div class="om-wall" style="--x:8.103%;--y:92.644%;--w:83.966%;--h:1.494%;"></div><div class="om-wall" style="--x:28.621%;--y:15.747%;--w:56.379%;--h:.805%;"></div><div class="om-wall" style="--x:8.103%;--y:47.126%;--w:18.966%;--h:.69%;"></div><div class="om-lamp-strip" style="--x:8.448%;--y:16.092%;--w:1.552%;--h:75.862%;"></div><div class="om-lamp-strip" style="--x:90%;--y:16.092%;--w:1.552%;--h:75.862%;"></div><div class="om-zone om-access" style="--x:9.828%;--y:4.828%;--w:17.759%;--h:9.54%;"><span class="om-zone-label">Acceso</span><i class="om-access-arrow" aria-hidden="true"></i></div><div class="om-vip-frame" style="--x:29.138%;--y:5.862%;--w:27.069%;--h:10.23%;"></div><div class="om-vip-frame" style="--x:58.103%;--y:5.862%;--w:27.241%;--h:10.23%;"></div><div class="om-table om-vip" style="--x:33.966%;--y:7.241%;--w:17.241%;--h:7.471%;"><span class="om-table-number">1</span><span class="om-table-name">Backstage</span></div><div class="om-table om-vip" style="--x:62.931%;--y:7.241%;--w:17.241%;--h:7.471%;"><span class="om-table-number">2</span><span class="om-table-name">Private</span></div><div class="om-stage" style="--x:28.793%;--y:16.667%;--w:45.862%;--h:8.161%;"><div class="om-dj-booth" aria-hidden="true"><span class="om-dj-deck"></span><span class="om-dj-deck"></span><span class="om-dj-leds"></span></div><span class="om-zone-label om-booth-label">Cabina DJ</span><span class="om-zone-label om-stage-label">Escenario</span></div><div class="om-dancefloor" style="--x:26.897%;--y:24.598%;--w:47.586%;--h:68.736%;"><i class="om-floor-line om-floor-line-left" aria-hidden="true"></i><i class="om-floor-line om-floor-line-right" aria-hidden="true"></i><span class="om-dancefloor-title">Dancefloor</span></div><div class="om-table reserved" style="--x:11.379%;--y:18.161%;--w:13.103%;--h:8.276%;"><span class="om-table-number">6</span><span class="om-reserved-label">Reservada</span></div><div class="om-table reserved" style="--x:11.379%;--y:28.046%;--w:13.103%;--h:8.276%;"><span class="om-table-number">7</span><span class="om-reserved-label">Reservada</span></div><div class="om-table" style="--x:11.379%;--y:37.931%;--w:13.103%;--h:8.276%;"><span class="om-table-number">8</span></div><div class="om-table" style="--x:76.379%;--y:18.161%;--w:12.414%;--h:8.276%;"><span class="om-table-number">3</span></div><div class="om-table" style="--x:76.379%;--y:27.701%;--w:12.414%;--h:8.276%;"><span class="om-table-number">4</span></div><div class="om-table" style="--x:76.379%;--y:37.241%;--w:12.414%;--h:8.276%;"><span class="om-table-number">5</span></div><div class="om-table" style="--x:76.379%;--y:46.782%;--w:12.414%;--h:8.276%;"><span class="om-table-number">9</span></div><div class="om-table" style="--x:76.379%;--y:56.322%;--w:12.414%;--h:8.276%;"><span class="om-table-number">10</span></div><div class="om-table" style="--x:76.379%;--y:65.862%;--w:12.414%;--h:8.276%;"><span class="om-table-number">11</span></div><div class="om-table" style="--x:76.379%;--y:75.402%;--w:12.414%;--h:8.276%;"><span class="om-table-number">12</span></div><div class="om-table om-table-13" style="--x:76.379%;--y:84.943%;--w:12.414%;--h:8.276%;"><span class="om-table-number">13</span></div><div class="om-zone om-banos" style="--x:9.828%;--y:47.356%;--w:18.966%;--h:10.46%;"><span class="om-banos-inner" aria-hidden="true"></span><span class="om-zone-label">Baños</span></div><div class="om-bar-zone" style="--x:9.828%;--y:59.195%;--w:18.103%;--h:30.805%;"><div class="om-bar-counter" aria-hidden="true"></div><div class="om-bar-stools" aria-hidden="true"></div><span class="om-zone-label om-bar-label">Barra</span></div><button class="table-plan-button table-1" style="--x:33.966%;--y:7.241%;--w:17.241%;--h:7.471%;" type="button" data-table="1" aria-label="Seleccionar mesa 1, Backstage"></button><button class="table-plan-button table-2" style="--x:62.931%;--y:7.241%;--w:17.241%;--h:7.471%;" type="button" data-table="2" aria-label="Seleccionar mesa 2, Private"></button><button class="table-plan-button table-3" style="--x:76.379%;--y:18.161%;--w:12.414%;--h:8.276%;" type="button" data-table="3" aria-label="Seleccionar mesa 3"></button><button class="table-plan-button table-4" style="--x:76.379%;--y:27.701%;--w:12.414%;--h:8.276%;" type="button" data-table="4" aria-label="Seleccionar mesa 4"></button><button class="table-plan-button table-5" style="--x:76.379%;--y:37.241%;--w:12.414%;--h:8.276%;" type="button" data-table="5" aria-label="Seleccionar mesa 5"></button><button class="table-plan-button table-6 is-reserved" style="--x:11.379%;--y:18.161%;--w:13.103%;--h:8.276%;" type="button" data-table="6" disabled aria-label="Mesa 6 reservada"></button><button class="table-plan-button table-7 is-reserved" style="--x:11.379%;--y:28.046%;--w:13.103%;--h:8.276%;" type="button" data-table="7" disabled aria-label="Mesa 7 reservada"></button><button class="table-plan-button table-8" style="--x:11.379%;--y:37.931%;--w:13.103%;--h:8.276%;" type="button" data-table="8" aria-label="Seleccionar mesa 8"></button><button class="table-plan-button table-9" style="--x:76.379%;--y:46.782%;--w:12.414%;--h:8.276%;" type="button" data-table="9" aria-label="Seleccionar mesa 9"></button><button class="table-plan-button table-10" style="--x:76.379%;--y:56.322%;--w:12.414%;--h:8.276%;" type="button" data-table="10" aria-label="Seleccionar mesa 10"></button><button class="table-plan-button table-11" style="--x:76.379%;--y:65.862%;--w:12.414%;--h:8.276%;" type="button" data-table="11" aria-label="Seleccionar mesa 11"></button><button class="table-plan-button table-12" style="--x:76.379%;--y:75.402%;--w:12.414%;--h:8.276%;" type="button" data-table="12" aria-label="Seleccionar mesa 12"></button><button class="table-plan-button table-13" style="--x:76.379%;--y:84.943%;--w:12.414%;--h:8.276%;" type="button" data-table="13" aria-label="Seleccionar mesa 13"></button></div></div><p class="table-plan-caption"><span></span> Disponible <i></i> Reservada <b class="table-plan-vip-key">Mesa 1 Backstage · Mesa 2 Private</b></p></div><form class="reservation-form" data-reservation-form><p class="reservation-eyebrow">Reserva de mesa</p><ol class="reservation-steps" aria-label="Pasos de reserva"><li><span>01</span><label for="reservation-date">Elegí una fecha<select id="reservation-date" data-reservation-date required><option value="festa-bros-31-oct">FESTA BROS · Sáb 31 OCT</option><option value="yamila-be-06-nov">YAMILA BE · Vie 06 NOV</option></select></label></li><li><span>02</span><div><b>Mesa</b><p data-reservation-table>Seleccioná una mesa en el plano.</p></div></li><li><span>03</span><label for="reservation-name">Nombre y contacto<input id="reservation-name" name="name" type="text" autocomplete="name" placeholder="Tu nombre" required /><input name="contact" type="tel" autocomplete="tel" placeholder="WhatsApp" required /></label></li></ol><button class="reservation-submit" type="submit" disabled data-reservation-submit>Continuar reserva <b aria-hidden="true">↗</b></button><p class="reservation-result" data-reservation-result aria-live="polite">Elegí una fecha y una mesa disponible.</p></form></div><footer class="tables-foot"><span>Escenario · dancefloor · barra · mesas</span><span>ONE MORE CLUB · DEVOTO</span></footer></div>
+  </section>
   <section class="faq" id="preguntas" aria-labelledby="faq-title">
     <div class="faq-frame">
       <header class="faq-intro">
@@ -725,8 +845,8 @@
           <div class="faq-panel" id="faq-answer-3" role="region" aria-label="Respuesta: requisitos de ingreso"><div class="faq-panel-inner"><p class="faq-answer">El ingreso es exclusivamente para mayores de 18 años. Llevá DNI vigente para acreditar tu edad.</p></div></div>
         </article>
         <article class="faq-item">
-          <button class="faq-trigger" type="button" aria-expanded="false" aria-controls="faq-answer-4"><span class="faq-index">04</span><span class="faq-question">¿El ingreso está garantizado?</span><span class="faq-mark" aria-hidden="true">+</span></button>
-          <div class="faq-panel" id="faq-answer-4" role="region" aria-label="Respuesta: condiciones de ingreso"><div class="faq-panel-inner"><p class="faq-answer">El ingreso está sujeto a capacidad, derecho de admisión y permanencia. Tener una entrada no modifica estas condiciones de acceso.</p></div></div>
+          <button class="faq-trigger" type="button" aria-expanded="false" aria-controls="faq-answer-4"><span class="faq-index">04</span><span class="faq-question">¿Qué tengo que saber sobre invitaciones, QR y mesas?</span><span class="faq-mark" aria-hidden="true">+</span></button>
+          <div class="faq-panel" id="faq-answer-4" role="region" aria-label="Respuesta: invitaciones, QR y mesas"><div class="faq-panel-inner"><p class="faq-answer">Las invitaciones especiales free son válidas hasta la 01:00: vení temprano. Tené el QR preparado para facilitar su lectura. Si tenés mesa, te pedimos llegar con anticipación para facilitar el ingreso y brindar un buen servicio. El ingreso está sujeto a capacidad, derecho de admisión y permanencia.</p></div></div>
         </article>
         <article class="faq-item">
           <button class="faq-trigger" type="button" aria-expanded="false" aria-controls="faq-answer-5"><span class="faq-index">05</span><span class="faq-question">¿A qué hora abre?</span><span class="faq-mark" aria-hidden="true">+</span></button>
@@ -746,7 +866,7 @@
           <div class="footer-brand"><img src="assets/one-logo.webp" alt="" /><span>ONE MORE<br>ELECTRONIC</span></div>
           <p class="footer-claim"><span>La noche</span><span>no termina</span></p>
         </div>
-        <nav class="footer-column" aria-label="Navegación del pie de página">
+        <nav class="footer-column footer-nav-column" aria-label="Navegación del pie de página">
           <p class="footer-label">Explorar</p>
           <div class="footer-nav">
             <a href="#proxima-experiencia">Próxima fecha</a>
@@ -756,29 +876,20 @@
             <a href="#preguntas">Preguntas frecuentes</a>
           </div>
         </nav>
-        <div class="footer-column">
-          <p class="footer-label">Próxima experiencia</p>
-          <p class="footer-event-name">JOYCE</p>
-          <p class="footer-event-meta">Viernes 23 de octubre<br>23:59 h · Devoto</p>
-          <a class="footer-event-link" href="#proxima-experiencia"><span>Ver información</span><span aria-hidden="true">↗</span></a>
-        </div>
+        <section class="footer-next-event" data-footer-next-event aria-labelledby="footer-next-title">
+          <div class="footer-next-top"><p class="footer-label">Próxima fecha</p><span class="footer-next-status" data-footer-event-status>Disponible</span></div>
+          <p id="footer-next-title" class="footer-event-name" data-footer-event-name>Próximamente</p>
+          <p class="footer-event-meta" data-footer-event-meta>Las próximas fechas se anuncian por nuestros canales oficiales.</p>
+          <a class="footer-event-link" data-footer-event-link href="#proxima-experiencia"><span data-footer-event-action>Ver próximas fechas</span><span aria-hidden="true">↗</span></a>
+        </section>
       </div>
-      <aside class="footer-entry-policy" aria-label="Información de ingreso">
-        <div class="footer-policy-item">
-          <p class="footer-policy-label">Edad mínima</p>
-          <p class="footer-policy-copy">+18 · DNI vigente obligatorio</p>
-        </div>
-        <div class="footer-policy-item">
-          <p class="footer-policy-label">Apertura</p>
-          <p class="footer-policy-copy">Desde 23:59 h · Consultá cada fecha</p>
-        </div>
-        <div class="footer-policy-item">
-          <p class="footer-policy-label">Ingreso</p>
-          <p class="footer-policy-copy">Sujeto a capacidad, derecho de admisión y permanencia</p>
-        </div>
-        <div class="footer-policy-item">
-          <p class="footer-policy-label">Ubicación</p>
-          <a class="footer-map-link" href="https://www.google.com/maps/search/?api=1&amp;query=Av.+Francisco+Beir%C3%B3+3334%2C+Villa+Devoto%2C+Buenos+Aires" target="_blank" rel="noopener noreferrer"><span>Cómo llegar<br>Google Maps</span><b aria-hidden="true">↗</b></a>
+      <aside class="footer-info-panel" aria-label="Información de ingreso y ubicación">
+        <div class="footer-info-head"><p class="footer-label">Información para tu visita</p><p>Todo lo esencial para llegar, ingresar y disfrutar de la fecha.</p></div>
+        <div class="footer-info-list">
+          <div class="footer-info-item"><p class="footer-policy-label">Edad mínima</p><p class="footer-policy-copy">+18 · DNI vigente obligatorio</p></div>
+          <div class="footer-info-item"><p class="footer-policy-label">Apertura</p><p class="footer-policy-copy">Desde 23:59 h · Consultá cada fecha</p></div>
+          <div class="footer-info-item"><p class="footer-policy-label">Ingreso</p><p class="footer-policy-copy">Sujeto a capacidad, derecho de admisión y permanencia</p></div>
+          <div class="footer-info-item footer-location-item"><p class="footer-policy-label">Ubicación</p><a class="footer-map-link" href="https://www.google.com/maps/search/?api=1&amp;query=Av.+Francisco+Beir%C3%B3+3334%2C+Villa+Devoto%2C+Buenos+Aires" target="_blank" rel="noopener noreferrer"><span>Av. Francisco Beiró 3334<br>Villa Devoto · Google Maps</span><b aria-hidden="true">↗</b></a></div>
         </div>
       </aside>
       <section class="footer-app-row" aria-label="ONE MORE app, sonido y alertas">
@@ -981,8 +1092,10 @@ Minimum version required to store current data is: `+i+`.
     window.addEventListener('scroll', updateMobileQuickActionVisibility, { passive:true });
     window.addEventListener('resize', updateMobileQuickActionVisibility, { passive:true });
     const heroVideo = document.querySelector('.hero-video');
+    let heroVideoFinished = false;
+    heroVideo.addEventListener('ended', () => { heroVideoFinished = true; });
     const syncHeroVideoMotion = () => {
-      const shouldPlay = !document.hidden && document.body.classList.contains('intro-active') && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const shouldPlay = !document.hidden && document.body.classList.contains('intro-active') && !window.matchMedia('(prefers-reduced-motion: reduce)').matches && !heroVideoFinished;
       if (!shouldPlay) { heroVideo.pause(); return; }
       heroVideo.play().catch(() => {});
     };
@@ -992,6 +1105,8 @@ Minimum version required to store current data is: `+i+`.
     // Each upcoming date is a real, independently navigable item. Images are read
     // for their intrinsic ratio, so changing a flyer also changes the poster column.
     const eventPosterImage = document.querySelector('.event-poster img');
+    const eventPoster = eventPosterImage.closest('.event-poster');
+    const eventStatusBadge = document.querySelector('[data-event-status]');
     const eventTitleWrap = document.querySelector('[data-event-title-wrap]');
     const eventTitle = document.querySelector('[data-event-title]');
     const eventLabel = document.querySelector('[data-event-label]');
@@ -1005,6 +1120,8 @@ Minimum version required to store current data is: `+i+`.
     const eventDetailLineup = document.querySelector('[data-event-detail-lineup]');
     const eventTicket = document.querySelector('[data-event-ticket]');
     const eventShareButton = document.querySelector('[data-event-share]');
+    const eventReminderButton = document.querySelector('[data-event-reminder]');
+    const reminderTooltip = document.querySelector('[data-reminder-tooltip]');
     const eventQrButton = document.querySelector('[data-event-qr]');
     const qrModal = document.querySelector('[data-qr-modal]');
     const qrCloseButton = document.querySelector('[data-qr-close]');
@@ -1021,6 +1138,60 @@ Minimum version required to store current data is: `+i+`.
       ticketNotice.classList.add('is-visible');
       ticketNoticeTimer = window.setTimeout(() => ticketNotice.classList.remove('is-visible'), 2600);
     };
+    const reservationForm = document.querySelector('[data-reservation-form]');
+    const reservationDate = document.querySelector('[data-reservation-date]');
+    const reservationTable = document.querySelector('[data-reservation-table]');
+    const reservationSubmit = document.querySelector('[data-reservation-submit]');
+    const reservationResult = document.querySelector('[data-reservation-result]');
+    const tablePlanButtons = [...document.querySelectorAll('[data-table]')];
+    const selectedDemoTables = new Set();
+    const getSelectedDemoTables = () => [...selectedDemoTables].sort((a, b) => Number(a) - Number(b));
+    const selectedTablesLabel = () => {
+      const tables = getSelectedDemoTables();
+      return tables.length === 1 ? `Mesa ${tables[0]}` : `Mesas ${tables.join(', ')}`;
+    };
+    const syncDemoReservation = () => {
+      tablePlanButtons.forEach((button) => {
+        const selected = selectedDemoTables.has(button.dataset.table);
+        button.classList.toggle('is-selected', selected);
+        button.setAttribute('aria-pressed', String(selected));
+      });
+      const total = selectedDemoTables.size;
+      if (!total) {
+        reservationTable.textContent = 'Seleccioná una o más mesas en el plano.';
+        reservationSubmit.disabled = true;
+        return;
+      }
+      reservationTable.textContent = `${selectedTablesLabel()} ${total === 1 ? 'seleccionada' : 'seleccionadas'}.`;
+      reservationSubmit.disabled = false;
+    };
+    tablePlanButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        if (button.disabled) return;
+        const table = button.dataset.table;
+        const wasSelected = selectedDemoTables.has(table);
+        if (wasSelected) selectedDemoTables.delete(table); else selectedDemoTables.add(table);
+        syncDemoReservation();
+        const date = reservationDate.options[reservationDate.selectedIndex].text;
+        reservationResult.textContent = wasSelected
+          ? `Mesa ${table} deseleccionada.`
+          : `${selectedTablesLabel()} ${selectedDemoTables.size === 1 ? 'seleccionada' : 'seleccionadas'} para ${date}.`;
+      });
+    });
+    reservationDate?.addEventListener('change', () => {
+      if (selectedDemoTables.size) reservationResult.textContent = `${selectedTablesLabel()} ${selectedDemoTables.size === 1 ? 'seleccionada' : 'seleccionadas'} para ${reservationDate.options[reservationDate.selectedIndex].text}.`;
+    });
+    reservationForm?.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (!selectedDemoTables.size) { reservationResult.textContent = 'Primero seleccioná una o más mesas disponibles en el plano.'; return; }
+      const formData = new FormData(reservationForm);
+      const name = String(formData.get('name') || '').trim();
+      const date = reservationDate.options[reservationDate.selectedIndex].text;
+      const total = selectedDemoTables.size;
+      reservationResult.textContent = `${name || 'Solicitud'} · ${selectedTablesLabel().toLowerCase()} · ${date}.`;
+      showActionNotice(`${total} ${total === 1 ? 'mesa seleccionada' : 'mesas seleccionadas'}`);
+    });
+    syncDemoReservation();
     // Tiny synthesized UI sounds: no media files or autoplay. They become audible only
     // after the visitor's first interaction, and the preference can be switched off at any time.
     const soundToggleButtons = [...document.querySelectorAll('[data-sound-toggle]')];
@@ -1330,14 +1501,106 @@ Minimum version required to store current data is: `+i+`.
         ticket:'Comprar entradas', ticketUrl:'https://www.passline.com/eventos/sabado-2410-more-goth', footer:'GOTH · Sábado 24 de octubre'
       },
       {
-        slug:'halloween-31-oct', startsAt:'2026-10-31T00:00:00-03:00', countdownLabel:'Sáb 31 OCT · Save the date', titleHtml:'<span>HALLOWEEN</span>', longTitle:true,
-        label:'ONE MORE ELECTRONIC presenta', image:'assets/halloween-31-octubre.webp', width:566, height:750,
-        alt:'Flyer Save the Date de Halloween para el 31 de octubre.', day:'31', month:'OCT',
-        date:'Sábado 31 de octubre', time:'Próximamente', place:'Por confirmar',
-        lineupLabel:'Save the date', lineup:'Información y line-up próximamente',
-        ticket:'Comprar entradas', ticketUrl:'https://www.passline.com/eventos/sabado-3110-more', footer:'HALLOWEEN · Sábado 31 de octubre'
+        slug:'festa-bros-31-oct', startsAt:'2026-10-31T23:59:00-03:00', countdownLabel:'Sáb 31 OCT · 23:59 H', titleHtml:'<span>FESTA</span><span>BROS</span>', longTitle:true,
+        label:'MORE HALLOWEEN presenta', image:'assets/festa-bros-31-octubre.webp', width:598, height:748,
+        alt:'Flyer de Festa Bros: sábado 31 de octubre, ONE MORE CLUB, Av. Beiro 3334, Devoto.', day:'31', month:'OCT',
+        date:'Sábado 31 de octubre', time:'23:59 Hs', place:'Av. Beiro 3334 · Devoto',
+        lineupLabel:'Artistas confirmados', lineup:'Festa Bros · Gonzalo Salinas · Oddone b2b Ariel Ladereche · Dana',
+        ticket:'Comprar entradas', ticketUrl:'https://www.passline.com/eventos/sabado-3110-more', footer:'FESTA BROS · Sábado 31 de octubre'
+      },
+      {
+        slug:'yamila-be-06-nov', startsAt:'2026-11-06T23:59:00-03:00', countdownLabel:'Vie 06 NOV · 23:59 H', titleHtml:'<span>YAMILA</span><span>BE</span>', longTitle:true,
+        label:'MORE ELECTRONIC MUSIC presenta', image:'assets/yamila-be-06-noviembre.webp', width:598, height:748,
+        alt:'Flyer de Yamila Be: viernes 6 de noviembre, ONE MORE CLUB, Av. Beiro 3334, Devoto.', day:'06', month:'NOV',
+        date:'Viernes 6 de noviembre', time:'23:59 Hs', place:'Av. Beiro 3334 · Devoto',
+        lineupLabel:'Artistas confirmados', lineup:'Yamila Be · Camila Díaz · Camila Méndez · Open Call',
+        ticket:'Comprar entradas', ticketUrl:'https://www.passline.com/eventos/viernes-611-more-yamila-be', footer:'YAMILA BE · Viernes 6 de noviembre'
       }
     ];
+    const REMINDER_STORAGE_KEY = 'one-more-event-reminders-v1';
+    let reminderTooltipTimer;
+    const getSavedReminderSlugs = () => {
+      try {
+        const saved = JSON.parse(localStorage.getItem(REMINDER_STORAGE_KEY) || '[]');
+        return Array.isArray(saved) ? new Set(saved) : new Set();
+      } catch (_) { return new Set(); }
+    };
+    const saveReminderSlugs = (slugs) => localStorage.setItem(REMINDER_STORAGE_KEY, JSON.stringify([...slugs]));
+    const showReminderTooltip = (message) => {
+      window.clearTimeout(reminderTooltipTimer);
+      reminderTooltip.textContent = message;
+      reminderTooltip.classList.add('is-visible');
+      reminderTooltipTimer = window.setTimeout(() => reminderTooltip.classList.remove('is-visible'), 2600);
+    };
+    const escapeIcsText = (value) => String(value).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n');
+    const formatIcsUtc = (value) => new Date(value).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+    const downloadEventReminder = (event) => {
+      const title = `ONE MORE · ${event.titleHtml.replace(/<[^>]+>/g, ' ')}`.replace(/\s+/g, ' ').trim();
+      const now = formatIcsUtc(new Date());
+      const startsAt = formatIcsUtc(event.startsAt);
+      const description = `${event.date} · ${event.time}\n${event.place}\nEntradas: ${event.ticketUrl}`;
+      const calendar = [
+        'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//ONE MORE ELECTRONIC//Eventos//ES', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
+        'BEGIN:VEVENT', `UID:${event.slug}-2026@onemoreelectronic.com`, `DTSTAMP:${now}`, `DTSTART:${startsAt}`,
+        `SUMMARY:${escapeIcsText(title)}`, `LOCATION:${escapeIcsText(`ONE MORE CLUB, ${event.place}`)}`,
+        `DESCRIPTION:${escapeIcsText(description)}`, `URL:${event.ticketUrl}`,
+        'BEGIN:VALARM', 'TRIGGER:-PT24H', 'ACTION:DISPLAY', `DESCRIPTION:${escapeIcsText(`Mañana: ${title}`)}`, 'END:VALARM',
+        'BEGIN:VALARM', 'TRIGGER:-PT2H', 'ACTION:DISPLAY', `DESCRIPTION:${escapeIcsText(`En 2 horas: ${title}`)}`, 'END:VALARM',
+        'END:VEVENT', 'END:VCALENDAR'
+      ].join('\r\n');
+      const link = document.createElement('a');
+      const url = URL.createObjectURL(new Blob([calendar], { type:'text/calendar;charset=utf-8' }));
+      link.href = url;
+      link.download = `one-more-${event.slug}-recordatorio.ics`;
+      document.body.append(link);
+      link.click();
+      link.remove();
+      window.setTimeout(() => URL.revokeObjectURL(url), 4000);
+    };
+    const syncEventReminder = (event) => {
+      const isSaved = getSavedReminderSlugs().has(event.slug);
+      const isFinished = isEventFinished(event);
+      eventReminderButton.classList.toggle('is-active', isSaved && !isFinished);
+      eventReminderButton.disabled = isFinished;
+      eventReminderButton.setAttribute('aria-pressed', String(isSaved && !isFinished));
+      eventReminderButton.setAttribute('aria-label', isFinished ? `La fecha ${event.titleHtml.replace(/<[^>]+>/g, '')} ya finalizó` : `${isSaved ? 'Desactivar' : 'Agregar'} recordatorio para ${event.titleHtml.replace(/<[^>]+>/g, '')}`);
+      eventReminderButton.title = isFinished ? 'Fecha finalizada' : (isSaved ? 'Desactivar recordatorio' : 'Agregar recordatorio');
+    };
+    eventReminderButton.addEventListener('click', () => {
+      const event = upcomingEvents[activeEventIndex];
+      if (!event || isEventFinished(event)) return;
+      const saved = getSavedReminderSlugs();
+      if (saved.has(event.slug)) {
+        saved.delete(event.slug);
+        saveReminderSlugs(saved);
+        syncEventReminder(event);
+        showReminderTooltip('Recordatorio desactivado');
+        return;
+      }
+      saved.add(event.slug);
+      saveReminderSlugs(saved);
+      downloadEventReminder(event);
+      syncEventReminder(event);
+      showReminderTooltip('Recordatorio agregado');
+    });
+    const syncReservationDateOptions = () => {
+      if (!reservationDate) return;
+      const previousValue = reservationDate.value;
+      const futureEvents = upcomingEvents.filter(({ startsAt }) => Date.parse(startsAt) > Date.now());
+      reservationDate.replaceChildren();
+      if (!futureEvents.length) {
+        const emptyOption = new Option('Próximamente', '', true, true);
+        emptyOption.disabled = true;
+        reservationDate.add(emptyOption);
+        reservationDate.disabled = true;
+        return;
+      }
+      reservationDate.disabled = false;
+      futureEvents.forEach((event) => reservationDate.add(new Option(`${event.footer.split(' · ')[0]} · ${event.countdownLabel.split(' · ')[0]}`, event.slug, false, event.slug === previousValue)));
+      if (![...reservationDate.options].some((option) => option.selected)) reservationDate.selectedIndex = 0;
+    };
+    syncReservationDateOptions();
+    window.setInterval(syncReservationDateOptions, 60000);
     const heroCountdown = document.querySelector('[data-hero-countdown]');
     const countdownEvent = document.querySelector('[data-countdown-event]');
     const countdownDate = document.querySelector('[data-countdown-date]');
@@ -1345,6 +1608,39 @@ Minimum version required to store current data is: `+i+`.
     const countdownHours = document.querySelector('[data-countdown-hours]');
     const countdownMinutes = document.querySelector('[data-countdown-minutes]');
     const getNextCountdownEvent = () => upcomingEvents.find(({ startsAt }) => Date.parse(startsAt) > Date.now()) || upcomingEvents[upcomingEvents.length - 1];
+    const getFirstAvailableEventIndex = () => { const index = upcomingEvents.findIndex(({ startsAt }) => Date.parse(startsAt) > Date.now()); return index >= 0 ? index : 0; };
+    const footerNextEvent = document.querySelector('[data-footer-next-event]');
+    const footerEventName = document.querySelector('[data-footer-event-name]');
+    const footerEventMeta = document.querySelector('[data-footer-event-meta]');
+    const footerEventStatus = document.querySelector('[data-footer-event-status]');
+    const footerEventLink = document.querySelector('[data-footer-event-link]');
+    const footerEventAction = document.querySelector('[data-footer-event-action]');
+    const getNextFooterEvent = () => upcomingEvents.find(({ startsAt }) => Date.parse(startsAt) > Date.now()) || null;
+    const syncFooterNextEvent = () => {
+      const event = getNextFooterEvent();
+      if (!event) {
+        footerNextEvent.classList.add('is-empty');
+        footerEventStatus.textContent = 'Muy pronto';
+        footerEventName.textContent = 'Próximamente';
+        footerEventMeta.textContent = 'Las nuevas fechas se anuncian primero en nuestro Instagram oficial.';
+        footerEventLink.href = 'https://www.instagram.com/more_electronic/';
+        footerEventLink.target = '_blank';
+        footerEventLink.rel = 'noopener noreferrer';
+        footerEventAction.textContent = 'Ver novedades';
+        return;
+      }
+      footerNextEvent.classList.remove('is-empty');
+      footerEventStatus.textContent = 'Próxima fecha';
+      footerEventName.textContent = event.titleHtml.replace(/<[^>]+>/g, '');
+      footerEventMeta.textContent = `${event.date} · ${event.time}
+${event.place}`;
+      footerEventLink.href = `?evento=${event.slug}`;
+      footerEventLink.removeAttribute('target');
+      footerEventLink.removeAttribute('rel');
+      footerEventAction.textContent = 'Ver información';
+    };
+    syncFooterNextEvent();
+    window.setInterval(syncFooterNextEvent, 60000);
     const refreshHeroCountdown = () => {
       const event = getNextCountdownEvent();
       const remaining = Math.max(0, Date.parse(event.startsAt) - Date.now());
@@ -1378,6 +1674,25 @@ Minimum version required to store current data is: `+i+`.
     const eventCountdownDays = document.querySelector('[data-event-countdown-days]');
     const eventCountdownHours = document.querySelector('[data-event-countdown-hours]');
     const eventCountdownMinutes = document.querySelector('[data-event-countdown-minutes]');
+    const eventCountdownLabel = document.querySelector('[data-event-countdown-label]');
+    const isEventFinished = (event) => Date.parse(event.startsAt) <= Date.now();
+    const syncEventAvailability = (event) => {
+      const finished = isEventFinished(event);
+      eventPoster.classList.toggle('is-finished', finished);
+      eventStatusBadge.textContent = finished ? 'Fecha finalizada' : '';
+      eventCountdownLabel.textContent = finished ? 'Finalizada' : 'Faltan';
+      eventTicket.classList.toggle('is-finished', finished);
+      eventTicket.setAttribute('aria-disabled', String(finished));
+      if (finished) {
+        eventTicket.removeAttribute('href');
+        eventTicket.setAttribute('tabindex', '-1');
+        eventTicket.replaceChildren(document.createTextNode('Fecha finalizada'));
+      } else {
+        eventTicket.href = event.ticketUrl;
+        eventTicket.removeAttribute('tabindex');
+        eventTicket.replaceChildren(document.createTextNode(event.ticket), Object.assign(document.createElement('b'), { textContent:'↗', ariaHidden:'true' }));
+      }
+    };
     const refreshEventCountdown = () => {
       const event = upcomingEvents[activeEventIndex];
       const remaining = Math.max(0, Date.parse(event.startsAt) - Date.now());
@@ -1385,7 +1700,8 @@ Minimum version required to store current data is: `+i+`.
       eventCountdownDays.textContent = String(Math.floor(totalMinutes / 1440)).padStart(2, '0');
       eventCountdownHours.textContent = String(Math.floor((totalMinutes % 1440) / 60)).padStart(2, '0');
       eventCountdownMinutes.textContent = String(totalMinutes % 60).padStart(2, '0');
-      eventCountdown.setAttribute('aria-label', `Cuenta regresiva para ${event.footer}`);
+      eventCountdown.setAttribute('aria-label', `${isEventFinished(event) ? 'Fecha finalizada' : 'Cuenta regresiva'} para ${event.footer}`);
+      syncEventAvailability(event);
     };
     window.setInterval(refreshEventCountdown, 1000);
     const syncPosterRatio = () => {
@@ -1427,8 +1743,8 @@ Minimum version required to store current data is: `+i+`.
       eventDetailLineup.textContent = event.lineup;
       refreshEventCountdown();
       eventInfo.setAttribute('aria-label', `Detalles de ${event.titleHtml.replace(/<[^>]+>/g, ' ')}`);
-      eventTicket.href = event.ticketUrl;
-      eventTicket.replaceChildren(document.createTextNode(event.ticket), Object.assign(document.createElement('b'), { textContent:'↗', ariaHidden:'true' }));
+      syncEventAvailability(event);
+      syncEventReminder(event);
       eventShareButton.setAttribute('aria-label', `Compartir la fecha ${event.titleHtml.replace(/<[^>]+>/g, '')}`);
       eventQrButton.setAttribute('aria-label', `Ver código QR de la fecha ${event.titleHtml.replace(/<[^>]+>/g, '')}`);
       if (document.body.classList.contains('event-open')) {
@@ -1483,8 +1799,34 @@ Minimum version required to store current data is: `+i+`.
     };
     eventPrevButton.addEventListener('click', () => changeUpcomingEvent(-1));
     eventNextButton.addEventListener('click', () => changeUpcomingEvent(1));
+    let eventSwipe = null;
+    const clearEventSwipe = () => { eventSwipe = null; };
+    eventStage.addEventListener('pointerdown', (event) => {
+      if (event.pointerType === 'mouse' || event.target.closest('a,button,input,select,textarea,label,[role="button"]')) return;
+      eventSwipe = { id:event.pointerId, x:event.clientX, y:event.clientY, horizontal:false };
+    });
+    eventStage.addEventListener('pointermove', (event) => {
+      if (!eventSwipe || eventSwipe.id !== event.pointerId) return;
+      const deltaX = event.clientX - eventSwipe.x;
+      const deltaY = event.clientY - eventSwipe.y;
+      if (!eventSwipe.horizontal && Math.abs(deltaX) > 12 && Math.abs(deltaX) > Math.abs(deltaY)) {
+        eventSwipe.horizontal = true;
+        eventStage.setPointerCapture?.(event.pointerId);
+      }
+      if (eventSwipe.horizontal) event.preventDefault();
+    }, { passive:false });
+    eventStage.addEventListener('pointerup', (event) => {
+      if (!eventSwipe || eventSwipe.id !== event.pointerId) return;
+      const deltaX = event.clientX - eventSwipe.x;
+      const isHorizontalSwipe = eventSwipe.horizontal && Math.abs(deltaX) >= 56;
+      clearEventSwipe();
+      if (!isHorizontalSwipe) return;
+      changeUpcomingEvent(deltaX < 0 ? 1 : -1);
+    });
+    eventStage.addEventListener('pointercancel', clearEventSwipe);
+    eventStage.addEventListener('lostpointercapture', clearEventSwipe);
     upcomingEvents.forEach(({ image }) => preloadFlyer(image));
-    void renderUpcomingEvent(0);
+    void renderUpcomingEvent(getFirstAvailableEventIndex());
     const closeMobileMenu = ({ returnFocus = false } = {}) => {
       mobileMenu.classList.remove('open');
       mobileMenu.setAttribute('aria-hidden', 'true');
