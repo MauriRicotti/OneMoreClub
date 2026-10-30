@@ -230,7 +230,7 @@
     .header-link:hover, .header-link:focus-visible, .header-link.active { color:var(--paper); }
     .header-link.active::after, .header-link:hover::after, .header-link:focus-visible::after { opacity:1; transform:scaleX(1); }
     .nav-home { margin-right:-3px; }
-    .nav-ticket { display:inline-flex; align-items:center; justify-content:center; min-height:38px; margin-left:4px; padding:0 13px; border:1px solid var(--paper); color:var(--ink); background:var(--paper); text-decoration:none; font-size:9px; font-weight:700; letter-spacing:.12em; line-height:1; text-transform:uppercase; }
+    .nav-ticket { display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:38px; margin-left:4px; padding:0 13px; border:1px solid var(--paper); color:var(--ink); background:var(--paper); text-decoration:none; font-size:9px; font-weight:700; letter-spacing:.12em; line-height:1; text-transform:uppercase; }
     .nav-ticket { transition:background-color 150ms ease,color 150ms ease; }
     .nav-ticket:hover, .nav-ticket:focus-visible { background:transparent; color:var(--paper); }
     .header-link:focus-visible, .nav-ticket:focus-visible, .menu-toggle:focus-visible { outline:2px solid var(--paper); outline-offset:4px; }
@@ -482,6 +482,44 @@
     .om-venue-plan .om-table-number { letter-spacing:-.035em; }
     .mobile-reservations > span { display:block; align-self:center; line-height:1; }
     .mobile-reservations > span:last-child { justify-self:end; font-size:17px; line-height:1; }
+    /* Visual account route: outlined to sit after Entradas and Reservas without competing with them. */
+    .nav-login { display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:38px; margin-left:4px; padding:0 13px; border:1px solid rgba(242,240,235,.72); background:transparent; color:var(--paper); font-size:9px; font-weight:700; letter-spacing:.12em; line-height:1; text-decoration:none; text-transform:uppercase; transition:background-color 150ms ease,color 150ms ease,border-color 150ms ease; }
+    .nav-login b { font-size:14px; font-weight:400; }
+    .nav-login:hover, .nav-login:focus-visible { border-color:var(--paper); background:var(--paper); color:var(--ink); outline:0; }
+    .nav-login:focus-visible { outline:2px solid var(--paper); outline-offset:4px; }
+    .nav-login.is-active { border-color:rgba(242,240,235,.52); color:rgba(242,240,235,.76); }
+    @media (min-width:781px) and (max-width:1080px) { .header-side { gap:10px; }.header-link { font-size:8px; letter-spacing:.09em; }.nav-ticket, .nav-reservations, .nav-login { padding-right:8px; padding-left:8px; font-size:8px; letter-spacing:.09em; } }
+    .nav-login-icon, .nav-logout-icon { width:16px; height:16px; flex:0 0 auto; }
+    .nav-logout-icon { display:none; }
+    .nav-login.is-active .nav-login-icon { display:none; }
+    .nav-login.is-active .nav-logout-icon { display:block; }
+    /* A controlled pull continues the existing entrance without replacing accessible controls. */
+    .pull-enter-indicator { --pull-entry-distance:0px; position:fixed; z-index:94; right:0; bottom:0; left:0; display:flex; align-items:center; min-height:min(22svh,170px); padding:22px clamp(22px,6vw,96px); border-top:1px solid rgba(8,8,8,.7); background:var(--paper); color:var(--ink); pointer-events:none; visibility:hidden; opacity:0; transform:translate3d(0,calc(100% - var(--pull-entry-distance)),0); transition:transform 260ms cubic-bezier(.22,.8,.22,1),opacity 160ms ease,visibility 0s linear 260ms; will-change:transform; }
+    .pull-enter-indicator.is-visible { visibility:visible; opacity:1; transition-delay:0s; }
+    .pull-enter-indicator.is-pulling { transition:none; }
+    .pull-enter-indicator.is-armed { border-top-color:var(--ink); }
+    .pull-enter-indicator.is-armed i { transform:translate3d(0,-4px,0); }
+    .pull-enter-indicator p { display:flex; align-items:baseline; gap:12px; width:100%; margin:0; font-size:clamp(23px,3.2vw,47px); font-weight:900; letter-spacing:-.09em; line-height:.78; text-transform:uppercase; }
+    .pull-enter-indicator p > span { color:rgba(8,8,8,.56); }
+    .pull-enter-indicator b { font:inherit; }
+    .pull-enter-indicator i { margin-left:auto; font-size:clamp(25px,3.5vw,46px); font-style:normal; font-weight:400; line-height:1; }
+    .intro-deck > .hero, .intro-slider > .next-experience { --pull-panel-offset:0px; transition:transform 300ms cubic-bezier(.16,.88,.22,1); will-change:transform; }
+    body.is-pulling-entry .intro-deck > .hero, body.is-pulling-entry .intro-slider > .next-experience { transform:translate3d(0,var(--pull-panel-offset),0); transition:none; }
+    /* Pull entrances travel with the gesture: bottom → screen → top. Button-driven routes retain their horizontal curtain. */
+    .entry-curtain.pull-up { transform:translate3d(0,100%,0); }
+    .entry-curtain.pull-up.is-covering { transform:translate3d(0,0,0); }
+    .entry-curtain.pull-up.exit-right { transform:translate3d(0,-100%,0); }
+    @media (max-width:780px) {
+      .mobile-nav .mobile-login { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; width:100%; min-height:54px; margin-top:8px; padding:0 15px; border:1px solid rgba(242,240,235,.55); background:transparent; color:var(--paper); font-size:9px; font-weight:700; letter-spacing:.12em; line-height:1; text-decoration:none; text-transform:uppercase; opacity:0; transform:translateY(10px); transition:opacity 170ms ease,transform 170ms ease,background-color 150ms ease,color 150ms ease; }
+      .mobile-nav .mobile-login .nav-login-icon, .mobile-nav .mobile-login .nav-logout-icon { justify-self:end; width:18px; height:18px; }
+      .mobile-nav.open .mobile-login { opacity:1; transform:translateY(0); transition-delay:285ms; }
+      .mobile-nav .mobile-login:hover, .mobile-nav .mobile-login:focus-visible { border-color:var(--paper); background:var(--paper); color:var(--ink); outline:0; }
+      .mobile-nav .mobile-login:focus-visible { outline:2px solid var(--paper); outline-offset:3px; }
+      .pull-enter-indicator { min-height:min(20svh,142px); padding:20px; }
+      .pull-enter-indicator p { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:7px 12px; font-size:clamp(31px,10vw,41px); }
+      .pull-enter-indicator p > span { grid-column:1 / -1; font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1; }
+      .pull-enter-indicator i { align-self:end; }
+    }
     @media (min-width:761px) { .gallery-kicker { white-space:nowrap; } }
     /* Experience heading: desktop uses the available horizontal field; mobile keeps its established three-line rhythm. */
     .gallery-title-block { min-width:0; }
@@ -532,24 +570,21 @@
     .footer-simple-cta:hover, .footer-simple-cta:focus-visible { border-color:var(--paper); background:var(--paper); color:var(--ink); outline:0; }
     .footer-simple-cta--primary { border-color:var(--paper); background:var(--paper); color:var(--ink); }
     .footer-simple-cta--primary:hover, .footer-simple-cta--primary:focus-visible { background:transparent; color:var(--paper); }
-    .footer-newsletter { display:grid; grid-template-columns:minmax(0,1fr) minmax(350px,.92fr); align-items:end; gap:clamp(32px,6vw,100px); margin:0 clamp(34px,5.5vw,90px) clamp(42px,5vw,76px); padding:clamp(31px,3.6vw,56px) 0; border-top:1px solid rgba(242,240,235,.35); border-bottom:1px solid rgba(242,240,235,.35); }
-    .footer-newsletter .footer-simple-label { margin-bottom:15px; }
-    .footer-newsletter h2 { margin:0; color:var(--paper); font-size:clamp(30px,3.4vw,54px); font-weight:900; letter-spacing:-.08em; line-height:.8; text-transform:uppercase; }
-    .footer-newsletter-copy > p:last-child { max-width:390px; margin:17px 0 0; color:rgba(242,240,235,.72); font-size:14px; line-height:1.42; }
-    .footer-newsletter-form > label { display:block; margin:0 0 10px; color:rgba(242,240,235,.7); font-size:11px; font-weight:700; letter-spacing:.02em; }
-    .footer-newsletter-controls { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:8px; }
-    .footer-newsletter input { width:100%; min-width:0; min-height:51px; border:1px solid rgba(242,240,235,.66); border-radius:0; padding:0 14px; background:transparent; color:var(--paper); font:400 13px/1 Arial,Helvetica,sans-serif; outline:0; }
-    .footer-newsletter input::placeholder { color:rgba(242,240,235,.47); }
-    .footer-newsletter input:focus-visible { outline:2px solid var(--paper); outline-offset:3px; }
-    .footer-newsletter button { display:inline-flex; align-items:center; justify-content:space-between; gap:22px; min-height:51px; padding:0 15px; border:1px solid var(--paper); background:var(--paper); color:var(--ink); font:700 11px/1 Arial,Helvetica,sans-serif; letter-spacing:.02em; cursor:pointer; transition:background-color 180ms ease,color 180ms ease; }
-    .footer-newsletter button b { font-size:16px; font-weight:400; }
-    .footer-newsletter button:hover, .footer-newsletter button:focus-visible { background:transparent; color:var(--paper); outline:0; }
-    .footer-newsletter-status { min-height:16px; margin:10px 0 0; color:rgba(242,240,235,.82); font-size:11px; line-height:1.35; }
+    .footer-channel { display:grid; grid-template-columns:minmax(0,1fr) minmax(310px,.72fr); align-items:center; gap:clamp(32px,7vw,122px); margin:0 clamp(34px,5.5vw,90px) clamp(42px,5vw,76px); padding:clamp(31px,3.6vw,56px) 0; border-top:1px solid rgba(242,240,235,.35); border-bottom:1px solid rgba(242,240,235,.35); }
+    .footer-channel .footer-simple-label { margin-bottom:15px; }
+    .footer-channel h2 { margin:0; color:var(--paper); font-size:clamp(30px,3.4vw,54px); font-weight:900; letter-spacing:-.08em; line-height:.8; text-transform:uppercase; }
+    .footer-channel-copy > p:last-child { max-width:420px; margin:17px 0 0; color:rgba(242,240,235,.72); font-size:14px; line-height:1.42; }
+    .footer-channel-action { display:flex; flex-direction:column; align-items:flex-start; }
+    .footer-channel-action > p:first-child { max-width:300px; margin:0 0 14px; color:rgba(242,240,235,.7); font-size:11px; font-weight:700; letter-spacing:.02em; line-height:1.38; }
+    .footer-channel-button { display:flex; align-items:center; justify-content:space-between; gap:24px; box-sizing:border-box; width:100%; min-height:54px; padding:0 16px; border:1px solid var(--paper); background:var(--paper); color:var(--ink); font-size:12px; font-weight:700; letter-spacing:.02em; line-height:1; text-decoration:none; transition:background-color 180ms ease,color 180ms ease; }
+    .footer-channel-button b { font-size:17px; font-weight:400; }
+    .footer-channel-button:hover, .footer-channel-button:focus-visible { background:transparent; color:var(--paper); outline:0; }
+    .footer-channel-note { margin:11px 0 0; color:rgba(242,240,235,.6); font-size:11px; line-height:1.38; }
     .footer-simple-meta { display:flex; align-items:center; justify-content:flex-start; gap:25px; padding:0 clamp(34px,5.5vw,90px) 30px; }
     .footer-simple-meta p, .footer-simple-meta a { margin:0; color:rgba(242,240,235,.68); font-size:11px; line-height:1.35; text-decoration:none; }
     .footer-simple-meta a { color:rgba(242,240,235,.9); white-space:nowrap; }
     .footer-simple-wordmark { box-sizing:border-box; position:relative; left:50%; display:block; width:max-content; max-width:none; margin:0; padding:clamp(16px,2.2vw,34px) clamp(12px,2.8vw,46px) clamp(42px,5.5vw,84px); color:var(--paper); font-size:clamp(90px,calc((100vw - 32px) / 5.5),305px); font-weight:900; letter-spacing:-.13em; line-height:.59; white-space:nowrap; text-align:center; text-transform:uppercase; transform:translateX(-51%); }
-    @media (max-width:700px) { .footer-simple-grid { grid-template-columns:1fr; gap:41px; padding:54px 24px 46px; }.footer-simple-name { font-size:34px; }.footer-simple-brand > p:last-of-type { margin-top:20px; font-size:16px; }.footer-simple-ctas { flex-direction:column; gap:8px; margin-top:25px; }.footer-simple-cta { width:100%; min-height:48px; padding:0 15px; font-size:12px; }.footer-simple-label { margin-bottom:17px; font-size:13px; }.footer-simple-nav > div { display:flex; flex-direction:column; align-items:flex-start; gap:15px; }.footer-simple-nav a, .footer-simple-contact a { font-size:15px; }.footer-simple-contact { gap:18px; }.footer-newsletter { grid-template-columns:1fr; gap:28px; margin:0 24px 40px; padding:34px 0; }.footer-newsletter h2 { font-size:clamp(34px,10vw,48px); }.footer-newsletter-copy > p:last-child { font-size:15px; }.footer-newsletter-controls { grid-template-columns:1fr; }.footer-newsletter input, .footer-newsletter button { min-height:52px; font-size:13px; }.footer-simple-meta { align-items:flex-start; flex-direction:column; gap:10px; padding:0 24px 22px; }.footer-simple-meta p, .footer-simple-meta a { font-size:11px; }.footer-simple-wordmark { padding:20px 8px 42px; font-size:clamp(64px,calc((100vw - 34px) / 5.5),94px); line-height:.62; transform:translateX(-51%); } }
+    @media (max-width:700px) { .footer-simple-grid { grid-template-columns:1fr; gap:41px; padding:54px 24px 46px; }.footer-simple-name { font-size:34px; }.footer-simple-brand > p:last-of-type { margin-top:20px; font-size:16px; }.footer-simple-ctas { flex-direction:column; gap:8px; margin-top:25px; }.footer-simple-cta { width:100%; min-height:48px; padding:0 15px; font-size:12px; }.footer-simple-label { margin-bottom:17px; font-size:13px; }.footer-simple-nav > div { display:flex; flex-direction:column; align-items:flex-start; gap:15px; }.footer-simple-nav a, .footer-simple-contact a { font-size:15px; }.footer-simple-contact { gap:18px; }.footer-channel { grid-template-columns:1fr; gap:27px; margin:0 24px 40px; padding:34px 0; }.footer-channel h2 { font-size:clamp(34px,10vw,48px); }.footer-channel-copy > p:last-child { font-size:15px; }.footer-channel-action > p:first-child { max-width:340px; font-size:12px; }.footer-channel-button { min-height:54px; font-size:13px; }.footer-simple-meta { align-items:flex-start; flex-direction:column; gap:10px; padding:0 24px 22px; }.footer-simple-meta p, .footer-simple-meta a { font-size:11px; }.footer-simple-wordmark { padding:20px 8px 42px; font-size:clamp(64px,calc((100vw - 34px) / 5.5),94px); line-height:.62; transform:translateX(-51%); } }
   </style>
 
 </head>
@@ -568,6 +603,7 @@
         <a class="header-link" href="#ubicacion">Ubicación</a>
         <a class="nav-ticket" href="#proxima-experiencia">Entradas <span aria-hidden="true">↗</span></a>
         <a class="nav-reservations" href="#mesas">Reservas <span aria-hidden="true">↘</span></a>
+        <a class="nav-login" data-login-access href="/login/" aria-label="Iniciar sesión"><span>Iniciar sesión</span><svg class="nav-login-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="3.35"/><path d="M5.6 20c.72-3.2 3.06-5.05 6.4-5.05s5.68 1.85 6.4 5.05"/></svg><svg class="nav-logout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M10 5H5v14h5M14 8l4 4-4 4M18 12H9"/></svg></a>
       </nav>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menú"><span></span><span></span><span></span></button>
       <nav id="mobile-menu" class="mobile-nav" aria-label="Navegación móvil" aria-hidden="true">
@@ -582,6 +618,7 @@
         </div>
         <a class="mobile-ticket" href="#proxima-experiencia"><span>Entradas</span><span aria-hidden="true">↗</span></a>
         <a class="mobile-reservations" href="#mesas"><span>Reservar mesa</span><span aria-hidden="true">↘</span></a>
+        <a class="mobile-login" data-login-access href="/login/" aria-label="Iniciar sesión"><span>Iniciar sesión</span><svg class="nav-login-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="3.35"/><path d="M5.6 20c.72-3.2 3.06-5.05 6.4-5.05s5.68 1.85 6.4 5.05"/></svg><svg class="nav-logout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M10 5H5v14h5M14 8l4 4-4 4M18 12H9"/></svg></a>
       </nav>
     </header>
 
@@ -683,6 +720,7 @@
       <p class="curtain-serial" data-curtain-serial>OM / BA / 2026</p>
     </div>
   </div>
+  <div class="pull-enter-indicator" data-pull-enter aria-hidden="true"><p><span>Entrando a</span><b>ONE MORE</b><i aria-hidden="true">↑</i></p></div>
   <nav class="mobile-quick-actions" aria-label="Accesos rápidos">
     <a class="quick-home" href="#inicio" aria-label="Volver al inicio"><span aria-hidden="true">⌂</span></a>
     <a class="quick-ticket" href="#proxima-experiencia"><span>Próxima fecha</span><span aria-hidden="true">↗</span></a>
@@ -916,7 +954,7 @@
         </article>
         <article class="faq-item">
           <button class="faq-trigger" type="button" aria-expanded="false" aria-controls="faq-answer-6"><span class="faq-index">06</span><span class="faq-question">¿Dónde veo próximas novedades?</span><span class="faq-mark" aria-hidden="true">+</span></button>
-          <div class="faq-panel" id="faq-answer-6" role="region" aria-label="Respuesta: próximas novedades"><div class="faq-panel-inner"><p class="faq-answer">Seguinos en <a href="https://www.instagram.com/more_electronic/" target="_blank" rel="noopener noreferrer">@more_electronic</a> para conocer anuncios, artistas y próximas fechas.</p></div></div>
+          <div class="faq-panel" id="faq-answer-6" role="region" aria-label="Respuesta: próximas novedades"><div class="faq-panel-inner"><p class="faq-answer">Sumate al <a href="https://whatsapp.com/channel/0029VbE2M9xJpe8lTDp3CH2l" target="_blank" rel="noopener noreferrer">canal oficial de WhatsApp</a> para recibir fechas, preventas, entradas y line-ups. También podés seguir <a href="https://www.instagram.com/more_electronic/" target="_blank" rel="noopener noreferrer">@more_electronic</a>.</p></div></div>
         </article>
       </div>
     </div>
@@ -947,20 +985,17 @@
           <a href="https://www.instagram.com/more_electronic/" target="_blank" rel="noopener noreferrer">Instagram · @more_electronic <span aria-hidden="true">↗</span></a>
         </section>
       </div>
-      <section class="footer-newsletter" aria-labelledby="newsletter-title">
-        <div class="footer-newsletter-copy">
-          <p class="footer-simple-label">Novedades</p>
-          <h2 id="newsletter-title">Recibí próximas fechas</h2>
-          <p>Line-ups, entradas y anuncios de ONE MORE directo a tu correo.</p>
+      <section class="footer-channel" aria-labelledby="channel-title">
+        <div class="footer-channel-copy">
+          <p class="footer-simple-label">Canal oficial</p>
+          <h2 id="channel-title">Enterate por<br>WhatsApp</h2>
+          <p>Fechas, preventas, entradas y line-ups de ONE MORE, directo en el canal.</p>
         </div>
-        <form class="footer-newsletter-form" data-newsletter-form novalidate>
-          <label for="newsletter-email">Tu correo electrónico</label>
-          <div class="footer-newsletter-controls">
-            <input id="newsletter-email" data-newsletter-email name="email" type="email" inputmode="email" autocomplete="email" placeholder="tuemail@correo.com" required />
-            <button type="submit"><span>Quiero enterarme</span><b aria-hidden="true">↗</b></button>
-          </div>
-          <p class="footer-newsletter-status" data-newsletter-status role="status" aria-live="polite"></p>
-        </form>
+        <div class="footer-channel-action">
+          <p>Sumate al canal y activá las notificaciones para enterarte primero.</p>
+          <a class="footer-channel-button" href="https://whatsapp.com/channel/0029VbE2M9xJpe8lTDp3CH2l" target="_blank" rel="noopener noreferrer" aria-label="Seguir el canal oficial de ONE MORE en WhatsApp"><span>Seguir el canal</span><b aria-hidden="true">↗</b></a>
+          <p class="footer-channel-note">Canal de difusión de WhatsApp. Podés silenciarlo cuando quieras.</p>
+        </div>
       </section>
       <div class="footer-simple-meta">
         <p>© 2026 ONE MORE ELECTRONIC · Todos los derechos reservados</p>
@@ -1358,46 +1393,6 @@ Minimum version required to store current data is: `+i+`.
       }
     }));
     syncSoundControls();
-
-    const newsletterForm = document.querySelector('[data-newsletter-form]');
-    const newsletterEmail = document.querySelector('[data-newsletter-email]');
-    const newsletterStatus = document.querySelector('[data-newsletter-status]');
-    const newsletterSubmit = newsletterForm?.querySelector('button[type="submit"]');
-    if (newsletterForm && newsletterEmail && newsletterStatus && newsletterSubmit) {
-      newsletterForm.addEventListener('submit', async (event) => {
-        event.preventDefault();
-        if (!newsletterEmail.validity.valid) {
-          newsletterStatus.textContent = 'Ingresá un correo electrónico válido.';
-          newsletterEmail.focus();
-          return;
-        }
-        const label = newsletterSubmit.querySelector('span');
-        const originalLabel = label.textContent;
-        newsletterSubmit.disabled = true;
-        label.textContent = 'Enviando…';
-        newsletterStatus.textContent = '';
-        try {
-          const request = await fetch('/api/newsletter-subscribe', {
-            method: 'POST',
-            headers: { 'content-type':'application/json' },
-            body: JSON.stringify({ email:newsletterEmail.value })
-          });
-          const result = await request.json().catch(() => ({}));
-          if (!request.ok) {
-            if (result.error === 'INVALID_EMAIL') throw new Error('Ingresá un correo electrónico válido.');
-            if (result.error === 'CONFIGURATION_REQUIRED') throw new Error('El newsletter todavía está configurándose.');
-            throw new Error('No se pudo procesar la suscripción. Probá nuevamente.');
-          }
-          newsletterEmail.disabled = true;
-          label.textContent = 'Revisá tu correo';
-          newsletterStatus.textContent = 'Te enviamos un correo para confirmar la suscripción.';
-        } catch (error) {
-          label.textContent = originalLabel;
-          newsletterSubmit.disabled = false;
-          newsletterStatus.textContent = error.message || 'No se pudo procesar la suscripción. Probá nuevamente.';
-        }
-      });
-    }
 
     const faqItems = [...document.querySelectorAll('.faq-item')];
     faqItems.forEach((item) => {
@@ -1956,6 +1951,29 @@ Minimum version required to store current data is: `+i+`.
       if (window.innerWidth > 780 && menuToggle.getAttribute('aria-expanded') === 'true') closeMobileMenu();
     });
 
+    const VISUAL_ACCESS_KEY = 'one-more-visual-access';
+    const loginAccessControls = [...document.querySelectorAll('[data-login-access]')];
+    const hasVisualAccess = () => {
+      try { return window.localStorage.getItem(VISUAL_ACCESS_KEY) === 'active'; } catch (_) { return false; }
+    };
+    const syncVisualAccessControls = () => {
+      const active = hasVisualAccess();
+      loginAccessControls.forEach((control) => {
+        const label = active ? 'Salir' : 'Iniciar sesión';
+        control.classList.toggle('is-active', active);
+        control.setAttribute('aria-label', active ? 'Salir de la sesión visual' : 'Iniciar sesión');
+        control.querySelector('span').textContent = label;
+      });
+    };
+    loginAccessControls.forEach((control) => control.addEventListener('click', (event) => {
+      if (!hasVisualAccess()) return;
+      event.preventDefault();
+      try { window.localStorage.removeItem(VISUAL_ACCESS_KEY); } catch (_) {}
+      syncVisualAccessControls();
+      if (mobileMenu.classList.contains('open')) closeMobileMenu();
+    }));
+    syncVisualAccessControls();
+
     const updateHeaderNavigation = () => {
       siteHeader.classList.toggle('is-solid', window.scrollY > 24 || document.body.classList.contains('event-open') || document.body.classList.contains('site-mode'));
       let currentId = '';
@@ -2055,9 +2073,10 @@ Minimum version required to store current data is: `+i+`.
       void introSlider.offsetWidth;
       introSlider.classList.remove('no-motion');
     };
-    const resetCurtainOffscreen = () => {
+    const resetCurtainOffscreen = ({ preservePullDirection = false } = {}) => {
       entryCurtain.classList.add('no-motion');
       entryCurtain.classList.remove('is-covering', 'exit-right');
+      if (!preservePullDirection) entryCurtain.classList.remove('pull-up');
       void entryCurtain.offsetWidth;
       entryCurtain.classList.remove('no-motion');
     };
@@ -2066,9 +2085,10 @@ Minimum version required to store current data is: `+i+`.
       curtainCaption.textContent = caption;
       curtainSerial.textContent = serial;
     };
-    const playCurtain = (reveal, context) => {
+    const playCurtain = (reveal, context, { pullUp = false } = {}) => {
       setCurtainContext(context);
-      resetCurtainOffscreen();
+      entryCurtain.classList.toggle('pull-up', pullUp);
+      resetCurtainOffscreen({ preservePullDirection: pullUp });
       const duration = reducedMotionEnabled() ? 0 : 620;
       const hold = reducedMotionEnabled() ? 0 : 160;
       requestAnimationFrame(() => entryCurtain.classList.add('is-covering'));
@@ -2156,15 +2176,118 @@ Minimum version required to store current data is: `+i+`.
       };
       return contexts[selector] || contexts['#archivo'];
     };
-    const enterWebsite = (selector = '#archivo') => {
+    const enterWebsite = (selector = '#archivo', { pullUp = false } = {}) => {
       hideSiteHeaderForTransition();
-      playCurtain(() => finalizeWebsiteEntry(selector), getWebsiteCurtainContext(selector));
+      playCurtain(() => finalizeWebsiteEntry(selector), getWebsiteCurtainContext(selector), { pullUp });
     };
 
     heroNextButton.addEventListener('click', showEventPanel);
     heroEnterButton.addEventListener('click', () => enterWebsite('#archivo'));
     eventBackButton.addEventListener('click', showIntroPanel);
     sliderEnterButton.addEventListener('click', () => enterWebsite('#archivo'));
+
+    // Pull-to-enter: touch from the hero, or a continued upward pull at the bottom of the dates screen.
+    // Trackpads provide the same affordance through pixel-based wheel events; ordinary mouse-wheel steps are ignored.
+    const pullEnterIndicator = document.querySelector('[data-pull-enter]');
+    const pullEventScreen = document.getElementById('proxima-experiencia');
+    const PULL_ENTER_THRESHOLD = 178;
+    const PULL_ENTER_MAX = 232;
+    let pullGesture = null;
+    let pullWheelDistance = 0;
+    let pullWheelScope = null;
+    let pullWheelReleaseTimer;
+    let pullIndicatorHideTimer;
+    let pullEntryTransitioning = false;
+    const pullGestureBlockedTarget = (target) => target instanceof Element && target.closest('a,button,input,select,textarea,label,[role="button"]');
+    const isDatesScreenAtBottom = () => {
+      if (!pullEventScreen) return false;
+      return pullEventScreen.scrollHeight - pullEventScreen.clientHeight <= 2 || pullEventScreen.scrollTop + pullEventScreen.clientHeight >= pullEventScreen.scrollHeight - 3;
+    };
+    const getPullScope = (target) => {
+      if (pullEntryTransitioning || document.body.classList.contains('menu-open') || !qrModal.hidden || pullGestureBlockedTarget(target)) return null;
+      if (document.body.classList.contains('intro-active') && target instanceof Element && target.closest('#intro-deck')) return { kind:'hero', panel:introDeck.querySelector('.hero') };
+      if (document.body.classList.contains('event-open') && target instanceof Element && target.closest('#proxima-experiencia') && isDatesScreenAtBottom()) return { kind:'dates', panel:pullEventScreen };
+      return null;
+    };
+    const showPullEntry = (scope, distance) => {
+      const boundedDistance = Math.min(PULL_ENTER_MAX, Math.max(0, distance));
+      // Deliberately resisted: more finger travel is required before the panel reveals itself.
+      const reveal = Math.round(Math.min(154, 7 + Math.pow(boundedDistance / PULL_ENTER_MAX, 1.48) * 148));
+      const panelLift = -Math.round(Math.min(10, boundedDistance * .043));
+      window.clearTimeout(pullIndicatorHideTimer);
+      pullEnterIndicator.classList.add('is-visible', 'is-pulling');
+      pullEnterIndicator.classList.toggle('is-armed', boundedDistance >= PULL_ENTER_THRESHOLD);
+      pullEnterIndicator.setAttribute('aria-hidden', 'false');
+      pullEnterIndicator.style.setProperty('--pull-entry-distance', `${reveal}px`);
+      scope.panel.style.setProperty('--pull-panel-offset', `${panelLift}px`);
+      document.body.classList.add('is-pulling-entry');
+    };
+    const clearPullEntry = ({ immediate = false } = {}) => {
+      if (pullGesture?.scope?.panel) pullGesture.scope.panel.style.setProperty('--pull-panel-offset', '0px');
+      if (pullWheelScope?.panel) pullWheelScope.panel.style.setProperty('--pull-panel-offset', '0px');
+      document.body.classList.remove('is-pulling-entry');
+      pullEnterIndicator.classList.remove('is-pulling', 'is-armed');
+      pullEnterIndicator.style.setProperty('--pull-entry-distance', '0px');
+      window.clearTimeout(pullIndicatorHideTimer);
+      const hide = () => {
+        pullEnterIndicator.classList.remove('is-visible');
+        pullEnterIndicator.setAttribute('aria-hidden', 'true');
+      };
+      if (immediate || reducedMotionEnabled()) hide(); else pullIndicatorHideTimer = window.setTimeout(hide, 270);
+    };
+    const completePullEntry = () => {
+      if (pullEntryTransitioning) return;
+      pullEntryTransitioning = true;
+      clearPullEntry({ immediate:true });
+      pullGesture = null;
+      pullWheelDistance = 0;
+      pullWheelScope = null;
+      enterWebsite('#archivo', { pullUp:true });
+      window.setTimeout(() => { pullEntryTransitioning = false; }, reducedMotionEnabled() ? 0 : 1350);
+    };
+    const finishTouchPull = () => {
+      if (!pullGesture) return;
+      const shouldEnter = pullGesture.distance >= PULL_ENTER_THRESHOLD;
+      if (shouldEnter) completePullEntry();
+      else {
+        clearPullEntry();
+        pullGesture = null;
+      }
+    };
+    document.addEventListener('touchstart', (event) => {
+      if (event.touches.length !== 1) return;
+      const scope = getPullScope(event.target);
+      if (!scope) return;
+      const touch = event.touches[0];
+      pullGesture = { scope, startY:touch.clientY, distance:0 };
+    }, { capture:true, passive:true });
+    document.addEventListener('touchmove', (event) => {
+      if (!pullGesture || event.touches.length !== 1) return;
+      const distance = pullGesture.startY - event.touches[0].clientY;
+      if (distance <= 10) return;
+      pullGesture.distance = distance;
+      showPullEntry(pullGesture.scope, distance);
+      event.preventDefault();
+    }, { capture:true, passive:false });
+    document.addEventListener('touchend', finishTouchPull, { capture:true, passive:true });
+    document.addEventListener('touchcancel', () => { clearPullEntry(); pullGesture = null; }, { capture:true, passive:true });
+    document.addEventListener('wheel', (event) => {
+      if (event.deltaMode !== 0 || event.ctrlKey || Math.abs(event.deltaY) <= Math.abs(event.deltaX) || event.deltaY <= 0) return;
+      const scope = pullWheelScope || getPullScope(event.target);
+      if (!scope) return;
+      event.preventDefault();
+      pullWheelScope = scope;
+      pullWheelDistance = Math.min(PULL_ENTER_MAX, pullWheelDistance + Math.min(42, event.deltaY));
+      showPullEntry(scope, pullWheelDistance);
+      window.clearTimeout(pullWheelReleaseTimer);
+      pullWheelReleaseTimer = window.setTimeout(() => {
+        const shouldEnter = pullWheelDistance >= PULL_ENTER_THRESHOLD;
+        if (shouldEnter) completePullEntry();
+        else clearPullEntry();
+        pullWheelDistance = 0;
+        pullWheelScope = null;
+      }, 180);
+    }, { capture:true, passive:false });
 
     document.addEventListener('click', (event) => {
       const link = event.target.closest('a[href^="#"]');

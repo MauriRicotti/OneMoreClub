@@ -1,7 +1,8 @@
-const CACHE_NAME = 'one-more-shell-v72';
+const CACHE_NAME = 'one-more-shell-v76';
 const APP_SHELL = [
   '/',
   '/index.html',
+  '/login/',
   '/manifest.webmanifest?v=3',
   '/assets/favicon.ico?v=3',
   '/assets/apple-touch-icon.png?v=3',
@@ -28,11 +29,12 @@ self.addEventListener('fetch', (event) => {
   if (url.pathname.endsWith('.mp4')) return;
 
   if (request.mode === 'navigate') {
+    const isHomeDocument = url.pathname === '/' || url.pathname === '/index.html';
     event.respondWith(fetch(request).then((response) => {
       const copy = response.clone();
-      caches.open(CACHE_NAME).then((cache) => cache.put('/index.html', copy));
+      caches.open(CACHE_NAME).then((cache) => cache.put(isHomeDocument ? '/index.html' : request, copy));
       return response;
-    }).catch(() => caches.match('/index.html')));
+    }).catch(() => caches.match(isHomeDocument ? '/index.html' : request).then((cached) => cached || caches.match('/index.html'))));
     return;
   }
 
