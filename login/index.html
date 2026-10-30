@@ -30,7 +30,7 @@
     .identity { text-decoration:none; }
     .account-content { position:absolute; right:0; bottom:0; left:0; display:flex; align-items:flex-end; justify-content:center; height:54svh; min-height:286px; padding:0 clamp(22px,5.3vw,74px) clamp(25px,4.6vw,58px); }
     .account-form-wrap { width:min(100%,488px); }
-    h1 { margin:0; font-size:clamp(42px,7.3vw,78px); font-weight:900; letter-spacing:-.102em; line-height:.78; text-transform:uppercase; }
+    h1 { margin:0; font-size:clamp(42px,7.3vw,78px); font-weight:900; letter-spacing:-.072em; line-height:.8; text-transform:uppercase; }
     h1 span { display:block; padding-left:.072em; }
     .intro { max-width:344px; margin:17px 0 22px; color:var(--quiet); font-size:13px; line-height:1.42; }
     .credential-fields { display:grid; gap:8px; }
@@ -40,6 +40,13 @@
     .field input:focus { border-color:var(--paper); background:rgba(244,242,235,.13); box-shadow:0 0 0 3px rgba(244,242,235,.1); }
     .field input:not(:placeholder-shown) + label, .field input:focus + label { top:12px; padding:0 2px; background:var(--black); color:rgba(244,242,235,.72); font-size:8px; letter-spacing:.03em; }
     .field input::placeholder { color:transparent; }
+    .field--password input { padding-right:54px; }
+    .password-visibility { position:absolute; z-index:2; top:0; right:0; display:grid; width:50px; height:100%; place-items:center; margin:0; border:0; background:transparent; color:rgba(244,242,235,.68); cursor:pointer; }
+    .password-visibility svg { width:18px; height:18px; fill:none; stroke:currentColor; stroke-linecap:round; stroke-linejoin:round; }
+    .password-visibility .eye-slash { display:none; }
+    .password-visibility.is-visible .eye-slash { display:block; }
+    .password-visibility:hover, .password-visibility:focus-visible { color:var(--paper); outline:0; }
+    .password-visibility:focus-visible svg { outline:2px solid var(--paper); outline-offset:4px; }
     .form-submit { display:flex; grid-column:1 / -1; align-items:center; justify-content:space-between; min-height:50px; margin-top:4px; border:1px solid var(--paper); border-radius:0; padding:0 15px 0 16px; background:var(--paper); color:var(--black); font-size:10px; font-weight:700; letter-spacing:.12em; line-height:1; text-transform:uppercase; transition:background-color 180ms ease,color 180ms ease; }
     .form-submit b { font-size:18px; font-weight:400; line-height:1; }
     .form-submit:hover, .form-submit:focus-visible { background:transparent; color:var(--paper); outline:2px solid var(--paper); outline-offset:4px; }
@@ -47,15 +54,16 @@
 
     @media (min-width:980px) {
       .account-screen { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(455px,.9fr); min-height:660px; }
-      .video-area { position:relative; z-index:0; grid-column:1; grid-row:1; height:100svh; min-height:660px; }
-      .video-area::after { background:linear-gradient(0deg,rgba(9,10,8,.86) 0%,rgba(9,10,8,.18) 51%,rgba(9,10,8,.1) 100%); }
-      .video-area::before { opacity:.17; }
+      .video-area { position:relative; z-index:0; grid-column:1; grid-row:1; height:100svh; min-height:660px; contain:layout paint; }
+      .video-area::after { background:linear-gradient(0deg,rgba(9,10,8,.89) 0%,rgba(9,10,8,.28) 51%,rgba(9,10,8,.15) 100%); }
+      .video-area::before { display:none; }
+      .video-area video { filter:none; transform:translateZ(0); backface-visibility:hidden; }
       .identity { top:clamp(28px,4vw,62px); left:clamp(28px,4.7vw,74px); }
       .identity img { width:42px; height:42px; }
       .video-copy { position:absolute; z-index:2; right:clamp(30px,5.5vw,90px); bottom:clamp(38px,6.5vw,96px); left:clamp(30px,5.5vw,90px); display:block; }
       .video-copy p { margin:0 0 18px; color:rgba(244,242,235,.67); font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; }
-      .video-copy h2 { max-width:450px; margin:0; color:var(--paper); font-size:clamp(58px,6.25vw,110px); font-weight:900; letter-spacing:-.11em; line-height:.75; text-transform:uppercase; }
-      .video-copy h2 span { display:block; padding-left:.07em; }
+      .video-copy h2 { max-width:none; margin:0; color:var(--paper); font-size:clamp(54px,5.15vw,88px); font-weight:900; letter-spacing:-.072em; line-height:.79; text-transform:uppercase; white-space:nowrap; }
+      .video-copy h2 span { display:block; padding-left:.055em; white-space:nowrap; }
       .video-copy small { display:block; margin-top:25px; color:rgba(244,242,235,.67); font-size:11px; font-weight:700; letter-spacing:.02em; line-height:1.45; }
       .account-content { position:relative; z-index:1; grid-column:2; grid-row:1; display:flex; align-items:center; justify-content:center; height:100svh; min-height:660px; padding:clamp(38px,6.2vw,92px); border-left:1px solid rgba(244,242,235,.17); background:var(--black); }
       .account-form-wrap { width:min(100%,455px); }
@@ -85,7 +93,7 @@
 <body>
   <main class="account-screen" aria-labelledby="account-title">
     <div class="video-area">
-      <video aria-hidden="true" autoplay muted loop playsinline preload="metadata">
+      <video aria-hidden="true" autoplay muted loop playsinline preload="auto">
         <source src="../assets/one-more-hero.mp4" type="video/mp4">
       </video>
       <div class="video-copy">
@@ -106,9 +114,10 @@
             <input id="account-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="Correo electrónico" aria-label="Correo electrónico" required>
             <label for="account-email">Correo electrónico</label>
           </div>
-          <div class="field">
+          <div class="field field--password">
             <input id="account-password" name="password" type="password" autocomplete="current-password" placeholder="Contraseña" aria-label="Contraseña" minlength="1" required>
             <label for="account-password">Contraseña</label>
+            <button class="password-visibility" data-password-visibility type="button" aria-label="Mostrar contraseña" aria-controls="account-password" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2.5 12s3.4-5.5 9.5-5.5S21.5 12 21.5 12 18.1 17.5 12 17.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="2.7"/><path class="eye-slash" d="m4 4 16 16"/></svg></button>
           </div>
           <button class="form-submit" type="submit"><span>Ingresar</span><b aria-hidden="true">↗</b></button>
         </form>
@@ -132,6 +141,15 @@
     (() => {
       const VISUAL_ACCESS_KEY = 'one-more-visual-access';
       const form = document.getElementById('visual-login-form');
+      const password = document.getElementById('account-password');
+      const passwordVisibility = document.querySelector('[data-password-visibility]');
+      passwordVisibility.addEventListener('click', () => {
+        const revealing = password.type === 'password';
+        password.type = revealing ? 'text' : 'password';
+        passwordVisibility.classList.toggle('is-visible', revealing);
+        passwordVisibility.setAttribute('aria-pressed', String(revealing));
+        passwordVisibility.setAttribute('aria-label', revealing ? 'Ocultar contraseña' : 'Mostrar contraseña');
+      });
       form.addEventListener('submit', (event) => {
         event.preventDefault();
         if (!form.checkValidity()) {

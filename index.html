@@ -489,6 +489,23 @@
     .nav-login:focus-visible { outline:2px solid var(--paper); outline-offset:4px; }
     .nav-login.is-active { border-color:rgba(242,240,235,.52); color:rgba(242,240,235,.76); }
     @media (min-width:781px) and (max-width:1080px) { .header-side { gap:10px; }.header-link { font-size:8px; letter-spacing:.09em; }.nav-ticket, .nav-reservations, .nav-login { padding-right:8px; padding-left:8px; font-size:8px; letter-spacing:.09em; } }
+    .logout-modal[hidden] { display:none; }
+    .logout-modal { position:fixed; z-index:180; inset:0; display:grid; place-items:center; padding:18px; background:rgba(8,8,8,.84); opacity:0; visibility:hidden; transition:opacity 180ms ease,visibility 0s linear 180ms; }
+    .logout-modal.is-open { opacity:1; visibility:visible; transition-delay:0s; }
+    .logout-dialog { width:min(100%,430px); border:1px solid var(--paper); background:#080808; color:var(--paper); box-shadow:8px 8px 0 rgba(242,240,235,.88); opacity:0; transform:translate3d(0,14px,0); transition:opacity 180ms ease,transform 220ms cubic-bezier(.22,.8,.22,1); }
+    .logout-modal.is-open .logout-dialog { opacity:1; transform:translate3d(0,0,0); }
+    .logout-dialog-head { display:flex; align-items:flex-start; justify-content:space-between; gap:17px; padding:18px 18px 16px; border-bottom:1px solid rgba(242,240,235,.42); }
+    .logout-dialog-kicker { margin:0 0 9px; color:rgba(242,240,235,.58); font-size:8px; font-weight:700; letter-spacing:.15em; line-height:1; text-transform:uppercase; }
+    .logout-dialog h2 { margin:0; font-size:clamp(31px,7vw,46px); font-weight:900; letter-spacing:-.075em; line-height:.76; text-transform:uppercase; }
+    .logout-close { display:grid; flex:0 0 auto; width:32px; height:32px; place-items:center; padding:0; border:1px solid rgba(242,240,235,.72); background:transparent; color:var(--paper); font:inherit; font-size:20px; line-height:1; cursor:pointer; }
+    .logout-close:hover, .logout-close:focus-visible { border-color:var(--paper); background:var(--paper); color:var(--ink); }.logout-close:focus-visible { outline:2px solid var(--paper); outline-offset:3px; }
+    .logout-dialog-main { padding:22px 18px 18px; }
+    .logout-dialog-main > p { max-width:310px; margin:0; color:rgba(242,240,235,.7); font-size:12px; line-height:1.45; }
+    .logout-dialog-actions { display:grid; grid-template-columns:1fr 1fr; gap:7px; margin-top:23px; }
+    .logout-dialog-actions button { display:flex; align-items:center; justify-content:space-between; min-height:48px; padding:0 13px; border:1px solid rgba(242,240,235,.72); background:transparent; color:var(--paper); font:inherit; font-size:9px; font-weight:700; letter-spacing:.12em; line-height:1; text-transform:uppercase; cursor:pointer; }
+    .logout-dialog-actions button:hover, .logout-dialog-actions button:focus-visible { border-color:var(--paper); background:var(--paper); color:var(--ink); outline:0; }.logout-dialog-actions button:focus-visible { outline:2px solid var(--paper); outline-offset:3px; }
+    .logout-dialog-actions .logout-confirm { border-color:var(--paper); background:var(--paper); color:var(--ink); }.logout-dialog-actions .logout-confirm:hover, .logout-dialog-actions .logout-confirm:focus-visible { background:transparent; color:var(--paper); }
+    body.logout-open { overflow:hidden; }
     .nav-login-icon, .nav-logout-icon { width:16px; height:16px; flex:0 0 auto; }
     .nav-logout-icon { display:none; }
     .nav-login.is-active .nav-login-icon { display:none; }
@@ -512,6 +529,7 @@
     @media (max-width:780px) {
       .mobile-nav .mobile-login { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; width:100%; min-height:54px; margin-top:8px; padding:0 15px; border:1px solid rgba(242,240,235,.55); background:transparent; color:var(--paper); font-size:9px; font-weight:700; letter-spacing:.12em; line-height:1; text-decoration:none; text-transform:uppercase; opacity:0; transform:translateY(10px); transition:opacity 170ms ease,transform 170ms ease,background-color 150ms ease,color 150ms ease; }
       .mobile-nav .mobile-login .nav-login-icon, .mobile-nav .mobile-login .nav-logout-icon { justify-self:end; width:18px; height:18px; }
+      .logout-modal { padding:12px; }.logout-dialog { box-shadow:5px 5px 0 rgba(242,240,235,.88); }.logout-dialog-actions { grid-template-columns:1fr; }.logout-dialog-actions button { min-height:52px; }
       .mobile-nav.open .mobile-login { opacity:1; transform:translateY(0); transition-delay:285ms; }
       .mobile-nav .mobile-login:hover, .mobile-nav .mobile-login:focus-visible { border-color:var(--paper); background:var(--paper); color:var(--ink); outline:0; }
       .mobile-nav .mobile-login:focus-visible { outline:2px solid var(--paper); outline-offset:3px; }
@@ -1004,6 +1022,12 @@
     </div>
   </footer>
   <div id="ticket-notice" class="ticket-notice" role="status" aria-live="polite" aria-atomic="true"><span>Abriendo entradas</span><b aria-hidden="true">↗</b></div>
+  <div class="logout-modal" data-logout-modal hidden>
+    <section class="logout-dialog" role="dialog" aria-modal="true" aria-labelledby="logout-title" aria-describedby="logout-description" tabindex="-1">
+      <header class="logout-dialog-head"><div><p class="logout-dialog-kicker">Tu cuenta ONE MORE</p><h2 id="logout-title">¿Cerrar sesión?</h2></div><button class="logout-close" type="button" data-logout-close aria-label="Cerrar confirmación">×</button></header>
+      <div class="logout-dialog-main"><p id="logout-description">Vas a cerrar el acceso visual en este navegador. Podés volver a ingresar cuando quieras.</p><div class="logout-dialog-actions"><button type="button" data-logout-cancel><span>Cancelar</span><b aria-hidden="true">←</b></button><button class="logout-confirm" type="button" data-logout-confirm><span>Salir</span><b aria-hidden="true">↗</b></button></div></div>
+    </section>
+  </div>
   <div class="qr-modal" data-qr-modal hidden>
     <section class="qr-dialog" role="dialog" aria-modal="true" aria-labelledby="qr-title" aria-describedby="qr-description">
       <header class="qr-dialog-head">
@@ -1953,6 +1977,13 @@ Minimum version required to store current data is: `+i+`.
 
     const VISUAL_ACCESS_KEY = 'one-more-visual-access';
     const loginAccessControls = [...document.querySelectorAll('[data-login-access]')];
+    const logoutModal = document.querySelector('[data-logout-modal]');
+    const logoutDialog = logoutModal.querySelector('.logout-dialog');
+    const logoutCloseButton = logoutModal.querySelector('[data-logout-close]');
+    const logoutCancelButton = logoutModal.querySelector('[data-logout-cancel]');
+    const logoutConfirmButton = logoutModal.querySelector('[data-logout-confirm]');
+    let logoutReturnFocus = null;
+    let logoutHideTimer;
     const hasVisualAccess = () => {
       try { return window.localStorage.getItem(VISUAL_ACCESS_KEY) === 'active'; } catch (_) { return false; }
     };
@@ -1965,13 +1996,42 @@ Minimum version required to store current data is: `+i+`.
         control.querySelector('span').textContent = label;
       });
     };
+    const closeLogoutModal = ({ returnFocus = true } = {}) => {
+      if (logoutModal.hidden) return;
+      logoutModal.classList.remove('is-open');
+      document.body.classList.remove('logout-open');
+      window.clearTimeout(logoutHideTimer);
+      logoutHideTimer = window.setTimeout(() => {
+        logoutModal.hidden = true;
+        if (returnFocus && logoutReturnFocus) logoutReturnFocus.focus();
+        logoutReturnFocus = null;
+      }, 190);
+    };
+    const openLogoutModal = (trigger) => {
+      logoutReturnFocus = trigger;
+      if (mobileMenu.classList.contains('open')) closeMobileMenu();
+      logoutModal.hidden = false;
+      document.body.classList.add('logout-open');
+      requestAnimationFrame(() => {
+        logoutModal.classList.add('is-open');
+        logoutConfirmButton.focus();
+      });
+    };
+    const confirmVisualLogout = () => {
+      try { window.localStorage.removeItem(VISUAL_ACCESS_KEY); } catch (_) {}
+      syncVisualAccessControls();
+      closeLogoutModal();
+    };
     loginAccessControls.forEach((control) => control.addEventListener('click', (event) => {
       if (!hasVisualAccess()) return;
       event.preventDefault();
-      try { window.localStorage.removeItem(VISUAL_ACCESS_KEY); } catch (_) {}
-      syncVisualAccessControls();
-      if (mobileMenu.classList.contains('open')) closeMobileMenu();
+      openLogoutModal(control);
     }));
+    logoutCloseButton.addEventListener('click', () => closeLogoutModal());
+    logoutCancelButton.addEventListener('click', () => closeLogoutModal());
+    logoutConfirmButton.addEventListener('click', confirmVisualLogout);
+    logoutModal.addEventListener('click', (event) => { if (event.target === logoutModal) closeLogoutModal(); });
+    document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && !logoutModal.hidden) closeLogoutModal(); });
     syncVisualAccessControls();
 
     const updateHeaderNavigation = () => {
