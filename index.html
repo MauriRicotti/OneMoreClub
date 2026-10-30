@@ -532,11 +532,24 @@
     .footer-simple-cta:hover, .footer-simple-cta:focus-visible { border-color:var(--paper); background:var(--paper); color:var(--ink); outline:0; }
     .footer-simple-cta--primary { border-color:var(--paper); background:var(--paper); color:var(--ink); }
     .footer-simple-cta--primary:hover, .footer-simple-cta--primary:focus-visible { background:transparent; color:var(--paper); }
+    .footer-newsletter { display:grid; grid-template-columns:minmax(0,1fr) minmax(350px,.92fr); align-items:end; gap:clamp(32px,6vw,100px); margin:0 clamp(34px,5.5vw,90px) clamp(42px,5vw,76px); padding:clamp(31px,3.6vw,56px) 0; border-top:1px solid rgba(242,240,235,.35); border-bottom:1px solid rgba(242,240,235,.35); }
+    .footer-newsletter .footer-simple-label { margin-bottom:15px; }
+    .footer-newsletter h2 { margin:0; color:var(--paper); font-size:clamp(30px,3.4vw,54px); font-weight:900; letter-spacing:-.08em; line-height:.8; text-transform:uppercase; }
+    .footer-newsletter-copy > p:last-child { max-width:390px; margin:17px 0 0; color:rgba(242,240,235,.72); font-size:14px; line-height:1.42; }
+    .footer-newsletter-form > label { display:block; margin:0 0 10px; color:rgba(242,240,235,.7); font-size:11px; font-weight:700; letter-spacing:.02em; }
+    .footer-newsletter-controls { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:8px; }
+    .footer-newsletter input { width:100%; min-width:0; min-height:51px; border:1px solid rgba(242,240,235,.66); border-radius:0; padding:0 14px; background:transparent; color:var(--paper); font:400 13px/1 Arial,Helvetica,sans-serif; outline:0; }
+    .footer-newsletter input::placeholder { color:rgba(242,240,235,.47); }
+    .footer-newsletter input:focus-visible { outline:2px solid var(--paper); outline-offset:3px; }
+    .footer-newsletter button { display:inline-flex; align-items:center; justify-content:space-between; gap:22px; min-height:51px; padding:0 15px; border:1px solid var(--paper); background:var(--paper); color:var(--ink); font:700 11px/1 Arial,Helvetica,sans-serif; letter-spacing:.02em; cursor:pointer; transition:background-color 180ms ease,color 180ms ease; }
+    .footer-newsletter button b { font-size:16px; font-weight:400; }
+    .footer-newsletter button:hover, .footer-newsletter button:focus-visible { background:transparent; color:var(--paper); outline:0; }
+    .footer-newsletter-status { min-height:16px; margin:10px 0 0; color:rgba(242,240,235,.82); font-size:11px; line-height:1.35; }
     .footer-simple-meta { display:flex; align-items:center; justify-content:flex-start; gap:25px; padding:0 clamp(34px,5.5vw,90px) 30px; }
     .footer-simple-meta p, .footer-simple-meta a { margin:0; color:rgba(242,240,235,.68); font-size:11px; line-height:1.35; text-decoration:none; }
     .footer-simple-meta a { color:rgba(242,240,235,.9); white-space:nowrap; }
     .footer-simple-wordmark { box-sizing:border-box; position:relative; left:50%; display:block; width:max-content; max-width:none; margin:0; padding:clamp(16px,2.2vw,34px) clamp(12px,2.8vw,46px) clamp(42px,5.5vw,84px); color:var(--paper); font-size:clamp(90px,calc((100vw - 32px) / 5.5),305px); font-weight:900; letter-spacing:-.13em; line-height:.59; white-space:nowrap; text-align:center; text-transform:uppercase; transform:translateX(-51%); }
-    @media (max-width:700px) { .footer-simple-grid { grid-template-columns:1fr; gap:41px; padding:54px 24px 46px; }.footer-simple-name { font-size:34px; }.footer-simple-brand > p:last-of-type { margin-top:20px; font-size:16px; }.footer-simple-ctas { flex-direction:column; gap:8px; margin-top:25px; }.footer-simple-cta { width:100%; min-height:48px; padding:0 15px; font-size:12px; }.footer-simple-label { margin-bottom:17px; font-size:13px; }.footer-simple-nav > div { display:flex; flex-direction:column; align-items:flex-start; gap:15px; }.footer-simple-nav a, .footer-simple-contact a { font-size:15px; }.footer-simple-contact { gap:18px; }.footer-simple-meta { align-items:flex-start; flex-direction:column; gap:10px; padding:0 24px 22px; }.footer-simple-meta p, .footer-simple-meta a { font-size:11px; }.footer-simple-wordmark { padding:20px 8px 42px; font-size:clamp(64px,calc((100vw - 34px) / 5.5),94px); line-height:.62; transform:translateX(-51%); } }
+    @media (max-width:700px) { .footer-simple-grid { grid-template-columns:1fr; gap:41px; padding:54px 24px 46px; }.footer-simple-name { font-size:34px; }.footer-simple-brand > p:last-of-type { margin-top:20px; font-size:16px; }.footer-simple-ctas { flex-direction:column; gap:8px; margin-top:25px; }.footer-simple-cta { width:100%; min-height:48px; padding:0 15px; font-size:12px; }.footer-simple-label { margin-bottom:17px; font-size:13px; }.footer-simple-nav > div { display:flex; flex-direction:column; align-items:flex-start; gap:15px; }.footer-simple-nav a, .footer-simple-contact a { font-size:15px; }.footer-simple-contact { gap:18px; }.footer-newsletter { grid-template-columns:1fr; gap:28px; margin:0 24px 40px; padding:34px 0; }.footer-newsletter h2 { font-size:clamp(34px,10vw,48px); }.footer-newsletter-copy > p:last-child { font-size:15px; }.footer-newsletter-controls { grid-template-columns:1fr; }.footer-newsletter input, .footer-newsletter button { min-height:52px; font-size:13px; }.footer-simple-meta { align-items:flex-start; flex-direction:column; gap:10px; padding:0 24px 22px; }.footer-simple-meta p, .footer-simple-meta a { font-size:11px; }.footer-simple-wordmark { padding:20px 8px 42px; font-size:clamp(64px,calc((100vw - 34px) / 5.5),94px); line-height:.62; transform:translateX(-51%); } }
   </style>
 
 </head>
@@ -934,6 +947,21 @@
           <a href="https://www.instagram.com/more_electronic/" target="_blank" rel="noopener noreferrer">Instagram · @more_electronic <span aria-hidden="true">↗</span></a>
         </section>
       </div>
+      <section class="footer-newsletter" aria-labelledby="newsletter-title">
+        <div class="footer-newsletter-copy">
+          <p class="footer-simple-label">Novedades</p>
+          <h2 id="newsletter-title">Recibí próximas fechas</h2>
+          <p>Line-ups, entradas y anuncios de ONE MORE directo a tu correo.</p>
+        </div>
+        <form class="footer-newsletter-form" data-newsletter-form novalidate>
+          <label for="newsletter-email">Tu correo electrónico</label>
+          <div class="footer-newsletter-controls">
+            <input id="newsletter-email" data-newsletter-email name="email" type="email" inputmode="email" autocomplete="email" placeholder="tuemail@correo.com" required />
+            <button type="submit"><span>Quiero enterarme</span><b aria-hidden="true">↗</b></button>
+          </div>
+          <p class="footer-newsletter-status" data-newsletter-status role="status" aria-live="polite"></p>
+        </form>
+      </section>
       <div class="footer-simple-meta">
         <p>© 2026 ONE MORE ELECTRONIC · Todos los derechos reservados</p>
       </div>
@@ -1331,6 +1359,46 @@ Minimum version required to store current data is: `+i+`.
     }));
     syncSoundControls();
 
+    const newsletterForm = document.querySelector('[data-newsletter-form]');
+    const newsletterEmail = document.querySelector('[data-newsletter-email]');
+    const newsletterStatus = document.querySelector('[data-newsletter-status]');
+    const newsletterSubmit = newsletterForm?.querySelector('button[type="submit"]');
+    if (newsletterForm && newsletterEmail && newsletterStatus && newsletterSubmit) {
+      newsletterForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (!newsletterEmail.validity.valid) {
+          newsletterStatus.textContent = 'Ingresá un correo electrónico válido.';
+          newsletterEmail.focus();
+          return;
+        }
+        const label = newsletterSubmit.querySelector('span');
+        const originalLabel = label.textContent;
+        newsletterSubmit.disabled = true;
+        label.textContent = 'Enviando…';
+        newsletterStatus.textContent = '';
+        try {
+          const request = await fetch('/api/newsletter-subscribe', {
+            method: 'POST',
+            headers: { 'content-type':'application/json' },
+            body: JSON.stringify({ email:newsletterEmail.value })
+          });
+          const result = await request.json().catch(() => ({}));
+          if (!request.ok) {
+            if (result.error === 'INVALID_EMAIL') throw new Error('Ingresá un correo electrónico válido.');
+            if (result.error === 'CONFIGURATION_REQUIRED') throw new Error('El newsletter todavía está configurándose.');
+            throw new Error('No se pudo procesar la suscripción. Probá nuevamente.');
+          }
+          newsletterEmail.disabled = true;
+          label.textContent = 'Revisá tu correo';
+          newsletterStatus.textContent = 'Te enviamos un correo para confirmar la suscripción.';
+        } catch (error) {
+          label.textContent = originalLabel;
+          newsletterSubmit.disabled = false;
+          newsletterStatus.textContent = error.message || 'No se pudo procesar la suscripción. Probá nuevamente.';
+        }
+      });
+    }
+
     const faqItems = [...document.querySelectorAll('.faq-item')];
     faqItems.forEach((item) => {
       const trigger = item.querySelector('.faq-trigger');
@@ -1568,31 +1636,6 @@ Minimum version required to store current data is: `+i+`.
       reminderTooltip.classList.add('is-visible');
       reminderTooltipTimer = window.setTimeout(() => reminderTooltip.classList.remove('is-visible'), 2600);
     };
-    const escapeIcsText = (value) => String(value).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n');
-    const formatIcsUtc = (value) => new Date(value).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
-    const downloadEventReminder = (event) => {
-      const title = `ONE MORE · ${event.titleHtml.replace(/<[^>]+>/g, ' ')}`.replace(/\s+/g, ' ').trim();
-      const now = formatIcsUtc(new Date());
-      const startsAt = formatIcsUtc(event.startsAt);
-      const description = `${event.date} · ${event.time}\n${event.place}\nEntradas: ${event.ticketUrl}`;
-      const calendar = [
-        'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//ONE MORE ELECTRONIC//Eventos//ES', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
-        'BEGIN:VEVENT', `UID:${event.slug}-2026@onemoreelectronic.com`, `DTSTAMP:${now}`, `DTSTART:${startsAt}`,
-        `SUMMARY:${escapeIcsText(title)}`, `LOCATION:${escapeIcsText(`ONE MORE CLUB, ${event.place}`)}`,
-        `DESCRIPTION:${escapeIcsText(description)}`, `URL:${event.ticketUrl}`,
-        'BEGIN:VALARM', 'TRIGGER:-PT24H', 'ACTION:DISPLAY', `DESCRIPTION:${escapeIcsText(`Mañana: ${title}`)}`, 'END:VALARM',
-        'BEGIN:VALARM', 'TRIGGER:-PT2H', 'ACTION:DISPLAY', `DESCRIPTION:${escapeIcsText(`En 2 horas: ${title}`)}`, 'END:VALARM',
-        'END:VEVENT', 'END:VCALENDAR'
-      ].join('\r\n');
-      const link = document.createElement('a');
-      const url = URL.createObjectURL(new Blob([calendar], { type:'text/calendar;charset=utf-8' }));
-      link.href = url;
-      link.download = `one-more-${event.slug}-recordatorio.ics`;
-      document.body.append(link);
-      link.click();
-      link.remove();
-      window.setTimeout(() => URL.revokeObjectURL(url), 4000);
-    };
     const syncEventReminder = (event) => {
       const isSaved = getSavedReminderSlugs().has(event.slug);
       const isFinished = isEventFinished(event);
@@ -1600,7 +1643,7 @@ Minimum version required to store current data is: `+i+`.
       eventReminderButton.disabled = isFinished;
       eventReminderButton.setAttribute('aria-pressed', String(isSaved && !isFinished));
       eventReminderButton.setAttribute('aria-label', isFinished ? `La fecha ${event.titleHtml.replace(/<[^>]+>/g, '')} ya finalizó` : `${isSaved ? 'Desactivar' : 'Agregar'} recordatorio para ${event.titleHtml.replace(/<[^>]+>/g, '')}`);
-      eventReminderButton.title = isFinished ? 'Fecha finalizada' : (isSaved ? 'Desactivar recordatorio' : 'Agregar recordatorio');
+      eventReminderButton.title = isFinished ? 'Fecha finalizada' : (isSaved ? 'Desactivar recordatorio guardado' : 'Guardar recordatorio');
     };
     eventReminderButton.addEventListener('click', () => {
       const event = upcomingEvents[activeEventIndex];
@@ -1615,9 +1658,8 @@ Minimum version required to store current data is: `+i+`.
       }
       saved.add(event.slug);
       saveReminderSlugs(saved);
-      downloadEventReminder(event);
       syncEventReminder(event);
-      showReminderTooltip('Recordatorio agregado');
+      showReminderTooltip('Recordatorio guardado');
     });
     const syncReservationDateOptions = () => {
       if (!reservationDate) return;
