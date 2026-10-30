@@ -28,7 +28,7 @@
     .identity img { display:block; width:39px; height:39px; object-fit:contain; }
     .identity-name { display:block; }
     .identity { text-decoration:none; }
-    .account-content { position:absolute; right:0; bottom:0; left:0; display:flex; align-items:flex-end; justify-content:center; height:54svh; min-height:286px; padding:0 clamp(22px,5.3vw,74px) clamp(25px,4.6vw,58px); }
+    .account-content { position:absolute; right:0; bottom:0; left:0; display:flex; align-items:flex-end; justify-content:center; height:60svh; min-height:350px; padding:0 clamp(22px,5.3vw,74px) clamp(25px,4.6vw,58px); }
     .account-form-wrap { width:min(100%,488px); }
     h1 { margin:0; font-size:clamp(42px,7.3vw,78px); font-weight:900; letter-spacing:-.072em; line-height:.8; text-transform:uppercase; }
     h1 span { display:block; padding-left:.072em; }
@@ -50,6 +50,9 @@
     .form-submit { display:flex; grid-column:1 / -1; align-items:center; justify-content:space-between; min-height:50px; margin-top:4px; border:1px solid var(--paper); border-radius:0; padding:0 15px 0 16px; background:var(--paper); color:var(--black); font-size:10px; font-weight:700; letter-spacing:.12em; line-height:1; text-transform:uppercase; transition:background-color 180ms ease,color 180ms ease; }
     .form-submit b { font-size:18px; font-weight:400; line-height:1; }
     .form-submit:hover, .form-submit:focus-visible { background:transparent; color:var(--paper); outline:2px solid var(--paper); outline-offset:4px; }
+    .form-cancel { display:flex; align-items:center; justify-content:space-between; min-height:44px; margin-top:9px; border:1px solid rgba(244,242,235,.58); border-radius:0; padding:0 15px 0 16px; color:var(--paper); font-size:10px; font-weight:700; letter-spacing:.12em; line-height:1; text-decoration:none; text-transform:uppercase; transition:background-color 180ms ease,color 180ms ease,border-color 180ms ease; }
+    .form-cancel b { font-size:17px; font-weight:400; line-height:1; }
+    .form-cancel:hover, .form-cancel:focus-visible { border-color:var(--paper); background:var(--paper); color:var(--black); outline:2px solid var(--paper); outline-offset:4px; }
     .video-copy, .site-details { display:none; }
 
     @media (min-width:980px) {
@@ -72,6 +75,7 @@
       .credential-fields { gap:10px; }
       .field input { height:54px; }
       .form-submit { min-height:54px; margin-top:6px; }
+      .form-cancel { min-height:49px; margin-top:10px; }
       .site-details { display:grid; grid-template-columns:1fr 1fr; gap:1px; margin:clamp(28px,3.5vh,42px) 0 0; border-top:1px solid rgba(244,242,235,.24); border-bottom:1px solid rgba(244,242,235,.24); background:rgba(244,242,235,.19); }
       .site-detail { min-height:112px; padding:16px 15px; background:var(--black); }
       .site-detail span { display:block; margin:0 0 12px; color:rgba(244,242,235,.55); font-size:9px; font-weight:700; letter-spacing:.1em; line-height:1; text-transform:uppercase; }
@@ -86,6 +90,7 @@
       .intro { margin:12px 0 15px; }
       .field input { height:45px; }
       .form-submit { min-height:45px; }
+      .form-cancel { min-height:42px; margin-top:7px; }
     }
     @media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; } }
   </style>
@@ -121,6 +126,7 @@
           </div>
           <button class="form-submit" type="submit"><span>Ingresar</span><b aria-hidden="true">↗</b></button>
         </form>
+        <a class="form-cancel" href="/" aria-label="Cancelar el ingreso y volver al inicio"><span>Cancelar</span><b aria-hidden="true">←</b></a>
         <section class="site-details" aria-label="Información de ONE MORE CLUB">
           <div class="site-detail">
             <span>Próxima fecha</span>
