@@ -1,4 +1,4 @@
-const CACHE_NAME = 'one-more-shell-v78';
+const CACHE_NAME = 'one-more-shell-v99';
 const APP_SHELL = [
   '/',
   '/index.html',

@@ -475,7 +475,6 @@
       .table-plan { width:100% !important; max-width:none; }
       /* Inset the two edge modules and the invisible hit-area for table 13 together. */
       .om-access { --y:6.5% !important; }
-      .om-table-13, .table-13 { --y:82.75% !important; }
     }
     .om-venue-plan, .om-venue-plan .om-table-number, .om-venue-plan .om-dancefloor-title { font-family:Arial,Helvetica,sans-serif; }
     .om-venue-plan .om-table-number, .om-venue-plan .om-dancefloor-title { font-weight:900; }
@@ -602,7 +601,126 @@
     .footer-simple-meta p, .footer-simple-meta a { margin:0; color:rgba(242,240,235,.68); font-size:11px; line-height:1.35; text-decoration:none; }
     .footer-simple-meta a { color:rgba(242,240,235,.9); white-space:nowrap; }
     .footer-simple-wordmark { box-sizing:border-box; position:relative; left:50%; display:block; width:max-content; max-width:100%; margin:0; padding:clamp(16px,2.2vw,34px) clamp(12px,2.8vw,46px) clamp(42px,5.5vw,84px); color:var(--paper); font-size:clamp(90px,calc((100vw - 32px) / 5.5),305px); font-weight:900; letter-spacing:-.13em; line-height:.59; white-space:nowrap; text-align:center; text-transform:uppercase; transform:translateX(-50%); }
-    @media (max-width:700px) { .footer-simple-grid { grid-template-columns:1fr; gap:41px; padding:54px 24px 46px; }.footer-simple-name { font-size:34px; }.footer-simple-brand > p:last-of-type { margin-top:20px; font-size:16px; }.footer-simple-ctas { flex-direction:column; gap:8px; margin-top:25px; }.footer-simple-cta { width:100%; min-height:48px; padding:0 15px; font-size:12px; }.footer-simple-label { margin-bottom:17px; font-size:13px; }.footer-simple-nav > div { display:flex; flex-direction:column; align-items:flex-start; gap:15px; }.footer-simple-nav a, .footer-simple-contact a { font-size:15px; }.footer-simple-contact { gap:18px; }.footer-channel { grid-template-columns:1fr; gap:27px; margin:0 24px 40px; padding:34px 0; }.footer-channel h2 { font-size:clamp(34px,10vw,48px); }.footer-channel-copy > p:last-child { font-size:15px; }.footer-channel-action > p:first-child { max-width:340px; font-size:12px; }.footer-channel-button { min-height:54px; font-size:13px; }.footer-simple-meta { align-items:flex-start; flex-direction:column; gap:10px; padding:0 24px 22px; }.footer-simple-meta p, .footer-simple-meta a { font-size:11px; }.footer-simple-wordmark { left:0; width:100%; max-width:100vw; padding:30px 17px 142px; font-size:clamp(48px,14.4vw,68px); letter-spacing:-.075em; line-height:.72; transform:none; } }
+    @media (max-width:700px) { .footer-simple-grid { grid-template-columns:1fr; gap:41px; padding:54px 24px 46px; }.footer-simple-name { font-size:34px; }.footer-simple-brand > p:last-of-type { margin-top:20px; font-size:16px; }.footer-simple-ctas { flex-direction:column; gap:8px; margin-top:25px; }.footer-simple-cta { width:100%; min-height:48px; padding:0 15px; font-size:12px; }.footer-simple-label { margin-bottom:17px; font-size:13px; }.footer-simple-nav > div { display:flex; flex-direction:column; align-items:flex-start; gap:15px; }.footer-simple-nav a, .footer-simple-contact a { font-size:15px; }.footer-simple-contact { gap:18px; }.footer-channel { grid-template-columns:1fr; gap:27px; margin:0 24px 40px; padding:34px 0; }.footer-channel h2 { font-size:clamp(34px,10vw,48px); }.footer-channel-copy > p:last-child { font-size:15px; }.footer-channel-action > p:first-child { max-width:340px; font-size:12px; }.footer-channel-button { min-height:54px; font-size:13px; }.footer-simple-meta { align-items:flex-start; flex-direction:column; gap:10px; padding:0 24px 22px; }.footer-simple-meta p, .footer-simple-meta a { font-size:11px; }.footer-simple-wordmark { left:0; width:100%; max-width:100vw; padding:30px 17px 76px; font-size:clamp(48px,14.4vw,68px); letter-spacing:-.075em; line-height:.72; transform:none; } }
+  
+
+    /* ONE MORE MOTION SYSTEM v89 — restrained editorial movement.
+       The hero and event panel retain their existing choreography. Lower chapters reveal
+       once, softly and only when the visitor reaches them; no continuous looping is added. */
+    @media (prefers-reduced-motion: no-preference) {
+      html.motion-ready .motion-reveal { --motion-x:0px; --motion-y:16px; --motion-scale:1; opacity:0; transform:translate3d(var(--motion-x),var(--motion-y),0) scale(var(--motion-scale)); transition:opacity 460ms ease,transform 620ms cubic-bezier(.22,.8,.22,1); will-change:opacity,transform; }
+      html.motion-ready .motion-reveal.motion-reveal--left { --motion-x:-18px; --motion-y:0px; }
+      html.motion-ready .motion-reveal.motion-reveal--right { --motion-x:18px; --motion-y:0px; }
+      html.motion-ready .motion-reveal.motion-reveal--lift { --motion-y:18px; }
+      html.motion-ready .motion-reveal.motion-reveal--settle { --motion-y:10px; --motion-scale:.992; }
+      html.motion-ready .motion-reveal.is-in-view { opacity:1; transform:translate3d(0,0,0) scale(1); }
+
+      /* Only tactile elements respond to hover. These are tiny feedback details, not page animation. */
+      @media (hover:hover) and (pointer:fine) {
+        .gallery-item img, .founder-card img { transition:transform 700ms cubic-bezier(.22,.8,.22,1),filter 380ms ease; }
+        .gallery-item:hover img { transform:scale(1.025); }
+        .founder-card:hover img { transform:scale(1.018); }
+        .footer-simple-cta b, .footer-channel-button b, .venue-hire-copy a b { display:inline-block; transition:transform 220ms cubic-bezier(.22,.8,.22,1); }
+        .footer-simple-cta:hover b, .footer-channel-button:hover b, .venue-hire-copy a:hover b { transform:translate3d(4px,0,0); }
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .motion-reveal { opacity:1 !important; transform:none !important; transition:none !important; }
+    }
+
+  
+
+    /* PLAN SCROLL PERFORMANCE v91 — the venue plan is a dense, interactive drawing.
+       Keep it outside the reveal system, isolate its paint work, and simplify only the
+       most expensive glows on touch / narrow devices. The plan remains fully interactive. */
+    .table-plan-wrap { contain:layout paint; }
+    .table-plan { contain:layout paint; isolation:isolate; }
+    .om-venue-plan { contain:layout paint; }
+    @media (max-width:760px), (hover:none) {
+      .om-inner-floor, .om-zone, .om-vip-frame, .om-dancefloor { box-shadow:none; }
+      .om-table { box-shadow:0 2px 5px rgba(0,0,0,.32); }
+      .om-table::before { box-shadow:0 0 3px var(--neon-soft); }
+      .om-stage::before, .om-floor-line { box-shadow:0 0 4px var(--neon-soft); }
+    }
+
+  
+
+    /* MOBILE FOOTER COMPACTNESS v92 — retain the oversized signature but remove excess
+       breathing room. The floating quick actions now leave before they can cover the wordmark. */
+    .footer-credit { color:rgba(242,240,235,.9); text-underline-offset:4px; }
+    .footer-credit:hover, .footer-credit:focus-visible { color:var(--paper); text-decoration:underline; }
+    @media (max-width:700px) {
+      .footer-simple-meta { padding:0 24px 10px; }
+      .footer-simple-wordmark { padding:10px 8px 38px; font-size:clamp(50px,15.2vw,72px); letter-spacing:-.082em; }
+    }
+
+  
+
+    /* FOOTER CREDIT LAYERING v93 — the wordmark is decorative, so it can never sit on
+       top of a real link. The developer credit is deliberately aligned to the right on desktop. */
+    .footer-simple-meta { position:relative; z-index:3; padding-bottom:clamp(42px,4vw,68px); }
+    .footer-credit { margin-left:auto; position:relative; z-index:4; }
+    .footer-simple-wordmark { position:relative; z-index:1; pointer-events:none; }
+    @media (max-width:700px) {
+      .footer-simple-meta { padding:0 24px 10px; }
+      .footer-credit { margin-left:0; }
+    }
+
+  
+
+    /* MOBILE QUICK TICKET + CREDIT ALIGNMENT v94 */
+    @media (max-width:760px) {
+      /* A warm grey action surface and a fine dark edge stay visible over both paper and night chapters. */
+      .quick-ticket { border:1px solid var(--ink); outline:0; background:#d9d7d2; color:var(--ink); box-shadow:0 5px 14px rgba(8,8,8,.20); }
+      .quick-ticket:hover, .quick-ticket:focus-visible { border-color:var(--ink); background:#e2e0db; color:var(--ink); }
+      .quick-ticket:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }
+    }
+    @media (min-width:701px) {
+      /* The meta row has two explicit columns: legal text left, portfolio credit on the far right. */
+      .footer-simple-meta { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:24px; width:100%; }
+      .footer-credit { justify-self:end; margin-left:0; white-space:nowrap; }
+    }
+
+  
+
+    /* VENUE PLAN RASTER PERFORMANCE v95 — the former CSS blueprint used dozens of shadows,
+       clip paths and gradients. A lightweight WebP now paints the same plan in one layer;
+       transparent, semantic table buttons remain above it for all selection behaviour. */
+    .table-plan-image { position:absolute; inset:0; z-index:1; display:block; width:100%; height:100%; object-fit:cover; pointer-events:none; user-select:none; }
+    .table-plan-controls { position:absolute; z-index:2; inset:0; transform-origin:center; }
+    @media (min-width:761px) {
+      .table-plan-image, .table-plan-controls { inset:auto; left:16.6667%; top:-25%; width:66.6667%; height:150%; transform:rotate(90deg); }
+      .table-plan-image { object-fit:fill; }
+    }
+
+  
+
+    /* RASTER PLAN ALIGNMENT + DESKTOP GRID v96
+       The hit areas use the raster's real geometry. From tablet/desktop upward the plan
+       and reservation form always remain side-by-side instead of allowing an oversized plan
+       to push the form below or beyond the viewport. */
+    @media (min-width:761px) {
+      .tables-main { grid-template-columns:minmax(0,1.08fr) minmax(300px,.72fr); }
+      .table-plan-wrap { min-width:0; }
+      .table-plan { box-sizing:border-box; width:100% !important; max-width:none; }
+    }
+
+  
+
+    /* TABLES DOM GRID FIX v97 — the caption belongs to the plan column. Keeping it inside
+       `.table-plan-wrap` leaves exactly two grid children: the plan column and the form column. */
+    .table-plan-wrap { display:flex; flex-direction:column; }
+    .table-plan-caption { flex:0 0 auto; }
+
+  
+
+    /* PLAN HIT-AREA REFINEMENT v99 — uses the raster's actual table edges; stale desktop table-13 override removed. */
+
+  
+
+    /* TABLE 13 DESKTOP ALIGNMENT v99 — use the measured raster coordinate; the former
+       82.75% CSS-blueprint override was shifting this hit area left after rotation. */
+
   </style>
 
 </head>
@@ -938,7 +1056,7 @@
     </div>
   </section>
   <section id="mesas" class="tables-section" aria-labelledby="tables-title">
-    <div class="tables-frame"><header class="tables-head"><div><p class="tables-kicker">ONE MORE CLUB · DEVOTO</p><h2 id="tables-title"><span>Mesas</span><span>y reservas</span></h2></div><p>Elegí la fecha y una mesa disponible. En PC el plano se presenta en horizontal; en móvil conserva la vista vertical para mantener cada mesa legible.</p></header><div class="tables-main"><div class="table-plan-wrap"><div class="table-plan" data-table-plan aria-label="Plano interactivo de mesas del lugar"><div class="om-venue-plan" role="group" aria-label="Plano en planta de ONE MORE: acceso y VIP arriba, escenario y cabina DJ, pista central, baños y barra a la izquierda, y trece mesas laterales."><div class="om-slab" style="--x:6.0345%;--y:3.908%;--w:87.931%;--h:91.264%;"></div><div class="om-inner-floor" style="--x:7.931%;--y:5.172%;--w:84.138%;--h:88.966%;"></div><div class="om-wall" style="--x:8.276%;--y:5.402%;--w:2.241%;--h:88.736%;"></div><div class="om-wall" style="--x:89.655%;--y:5.402%;--w:2.241%;--h:88.736%;"></div><div class="om-wall" style="--x:8.103%;--y:92.644%;--w:83.966%;--h:1.494%;"></div><div class="om-wall" style="--x:28.621%;--y:15.747%;--w:56.379%;--h:.805%;"></div><div class="om-wall" style="--x:8.103%;--y:47.126%;--w:18.966%;--h:.69%;"></div><div class="om-lamp-strip" style="--x:8.448%;--y:16.092%;--w:1.552%;--h:75.862%;"></div><div class="om-lamp-strip" style="--x:90%;--y:16.092%;--w:1.552%;--h:75.862%;"></div><div class="om-zone om-access" style="--x:9.828%;--y:4.828%;--w:17.759%;--h:9.54%;"><span class="om-zone-label">Acceso</span><i class="om-access-arrow" aria-hidden="true"></i></div><div class="om-vip-frame" style="--x:29.138%;--y:5.862%;--w:27.069%;--h:10.23%;"></div><div class="om-vip-frame" style="--x:58.103%;--y:5.862%;--w:27.241%;--h:10.23%;"></div><div class="om-table om-vip" style="--x:33.966%;--y:7.241%;--w:17.241%;--h:7.471%;"><span class="om-table-number">1</span><span class="om-table-name">Backstage</span></div><div class="om-table om-vip" style="--x:62.931%;--y:7.241%;--w:17.241%;--h:7.471%;"><span class="om-table-number">2</span><span class="om-table-name">Private</span></div><div class="om-stage" style="--x:28.793%;--y:16.667%;--w:45.862%;--h:8.161%;"><div class="om-dj-booth" aria-hidden="true"><span class="om-dj-deck"></span><span class="om-dj-deck"></span><span class="om-dj-leds"></span></div><span class="om-zone-label om-booth-label">Cabina DJ</span><span class="om-zone-label om-stage-label">Escenario</span></div><div class="om-dancefloor" style="--x:26.897%;--y:24.598%;--w:47.586%;--h:68.736%;"><i class="om-floor-line om-floor-line-left" aria-hidden="true"></i><i class="om-floor-line om-floor-line-right" aria-hidden="true"></i><span class="om-dancefloor-title">Dancefloor</span></div><div class="om-table reserved" style="--x:11.379%;--y:18.161%;--w:13.103%;--h:8.276%;"><span class="om-table-number">6</span><span class="om-reserved-label">Reservada</span></div><div class="om-table reserved" style="--x:11.379%;--y:28.046%;--w:13.103%;--h:8.276%;"><span class="om-table-number">7</span><span class="om-reserved-label">Reservada</span></div><div class="om-table" style="--x:11.379%;--y:37.931%;--w:13.103%;--h:8.276%;"><span class="om-table-number">8</span></div><div class="om-table" style="--x:76.379%;--y:18.161%;--w:12.414%;--h:8.276%;"><span class="om-table-number">3</span></div><div class="om-table" style="--x:76.379%;--y:27.701%;--w:12.414%;--h:8.276%;"><span class="om-table-number">4</span></div><div class="om-table" style="--x:76.379%;--y:37.241%;--w:12.414%;--h:8.276%;"><span class="om-table-number">5</span></div><div class="om-table" style="--x:76.379%;--y:46.782%;--w:12.414%;--h:8.276%;"><span class="om-table-number">9</span></div><div class="om-table" style="--x:76.379%;--y:56.322%;--w:12.414%;--h:8.276%;"><span class="om-table-number">10</span></div><div class="om-table" style="--x:76.379%;--y:65.862%;--w:12.414%;--h:8.276%;"><span class="om-table-number">11</span></div><div class="om-table" style="--x:76.379%;--y:75.402%;--w:12.414%;--h:8.276%;"><span class="om-table-number">12</span></div><div class="om-table om-table-13" style="--x:76.379%;--y:84.943%;--w:12.414%;--h:8.276%;"><span class="om-table-number">13</span></div><div class="om-zone om-banos" style="--x:9.828%;--y:47.356%;--w:18.966%;--h:10.46%;"><span class="om-banos-inner" aria-hidden="true"></span><span class="om-zone-label">Baños</span></div><div class="om-bar-zone" style="--x:9.828%;--y:59.195%;--w:18.103%;--h:30.805%;"><div class="om-bar-counter" aria-hidden="true"></div><div class="om-bar-stools" aria-hidden="true"></div><span class="om-zone-label om-bar-label">Barra</span></div><button class="table-plan-button table-1" style="--x:33.966%;--y:7.241%;--w:17.241%;--h:7.471%;" type="button" data-table="1" aria-label="Seleccionar mesa 1, Backstage"></button><button class="table-plan-button table-2" style="--x:62.931%;--y:7.241%;--w:17.241%;--h:7.471%;" type="button" data-table="2" aria-label="Seleccionar mesa 2, Private"></button><button class="table-plan-button table-3" style="--x:76.379%;--y:18.161%;--w:12.414%;--h:8.276%;" type="button" data-table="3" aria-label="Seleccionar mesa 3"></button><button class="table-plan-button table-4" style="--x:76.379%;--y:27.701%;--w:12.414%;--h:8.276%;" type="button" data-table="4" aria-label="Seleccionar mesa 4"></button><button class="table-plan-button table-5" style="--x:76.379%;--y:37.241%;--w:12.414%;--h:8.276%;" type="button" data-table="5" aria-label="Seleccionar mesa 5"></button><button class="table-plan-button table-6 is-reserved" style="--x:11.379%;--y:18.161%;--w:13.103%;--h:8.276%;" type="button" data-table="6" disabled aria-label="Mesa 6 reservada"></button><button class="table-plan-button table-7 is-reserved" style="--x:11.379%;--y:28.046%;--w:13.103%;--h:8.276%;" type="button" data-table="7" disabled aria-label="Mesa 7 reservada"></button><button class="table-plan-button table-8" style="--x:11.379%;--y:37.931%;--w:13.103%;--h:8.276%;" type="button" data-table="8" aria-label="Seleccionar mesa 8"></button><button class="table-plan-button table-9" style="--x:76.379%;--y:46.782%;--w:12.414%;--h:8.276%;" type="button" data-table="9" aria-label="Seleccionar mesa 9"></button><button class="table-plan-button table-10" style="--x:76.379%;--y:56.322%;--w:12.414%;--h:8.276%;" type="button" data-table="10" aria-label="Seleccionar mesa 10"></button><button class="table-plan-button table-11" style="--x:76.379%;--y:65.862%;--w:12.414%;--h:8.276%;" type="button" data-table="11" aria-label="Seleccionar mesa 11"></button><button class="table-plan-button table-12" style="--x:76.379%;--y:75.402%;--w:12.414%;--h:8.276%;" type="button" data-table="12" aria-label="Seleccionar mesa 12"></button><button class="table-plan-button table-13" style="--x:76.379%;--y:84.943%;--w:12.414%;--h:8.276%;" type="button" data-table="13" aria-label="Seleccionar mesa 13"></button></div></div><p class="table-plan-caption"><span></span> Disponible <i></i> Reservada <b class="table-plan-vip-key">Mesa 1 Backstage · Mesa 2 Private</b></p></div><form class="reservation-form" data-reservation-form><p class="reservation-eyebrow">Reserva de mesa</p><ol class="reservation-steps" aria-label="Pasos de reserva"><li><span>01</span><label for="reservation-date">Elegí una fecha<select id="reservation-date" data-reservation-date required><option value="festa-bros-31-oct">FESTA BROS · Sáb 31 OCT</option><option value="yamila-be-06-nov">YAMILA BE · Vie 06 NOV</option></select></label></li><li><span>02</span><div><b>Mesa</b><p data-reservation-table>Seleccioná una mesa en el plano.</p></div></li><li><span>03</span><label for="reservation-name">Nombre y contacto<input id="reservation-name" name="name" type="text" autocomplete="name" placeholder="Tu nombre" required /><input name="contact" type="tel" autocomplete="tel" placeholder="WhatsApp" required /></label></li></ol><button class="reservation-submit" type="submit" disabled data-reservation-submit>Continuar reserva <b aria-hidden="true">↗</b></button><p class="reservation-result" data-reservation-result aria-live="polite">Elegí una fecha y una mesa disponible.</p></form></div><footer class="tables-foot"><span>Escenario · dancefloor · barra · mesas</span><span>ONE MORE CLUB · DEVOTO</span></footer></div>
+    <div class="tables-frame"><header class="tables-head"><div><p class="tables-kicker">ONE MORE CLUB · DEVOTO</p><h2 id="tables-title"><span>Mesas</span><span>y reservas</span></h2></div><p>Elegí la fecha y una mesa disponible. En PC el plano se presenta en horizontal; en móvil conserva la vista vertical para mantener cada mesa legible.</p></header><div class="tables-main"><div class="table-plan-wrap"><div class="table-plan" data-table-plan aria-label="Plano interactivo de mesas del lugar"><img class="table-plan-image" src="assets/one-more-table-plan.webp" width="585" height="878" decoding="async" alt="" aria-hidden="true" /><div class="table-plan-controls"><button class="table-plan-button table-1" style="--x:31.500%;--y:7.400%;--w:22.600%;--h:8.000%;" type="button" data-table="1" aria-label="Seleccionar mesa 1, Backstage"></button><button class="table-plan-button table-2" style="--x:59.000%;--y:7.400%;--w:22.000%;--h:8.000%;" type="button" data-table="2" aria-label="Seleccionar mesa 2, Private"></button><button class="table-plan-button table-3" style="--x:74.000%;--y:17.500%;--w:12.500%;--h:8.000%;" type="button" data-table="3" aria-label="Seleccionar mesa 3"></button><button class="table-plan-button table-4" style="--x:74.000%;--y:26.200%;--w:12.500%;--h:8.000%;" type="button" data-table="4" aria-label="Seleccionar mesa 4"></button><button class="table-plan-button table-5" style="--x:74.000%;--y:35.000%;--w:12.500%;--h:8.000%;" type="button" data-table="5" aria-label="Seleccionar mesa 5"></button><button class="table-plan-button table-6 is-reserved" style="--x:14.000%;--y:17.300%;--w:12.700%;--h:8.400%;" type="button" data-table="6" disabled aria-label="Mesa 6 reservada"></button><button class="table-plan-button table-7 is-reserved" style="--x:14.500%;--y:27.500%;--w:11.800%;--h:7.500%;" type="button" data-table="7" disabled aria-label="Mesa 7 reservada"></button><button class="table-plan-button table-8" style="--x:14.500%;--y:36.500%;--w:11.800%;--h:7.500%;" type="button" data-table="8" aria-label="Seleccionar mesa 8"></button><button class="table-plan-button table-9" style="--x:74.000%;--y:44.300%;--w:12.500%;--h:8.000%;" type="button" data-table="9" aria-label="Seleccionar mesa 9"></button><button class="table-plan-button table-10" style="--x:74.000%;--y:53.300%;--w:12.500%;--h:8.000%;" type="button" data-table="10" aria-label="Seleccionar mesa 10"></button><button class="table-plan-button table-11" style="--x:74.000%;--y:62.200%;--w:12.500%;--h:8.000%;" type="button" data-table="11" aria-label="Seleccionar mesa 11"></button><button class="table-plan-button table-12" style="--x:74.000%;--y:71.300%;--w:12.500%;--h:8.000%;" type="button" data-table="12" aria-label="Seleccionar mesa 12"></button><button class="table-plan-button table-13" style="--x:74.800%;--y:80.800%;--w:11.000%;--h:7.300%;" type="button" data-table="13" aria-label="Seleccionar mesa 13"></button></div></div><p class="table-plan-caption"><span></span> Disponible <i></i> Reservada <b class="table-plan-vip-key">Mesa 1 Backstage · Mesa 2 Private</b></p></div><form class="reservation-form" data-reservation-form><p class="reservation-eyebrow">Reserva de mesa</p><ol class="reservation-steps" aria-label="Pasos de reserva"><li><span>01</span><label for="reservation-date">Elegí una fecha<select id="reservation-date" data-reservation-date required><option value="festa-bros-31-oct">FESTA BROS · Sáb 31 OCT</option><option value="yamila-be-06-nov">YAMILA BE · Vie 06 NOV</option></select></label></li><li><span>02</span><div><b>Mesa</b><p data-reservation-table>Seleccioná una mesa en el plano.</p></div></li><li><span>03</span><label for="reservation-name">Nombre y contacto<input id="reservation-name" name="name" type="text" autocomplete="name" placeholder="Tu nombre" required /><input name="contact" type="tel" autocomplete="tel" placeholder="WhatsApp" required /></label></li></ol><button class="reservation-submit" type="submit" disabled data-reservation-submit>Continuar reserva <b aria-hidden="true">↗</b></button><p class="reservation-result" data-reservation-result aria-live="polite">Elegí una fecha y una mesa disponible.</p></form></div><footer class="tables-foot"><span>Escenario · dancefloor · barra · mesas</span><span>ONE MORE CLUB · DEVOTO</span></footer></div>
   </section>
   <section class="faq" id="preguntas" aria-labelledby="faq-title">
     <div class="faq-frame">
@@ -1017,6 +1135,7 @@
       </section>
       <div class="footer-simple-meta">
         <p>© 2026 ONE MORE ELECTRONIC · Todos los derechos reservados</p>
+        <a class="footer-credit" href="https://mauricio-ricotti.vercel.app/" target="_blank" rel="noopener noreferrer">Desarrollado por Mauricio Ricotti <span aria-hidden="true">↗</span></a>
       </div>
       <p class="footer-simple-wordmark" aria-hidden="true">ONE MORE</p>
     </div>
@@ -1177,7 +1296,7 @@ Minimum version required to store current data is: `+i+`.
     const curtainSerial = document.querySelector('[data-curtain-serial]');
     const sliderEnterButton = document.querySelector('.slider-enter');
     const mobileQuickActions = document.querySelector('.mobile-quick-actions');
-    const quickActionBoundary = document.querySelector('.footer-app-row');
+    const quickActionBoundary = document.querySelector('.footer-app-row') || document.querySelector('.site-footer');
     const quickActionLinks = mobileQuickActions ? [...mobileQuickActions.querySelectorAll('a')] : [];
     let quickActionsAtEnd = false;
     let quickActionMotionTimer;
@@ -1207,8 +1326,16 @@ Minimum version required to store current data is: `+i+`.
         quickActionMotionTimer = window.setTimeout(() => mobileQuickActions.classList.remove('is-returning'), 680);
       }
     };
-    window.addEventListener('scroll', updateMobileQuickActionVisibility, { passive:true });
-    window.addEventListener('resize', updateMobileQuickActionVisibility, { passive:true });
+    let quickActionScrollFrame = 0;
+    const scheduleMobileQuickActionVisibility = () => {
+      if (quickActionScrollFrame) return;
+      quickActionScrollFrame = window.requestAnimationFrame(() => {
+        quickActionScrollFrame = 0;
+        updateMobileQuickActionVisibility();
+      });
+    };
+    window.addEventListener('scroll', scheduleMobileQuickActionVisibility, { passive:true });
+    window.addEventListener('resize', scheduleMobileQuickActionVisibility, { passive:true });
     const heroVideo = document.querySelector('.hero-video');
     const syncHeroVideoMotion = () => {
       const shouldPlay = !document.hidden && document.body.classList.contains('intro-active') && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -2058,7 +2185,15 @@ Minimum version required to store current data is: `+i+`.
         if (active) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current');
       });
     };
-    window.addEventListener('scroll', updateHeaderNavigation, { passive:true });
+    let headerScrollFrame = 0;
+    const scheduleHeaderNavigation = () => {
+      if (headerScrollFrame) return;
+      headerScrollFrame = window.requestAnimationFrame(() => {
+        headerScrollFrame = 0;
+        updateHeaderNavigation();
+      });
+    };
+    window.addEventListener('scroll', scheduleHeaderNavigation, { passive:true });
 
     const setIntroLock = (locked) => {
       document.documentElement.classList.toggle('intro-locked', locked);
@@ -2461,6 +2596,66 @@ Minimum version required to store current data is: `+i+`.
       }
     };
     notificationPreviewButtons.forEach((button) => button.addEventListener('click', sendNotificationPreview));
+
+
+    // ONE MORE MOTION SYSTEM v89: one-time chapter reveals, with no effect on visitors
+    // who request reduced motion. Essential content remains visible without JavaScript.
+    const initialiseEditorialMotion = () => {
+      const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const motionPlan = [
+        ['#el-club .manifesto-title', 'motion-reveal--left', 0],
+        ['#el-club .manifesto-copy', 'motion-reveal--right', 70],
+        ['#el-club .founders-head', 'motion-reveal--lift', 0],
+        ['#el-club .founders-grid', 'motion-reveal--settle', 80],
+        ['#experiencia .gallery-top', 'motion-reveal--lift', 0],
+        ['#experiencia .gallery-head', 'motion-reveal--lift', 65],
+        ['#experiencia .gallery-grid', 'motion-reveal--settle', 110],
+        ['#experiencia .venue-hire', 'motion-reveal--lift', 0],
+        ['#ubicacion .map-canvas', 'motion-reveal--left', 0],
+        ['#ubicacion .map-panel', 'motion-reveal--right', 75],
+        ['#mesas .tables-head', 'motion-reveal--lift', 0],
+        ['#preguntas .faq-intro', 'motion-reveal--left', 0],
+        ['#preguntas .faq-list', 'motion-reveal--right', 70],
+        ['.site-footer .footer-simple-grid', 'motion-reveal--lift', 0],
+        ['.site-footer .footer-channel', 'motion-reveal--lift', 70]
+      ];
+      const targets = motionPlan.map(([selector, variant, delay]) => {
+        const element = document.querySelector(selector);
+        if (!element) return null;
+        element.classList.add('motion-reveal', variant);
+        element.style.setProperty('--motion-delay', `${delay}ms`);
+        element.style.transitionDelay = `${delay}ms`;
+        return element;
+      }).filter(Boolean);
+      if (!targets.length || preference.matches || !('IntersectionObserver' in window)) return;
+
+      const reveal = (element) => {
+        if (element.classList.contains('is-in-view')) return;
+        element.classList.add('is-in-view');
+        element.addEventListener('transitionend', () => { element.style.willChange = 'auto'; }, { once:true });
+      };
+      document.documentElement.classList.add('motion-ready');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          reveal(entry.target);
+          observer.unobserve(entry.target);
+        });
+      }, { rootMargin:'0px 0px -9% 0px', threshold:.08 });
+      targets.forEach((target) => observer.observe(target));
+      // Protect direct deep links and very fast navigation from leaving a visible target hidden.
+      window.setTimeout(() => targets.forEach((target) => {
+        const rect = target.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) reveal(target);
+      }), 450);
+      preference.addEventListener('change', (event) => {
+        if (!event.matches) return;
+        document.documentElement.classList.remove('motion-ready');
+        targets.forEach(reveal);
+        observer.disconnect();
+      }, { once:true });
+    };
+    initialiseEditorialMotion();
 
     const requestedEventSlug = new URLSearchParams(window.location.search).get('evento');
     const requestedEventIndex = upcomingEvents.findIndex(({ slug }) => slug === requestedEventSlug);
