@@ -111,7 +111,7 @@
     .hero-route:focus-visible { outline:2px solid var(--paper); outline-offset:3px; }.hero-route:focus-visible b { transform:translate3d(4px,0,0); }.hero-route--enter:focus-visible b { transform:translate3d(0,4px,0); }
     .event-back { display:inline-flex; align-items:center; gap:8px; min-height:34px; padding:0 12px; border:1px solid var(--ink); background:var(--ink); color:var(--paper); font-size:9px; font-weight:700; letter-spacing:.14em; line-height:1; text-transform:uppercase; cursor:pointer; }
     .event-back span { font-size:17px; font-weight:400; }.event-back:hover { background:var(--paper); color:var(--ink); }.event-back:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }
-    .event-switcher { display:inline-flex; align-items:center; justify-content:center; gap:9px; color:var(--ink); }.event-nav-control { display:grid; place-items:center; width:29px; height:29px; padding:0; border:1px solid rgba(8,8,8,.75); background:transparent; color:var(--ink); font-size:17px; line-height:1; cursor:pointer; }.event-nav-control:hover { background:var(--ink); color:var(--paper); }.event-nav-control:disabled { cursor:wait; opacity:.45; }.event-nav-control:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }.event-nav-copy { display:flex; flex-direction:column; align-items:center; min-width:108px; gap:3px; line-height:1; text-align:center; text-transform:uppercase; }.event-nav-copy strong { font-size:8px; font-weight:700; letter-spacing:.15em; }.event-nav-copy small { font-size:8px; font-weight:700; letter-spacing:.13em; color:rgba(8,8,8,.63); }.event-nav-copy b { color:var(--ink); font-weight:700; }.event-nav-copy i { font-style:normal; }
+    .event-switcher { display:inline-flex; align-items:center; justify-content:center; gap:9px; color:var(--ink); }.event-nav-control { display:grid; place-items:center; width:29px; height:29px; padding:0; border:1px solid rgba(8,8,8,.75); background:transparent; color:var(--ink); font-size:17px; line-height:1; cursor:pointer; }.event-nav-control:hover { background:var(--ink); color:var(--paper); }.event-nav-control:disabled { cursor:not-allowed; opacity:.45; }.event-nav-control:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }.event-nav-copy { display:flex; flex-direction:column; align-items:center; min-width:108px; gap:3px; line-height:1; text-align:center; text-transform:uppercase; }.event-nav-copy strong { font-size:8px; font-weight:700; letter-spacing:.15em; }.event-nav-copy small { font-size:8px; font-weight:700; letter-spacing:.13em; color:rgba(8,8,8,.63); }.event-nav-copy b { color:var(--ink); font-weight:700; }.event-nav-copy i { font-style:normal; }
     .slider-enter { display:inline-flex; align-items:center; gap:10px; min-height:36px; padding:0 13px; border:1px solid var(--ink); background:var(--ink); color:var(--paper); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1; text-transform:uppercase; cursor:pointer; }.slider-enter b { font-size:16px; font-weight:400; }.slider-enter:hover { background:var(--paper); color:var(--ink); }.slider-enter:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }
     .next-experience { position:relative; overflow:hidden; padding:15px; background:var(--paper); color:var(--ink); }
     .next-frame { min-height:calc(100svh - 30px); display:flex; flex-direction:column; border:1px solid rgba(8,8,8,.6); }
@@ -765,6 +765,56 @@
     @media (max-width:650px) { .event-reservation-strip { grid-template-columns:1fr auto; gap:11px 14px; min-height:0; padding:16px 15px; }.event-reservation-kicker { grid-column:1 / -1; }.event-reservation-copy strong { font-size:10px; }.event-reservation-status { font-size:7px; white-space:normal; }.event-reservation-open { min-height:39px; padding:0 10px; font-size:7px; }.event-reservation-panel { align-items:flex-end; }.event-reservation-drawer { width:100%; height:100svh; height:100dvh; max-height:100svh; max-height:100dvh; border-top:0; border-left:0; transform:translate3d(0,100%,0); }.event-reservation-panel.is-open .event-reservation-drawer { transform:translate3d(0,0,0); }.event-reservation-drawer-head { padding:16px 18px 14px; }.event-reservation-drawer-main { padding:14px 18px; }.event-reservation-event { font-size:9px; }.event-reservation-availability { margin-top:8px; }.event-reservation-list { grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px; margin-top:14px; }.event-reservation-table { min-height:48px; padding:7px; }.event-reservation-table span { font-size:9px; }.event-reservation-table small { margin-top:5px; font-size:6px; letter-spacing:.09em; }.event-reservation-selection { min-height:40px; margin-top:14px; padding:10px 0; font-size:9px; }.event-reservation-form { margin-top:14px; }.event-reservation-form label { margin-bottom:7px; font-size:7px; }.event-reservation-form input { min-height:40px; margin-top:6px; }.event-reservation-submit { min-height:46px; margin-top:12px; }.event-reservation-result { min-height:24px; margin-top:9px; font-size:8px; } }
     @media (prefers-reduced-motion:reduce) { .event-reservation-panel,.event-reservation-drawer { transition:none; } }
 
+
+
+    /* DATE SCREEN FIT + MOBILE RESERVATION POLISH v105
+       The reservation strip takes vertical room from a previously full-height date screen.
+       Compact the desktop detail rhythm before the strip can touch the action controls. */
+    @media (min-width:781px) and (max-height:940px) {
+      .event-reservation-strip { min-height:64px; padding:9px 18px; gap:14px; }
+      .event-reservation-copy strong { font-size:10px; }.event-reservation-status { font-size:7px; }.event-reservation-open { min-height:38px; padding:0 10px; font-size:7px; }
+      .event-bottom { padding:12px 18px; }
+      .event-title { min-height:0; padding-top:clamp(24px,3vw,42px); padding-bottom:20px; }
+      .event-info { min-height:0; padding:24px clamp(20px,2.7vw,38px) 18px; }
+      .event-info > .event-info-content { min-height:0; padding-bottom:12px; }
+      .event-number span { font-size:clamp(78px,7vw,104px); }
+      .detail-list { margin-top:28px; }.detail { padding:11px 0; }.event-countdown { margin-top:14px; }
+      .event-countdown-clock span { padding-top:7px; padding-bottom:6px; }
+      .announce, .event-share, .event-reminder, .event-qr-trigger { min-height:44px; }
+    }
+
+    /* Native mobile tap feedback was briefly painting a blue transparent flash over a selected table.
+       Keep the intentional monochrome selected state, not the browser's touch highlight. */
+    .event-reservation-open, .event-reservation-close, .event-reservation-table, .event-reservation-submit { -webkit-tap-highlight-color:transparent; touch-action:manipulation; }
+    @media (max-width:650px) {
+      .event-reservation-drawer-main { padding-bottom:14px; }
+      .event-reservation-selection { flex:0 0 auto; }
+      /* The form is anchored at the bottom of the full-height sheet. Any remaining vertical space
+         becomes deliberate breathing room between table choice and contact, never a dead area below. */
+      .event-reservation-form { margin-top:auto; padding-top:14px; }
+      .event-reservation-list { align-content:start; }
+    }
+
+
+
+    /* STATIC TABLE PLAN PREVIEW v106 — visual orientation only; selection remains in the reservation list. */
+    .event-reservation-plan-trigger { display:inline-flex; align-items:center; gap:8px; width:max-content; min-height:30px; margin-top:9px; padding:0 0 2px; border:0; border-bottom:1px solid rgba(242,240,235,.54); background:transparent; color:rgba(242,240,235,.78); font:700 8px/1 Arial,Helvetica,sans-serif; letter-spacing:.13em; text-transform:uppercase; cursor:pointer; -webkit-tap-highlight-color:transparent; touch-action:manipulation; }.event-reservation-plan-trigger b { font-size:14px; font-weight:400; }.event-reservation-plan-trigger:hover,.event-reservation-plan-trigger:focus-visible { border-bottom-color:var(--paper); color:var(--paper); outline:0; }.event-reservation-plan-trigger:focus-visible { outline:2px solid var(--paper); outline-offset:4px; }
+    .event-table-plan-preview[hidden] { display:none; }.event-table-plan-preview { position:fixed; z-index:220; inset:0; display:grid; place-items:center; padding:18px; background:rgba(8,8,8,.82); opacity:0; visibility:hidden; transition:opacity 180ms ease,visibility 0s linear 220ms; }.event-table-plan-preview.is-open { opacity:1; visibility:visible; transition-delay:0s; }
+    .event-table-plan-dialog { display:flex; width:min(100%,570px); max-height:min(92svh,870px); flex-direction:column; overflow:hidden; border:1px solid rgba(242,240,235,.7); background:#101010; color:var(--paper); box-shadow:8px 8px 0 rgba(0,0,0,.55); opacity:0; transform:translate3d(0,15px,0) scale(.985); transition:opacity 180ms ease,transform 240ms cubic-bezier(.22,.8,.22,1); }.event-table-plan-preview.is-open .event-table-plan-dialog { opacity:1; transform:translate3d(0,0,0) scale(1); }
+    .event-table-plan-head { display:flex; align-items:flex-start; justify-content:space-between; gap:18px; padding:17px 18px 15px; border-bottom:1px solid rgba(242,240,235,.35); }.event-table-plan-kicker { margin:0 0 8px; color:rgba(242,240,235,.6); font-size:8px; font-weight:700; letter-spacing:.15em; line-height:1; text-transform:uppercase; }.event-table-plan-head h2 { margin:0; font-size:clamp(31px,5vw,48px); font-weight:900; letter-spacing:-.1em; line-height:.74; text-transform:uppercase; }
+    .event-table-plan-close { display:grid; flex:0 0 auto; width:34px; height:34px; place-items:center; padding:0; border:1px solid rgba(242,240,235,.72); background:transparent; color:var(--paper); font:inherit; font-size:23px; line-height:1; cursor:pointer; -webkit-tap-highlight-color:transparent; touch-action:manipulation; }.event-table-plan-close:hover,.event-table-plan-close:focus-visible { border-color:var(--paper); background:var(--paper); color:var(--ink); outline:0; }.event-table-plan-close:focus-visible { outline:2px solid var(--paper); outline-offset:3px; }
+    .event-table-plan-main { min-height:0; overflow:auto; padding:17px; }.event-table-plan-main img { display:block; width:100%; max-height:calc(92svh - 145px); object-fit:contain; user-select:none; -webkit-user-drag:none; pointer-events:none; }.event-table-plan-caption { margin:12px 0 0; color:rgba(242,240,235,.6); font-size:8px; font-weight:700; letter-spacing:.13em; line-height:1.35; text-align:center; text-transform:uppercase; }
+    @media (max-width:650px) { .event-reservation-plan-trigger { min-height:36px; margin-top:8px; font-size:7px; }.event-table-plan-preview { padding:10px; }.event-table-plan-dialog { width:100%; max-height:calc(100dvh - 20px); }.event-table-plan-head { padding:15px 16px 13px; }.event-table-plan-main { padding:12px; }.event-table-plan-main img { max-height:calc(100dvh - 132px); }.event-table-plan-caption { margin-top:9px; font-size:7px; } }
+    @media (prefers-reduced-motion:reduce) { .event-table-plan-preview,.event-table-plan-dialog { transition:none; } }
+
+
+
+    /* RESERVATION DRAWER CURSOR + FLOW v107 */
+    .event-reservation-panel, .event-reservation-drawer, .event-reservation-drawer-main, .event-reservation-list, .event-reservation-selection, .event-reservation-form, .event-reservation-event, .event-reservation-availability, .event-table-plan-preview, .event-table-plan-dialog, .event-table-plan-main { cursor:default; }
+    .event-reservation-form input { cursor:text; }
+    .event-reservation-plan-trigger { margin-top:12px; }.event-reservation-plan-trigger + .event-reservation-form { margin-top:18px; }
+    @media (max-width:650px) { .event-reservation-plan-trigger { margin-top:11px; }.event-reservation-plan-trigger + .event-reservation-form { margin-top:auto; } }
+
   </style>
 
 </head>
@@ -902,6 +952,7 @@
         <p class="event-reservation-availability" data-event-reservation-availability>Mesas disponibles para esta fecha</p>
         <div class="event-reservation-list" data-event-reservation-list aria-label="Mesas disponibles"></div>
         <p class="event-reservation-selection" data-event-reservation-selection>Elegí una mesa disponible.</p>
+        <button class="event-reservation-plan-trigger" type="button" data-event-reservation-plan-open aria-haspopup="dialog"><span>Ver plano de mesas</span><b aria-hidden="true">↗</b></button>
         <form class="event-reservation-form" data-event-reservation-form novalidate>
           <label for="event-reservation-name">Nombre y contacto</label>
           <input id="event-reservation-name" name="name" type="text" autocomplete="name" placeholder="Tu nombre" required>
@@ -911,6 +962,12 @@
         </form>
       </div>
     </aside>
+  </div>
+  <div class="event-table-plan-preview" data-event-table-plan-preview hidden aria-hidden="true">
+    <section class="event-table-plan-dialog" role="dialog" aria-modal="true" aria-labelledby="event-table-plan-title" aria-describedby="event-table-plan-caption" tabindex="-1">
+      <header class="event-table-plan-head"><div><p class="event-table-plan-kicker">Ubicación de mesas</p><h2 id="event-table-plan-title">Plano</h2></div><button class="event-table-plan-close" type="button" data-event-table-plan-close aria-label="Cerrar plano de mesas">×</button></header>
+      <div class="event-table-plan-main"><img src="assets/one-more-table-plan.webp" width="870" height="580" decoding="async" alt="Plano de distribución de mesas, cabina, escenario, dancefloor, barra, baños y acceso de ONE MORE." /><p class="event-table-plan-caption" id="event-table-plan-caption">Referencia visual · Elegí las mesas desde la lista</p></div>
+    </section>
   </div>
   <div id="entry-curtain" class="entry-curtain" aria-hidden="true">
     <div class="curtain-layout">
@@ -1950,6 +2007,12 @@ Minimum version required to store current data is: `+i+`.
     const eventReservationForm = document.querySelector('[data-event-reservation-form]');
     const eventReservationSubmit = document.querySelector('[data-event-reservation-submit]');
     const eventReservationResult = document.querySelector('[data-event-reservation-result]');
+    const eventTablePlanPreview = document.querySelector('[data-event-table-plan-preview]');
+    const eventTablePlanDialog = eventTablePlanPreview.querySelector('.event-table-plan-dialog');
+    const eventTablePlanOpenButton = document.querySelector('[data-event-reservation-plan-open]');
+    const eventTablePlanCloseButton = document.querySelector('[data-event-table-plan-close]');
+    let eventTablePlanReturnFocus = null;
+    let eventTablePlanHideTimer;
     let eventReservationReturnFocus = null;
     let eventReservationHideTimer;
     let eventReservationShouldReturnFocus = false;
@@ -2013,6 +2076,34 @@ Minimum version required to store current data is: `+i+`.
       if (!selected.length && !finished) eventReservationResult.textContent = 'Elegí una o más mesas disponibles para continuar.';
       if (finished) eventReservationResult.textContent = 'La reserva para esta fecha finalizó.';
     };
+    const finishClosingEventTablePlan = () => {
+      if (eventTablePlanPreview.hidden || eventTablePlanPreview.classList.contains('is-open')) return;
+      eventTablePlanPreview.hidden = true;
+      if (eventTablePlanReturnFocus) eventTablePlanReturnFocus.focus();
+      eventTablePlanReturnFocus = null;
+    };
+    const closeEventTablePlan = () => {
+      if (eventTablePlanPreview.hidden) return;
+      eventTablePlanPreview.classList.remove('is-open');
+      eventTablePlanPreview.setAttribute('aria-hidden', 'true');
+      window.clearTimeout(eventTablePlanHideTimer);
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        finishClosingEventTablePlan();
+        return;
+      }
+      eventTablePlanHideTimer = window.setTimeout(finishClosingEventTablePlan, 290);
+    };
+    const openEventTablePlan = (trigger) => {
+      eventTablePlanReturnFocus = trigger;
+      eventTablePlanPreview.hidden = false;
+      eventTablePlanPreview.setAttribute('aria-hidden', 'false');
+      // Commit the unobscured state first so display:none cannot skip the modal entrance.
+      void eventTablePlanDialog.offsetWidth;
+      requestAnimationFrame(() => {
+        eventTablePlanPreview.classList.add('is-open');
+        eventTablePlanCloseButton.focus();
+      });
+    };
     const finishClosingEventReservationPanel = () => {
       if (eventReservationPanel.hidden || eventReservationPanel.classList.contains('is-open')) return;
       eventReservationPanel.hidden = true;
@@ -2055,6 +2146,16 @@ Minimum version required to store current data is: `+i+`.
     };
     eventReservationOpenButton.addEventListener('click', () => openEventReservationPanel(eventReservationOpenButton));
     eventReservationCloseButton.addEventListener('click', () => closeEventReservationPanel());
+    eventTablePlanOpenButton.addEventListener('click', () => openEventTablePlan(eventTablePlanOpenButton));
+    eventTablePlanCloseButton.addEventListener('click', closeEventTablePlan);
+    eventTablePlanPreview.addEventListener('click', (event) => { if (event.target === eventTablePlanPreview) closeEventTablePlan(); });
+    eventTablePlanDialog.addEventListener('keydown', (event) => {
+      if (event.key !== 'Tab') return;
+      const focusable = [...eventTablePlanDialog.querySelectorAll('button:not([disabled])')];
+      if (!focusable.length) return;
+      event.preventDefault();
+      focusable[0].focus();
+    });
     eventReservationPanel.addEventListener('click', (event) => { if (event.target === eventReservationPanel) closeEventReservationPanel(); });
     eventReservationDrawer.addEventListener('transitionend', (event) => {
       if (event.target === eventReservationDrawer && event.propertyName === 'transform') finishClosingEventReservationPanel();
@@ -2082,10 +2183,16 @@ Minimum version required to store current data is: `+i+`.
       showActionNotice(`${tables.length} ${tables.length === 1 ? 'mesa seleccionada' : 'mesas seleccionadas'}`);
     });
     document.addEventListener('keydown', (event) => {
-      if (event.key !== 'Escape' || eventReservationPanel.hidden) return;
+      if (event.key !== 'Escape' || eventReservationPanel.hidden || !eventTablePlanPreview.hidden) return;
       event.preventDefault();
       event.stopImmediatePropagation();
       closeEventReservationPanel();
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape' || eventTablePlanPreview.hidden) return;
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      closeEventTablePlan();
     });
     const syncEventAvailability = (event) => {
       const finished = isEventFinished(event);
