@@ -645,13 +645,13 @@
 
   
 
-    /* MOBILE FOOTER COMPACTNESS v92 — retain the oversized signature but remove excess
-       breathing room. The floating quick actions now leave before they can cover the wordmark. */
+    /* MOBILE FOOTER WORDMARK WIDTH TEST v100 — retain the approved compact footer while
+       letting the decorative ONE MORE signature use more of the phone width without clipping. */
     .footer-credit { color:rgba(242,240,235,.9); text-underline-offset:4px; }
     .footer-credit:hover, .footer-credit:focus-visible { color:var(--paper); text-decoration:underline; }
     @media (max-width:700px) {
       .footer-simple-meta { padding:0 24px 10px; }
-      .footer-simple-wordmark { padding:10px 8px 38px; font-size:clamp(50px,15.2vw,72px); letter-spacing:-.082em; }
+      .footer-simple-wordmark { padding:8px 4px 36px; font-size:clamp(57px,17.6vw,82px); letter-spacing:-.084em; line-height:.68; }
     }
 
   
@@ -720,6 +720,50 @@
 
     /* TABLE 13 DESKTOP ALIGNMENT v99 — use the measured raster coordinate; the former
        82.75% CSS-blueprint override was shifting this hit area left after rotation. */
+
+
+
+    /* MOBILE HERO VIDEO HEIGHT v102 — on phones only, the moving visual field occupies
+       the upper 70% of the viewport; the hero itself and its existing content layout remain intact. */
+    @media (max-width:650px) {
+      .hero .background { inset:0 0 auto; height:70svh; background-position:center 38%; }
+      .hero .hero-video { object-position:center 38%; }
+      .hero .veil { inset:0 0 auto; height:70svh; background:linear-gradient(180deg,rgba(0,0,0,.18) 0%,rgba(0,0,0,.24) 38%,#080808 100%),linear-gradient(90deg,rgba(4,4,4,.64),rgba(4,4,4,.10) 74%,rgba(4,4,4,.36)); }
+    }
+
+
+
+    /* EVENT DATE → TABLE RESERVATION v103
+       The date screen keeps tickets as its primary action. This full-width band gives the
+       same night a direct, contextual route to the existing demo table availability. */
+    .event-reservation-strip { display:grid; grid-template-columns:auto minmax(0,1fr) auto auto; align-items:center; gap:18px; min-height:76px; padding:13px 22px; border-top:1px solid rgba(8,8,8,.6); background:#151515; color:var(--paper); }
+    .event-reservation-strip[hidden] { display:none; }
+    .event-reservation-kicker { margin:0; color:rgba(242,240,235,.58); font-size:8px; font-weight:700; letter-spacing:.15em; line-height:1; text-transform:uppercase; }
+    .event-reservation-copy { min-width:0; }
+    .event-reservation-copy strong { display:block; font-size:11px; font-weight:700; letter-spacing:.035em; line-height:1.25; text-transform:uppercase; }
+    .event-reservation-status { display:flex; align-items:center; gap:7px; margin:0; color:rgba(242,240,235,.72); font-size:8px; font-weight:700; letter-spacing:.12em; line-height:1.2; text-transform:uppercase; white-space:nowrap; }
+    .event-reservation-status i { width:7px; height:7px; border:1px solid var(--paper); background:transparent; }
+    .event-reservation-strip.is-closed .event-reservation-status { color:rgba(242,240,235,.5); }.event-reservation-strip.is-closed .event-reservation-status i { border-color:rgba(242,240,235,.5); background:rgba(242,240,235,.22); }
+    .event-reservation-open { display:inline-flex; align-items:center; justify-content:space-between; gap:21px; min-height:42px; padding:0 12px; border:1px solid var(--paper); background:var(--paper); color:var(--ink); font-size:8px; font-weight:700; letter-spacing:.12em; line-height:1; text-transform:uppercase; cursor:pointer; transition:background-color 170ms ease,color 170ms ease; }
+    .event-reservation-open b { font-size:16px; font-weight:400; }.event-reservation-open:hover,.event-reservation-open:focus-visible { background:transparent; color:var(--paper); outline:0; }.event-reservation-open:focus-visible { outline:2px solid var(--paper); outline-offset:3px; }.event-reservation-open:disabled { cursor:not-allowed; border-color:rgba(242,240,235,.35); background:transparent; color:rgba(242,240,235,.52); }
+    .intro-slider.panel-intro .event-reservation-strip { opacity:0; transform:translate3d(0,11px,0); transition:opacity 260ms ease,transform 420ms cubic-bezier(.22,.8,.22,1); will-change:opacity,transform; }
+    .intro-slider.panel-intro.is-stage-ready .event-reservation-strip { opacity:1; transform:translate3d(0,0,0); transition-delay:265ms; }.intro-slider.panel-intro.stage-preparing .event-reservation-strip { transition:none !important; }
+
+    body.event-reservation-open { overflow:hidden; }
+    .event-reservation-panel[hidden] { display:none; }
+    .event-reservation-panel { position:fixed; z-index:190; inset:0; display:flex; justify-content:flex-end; pointer-events:none; background:rgba(8,8,8,.68); opacity:0; visibility:hidden; transition:opacity 190ms ease,visibility 0s linear 320ms; will-change:opacity; }
+    .event-reservation-panel.is-open { visibility:visible; pointer-events:auto; opacity:1; transition-delay:0s; }
+    .event-reservation-drawer { display:flex; width:min(100%,520px); height:100vh; height:100dvh; flex-direction:column; overflow:hidden; border-left:1px solid rgba(242,240,235,.5); background:#101010; color:var(--paper); box-shadow:-14px 0 35px rgba(0,0,0,.28); transform:translate3d(100%,0,0); transition:transform 310ms cubic-bezier(.22,.8,.22,1); will-change:transform; }
+    .event-reservation-panel.is-open .event-reservation-drawer { transform:translate3d(0,0,0); }
+    .event-reservation-drawer-head { display:flex; align-items:flex-start; justify-content:space-between; gap:18px; padding:22px 22px 19px; border-bottom:1px solid rgba(242,240,235,.36); }
+    .event-reservation-drawer-kicker { margin:0 0 9px; color:rgba(242,240,235,.58); font-size:8px; font-weight:700; letter-spacing:.15em; line-height:1; text-transform:uppercase; }.event-reservation-drawer h2 { margin:0; font-size:clamp(33px,4.5vw,50px); font-weight:900; letter-spacing:-.09em; line-height:.75; text-transform:uppercase; }
+    .event-reservation-close { display:grid; flex:0 0 auto; width:34px; height:34px; place-items:center; padding:0; border:1px solid rgba(242,240,235,.72); background:transparent; color:var(--paper); font:inherit; font-size:23px; line-height:1; cursor:pointer; }.event-reservation-close:hover,.event-reservation-close:focus-visible { border-color:var(--paper); background:var(--paper); color:var(--ink); outline:0; }.event-reservation-close:focus-visible { outline:2px solid var(--paper); outline-offset:3px; }
+    .event-reservation-drawer-main { display:flex; min-height:0; flex:1; flex-direction:column; overflow-y:auto; overscroll-behavior:contain; padding:22px; }.event-reservation-event { margin:0; color:rgba(242,240,235,.75); font-size:10px; font-weight:700; letter-spacing:.08em; line-height:1.35; text-transform:uppercase; }.event-reservation-availability { margin:10px 0 0; color:rgba(242,240,235,.58); font-size:8px; font-weight:700; letter-spacing:.13em; line-height:1; text-transform:uppercase; }
+    .event-reservation-list { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin:20px 0 0; }.event-reservation-table { display:grid; min-height:63px; padding:9px; border:1px solid rgba(242,240,235,.57); background:transparent; color:var(--paper); text-align:left; cursor:pointer; transition:background-color 150ms ease,color 150ms ease,border-color 150ms ease; }.event-reservation-table span,.event-reservation-table small { display:block; text-transform:uppercase; }.event-reservation-table span { font-size:10px; font-weight:900; letter-spacing:.09em; line-height:1.1; }.event-reservation-table small { align-self:end; margin-top:7px; color:rgba(242,240,235,.58); font-size:7px; font-weight:700; letter-spacing:.12em; line-height:1; }.event-reservation-table:hover,.event-reservation-table:focus-visible,.event-reservation-table.is-selected { border-color:var(--paper); background:var(--paper); color:var(--ink); outline:0; }.event-reservation-table:hover small,.event-reservation-table:focus-visible small,.event-reservation-table.is-selected small { color:rgba(8,8,8,.62); }.event-reservation-table:focus-visible { outline:2px solid var(--paper); outline-offset:3px; }.event-reservation-table:disabled { cursor:not-allowed; border-color:rgba(242,240,235,.25); color:rgba(242,240,235,.42); }.event-reservation-table:disabled small { color:rgba(242,240,235,.36); }.event-reservation-table:disabled:hover { background:transparent; }
+    .event-reservation-selection { min-height:50px; margin:22px 0 0; padding:13px 0; border-top:1px solid rgba(242,240,235,.36); border-bottom:1px solid rgba(242,240,235,.36); color:rgba(242,240,235,.74); font-size:10px; font-weight:700; letter-spacing:.06em; line-height:1.35; text-transform:uppercase; }.event-reservation-selection b { color:var(--paper); }
+    .event-reservation-form { margin-top:22px; }.event-reservation-form label { display:block; margin:0 0 9px; color:rgba(242,240,235,.64); font-size:8px; font-weight:700; letter-spacing:.14em; line-height:1; text-transform:uppercase; }.event-reservation-form input { display:block; width:100%; min-height:46px; margin-top:7px; border:1px solid rgba(242,240,235,.6); border-radius:0; padding:0 11px; background:#101010; color:var(--paper); font:700 10px/1 Arial,Helvetica,sans-serif; letter-spacing:.07em; outline:0; text-transform:uppercase; }.event-reservation-form input:focus-visible { outline:2px solid var(--paper); outline-offset:3px; }.event-reservation-submit { display:flex; align-items:center; justify-content:space-between; width:100%; min-height:52px; margin-top:18px; padding:0 14px; border:1px solid var(--paper); background:var(--paper); color:var(--ink); font:700 9px/1 Arial,Helvetica,sans-serif; letter-spacing:.12em; text-transform:uppercase; cursor:pointer; }.event-reservation-submit b { font-size:17px; font-weight:400; }.event-reservation-submit:disabled { cursor:not-allowed; opacity:.42; }.event-reservation-submit:not(:disabled):hover,.event-reservation-submit:not(:disabled):focus-visible { background:#101010; color:var(--paper); outline:0; }.event-reservation-submit:focus-visible { outline:2px solid var(--paper); outline-offset:3px; }.event-reservation-result { min-height:34px; margin:13px 0 0; color:rgba(242,240,235,.64); font-size:9px; font-weight:700; letter-spacing:.06em; line-height:1.35; }
+    @media (max-width:650px) { .event-reservation-strip { grid-template-columns:1fr auto; gap:11px 14px; min-height:0; padding:16px 15px; }.event-reservation-kicker { grid-column:1 / -1; }.event-reservation-copy strong { font-size:10px; }.event-reservation-status { font-size:7px; white-space:normal; }.event-reservation-open { min-height:39px; padding:0 10px; font-size:7px; }.event-reservation-panel { align-items:flex-end; }.event-reservation-drawer { width:100%; height:100svh; height:100dvh; max-height:100svh; max-height:100dvh; border-top:0; border-left:0; transform:translate3d(0,100%,0); }.event-reservation-panel.is-open .event-reservation-drawer { transform:translate3d(0,0,0); }.event-reservation-drawer-head { padding:16px 18px 14px; }.event-reservation-drawer-main { padding:14px 18px; }.event-reservation-event { font-size:9px; }.event-reservation-availability { margin-top:8px; }.event-reservation-list { grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px; margin-top:14px; }.event-reservation-table { min-height:48px; padding:7px; }.event-reservation-table span { font-size:9px; }.event-reservation-table small { margin-top:5px; font-size:6px; letter-spacing:.09em; }.event-reservation-selection { min-height:40px; margin-top:14px; padding:10px 0; font-size:9px; }.event-reservation-form { margin-top:14px; }.event-reservation-form label { margin-bottom:7px; font-size:7px; }.event-reservation-form input { min-height:40px; margin-top:6px; }.event-reservation-submit { min-height:46px; margin-top:12px; }.event-reservation-result { min-height:24px; margin-top:9px; font-size:8px; } }
+    @media (prefers-reduced-motion:reduce) { .event-reservation-panel,.event-reservation-drawer { transition:none; } }
 
   </style>
 
@@ -841,9 +885,33 @@
           </aside>
         </div>
       </div>
+      <section class="event-reservation-strip" data-event-reservation-strip aria-label="Reserva de mesa para esta fecha">
+        <p class="event-reservation-kicker">Reservar mesa</p>
+        <div class="event-reservation-copy"><strong data-event-reservation-copy>Elegí una mesa disponible para esta fecha.</strong></div>
+        <p class="event-reservation-status"><i aria-hidden="true"></i><span data-event-reservation-status>Mesas disponibles</span></p>
+        <button class="event-reservation-open" type="button" data-event-reservation-open><span>Ver mesas disponibles</span><b aria-hidden="true">↗</b></button>
+      </section>
       <footer class="event-bottom"><span data-event-footer>FESTA BROS · Sábado 31 de octubre</span><button class="slider-enter" type="button">Entrar a ONE MORE</button></footer>
     </div>
   </section>  </div>
+  <div class="event-reservation-panel" data-event-reservation-panel hidden aria-hidden="true">
+    <aside class="event-reservation-drawer" role="dialog" aria-modal="true" aria-labelledby="event-reservation-title" aria-describedby="event-reservation-event" tabindex="-1">
+      <header class="event-reservation-drawer-head"><div><p class="event-reservation-drawer-kicker">Reserva de mesa</p><h2 id="event-reservation-title">Elegí tu mesa</h2></div><button class="event-reservation-close" type="button" data-event-reservation-close aria-label="Cerrar reserva de mesa">×</button></header>
+      <div class="event-reservation-drawer-main">
+        <p class="event-reservation-event" id="event-reservation-event" data-event-reservation-event></p>
+        <p class="event-reservation-availability" data-event-reservation-availability>Mesas disponibles para esta fecha</p>
+        <div class="event-reservation-list" data-event-reservation-list aria-label="Mesas disponibles"></div>
+        <p class="event-reservation-selection" data-event-reservation-selection>Elegí una mesa disponible.</p>
+        <form class="event-reservation-form" data-event-reservation-form novalidate>
+          <label for="event-reservation-name">Nombre y contacto</label>
+          <input id="event-reservation-name" name="name" type="text" autocomplete="name" placeholder="Tu nombre" required>
+          <input name="contact" type="tel" autocomplete="tel" placeholder="WhatsApp" required>
+          <button class="event-reservation-submit" type="submit" disabled data-event-reservation-submit><span>Continuar reserva</span><b aria-hidden="true">↗</b></button>
+          <p class="event-reservation-result" data-event-reservation-result aria-live="polite">Elegí una mesa disponible para continuar.</p>
+        </form>
+      </div>
+    </aside>
+  </div>
   <div id="entry-curtain" class="entry-curtain" aria-hidden="true">
     <div class="curtain-layout">
       <p class="curtain-index" data-curtain-index>01 / Próxima fecha</p>
@@ -1868,6 +1936,157 @@ Minimum version required to store current data is: `+i+`.
     const eventCountdownMinutes = document.querySelector('[data-event-countdown-minutes]');
     const eventCountdownLabel = document.querySelector('[data-event-countdown-label]');
     const isEventFinished = (event) => Date.parse(event.startsAt) <= Date.now();
+    const eventReservationStrip = document.querySelector('[data-event-reservation-strip]');
+    const eventReservationCopy = document.querySelector('[data-event-reservation-copy]');
+    const eventReservationStatus = document.querySelector('[data-event-reservation-status]');
+    const eventReservationOpenButton = document.querySelector('[data-event-reservation-open]');
+    const eventReservationPanel = document.querySelector('[data-event-reservation-panel]');
+    const eventReservationDrawer = eventReservationPanel.querySelector('.event-reservation-drawer');
+    const eventReservationCloseButton = document.querySelector('[data-event-reservation-close]');
+    const eventReservationEvent = document.querySelector('[data-event-reservation-event]');
+    const eventReservationAvailability = document.querySelector('[data-event-reservation-availability]');
+    const eventReservationList = document.querySelector('[data-event-reservation-list]');
+    const eventReservationSelection = document.querySelector('[data-event-reservation-selection]');
+    const eventReservationForm = document.querySelector('[data-event-reservation-form]');
+    const eventReservationSubmit = document.querySelector('[data-event-reservation-submit]');
+    const eventReservationResult = document.querySelector('[data-event-reservation-result]');
+    let eventReservationReturnFocus = null;
+    let eventReservationHideTimer;
+    let eventReservationShouldReturnFocus = false;
+    const eventReservationTableName = (table) => ({ '1':'Backstage', '2':'Private' }[table] || 'Mesa disponible');
+    const setReservationDateFromEvent = (event) => {
+      if (!reservationDate || isEventFinished(event)) return;
+      const option = [...reservationDate.options].find((item) => item.value === event.slug);
+      if (option) reservationDate.value = event.slug;
+    };
+    const selectedEventTables = () => getSelectedDemoTables().filter((table) => !tablePlanButtons.find((button) => button.dataset.table === table)?.disabled);
+    const syncEventReservationStrip = (event) => {
+      const finished = isEventFinished(event);
+      eventReservationStrip.classList.toggle('is-closed', finished);
+      eventReservationCopy.textContent = finished
+        ? 'La reserva de mesa para esta fecha finalizó.'
+        : `Elegí una mesa disponible para ${event.footer}.`;
+      eventReservationStatus.textContent = finished ? 'Reserva cerrada' : 'Mesas disponibles';
+      eventReservationOpenButton.disabled = finished;
+      eventReservationOpenButton.setAttribute('aria-disabled', String(finished));
+      eventReservationOpenButton.setAttribute('aria-label', finished ? `Reserva de mesa cerrada para ${event.footer}` : `Ver mesas disponibles para ${event.footer}`);
+      eventReservationOpenButton.querySelector('span').textContent = finished ? 'Reserva cerrada' : 'Ver mesas disponibles';
+    };
+    const renderEventReservationDrawer = (event) => {
+      const finished = isEventFinished(event);
+      eventReservationEvent.textContent = `${event.footer} · ${event.time} · ${event.place}`;
+      eventReservationAvailability.textContent = finished ? 'Reserva cerrada para esta fecha' : 'Mesas disponibles para esta fecha';
+      eventReservationList.replaceChildren();
+      tablePlanButtons.forEach((source) => {
+        const table = source.dataset.table;
+        const unavailable = source.disabled || finished;
+        const selected = selectedEventTables().includes(table);
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'event-reservation-table';
+        button.disabled = unavailable;
+        button.classList.toggle('is-selected', selected);
+        button.setAttribute('aria-pressed', String(selected));
+        const label = document.createElement('span');
+        label.textContent = `Mesa ${table}`;
+        const detail = document.createElement('small');
+        detail.textContent = unavailable ? 'Reservada' : (eventReservationTableName(table) === 'Mesa disponible' ? 'Disponible' : `${eventReservationTableName(table)} · Disponible`);
+        button.append(label, detail);
+        button.setAttribute('aria-label', `Mesa ${table}, ${unavailable ? 'reservada' : 'disponible'}${!unavailable && eventReservationTableName(table) !== 'Mesa disponible' ? `, ${eventReservationTableName(table)}` : ''}`);
+        button.addEventListener('click', () => {
+          if (unavailable) return;
+          const wasSelected = selectedDemoTables.has(table);
+          if (wasSelected) selectedDemoTables.delete(table); else selectedDemoTables.add(table);
+          syncDemoReservation();
+          renderEventReservationDrawer(event);
+          const selected = selectedEventTables();
+          eventReservationResult.textContent = selected.length
+            ? `${selectedTablesLabel()} ${selected.length === 1 ? 'seleccionada' : 'seleccionadas'} para ${event.footer}.`
+            : 'Elegí una o más mesas disponibles para continuar.';
+        });
+        eventReservationList.append(button);
+      });
+      const selected = selectedEventTables();
+      eventReservationSelection.innerHTML = selected.length ? `Mesas elegidas · <b>${selectedTablesLabel()}</b>` : 'Elegí una o más mesas disponibles.';
+      eventReservationSubmit.disabled = !selected.length || finished;
+      if (selected.length && !finished) eventReservationResult.textContent = `${selectedTablesLabel()} ${selected.length === 1 ? 'seleccionada' : 'seleccionadas'} para ${event.footer}.`;
+      if (!selected.length && !finished) eventReservationResult.textContent = 'Elegí una o más mesas disponibles para continuar.';
+      if (finished) eventReservationResult.textContent = 'La reserva para esta fecha finalizó.';
+    };
+    const finishClosingEventReservationPanel = () => {
+      if (eventReservationPanel.hidden || eventReservationPanel.classList.contains('is-open')) return;
+      eventReservationPanel.hidden = true;
+      if (eventReservationShouldReturnFocus && eventReservationReturnFocus) eventReservationReturnFocus.focus();
+      eventReservationReturnFocus = null;
+      eventReservationShouldReturnFocus = false;
+    };
+    const closeEventReservationPanel = ({ returnFocus = true } = {}) => {
+      if (eventReservationPanel.hidden || !eventReservationPanel.classList.contains('is-open')) return;
+      eventReservationShouldReturnFocus = returnFocus;
+      eventReservationPanel.classList.remove('is-open');
+      eventReservationPanel.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('event-reservation-open');
+      window.clearTimeout(eventReservationHideTimer);
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        finishClosingEventReservationPanel();
+        return;
+      }
+      // Fallback only: normally the drawer's transform transition finishes the close.
+      eventReservationHideTimer = window.setTimeout(finishClosingEventReservationPanel, 380);
+    };
+    const openEventReservationPanel = (trigger) => {
+      const event = upcomingEvents[activeEventIndex];
+      if (!event || isEventFinished(event)) return;
+      window.clearTimeout(eventReservationHideTimer);
+      eventReservationShouldReturnFocus = false;
+      eventReservationReturnFocus = trigger;
+      setReservationDateFromEvent(event);
+      renderEventReservationDrawer(event);
+      eventReservationPanel.hidden = false;
+      eventReservationPanel.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('event-reservation-open');
+      // Force the off-screen state to be committed before adding .is-open. On mobile this
+      // avoids the browser coalescing display:none → final transform into an abrupt sheet.
+      void eventReservationDrawer.offsetWidth;
+      requestAnimationFrame(() => {
+        eventReservationPanel.classList.add('is-open');
+        eventReservationCloseButton.focus();
+      });
+    };
+    eventReservationOpenButton.addEventListener('click', () => openEventReservationPanel(eventReservationOpenButton));
+    eventReservationCloseButton.addEventListener('click', () => closeEventReservationPanel());
+    eventReservationPanel.addEventListener('click', (event) => { if (event.target === eventReservationPanel) closeEventReservationPanel(); });
+    eventReservationDrawer.addEventListener('transitionend', (event) => {
+      if (event.target === eventReservationDrawer && event.propertyName === 'transform') finishClosingEventReservationPanel();
+    });
+    eventReservationDrawer.addEventListener('keydown', (event) => {
+      if (event.key !== 'Tab') return;
+      const focusable = [...eventReservationDrawer.querySelectorAll('button:not([disabled]), input:not([disabled])')];
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    });
+    eventReservationForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const currentEvent = upcomingEvents[activeEventIndex];
+      const tables = selectedEventTables();
+      if (!currentEvent || isEventFinished(currentEvent) || !tables.length) {
+        eventReservationResult.textContent = 'Elegí una o más mesas disponibles para continuar.';
+        return;
+      }
+      const formData = new FormData(eventReservationForm);
+      const name = String(formData.get('name') || '').trim();
+      eventReservationResult.textContent = `${name || 'Solicitud'} · ${selectedTablesLabel().toLowerCase()} · ${currentEvent.footer}.`;
+      showActionNotice(`${tables.length} ${tables.length === 1 ? 'mesa seleccionada' : 'mesas seleccionadas'}`);
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape' || eventReservationPanel.hidden) return;
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      closeEventReservationPanel();
+    });
     const syncEventAvailability = (event) => {
       const finished = isEventFinished(event);
       eventPoster.classList.toggle('is-finished', finished);
@@ -1884,6 +2103,7 @@ Minimum version required to store current data is: `+i+`.
         eventTicket.removeAttribute('tabindex');
         eventTicket.replaceChildren(document.createTextNode(event.ticket), Object.assign(document.createElement('b'), { textContent:'↗', ariaHidden:'true' }));
       }
+      syncEventReservationStrip(event);
     };
     const refreshEventCountdown = () => {
       const event = upcomingEvents[activeEventIndex];
