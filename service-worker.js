@@ -1,4 +1,4 @@
-const CACHE_NAME = 'one-more-shell-v107';
+const CACHE_NAME = 'one-more-shell-v108';
 const APP_SHELL = [
   '/',
   '/index.html',
@@ -9,7 +9,8 @@ const APP_SHELL = [
   '/assets/one-logo.webp',
   '/assets/notification-icon.png?v=1',
   '/assets/notification-badge.png?v=1',
-  '/assets/one-more-crowd-hero.webp'
+  '/assets/one-more-crowd-hero.webp',
+  '/assets/gallery-dancefloor.webp'
 ];
 
 self.addEventListener('install', (event) => {
@@ -25,7 +26,7 @@ self.addEventListener('fetch', (event) => {
   if (request.method !== 'GET') return;
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
-  // The video and MapCN assets are on-demand. This preserves a lightweight initial install.
+  // The hero video is not precached; MapCN assets load on demand, while its poster and login image stay cached.
   if (url.pathname.endsWith('.mp4')) return;
 
   if (request.mode === 'navigate') {

@@ -8,6 +8,7 @@
   <meta name="description" content="Accedé a tu cuenta ONE MORE.">
   <link rel="icon" href="../assets/favicon.ico?v=3" sizes="any">
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png?v=3">
+  <link rel="preload" as="image" href="../assets/gallery-dancefloor.webp" fetchpriority="high">
   <style>
     :root {
       --black:#090a08;
@@ -20,10 +21,9 @@
     html, body { width:100%; min-width:320px; min-height:100%; margin:0; }
     body { overflow:hidden; background:var(--black); color:var(--paper); font-family:Arial, Helvetica, sans-serif; }
     .account-screen { position:relative; isolation:isolate; height:100svh; min-height:520px; overflow:hidden; background:var(--black); }
-    .video-area { position:absolute; z-index:-2; top:0; right:0; left:0; height:60svh; min-height:312px; overflow:hidden; background:#161813; }
-    .video-area::after { position:absolute; inset:0; background:linear-gradient(to bottom,rgba(9,10,8,.04) 25%,rgba(9,10,8,.2) 52%,var(--black) 100%); content:""; }
-    .video-area::before { position:absolute; z-index:1; top:0; right:0; bottom:0; left:0; opacity:.19; background-image:linear-gradient(rgba(244,242,235,.15) 1px,transparent 1px),linear-gradient(90deg,rgba(244,242,235,.15) 1px,transparent 1px); background-size:25% 25%; mask-image:linear-gradient(to bottom,black,transparent 78%); content:""; }
-    video { display:block; width:100%; height:100%; object-fit:cover; object-position:center 43%; filter:grayscale(.32) brightness(.62) contrast(1.08); }
+    .visual-area { position:absolute; z-index:-2; top:0; right:0; left:0; height:60svh; min-height:312px; overflow:hidden; background:#161813 url('../assets/gallery-dancefloor.webp') center 43%/cover no-repeat; }
+    .visual-area::after { position:absolute; inset:0; background:linear-gradient(to bottom,rgba(9,10,8,.04) 25%,rgba(9,10,8,.2) 52%,var(--black) 100%); content:""; }
+    .visual-area::before { position:absolute; z-index:1; top:0; right:0; bottom:0; left:0; opacity:.19; background-image:linear-gradient(rgba(244,242,235,.15) 1px,transparent 1px),linear-gradient(90deg,rgba(244,242,235,.15) 1px,transparent 1px); background-size:25% 25%; mask-image:linear-gradient(to bottom,black,transparent 78%); content:""; }
     .identity { position:absolute; z-index:2; top:clamp(22px,4vw,46px); left:clamp(22px,5.2vw,76px); display:flex; align-items:center; gap:12px; color:var(--paper); font-size:10px; font-weight:700; letter-spacing:.105em; line-height:.96; text-transform:uppercase; }
     .identity img { display:block; width:39px; height:39px; object-fit:contain; }
     .identity-name { display:block; }
@@ -53,21 +53,20 @@
     .form-cancel { display:flex; align-items:center; justify-content:space-between; min-height:44px; margin-top:9px; border:1px solid rgba(244,242,235,.58); border-radius:0; padding:0 15px 0 16px; color:var(--paper); font-size:10px; font-weight:700; letter-spacing:.12em; line-height:1; text-decoration:none; text-transform:uppercase; transition:background-color 180ms ease,color 180ms ease,border-color 180ms ease; }
     .form-cancel b { font-size:17px; font-weight:400; line-height:1; }
     .form-cancel:hover, .form-cancel:focus-visible { border-color:var(--paper); background:var(--paper); color:var(--black); outline:2px solid var(--paper); outline-offset:4px; }
-    .video-copy, .site-details { display:none; }
+    .visual-copy, .site-details { display:none; }
 
     @media (min-width:980px) {
       .account-screen { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(455px,.9fr); min-height:660px; }
-      .video-area { position:relative; z-index:0; grid-column:1; grid-row:1; height:100svh; min-height:660px; contain:layout paint; }
-      .video-area::after { background:linear-gradient(0deg,rgba(9,10,8,.89) 0%,rgba(9,10,8,.28) 51%,rgba(9,10,8,.15) 100%); }
-      .video-area::before { display:none; }
-      .video-area video { filter:none; transform:translateZ(0); backface-visibility:hidden; }
+      .visual-area { position:relative; z-index:0; grid-column:1; grid-row:1; height:100svh; min-height:660px; contain:layout paint; }
+      .visual-area::after { background:linear-gradient(0deg,rgba(9,10,8,.89) 0%,rgba(9,10,8,.28) 51%,rgba(9,10,8,.15) 100%); }
+      .visual-area::before { display:none; }
       .identity { top:clamp(28px,4vw,62px); left:clamp(28px,4.7vw,74px); }
       .identity img { width:42px; height:42px; }
-      .video-copy { position:absolute; z-index:2; right:clamp(30px,5.5vw,90px); bottom:clamp(38px,6.5vw,96px); left:clamp(30px,5.5vw,90px); display:block; }
-      .video-copy p { margin:0 0 18px; color:rgba(244,242,235,.67); font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; }
-      .video-copy h2 { max-width:none; margin:0; color:var(--paper); font-size:clamp(54px,5.15vw,88px); font-weight:900; letter-spacing:-.072em; line-height:.79; text-transform:uppercase; white-space:nowrap; }
-      .video-copy h2 span { display:block; padding-left:.055em; white-space:nowrap; }
-      .video-copy small { display:block; margin-top:25px; color:rgba(244,242,235,.67); font-size:11px; font-weight:700; letter-spacing:.02em; line-height:1.45; }
+      .visual-copy { position:absolute; z-index:2; right:clamp(30px,5.5vw,90px); bottom:clamp(38px,6.5vw,96px); left:clamp(30px,5.5vw,90px); display:block; }
+      .visual-copy p { margin:0 0 18px; color:rgba(244,242,235,.67); font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; }
+      .visual-copy h2 { max-width:none; margin:0; color:var(--paper); font-size:clamp(54px,5.15vw,88px); font-weight:900; letter-spacing:-.072em; line-height:.79; text-transform:uppercase; white-space:nowrap; }
+      .visual-copy h2 span { display:block; padding-left:.055em; white-space:nowrap; }
+      .visual-copy small { display:block; margin-top:25px; color:rgba(244,242,235,.67); font-size:11px; font-weight:700; letter-spacing:.02em; line-height:1.45; }
       .account-content { position:relative; z-index:1; grid-column:2; grid-row:1; display:flex; align-items:center; justify-content:center; height:100svh; min-height:660px; padding:clamp(38px,6.2vw,92px); border-left:1px solid rgba(244,242,235,.17); background:var(--black); }
       .account-form-wrap { width:min(100%,455px); }
       h1 { font-size:clamp(56px,4.35vw,76px); }
@@ -85,7 +84,7 @@
     }
     @media (max-height:650px) and (max-width:979px) {
       .account-screen { min-height:0; }
-      .video-area { min-height:0; }
+      .visual-area { min-height:0; }
       .account-content { padding-bottom:18px; }
       .intro { margin:12px 0 15px; }
       .field input { height:45px; }
@@ -97,14 +96,11 @@
 </head>
 <body>
   <main class="account-screen" aria-labelledby="account-title">
-    <div class="video-area">
-      <video aria-hidden="true" autoplay muted loop playsinline preload="auto">
-        <source src="../assets/one-more-hero.mp4" type="video/mp4">
-      </video>
-      <div class="video-copy">
+    <div class="visual-area">
+      <div class="visual-copy">
         <p>ONE MORE CLUB · DEVOTO</p>
         <h2>La noche<span>no termina.</span></h2>
-        <small>Electrónica, comunidad y una noche que no termina.</small>
+        <small>Próximas fechas, DJs y música electrónica en Villa Devoto.</small>
       </div>
     </div>
 
