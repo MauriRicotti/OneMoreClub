@@ -1,0 +1,821 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#080808">
+  <meta name="description" content="Fechas, artistas, entradas y reservas de ONE MORE ELECTRONIC.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="ONE MORE Fechas">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="../assets/favicon.ico">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <title>Fechas · ONE MORE ELECTRONIC</title>
+  <style>
+    :root { color-scheme:dark; --ink:#080808; --paper:#f2f0eb; --muted:rgba(242,240,235,.64); --line:rgba(242,240,235,.35); --accent:#d9d7d2; }
+    * { box-sizing:border-box; }
+    html { min-height:100%; background:var(--ink); scroll-behavior:smooth; }
+    body { min-height:100vh; margin:0; padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom); background:var(--ink); color:var(--paper); font-family:Arial,Helvetica,sans-serif; -webkit-font-smoothing:antialiased; }
+    button,input { font:inherit; }
+    button,a { -webkit-tap-highlight-color:transparent; }
+    a { color:inherit; }
+    button { color:inherit; }
+    [hidden] { display:none !important; }
+    .app-header { position:sticky; top:0; z-index:20; display:flex; align-items:center; justify-content:space-between; gap:16px; min-height:72px; padding:10px max(18px,calc((100vw - 1320px)/2)); border-bottom:1px solid rgba(242,240,235,.25); background:rgba(8,8,8,.96); }
+    .brand { display:flex; align-items:center; gap:10px; color:var(--paper); text-decoration:none; }
+    .brand img { display:block; width:38px; height:38px; object-fit:contain; }
+    .brand span { font-size:9px; font-weight:700; letter-spacing:.12em; line-height:1; text-transform:uppercase; }
+    .header-actions { display:flex; align-items:center; gap:8px; }
+    .header-link,.install-button { display:inline-flex; align-items:center; justify-content:center; min-height:38px; padding:0 12px; border:1px solid rgba(242,240,235,.55); background:transparent; color:var(--paper); font-size:8px; font-weight:700; letter-spacing:.12em; text-decoration:none; text-transform:uppercase; cursor:pointer; }
+    .install-button { border-color:var(--paper); background:var(--paper); color:var(--ink); }
+    .header-link:hover,.header-link:focus-visible,.install-button:hover,.install-button:focus-visible { outline:2px solid var(--paper); outline-offset:3px; }
+    .app-shell { width:min(100%,1360px); margin:0 auto; padding:0 15px 24px; }
+    .screen-top { display:flex; align-items:center; justify-content:space-between; gap:14px; min-height:60px; padding:10px 6px; border-bottom:1px solid var(--line); }
+    .screen-kicker { margin:0; color:var(--muted); font-size:8px; font-weight:700; letter-spacing:.16em; line-height:1.2; text-transform:uppercase; }
+    .screen-label { margin:5px 0 0; font-size:10px; font-weight:900; letter-spacing:.12em; line-height:1; text-transform:uppercase; }
+    .event-switcher { display:flex; align-items:center; gap:8px; }
+    .event-switcher button,.modal-close,.drawer-close { display:grid; place-items:center; flex:0 0 auto; width:35px; height:35px; padding:0; border:1px solid rgba(242,240,235,.55); background:transparent; color:var(--paper); font-size:18px; line-height:1; cursor:pointer; }
+    .event-switcher button:disabled { opacity:.35; cursor:not-allowed; }
+    .event-switcher button:not(:disabled):hover,.event-switcher button:not(:disabled):focus-visible,.modal-close:hover,.modal-close:focus-visible,.drawer-close:hover,.drawer-close:focus-visible { border-color:var(--paper); background:var(--paper); color:var(--ink); outline:0; }
+    .event-switcher button:focus-visible,.modal-close:focus-visible,.drawer-close:focus-visible { outline:2px solid var(--paper); outline-offset:3px; }
+    .event-position { min-width:55px; color:var(--muted); font-size:8px; font-weight:700; letter-spacing:.14em; text-align:center; }
+    .event-position i { padding:0 4px; font-style:normal; }
+    .no-upcoming { margin:15px 0; padding:12px 14px; border:1px solid rgba(242,240,235,.38); color:var(--paper); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1.4; text-transform:uppercase; }
+    .empty-state { display:flex; min-height:min(70svh,720px); flex-direction:column; justify-content:center; padding:clamp(28px,7vw,88px); border:1px solid rgba(242,240,235,.42); background:var(--paper); color:var(--ink); }
+    .empty-state p { margin:0; color:rgba(8,8,8,.62); font-size:9px; font-weight:700; letter-spacing:.15em; text-transform:uppercase; }
+    .empty-state h1 { max-width:760px; margin:24px 0; font-size:clamp(48px,10vw,116px); font-weight:900; letter-spacing:-.09em; line-height:.82; text-transform:uppercase; }
+    .empty-state a { align-self:flex-start; padding:12px 14px; border:1px solid var(--ink); color:var(--ink); font-size:8px; font-weight:700; letter-spacing:.13em; text-decoration:none; text-transform:uppercase; }
+    .event-card { margin-top:15px; overflow:hidden; border:1px solid rgba(242,240,235,.48); background:var(--paper); color:var(--ink); }
+    .event-stage { display:grid; grid-template-columns:minmax(260px,.88fr) minmax(0,1.12fr); min-height:min(690px,calc(100svh - 150px)); transition:opacity 180ms ease,transform 220ms cubic-bezier(.22,.8,.22,1); }
+    .event-stage.is-changing { opacity:0; transform:translate3d(-14px,0,0); }
+    .event-poster { position:relative; display:grid; place-items:center; min-width:0; min-height:400px; margin:0; overflow:hidden; border-right:1px solid rgba(8,8,8,.55); background:#101010; }
+    .event-poster img { display:block; width:100%; height:100%; max-height:820px; object-fit:contain; }
+    .event-status { position:absolute; left:14px; bottom:14px; padding:8px 10px; border:1px solid rgba(242,240,235,.75); background:rgba(8,8,8,.88); color:var(--paper); font-size:8px; font-weight:700; letter-spacing:.13em; text-transform:uppercase; }
+    .event-content { display:grid; grid-template-columns:minmax(0,1fr) minmax(255px,.84fr); min-width:0; }
+    .event-title { display:flex; min-width:0; min-height:100%; flex-direction:column; justify-content:space-between; padding:clamp(25px,4vw,58px) clamp(20px,3.5vw,46px) 27px; border-right:1px solid rgba(8,8,8,.55); }
+    .event-label { margin:0; color:rgba(8,8,8,.6); font-size:8px; font-weight:700; letter-spacing:.15em; line-height:1.25; text-transform:uppercase; }
+    .event-title h1 { max-width:100%; margin:45px 0; font-size:clamp(54px,7vw,106px); font-weight:900; letter-spacing:-.105em; line-height:.78; overflow-wrap:anywhere; text-transform:uppercase; }
+    .event-title h1 span { display:block; }
+    .event-title.is-long-title h1 { font-size:clamp(48px,5.6vw,82px); letter-spacing:-.09em; line-height:.86; }
+    .event-lineup { max-width:400px; padding-top:14px; border-top:1px solid rgba(8,8,8,.57); }
+    .event-lineup span { color:rgba(8,8,8,.58); font-size:8px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; }
+    .event-lineup p { margin:8px 0 0; font-size:clamp(12px,1.2vw,16px); font-weight:700; letter-spacing:-.025em; line-height:1.25; text-transform:uppercase; }
+    .event-info { display:flex; min-width:0; flex-direction:column; justify-content:space-between; padding:clamp(22px,3vw,42px) clamp(18px,2.4vw,34px) 22px; background:#101010; color:var(--paper); }
+    .event-info-main { flex:1; }
+    .event-number { display:flex; align-items:baseline; gap:10px; margin:0; font-weight:900; line-height:.68; text-transform:uppercase; }
+    .event-number strong { font-size:clamp(76px,8vw,118px); letter-spacing:-.11em; }
+    .event-number small { font-size:10px; letter-spacing:.16em; }
+    .event-details { margin:30px 0 0; border-top:1px solid var(--line); }
+    .event-detail { display:grid; grid-template-columns:68px minmax(0,1fr); gap:11px; padding:12px 0; border-bottom:1px solid var(--line); }
+    .event-detail dt { color:var(--muted); font-size:8px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; }
+    .event-detail dd { min-width:0; margin:0; font-size:10px; font-weight:700; letter-spacing:.035em; line-height:1.32; overflow-wrap:anywhere; text-transform:uppercase; }
+    .countdown { margin-top:16px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+    .countdown-head { padding:8px 0; color:var(--muted); font-size:8px; font-weight:700; letter-spacing:.14em; line-height:1; text-transform:uppercase; }
+    .countdown-clock { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; background:var(--line); }
+    .countdown-clock span { display:flex; flex-direction:column; gap:5px; padding:9px 7px 8px; background:#101010; }
+    .countdown-clock b { font-size:clamp(18px,2vw,27px); font-weight:900; letter-spacing:-.08em; line-height:.8; }
+    .countdown-clock small { color:var(--muted); font-size:7px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
+    .event-actions { display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) 46px; gap:6px; margin-top:15px; }
+    .ticket-link,.action-button { display:flex; min-width:0; min-height:46px; align-items:center; justify-content:space-between; gap:8px; padding:0 11px; border:1px solid rgba(242,240,235,.68); background:transparent; color:var(--paper); font-size:8px; font-weight:700; letter-spacing:.1em; line-height:1.1; text-align:left; text-decoration:none; text-transform:uppercase; cursor:pointer; }
+    .ticket-link { border-color:var(--paper); background:var(--paper); color:var(--ink); }
+    .ticket-link b,.action-button b { flex:0 0 auto; font-size:16px; font-weight:400; }
+    .action-button { font-family:inherit; }
+    .ticket-link:hover:not(.is-disabled),.ticket-link:focus-visible,.action-button:hover,.action-button:focus-visible { outline:2px solid var(--paper); outline-offset:3px; }
+    .ticket-link.is-disabled { border-color:rgba(242,240,235,.34); background:transparent; color:rgba(242,240,235,.52); cursor:default; pointer-events:none; }
+    .event-reservation-strip { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,1.5fr) auto auto; align-items:center; gap:12px; padding:15px 18px; border-top:1px solid rgba(242,240,235,.3); background:#101010; color:var(--paper); }
+    .reservation-kicker,.reservation-status { margin:0; font-size:8px; font-weight:700; letter-spacing:.13em; line-height:1.25; text-transform:uppercase; }
+    .reservation-kicker { color:var(--muted); }
+    .reservation-copy { min-width:0; margin:0; font-size:9px; font-weight:700; letter-spacing:.025em; line-height:1.35; text-transform:uppercase; }
+    .reservation-status { display:flex; align-items:center; gap:7px; color:rgba(242,240,235,.75); white-space:nowrap; }
+    .reservation-status i { width:7px; height:7px; border:1px solid var(--paper); }
+    .reservation-strip.is-closed .reservation-status { color:rgba(242,240,235,.48); }
+    .reservation-strip.is-closed .reservation-status i { border-color:rgba(242,240,235,.45); background:rgba(242,240,235,.2); }
+    .reservation-open { display:inline-flex; min-height:38px; align-items:center; justify-content:space-between; gap:16px; padding:0 11px; border:1px solid var(--paper); background:var(--paper); color:var(--ink); font-size:7px; font-weight:700; letter-spacing:.11em; text-transform:uppercase; cursor:pointer; }
+    .reservation-open:hover:not(:disabled),.reservation-open:focus-visible { border-color:var(--paper); background:transparent; color:var(--paper); outline:2px solid var(--paper); outline-offset:3px; }
+    .reservation-open:disabled { border-color:rgba(242,240,235,.3); background:transparent; color:rgba(242,240,235,.45); cursor:not-allowed; }
+    .screen-footer { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 6px 0; color:var(--muted); font-size:8px; font-weight:700; letter-spacing:.13em; line-height:1.3; text-transform:uppercase; }
+    .screen-footer a { color:var(--paper); text-decoration:none; }
+    .screen-footer a:hover,.screen-footer a:focus-visible { text-decoration:underline; outline:0; }
+    .notice { position:fixed; z-index:300; right:18px; bottom:calc(18px + env(safe-area-inset-bottom)); left:18px; width:max-content; max-width:calc(100% - 36px); margin:auto; padding:11px 14px; border:1px solid var(--ink); background:var(--paper); color:var(--ink); font-size:9px; font-weight:700; letter-spacing:.12em; line-height:1.25; text-transform:uppercase; opacity:0; pointer-events:none; transform:translate3d(0,8px,0); transition:opacity 150ms ease,transform 150ms ease; }
+    .notice.is-visible { opacity:1; transform:translate3d(0,0,0); }
+    .modal-layer,.drawer-layer { position:fixed; z-index:100; inset:0; display:grid; place-items:center; padding:16px; background:rgba(8,8,8,.82); opacity:0; visibility:hidden; transition:opacity 180ms ease,visibility 0s linear 200ms; }
+    .modal-layer.is-open,.drawer-layer.is-open { visibility:visible; pointer-events:auto; opacity:1; transition-delay:0s; }
+    .modal { position:relative; width:min(100%,440px); max-height:min(92svh,820px); overflow:auto; border:1px solid var(--ink); background:var(--paper); color:var(--ink); box-shadow:7px 7px 0 rgba(8,8,8,.9); opacity:0; transform:translate3d(0,10px,0); transition:opacity 160ms ease,transform 190ms cubic-bezier(.22,.8,.22,1); }
+    .modal-layer.is-open .modal { opacity:1; transform:translate3d(0,0,0); }
+    .modal-head,.drawer-head { display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:16px 17px 14px; border-bottom:1px solid rgba(8,8,8,.62); }
+    .modal-kicker,.drawer-kicker { margin:0 0 7px; color:rgba(8,8,8,.58); font-size:8px; font-weight:700; letter-spacing:.15em; line-height:1; text-transform:uppercase; }
+    .modal-head h2,.drawer-head h2 { margin:0; font-size:clamp(30px,7vw,44px); font-weight:900; letter-spacing:-.09em; line-height:.82; text-transform:uppercase; }
+    .modal-close,.drawer-close { border-color:rgba(8,8,8,.72); color:var(--ink); font-size:21px; }
+    .modal-close:hover,.modal-close:focus-visible,.drawer-close:hover,.drawer-close:focus-visible { border-color:var(--ink); background:var(--ink); color:var(--paper); outline-color:var(--ink); }
+    .qr-main { display:flex; flex-direction:column; align-items:center; padding:20px 17px 18px; }
+    .qr-code { display:grid; place-items:center; width:min(100%,270px); min-height:270px; padding:10px; border:1px solid var(--ink); background:var(--paper); }
+    .qr-code svg { display:block; width:100%; height:auto; }
+    .qr-code-status { margin:0; color:rgba(8,8,8,.65); font-size:9px; font-weight:700; letter-spacing:.12em; line-height:1.4; text-align:center; text-transform:uppercase; }
+    .qr-description { max-width:280px; margin:15px 0 0; font-size:10px; font-weight:700; letter-spacing:.025em; line-height:1.4; text-align:center; text-transform:uppercase; }
+    .modal-actions { display:grid; grid-template-columns:1fr 1fr; gap:7px; width:100%; margin-top:18px; }
+    .modal-actions button,.dialog-button { display:flex; min-height:43px; align-items:center; justify-content:space-between; gap:8px; padding:0 12px; border:1px solid var(--ink); background:transparent; color:var(--ink); font-size:8px; font-weight:700; letter-spacing:.1em; text-align:left; text-transform:uppercase; cursor:pointer; }
+    .modal-actions button:hover:not(:disabled),.modal-actions button:focus-visible,.dialog-button:hover,.dialog-button:focus-visible { background:var(--ink); color:var(--paper); outline:2px solid var(--ink); outline-offset:2px; }
+    .modal-actions button:disabled { opacity:.45; cursor:wait; }
+    .drawer-layer { display:flex; justify-content:flex-end; padding:0; background:rgba(8,8,8,.68); transition:opacity 170ms ease,visibility 0s linear 210ms; }
+    .drawer-layer[hidden],.modal-layer[hidden] { display:none; }
+    .drawer { display:flex; width:min(100%,520px); height:100vh; height:100dvh; flex-direction:column; overflow:hidden; border-left:1px solid rgba(242,240,235,.45); background:#101010; color:var(--paper); box-shadow:-12px 0 30px rgba(0,0,0,.3); transform:translate3d(100%,0,0); transition:transform 190ms cubic-bezier(.22,.8,.22,1); }
+    .drawer-layer.is-open .drawer { transform:translate3d(0,0,0); }
+    .drawer-head { border-bottom-color:var(--line); }
+    .drawer-kicker { color:var(--muted); }
+    .drawer-head h2 { font-size:clamp(33px,5vw,48px); }
+    .drawer-close { border-color:rgba(242,240,235,.65); color:var(--paper); }
+    .drawer-close:hover,.drawer-close:focus-visible { border-color:var(--paper); background:var(--paper); color:var(--ink); outline-color:var(--paper); }
+    .drawer-main { min-height:0; flex:1; overflow-y:auto; overscroll-behavior:contain; padding:17px 18px 24px; }
+    .drawer-event { margin:0; color:rgba(242,240,235,.78); font-size:9px; font-weight:700; letter-spacing:.07em; line-height:1.35; text-transform:uppercase; }
+    .drawer-availability { margin:8px 0 0; color:var(--muted); font-size:8px; font-weight:700; letter-spacing:.13em; line-height:1.3; text-transform:uppercase; }
+    .table-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:6px; margin-top:16px; }
+    .table-choice { display:grid; min-height:55px; padding:8px; border:1px solid rgba(242,240,235,.56); background:transparent; color:var(--paper); text-align:left; cursor:pointer; transition:background-color 140ms ease,color 140ms ease,border-color 140ms ease; }
+    .table-choice span,.table-choice small { display:block; text-transform:uppercase; }
+    .table-choice span { font-size:9px; font-weight:900; letter-spacing:.08em; }
+    .table-choice small { align-self:end; margin-top:6px; color:var(--muted); font-size:6px; font-weight:700; letter-spacing:.11em; }
+    .table-choice:hover:not(:disabled),.table-choice:focus-visible,.table-choice.is-selected { border-color:var(--paper); background:var(--paper); color:var(--ink); outline:0; }
+    .table-choice:hover small,.table-choice:focus-visible small,.table-choice.is-selected small { color:rgba(8,8,8,.62); }
+    .table-choice:focus-visible { outline:2px solid var(--paper); outline-offset:2px; }
+    .table-choice:disabled { border-color:rgba(242,240,235,.24); color:rgba(242,240,235,.42); cursor:not-allowed; }
+    .table-choice:disabled small { color:rgba(242,240,235,.35); }
+    .selection-summary { min-height:44px; margin:15px 0 0; padding:11px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); color:rgba(242,240,235,.76); font-size:9px; font-weight:700; letter-spacing:.05em; line-height:1.35; text-transform:uppercase; }
+    .selection-summary b { color:var(--paper); }
+    .plan-trigger { display:flex; width:100%; min-height:41px; align-items:center; justify-content:space-between; gap:10px; margin-top:13px; padding:0 12px; border:1px solid rgba(242,240,235,.58); background:transparent; color:var(--paper); font-size:8px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; cursor:pointer; }
+    .plan-trigger:hover,.plan-trigger:focus-visible { border-color:var(--paper); background:var(--paper); color:var(--ink); outline:2px solid var(--paper); outline-offset:2px; }
+    .reservation-form { margin-top:17px; }
+    .reservation-form label { display:block; margin:0 0 8px; color:var(--muted); font-size:8px; font-weight:700; letter-spacing:.13em; text-transform:uppercase; }
+    .reservation-form input { display:block; width:100%; min-height:43px; margin-top:7px; padding:0 10px; border:1px solid rgba(242,240,235,.56); border-radius:0; background:#101010; color:var(--paper); font-size:10px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; }
+    .reservation-form input::placeholder { color:rgba(242,240,235,.52); }
+    .reservation-form input:focus-visible { outline:2px solid var(--paper); outline-offset:2px; }
+    .reservation-submit { display:flex; width:100%; min-height:45px; align-items:center; justify-content:space-between; gap:10px; margin-top:12px; padding:0 12px; border:1px solid var(--paper); background:var(--paper); color:var(--ink); font-size:8px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; cursor:pointer; }
+    .reservation-submit:disabled { opacity:.42; cursor:not-allowed; }
+    .reservation-result { min-height:27px; margin:10px 0 0; color:var(--muted); font-size:8px; font-weight:700; letter-spacing:.045em; line-height:1.4; text-transform:uppercase; }
+    .plan-main { display:flex; flex-direction:column; align-items:center; padding:16px; }
+    .plan-main img { display:block; width:auto; max-width:min(100%,600px); height:auto; max-height:62svh; object-fit:contain; background:#101010; }
+    .plan-caption { margin:12px 0 0; color:rgba(8,8,8,.65); font-size:8px; font-weight:700; letter-spacing:.13em; text-align:center; text-transform:uppercase; }
+    .install-copy { margin:0; padding:18px; font-size:12px; line-height:1.5; }
+    .install-copy strong { text-transform:uppercase; }
+    .install-close-row { padding:0 18px 18px; }
+    body.overlay-open { overflow:hidden; }
+    @media (max-width:760px) {
+      .app-header { min-height:62px; padding-right:14px; padding-left:14px; }
+      .brand img { width:34px; height:34px; }
+      .header-link { display:none; }
+      .install-button { min-height:35px; padding:0 10px; font-size:7px; }
+      .app-shell { padding:0 10px 18px; }
+      .screen-top { min-height:55px; padding:8px 4px; }
+      .screen-kicker { font-size:7px; }
+      .event-switcher { gap:5px; }
+      .event-switcher button { width:32px; height:32px; }
+      .event-stage { grid-template-columns:minmax(0,1fr); min-height:0; }
+      .event-poster { min-height:0; aspect-ratio:598 / 748; border-right:0; border-bottom:1px solid rgba(8,8,8,.55); }
+      .event-poster img { width:100%; height:100%; max-height:unset; object-fit:contain; }
+      .event-content { grid-template-columns:minmax(0,1fr); }
+      .event-title { min-height:270px; padding:26px 19px 22px; border-right:0; border-bottom:1px solid rgba(8,8,8,.55); }
+      .event-title h1 { margin:32px 0; font-size:clamp(62px,18vw,91px); }
+      .event-title.is-long-title h1 { font-size:clamp(49px,13vw,69px); letter-spacing:-.08em; }
+      .event-lineup p { font-size:13px; }
+      .event-info { min-height:0; padding:24px 19px 20px; }
+      .event-number strong { font-size:108px; }
+      .event-details { margin-top:28px; }
+      .event-detail { grid-template-columns:75px minmax(0,1fr); padding:12px 0; }
+      .event-detail dd { font-size:10px; }
+      .event-actions { grid-template-columns:minmax(0,1fr) minmax(0,1fr) 44px; }
+      .event-reservation-strip { grid-template-columns:minmax(0,1fr) auto; gap:9px 12px; padding:14px; }
+      .reservation-kicker { grid-column:1 / -1; }
+      .reservation-copy { font-size:8px; }
+      .reservation-status { justify-self:start; font-size:7px; white-space:normal; }
+      .reservation-open { min-height:36px; gap:8px; padding:0 8px; font-size:6px; }
+      .screen-footer { align-items:flex-start; flex-direction:column; padding:13px 4px 0; font-size:7px; }
+      .drawer-layer { align-items:flex-end; }
+      .drawer { width:100%; height:100svh; height:100dvh; border:0; border-top:1px solid rgba(242,240,235,.38); transform:translate3d(0,100%,0); }
+      .drawer-layer.is-open .drawer { transform:translate3d(0,0,0); }
+      .drawer-head { padding:14px 17px 12px; }
+      .drawer-main { padding:13px 17px calc(20px + env(safe-area-inset-bottom)); }
+      .table-list { grid-template-columns:repeat(3,minmax(0,1fr)); gap:5px; margin-top:13px; }
+      .table-choice { min-height:48px; padding:6px; }
+      .table-choice span { font-size:8px; }
+      .table-choice small { font-size:6px; letter-spacing:.07em; }
+      .selection-summary { min-height:39px; margin-top:13px; padding:9px 0; }
+      .reservation-form { margin-top:13px; }
+      .reservation-form input { min-height:40px; }
+      .reservation-submit { min-height:43px; }
+      .modal-layer { padding:10px; }
+      .qr-code { width:min(100%,245px); min-height:245px; }
+    }
+    @media (max-width:390px) {
+      .header-actions { gap:0; }
+      .screen-top { gap:6px; }
+      .event-position { min-width:43px; font-size:7px; }
+      .event-actions { grid-template-columns:minmax(0,1fr) 46px; }
+      .event-actions .ticket-link { grid-column:1 / -1; }
+      .event-actions .action-button[data-share] { grid-column:1; }
+      .event-actions .action-button[data-open-qr] { grid-column:2; justify-content:center; }
+      .event-actions .action-button[data-open-qr] b { display:none; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      html { scroll-behavior:auto; }
+      *,*::before,*::after { animation-duration:1ms !important; animation-iteration-count:1 !important; transition-duration:1ms !important; scroll-behavior:auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <a class="brand" href="../" aria-label="ONE MORE ELECTRONIC · volver al sitio">
+      <img src="../assets/one-logo.webp" alt="" width="38" height="38">
+      <span>ONE MORE<br>FECHAS</span>
+    </a>
+    <div class="header-actions">
+      <a class="header-link" href="../">Sitio principal</a>
+      <button class="install-button" type="button" data-install-button>Instalar app</button>
+    </div>
+  </header>
+
+  <main class="app-shell">
+    <div class="screen-top">
+      <div>
+        <p class="screen-kicker">ONE MORE CLUB · DEVOTO</p>
+        <p class="screen-label">Próximas fechas</p>
+      </div>
+      <nav class="event-switcher" aria-label="Cambiar de fecha">
+        <button type="button" data-event-prev aria-label="Ver fecha anterior" disabled>←</button>
+        <span class="event-position"><span data-event-current>01</span><i>/</i><span data-event-total>01</span></span>
+        <button type="button" data-event-next aria-label="Ver fecha siguiente" disabled>→</button>
+      </nav>
+    </div>
+
+    <p class="no-upcoming" data-no-upcoming hidden>Por ahora no hay fechas futuras publicadas. Nuevas fechas pronto.</p>
+    <section class="empty-state" data-empty-state hidden aria-labelledby="empty-title"><p>ONE MORE ELECTRONIC · BUENOS AIRES</p><h1 id="empty-title">Nuevas fechas<br>pronto</h1><a href="../">Volver al sitio</a></section>
+    <section class="event-card" data-event-card aria-label="Detalle de la fecha">
+      <div class="event-stage" data-event-stage aria-live="polite">
+        <figure class="event-poster">
+          <img data-event-poster src="../assets/yamila-be-06-noviembre.webp" width="598" height="748" decoding="async" alt="Flyer de la próxima fecha ONE MORE">
+          <span class="event-status" data-event-status hidden>Fecha finalizada</span>
+        </figure>
+        <div class="event-content">
+          <header class="event-title" data-event-title-wrap>
+            <div>
+              <p class="event-label" data-event-label>MORE ELECTRONIC MUSIC presenta</p>
+              <h1 data-event-title><span>YAMILA</span><span>BE</span></h1>
+            </div>
+            <div class="event-lineup"><span data-event-lineup-label>Artistas confirmados</span><p data-event-lineup>Yamila Be · Camila Díaz · Camila Méndez · Open Call</p></div>
+          </header>
+          <aside class="event-info" aria-label="Detalles de la próxima fecha">
+            <div class="event-info-main">
+              <p class="event-number"><strong data-event-day>06</strong><small data-event-month>NOV</small></p>
+              <dl class="event-details">
+                <div class="event-detail"><dt>Fecha</dt><dd data-event-date>Viernes 6 de noviembre</dd></div>
+                <div class="event-detail"><dt>Horario</dt><dd data-event-time>23:59 Hs</dd></div>
+                <div class="event-detail"><dt>Lugar</dt><dd data-event-place>Av. Beiro 3334 · Devoto</dd></div>
+                <div class="event-detail"><dt>Line-up</dt><dd data-event-detail-lineup>Yamila Be · Camila Díaz · Camila Méndez · Open Call</dd></div>
+              </dl>
+              <section class="countdown" aria-label="Cuenta regresiva">
+                <p class="countdown-head" data-countdown-label>Faltan</p>
+                <div class="countdown-clock" aria-hidden="true"><span><b data-countdown-days>00</b><small>Días</small></span><span><b data-countdown-hours>00</b><small>Horas</small></span><span><b data-countdown-minutes>00</b><small>Min</small></span></div>
+              </section>
+            </div>
+            <div class="event-actions">
+              <a class="ticket-link" data-ticket-link href="https://www.passline.com/eventos/viernes-611-more-yamila-be" target="_blank" rel="noopener noreferrer"><span data-ticket-label>Comprar entradas</span><b aria-hidden="true">↗</b></a>
+              <button class="action-button" type="button" data-share aria-label="Compartir la fecha"><span>Compartir</span><b aria-hidden="true">↗</b></button>
+              <button class="action-button" type="button" data-open-qr aria-label="Ver código QR"><span>QR</span><b aria-hidden="true">↗</b></button>
+            </div>
+          </aside>
+        </div>
+      </div>
+      <section class="event-reservation-strip reservation-strip" data-reservation-strip aria-label="Reserva de mesa para esta fecha">
+        <p class="reservation-kicker">Reservar mesa</p>
+        <p class="reservation-copy" data-reservation-copy>Elegí una mesa disponible para esta fecha.</p>
+        <p class="reservation-status" data-reservation-status><i aria-hidden="true"></i><span>Mesas disponibles</span></p>
+        <button class="reservation-open" type="button" data-open-reservation><span>Ver mesas disponibles</span><b aria-hidden="true">↗</b></button>
+      </section>
+    </section>
+
+    <footer class="screen-footer"><span data-event-footer>YAMILA BE · Viernes 6 de noviembre</span><a href="../#archivo">Entrar a ONE MORE ↗</a></footer>
+  </main>
+
+  <div class="notice" data-notice role="status" aria-live="polite"></div>
+
+  <div class="modal-layer" data-qr-modal hidden aria-hidden="true">
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="qr-title" aria-describedby="qr-description">
+      <header class="modal-head"><div><p class="modal-kicker">ONE MORE ELECTRONIC</p><h2 id="qr-title">Fecha</h2></div><button class="modal-close" type="button" data-qr-close aria-label="Cerrar código QR">×</button></header>
+      <div class="qr-main"><div class="qr-code" data-qr-code aria-label="Código QR de la fecha"><p class="qr-code-status">Generando QR</p></div><p class="qr-description" id="qr-description">Escaneá para ver esta fecha y conseguir tus entradas.</p><div class="modal-actions"><button type="button" data-qr-download disabled><span>Descargar JPG</span><b aria-hidden="true">↓</b></button><button type="button" data-qr-copy><span>Copiar link</span><b aria-hidden="true">↗</b></button></div></div>
+    </section>
+  </div>
+
+  <div class="drawer-layer" data-reservation-panel hidden aria-hidden="true">
+    <aside class="drawer" role="dialog" aria-modal="true" aria-labelledby="reservation-title" aria-describedby="drawer-event" tabindex="-1">
+      <header class="drawer-head"><div><p class="drawer-kicker">Reserva de mesa</p><h2 id="reservation-title">Elegí tu mesa</h2></div><button class="drawer-close" type="button" data-close-reservation aria-label="Cerrar reserva de mesa">×</button></header>
+      <div class="drawer-main">
+        <p class="drawer-event" id="drawer-event" data-drawer-event></p>
+        <p class="drawer-availability" data-drawer-availability>Mesas disponibles para esta fecha</p>
+        <div class="table-list" data-table-list aria-label="Mesas disponibles"></div>
+        <p class="selection-summary" data-selection-summary>Elegí una o más mesas disponibles.</p>
+        <button class="plan-trigger" type="button" data-open-plan aria-haspopup="dialog"><span>Ver plano de mesas</span><b aria-hidden="true">↗</b></button>
+        <form class="reservation-form" data-reservation-form novalidate>
+          <label for="reservation-name">Nombre y contacto</label>
+          <input id="reservation-name" name="name" type="text" autocomplete="name" placeholder="Tu nombre" required>
+          <input name="contact" type="tel" autocomplete="tel" placeholder="WhatsApp" aria-label="WhatsApp" required>
+          <button class="reservation-submit" type="submit" data-reservation-submit disabled><span>Continuar reserva</span><b aria-hidden="true">↗</b></button>
+          <p class="reservation-result" data-reservation-result aria-live="polite">Elegí una o más mesas disponibles para continuar.</p>
+        </form>
+      </div>
+    </aside>
+  </div>
+
+  <div class="modal-layer" data-plan-modal hidden aria-hidden="true">
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="plan-title" aria-describedby="plan-caption">
+      <header class="modal-head"><div><p class="modal-kicker">Ubicación de mesas</p><h2 id="plan-title">Plano</h2></div><button class="modal-close" type="button" data-close-plan aria-label="Cerrar plano de mesas">×</button></header>
+      <div class="plan-main"><img src="../assets/one-more-table-plan.webp" width="585" height="878" decoding="async" alt="Plano de distribución de mesas, cabina, escenario, dancefloor, barra, baños y acceso de ONE MORE."><p class="plan-caption" id="plan-caption">Referencia visual · Elegí las mesas desde la lista</p></div>
+    </section>
+  </div>
+
+  <div class="modal-layer" data-install-help hidden aria-hidden="true">
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="install-title">
+      <header class="modal-head"><div><p class="modal-kicker">ONE MORE · FECHAS</p><h2 id="install-title">Instalar app</h2></div><button class="modal-close" type="button" data-close-install aria-label="Cerrar instrucciones">×</button></header>
+      <p class="install-copy"><strong>Android:</strong> abrí el menú del navegador y elegí «Instalar app» o «Agregar a pantalla principal».<br><br><strong>iPhone:</strong> tocá Compartir y después «Agregar a pantalla de inicio».</p>
+      <div class="install-close-row"><button class="dialog-button" type="button" data-close-install>Entendido <b aria-hidden="true">✓</b></button></div>
+    </section>
+  </div>
+
+  <script src="qrcode.js"></script>
+  <script src="../events.js"></script>
+  <script>
+    (() => {
+      const events = Array.isArray(window.ONE_MORE_UPCOMING_EVENTS) ? window.ONE_MORE_UPCOMING_EVENTS : [];
+      const $ = (selector) => document.querySelector(selector);
+      const eventCard = $('[data-event-card]');
+      const emptyState = $('[data-empty-state]');
+      const stage = $('[data-event-stage]');
+      const poster = $('[data-event-poster]');
+      const statusBadge = $('[data-event-status]');
+      const titleWrap = $('[data-event-title-wrap]');
+      const title = $('[data-event-title]');
+      const label = $('[data-event-label]');
+      const lineupLabel = $('[data-event-lineup-label]');
+      const lineup = $('[data-event-lineup]');
+      const day = $('[data-event-day]');
+      const month = $('[data-event-month]');
+      const date = $('[data-event-date]');
+      const time = $('[data-event-time]');
+      const place = $('[data-event-place]');
+      const detailLineup = $('[data-event-detail-lineup]');
+      const ticketLink = $('[data-ticket-link]');
+      const ticketLabel = $('[data-ticket-label]');
+      const shareButton = $('[data-share]');
+      const qrOpenButton = $('[data-open-qr]');
+      const currentPosition = $('[data-event-current]');
+      const totalPosition = $('[data-event-total]');
+      const prevButton = $('[data-event-prev]');
+      const nextButton = $('[data-event-next]');
+      const countdownLabel = $('[data-countdown-label]');
+      const countdownDays = $('[data-countdown-days]');
+      const countdownHours = $('[data-countdown-hours]');
+      const countdownMinutes = $('[data-countdown-minutes]');
+      const reservationStrip = $('[data-reservation-strip]');
+      const reservationCopy = $('[data-reservation-copy]');
+      const reservationStatus = $('[data-reservation-status] span');
+      const openReservationButton = $('[data-open-reservation]');
+      const footer = $('[data-event-footer]');
+      const notice = $('[data-notice]');
+      let activeIndex = 0;
+      let noticeTimer;
+      let activeQrSvg = '';
+      let activeQrUrl = '';
+      let qrReturnFocus = null;
+      let drawerReturnFocus = null;
+      let planReturnFocus = null;
+      let closeDrawerTimer;
+      let closeQrTimer;
+      let closePlanTimer;
+      const selectedTables = new Set();
+      const reservedTables = new Set(['6','7']);
+      const tableNames = { '1':'Backstage', '2':'Private' };
+      const isFinished = (event) => !event || Date.parse(event.startsAt) <= Date.now();
+      const plainTitle = (event) => event.titleHtml.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
+      const appEventUrl = (event) => {
+        const url = new URL('./',window.location.href);
+        url.searchParams.set('evento',event.slug);
+        return url.toString();
+      };
+      const assetUrl = (path) => new URL(`../${String(path).replace(/^\/+/, '')}`,window.location.href).href;
+      const showNotice = (message) => {
+        window.clearTimeout(noticeTimer);
+        notice.textContent = message;
+        notice.classList.add('is-visible');
+        noticeTimer = window.setTimeout(() => notice.classList.remove('is-visible'),2400);
+      };
+      const copyText = async (text) => {
+        if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
+        const field = document.createElement('textarea');
+        field.value = text;
+        field.setAttribute('readonly','');
+        field.style.cssText = 'position:fixed;opacity:0;pointer-events:none;';
+        document.body.appendChild(field);
+        field.select();
+        const copied = document.execCommand('copy');
+        field.remove();
+        if (!copied) throw new Error('copy unavailable');
+      };
+      const currentEvent = () => events[activeIndex] || null;
+      const renderTitle = (event) => {
+        const parts = [...event.titleHtml.matchAll(/<span>(.*?)<\/span>/g)].map((match) => match[1]);
+        title.replaceChildren(...(parts.length ? parts : [plainTitle(event)]).map((part) => {
+          const span = document.createElement('span');
+          span.textContent = part;
+          return span;
+        }));
+      };
+      const updateNavigation = () => {
+        currentPosition.textContent = String(activeIndex + 1).padStart(2,'0');
+        totalPosition.textContent = String(events.length).padStart(2,'0');
+        prevButton.disabled = activeIndex <= 0;
+        nextButton.disabled = activeIndex >= events.length - 1;
+      };
+      const updateCountdown = () => {
+        const event = currentEvent();
+        if (!event) return;
+        const remaining = Math.max(0,Date.parse(event.startsAt) - Date.now());
+        const totalMinutes = Math.floor(remaining / 60000);
+        countdownDays.textContent = String(Math.floor(totalMinutes / 1440)).padStart(2,'0');
+        countdownHours.textContent = String(Math.floor((totalMinutes % 1440) / 60)).padStart(2,'0');
+        countdownMinutes.textContent = String(totalMinutes % 60).padStart(2,'0');
+        countdownLabel.textContent = isFinished(event) ? 'Fecha finalizada' : 'Faltan';
+      };
+      const getChosenTables = () => [...selectedTables].filter((table) => !reservedTables.has(table));
+      const tableDisplayName = (table) => tableNames[table] || 'Mesa disponible';
+      const syncReservationStatus = (event) => {
+        const finished = isFinished(event);
+        reservationStrip.classList.toggle('is-closed',finished);
+        reservationCopy.textContent = finished ? 'La reserva de mesa para esta fecha finalizó.' : `Elegí una mesa disponible para ${event.footer}.`;
+        reservationStatus.textContent = finished ? 'Reserva cerrada' : 'Mesas disponibles';
+        openReservationButton.disabled = finished;
+        openReservationButton.setAttribute('aria-disabled',String(finished));
+        openReservationButton.setAttribute('aria-label',finished ? `Reserva cerrada para ${event.footer}` : `Ver mesas disponibles para ${event.footer}`);
+        openReservationButton.querySelector('span').textContent = finished ? 'Reserva cerrada' : 'Ver mesas disponibles';
+      };
+      const renderReservationDrawer = (event) => {
+        const finished = isFinished(event);
+        $('[data-drawer-event]').textContent = `${event.footer} · ${event.time} · ${event.place}`;
+        $('[data-drawer-availability]').textContent = finished ? 'Reserva cerrada para esta fecha' : 'Mesas disponibles para esta fecha';
+        const list = $('[data-table-list]');
+        list.replaceChildren();
+        for (let number = 1; number <= 13; number += 1) {
+          const table = String(number);
+          const unavailable = reservedTables.has(table) || finished;
+          const selected = getChosenTables().includes(table);
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'table-choice';
+          button.disabled = unavailable;
+          button.classList.toggle('is-selected',selected);
+          button.setAttribute('aria-pressed',String(selected));
+          const name = document.createElement('span');
+          name.textContent = `Mesa ${table}`;
+          const detail = document.createElement('small');
+          detail.textContent = unavailable ? 'Reservada' : (tableDisplayName(table) === 'Mesa disponible' ? 'Disponible' : `${tableDisplayName(table)} · Disponible`);
+          button.append(name,detail);
+          button.setAttribute('aria-label',`Mesa ${table}, ${unavailable ? 'reservada' : 'disponible'}${!unavailable && tableNames[table] ? `, ${tableNames[table]}` : ''}`);
+          button.addEventListener('click',() => {
+            if (unavailable) return;
+            if (selectedTables.has(table)) selectedTables.delete(table); else selectedTables.add(table);
+            renderReservationDrawer(event);
+            const chosen = getChosenTables();
+            $('[data-selection-summary]').innerHTML = chosen.length ? `Mesas elegidas · <b>${chosen.map((n) => `Mesa ${n}`).join(', ')}</b>` : 'Elegí una o más mesas disponibles.';
+            $('[data-reservation-submit]').disabled = !chosen.length || finished;
+            $('[data-reservation-result]').textContent = chosen.length ? `${chosen.map((n) => `Mesa ${n}`).join(', ')} ${chosen.length === 1 ? 'seleccionada' : 'seleccionadas'} para ${event.footer}.` : 'Elegí una o más mesas disponibles para continuar.';
+          });
+          list.append(button);
+        }
+        const chosen = getChosenTables();
+        $('[data-selection-summary]').innerHTML = chosen.length ? `Mesas elegidas · <b>${chosen.map((n) => `Mesa ${n}`).join(', ')}</b>` : 'Elegí una o más mesas disponibles.';
+        $('[data-reservation-submit]').disabled = !chosen.length || finished;
+        $('[data-reservation-result]').textContent = finished ? 'La reserva para esta fecha finalizó.' : (chosen.length ? `${chosen.map((n) => `Mesa ${n}`).join(', ')} ${chosen.length === 1 ? 'seleccionada' : 'seleccionadas'} para ${event.footer}.` : 'Elegí una o más mesas disponibles para continuar.');
+      };
+      const updateTicket = (event) => {
+        const finished = isFinished(event);
+        const hasTicket = Boolean(event.ticketUrl);
+        if (finished || !hasTicket) {
+          ticketLink.removeAttribute('href');
+          ticketLink.classList.add('is-disabled');
+          ticketLink.setAttribute('aria-disabled','true');
+          ticketLabel.textContent = finished ? 'Fecha finalizada' : 'Entradas próximamente';
+        } else {
+          ticketLink.href = event.ticketUrl;
+          ticketLink.classList.remove('is-disabled');
+          ticketLink.removeAttribute('aria-disabled');
+          ticketLabel.textContent = event.ticket || 'Comprar entradas';
+        }
+      };
+      const renderEvent = (index,{updateUrl=true}={}) => {
+        if (!events.length) {
+          eventCard.hidden = true;
+          emptyState.hidden = false;
+          return;
+        }
+        activeIndex = Math.max(0,Math.min(index,events.length - 1));
+        const event = currentEvent();
+        eventCard.hidden = false;
+        emptyState.hidden = true;
+        renderTitle(event);
+        titleWrap.classList.toggle('is-long-title',Boolean(event.longTitle));
+        label.textContent = event.label;
+        lineupLabel.textContent = event.lineupLabel;
+        lineup.textContent = event.lineup;
+        day.textContent = event.day;
+        month.textContent = event.month;
+        date.textContent = event.date;
+        time.textContent = event.time;
+        place.textContent = event.place;
+        detailLineup.textContent = event.lineup;
+        poster.src = assetUrl(event.image);
+        poster.width = event.width;
+        poster.height = event.height;
+        poster.alt = event.alt;
+        statusBadge.hidden = !isFinished(event);
+        updateTicket(event);
+        updateCountdown();
+        syncReservationStatus(event);
+        updateNavigation();
+        footer.textContent = event.footer;
+        shareButton.setAttribute('aria-label',`Compartir la fecha ${plainTitle(event)}`);
+        qrOpenButton.setAttribute('aria-label',`Ver código QR de la fecha ${plainTitle(event)}`);
+        if (updateUrl) history.replaceState({},'',appEventUrl(event));
+        if (!$('[data-reservation-panel]').hidden) renderReservationDrawer(event);
+      };
+      const upcomingIndex = events.findIndex((event) => !isFinished(event));
+      const requestedSlug = new URLSearchParams(location.search).get('evento');
+      const requestedIndex = events.findIndex((event) => event.slug === requestedSlug);
+      const initialIndex = requestedIndex >= 0 ? requestedIndex : (upcomingIndex >= 0 ? upcomingIndex : Math.max(0,events.length - 1));
+      const hasAnyUpcoming = events.some((event) => !isFinished(event));
+      $('[data-no-upcoming]').hidden = hasAnyUpcoming || !events.length;
+      renderEvent(initialIndex,{updateUrl:requestedIndex < 0});
+
+      const changeEvent = (direction) => {
+        const target = activeIndex + direction;
+        if (target < 0 || target >= events.length) return;
+        stage.classList.add('is-changing');
+        window.setTimeout(() => {
+          renderEvent(target);
+          void stage.offsetWidth;
+          stage.classList.remove('is-changing');
+        },window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 150);
+      };
+      prevButton.addEventListener('click',() => changeEvent(-1));
+      nextButton.addEventListener('click',() => changeEvent(1));
+      let swipeStart = null;
+      stage.addEventListener('touchstart',(event) => {
+        if (event.target.closest('button,a,input,textarea,select')) return;
+        const touch = event.changedTouches[0];
+        swipeStart = { x:touch.clientX,y:touch.clientY };
+      },{passive:true});
+      stage.addEventListener('touchend',(event) => {
+        if (!swipeStart) return;
+        const touch = event.changedTouches[0];
+        const dx = touch.clientX - swipeStart.x;
+        const dy = touch.clientY - swipeStart.y;
+        swipeStart = null;
+        if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) changeEvent(dx < 0 ? 1 : -1);
+      },{passive:true});
+      window.setInterval(() => {
+        const event = currentEvent();
+        if (!event) return;
+        updateCountdown();
+        const finished = isFinished(event);
+        const wasFinished = !statusBadge.hidden;
+        if (finished !== wasFinished) {
+          statusBadge.hidden = !finished;
+          updateTicket(event);
+          syncReservationStatus(event);
+          if (!$('[data-reservation-panel]').hidden) renderReservationDrawer(event);
+        }
+        const nextUpcoming = events.findIndex((item) => !isFinished(item));
+        $('[data-no-upcoming]').hidden = nextUpcoming >= 0 || !events.length;
+      },1000);
+
+      const drawerLayer = $('[data-reservation-panel]');
+      const drawer = drawerLayer.querySelector('.drawer');
+      const closeDrawerButton = $('[data-close-reservation]');
+      const finishCloseDrawer = () => {
+        if (drawerLayer.hidden || drawerLayer.classList.contains('is-open')) return;
+        window.clearTimeout(closeDrawerTimer);
+        drawerLayer.hidden = true;
+        document.body.classList.remove('overlay-open');
+        if (drawerReturnFocus) drawerReturnFocus.focus();
+        drawerReturnFocus = null;
+      };
+      const closeDrawer = () => {
+        if (drawerLayer.hidden || !drawerLayer.classList.contains('is-open')) return;
+        drawerLayer.classList.remove('is-open');
+        drawerLayer.setAttribute('aria-hidden','true');
+        window.clearTimeout(closeDrawerTimer);
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) finishCloseDrawer();
+        else closeDrawerTimer = window.setTimeout(finishCloseDrawer,250);
+      };
+      const openDrawer = (trigger) => {
+        const event = currentEvent();
+        if (!event || isFinished(event)) return;
+        window.clearTimeout(closeDrawerTimer);
+        drawerReturnFocus = trigger;
+        renderReservationDrawer(event);
+        drawerLayer.hidden = false;
+        drawerLayer.setAttribute('aria-hidden','false');
+        document.body.classList.add('overlay-open');
+        void drawer.offsetWidth;
+        requestAnimationFrame(() => { drawerLayer.classList.add('is-open'); closeDrawerButton.focus(); });
+      };
+      openReservationButton.addEventListener('click',() => openDrawer(openReservationButton));
+      closeDrawerButton.addEventListener('click',closeDrawer);
+      drawerLayer.addEventListener('click',(event) => { if (event.target === drawerLayer) closeDrawer(); });
+      drawer.addEventListener('transitionend',(event) => { if (event.target === drawer && event.propertyName === 'transform') finishCloseDrawer(); });
+      drawer.addEventListener('keydown',(event) => {
+        if (event.key !== 'Tab') return;
+        const focusable = [...drawer.querySelectorAll('button:not([disabled]),input:not([disabled])')];
+        if (!focusable.length) return;
+        const first = focusable[0],last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+      });
+      $('[data-reservation-form]').addEventListener('submit',(event) => {
+        event.preventDefault();
+        const active = currentEvent();
+        const chosen = getChosenTables();
+        if (!active || isFinished(active) || !chosen.length) {
+          $('[data-reservation-result]').textContent = 'Elegí una o más mesas disponibles para continuar.';
+          return;
+        }
+        const name = String(new FormData(event.currentTarget).get('name') || '').trim();
+        $('[data-reservation-result]').textContent = `${name || 'Solicitud'} · ${chosen.map((n) => `Mesa ${n}`).join(', ').toLowerCase()} · ${active.footer}.`;
+        showNotice(`${chosen.length} ${chosen.length === 1 ? 'mesa seleccionada' : 'mesas seleccionadas'}`);
+      });
+
+      const planModal = $('[data-plan-modal]');
+      const planDialog = planModal.querySelector('.modal');
+      const closePlanButton = $('[data-close-plan]');
+      const finishClosePlan = () => {
+        if (planModal.hidden || planModal.classList.contains('is-open')) return;
+        window.clearTimeout(closePlanTimer);
+        planModal.hidden = true;
+        if (planReturnFocus) planReturnFocus.focus();
+        planReturnFocus = null;
+      };
+      const closePlan = () => {
+        if (planModal.hidden || !planModal.classList.contains('is-open')) return;
+        planModal.classList.remove('is-open');
+        planModal.setAttribute('aria-hidden','true');
+        window.clearTimeout(closePlanTimer);
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) finishClosePlan();
+        else closePlanTimer = window.setTimeout(finishClosePlan,220);
+      };
+      $('[data-open-plan]').addEventListener('click',(event) => {
+        planReturnFocus = event.currentTarget;
+        planModal.hidden = false;
+        planModal.setAttribute('aria-hidden','false');
+        void planDialog.offsetWidth;
+        requestAnimationFrame(() => { planModal.classList.add('is-open'); closePlanButton.focus(); });
+      });
+      closePlanButton.addEventListener('click',closePlan);
+      planModal.addEventListener('click',(event) => { if (event.target === planModal) closePlan(); });
+
+      const qrModal = $('[data-qr-modal]');
+      const qrDialog = qrModal.querySelector('.modal');
+      const qrCode = $('[data-qr-code]');
+      const qrTitle = $('#qr-title');
+      const qrCloseButton = $('[data-qr-close]');
+      const qrDownloadButton = $('[data-qr-download]');
+      const qrCopyButton = $('[data-qr-copy]');
+      const finishCloseQr = () => {
+        if (qrModal.hidden || qrModal.classList.contains('is-open')) return;
+        window.clearTimeout(closeQrTimer);
+        qrModal.hidden = true;
+        document.body.classList.remove('overlay-open');
+        if (qrReturnFocus) qrReturnFocus.focus();
+        qrReturnFocus = null;
+      };
+      const closeQr = () => {
+        if (qrModal.hidden || !qrModal.classList.contains('is-open')) return;
+        qrModal.classList.remove('is-open');
+        qrModal.setAttribute('aria-hidden','true');
+        window.clearTimeout(closeQrTimer);
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) finishCloseQr();
+        else closeQrTimer = window.setTimeout(finishCloseQr,220);
+      };
+      const openQr = async () => {
+        const event = currentEvent();
+        if (!event) return;
+        qrReturnFocus = document.activeElement;
+        activeQrUrl = appEventUrl(event);
+        qrModal.hidden = false;
+        qrModal.setAttribute('aria-hidden','false');
+        void qrDialog.offsetWidth;
+        requestAnimationFrame(() => { qrModal.classList.add('is-open'); qrCloseButton.focus(); });
+        document.body.classList.add('overlay-open');
+        qrTitle.textContent = plainTitle(event);
+        qrCode.innerHTML = '<p class="qr-code-status">Generando QR</p>';
+        qrDownloadButton.disabled = true;
+        activeQrSvg = '';
+        try {
+          if (!window.QRCode || !window.QRCode.toString) throw new Error('QR encoder unavailable');
+          activeQrSvg = await window.QRCode.toString(activeQrUrl,{ type:'svg',errorCorrectionLevel:'M',margin:4,width:320,color:{dark:'#080808',light:'#f2f0eb'} });
+          qrCode.innerHTML = activeQrSvg;
+          qrDownloadButton.disabled = false;
+        } catch (_) {
+          qrCode.innerHTML = '<p class="qr-code-status">No se pudo generar el QR</p>';
+        }
+      };
+      const loadQrImage = (svg) => new Promise((resolve,reject) => {
+        const image = new Image();
+        const objectUrl = URL.createObjectURL(new Blob([svg],{type:'image/svg+xml;charset=utf-8'}));
+        image.onload = () => { URL.revokeObjectURL(objectUrl); resolve(image); };
+        image.onerror = () => { URL.revokeObjectURL(objectUrl); reject(new Error('QR image unavailable')); };
+        image.src = objectUrl;
+      });
+      const downloadQr = async () => {
+        if (!activeQrSvg) return;
+        const event = currentEvent();
+        qrDownloadButton.disabled = true;
+        try {
+          const image = await loadQrImage(activeQrSvg);
+          const canvas = document.createElement('canvas');
+          canvas.width = 1200; canvas.height = 1440;
+          const context = canvas.getContext('2d');
+          context.fillStyle = '#f2f0eb'; context.fillRect(0,0,canvas.width,canvas.height);
+          context.strokeStyle = '#080808'; context.lineWidth = 4; context.strokeRect(32,32,canvas.width-64,canvas.height-64);
+          context.fillStyle = '#080808'; context.font = '700 24px Arial,Helvetica,sans-serif'; context.fillText('ONE MORE ELECTRONIC',84,105);
+          const name = plainTitle(event).toUpperCase();
+          context.font = `900 ${name.length > 8 ? 116 : 150}px Arial,Helvetica,sans-serif`; context.fillText(name,84,252);
+          context.fillRect(84,294,1032,3);
+          const size=820,x=Math.round((canvas.width-size)/2),y=356;
+          context.fillStyle='#f2f0eb'; context.fillRect(x-16,y-16,size+32,size+32);
+          context.strokeStyle='#080808'; context.lineWidth=3; context.strokeRect(x-16,y-16,size+32,size+32); context.drawImage(image,x,y,size,size);
+          context.fillStyle='#080808'; context.font='700 25px Arial,Helvetica,sans-serif'; context.textAlign='center';
+          context.fillText('ESCANEÁ PARA VER ESTA FECHA Y CONSEGUIR',canvas.width/2,1270); context.fillText('TUS ENTRADAS.',canvas.width/2,1306);
+          context.textAlign='left'; context.fillStyle='rgba(8,8,8,.64)'; context.font='700 18px Arial,Helvetica,sans-serif'; context.fillText(event.footer.toUpperCase(),84,1360);
+          const blob=await new Promise((resolve)=>canvas.toBlob(resolve,'image/jpeg',.94));
+          if (!blob) throw new Error('JPG unavailable');
+          const href=URL.createObjectURL(blob),link=document.createElement('a'); link.href=href; link.download=`one-more-${event.slug}-qr.jpg`; link.click(); URL.revokeObjectURL(href); showNotice('QR descargado en JPG');
+        } catch (_) { showNotice('No se pudo crear el JPG'); }
+        finally { qrDownloadButton.disabled=false; }
+      };
+      const copyQrLink = async () => {
+        try { await copyText(activeQrUrl || appEventUrl(currentEvent())); showNotice('Link copiado'); }
+        catch (_) { showNotice('No se pudo copiar el link'); }
+      };
+      qrOpenButton.addEventListener('click',openQr);
+      qrCloseButton.addEventListener('click',closeQr);
+      qrModal.addEventListener('click',(event) => { if (event.target === qrModal) closeQr(); });
+      qrDownloadButton.addEventListener('click',downloadQr);
+      qrCopyButton.addEventListener('click',copyQrLink);
+
+      shareButton.addEventListener('click',async () => {
+        const event = currentEvent(); if (!event) return;
+        const url = appEventUrl(event);
+        const titleText = `ONE MORE ELECTRONIC — ${plainTitle(event)}`;
+        const shareText = `${event.footer} · ${event.place}`;
+        const native = Boolean(navigator.share) && (matchMedia('(pointer:coarse)').matches || navigator.maxTouchPoints > 0);
+        if (native) {
+          try { await navigator.share({title:titleText,text:shareText,url}); showNotice('Fecha compartida'); return; }
+          catch (error) { if (error && error.name === 'AbortError') return; }
+        }
+        try { await copyText(url); showNotice('Link copiado'); }
+        catch (_) { showNotice('No se pudo copiar el link'); }
+      });
+
+      const installButton = $('[data-install-button]');
+      const installModal = $('[data-install-help]');
+      const closeInstallButtons = [...document.querySelectorAll('[data-close-install]')];
+      const standalone = () => matchMedia('(display-mode:standalone)').matches || navigator.standalone === true;
+      let installPrompt = null;
+      if (standalone()) installButton.hidden = true;
+      window.addEventListener('beforeinstallprompt',(event) => { event.preventDefault(); installPrompt = event; installButton.hidden = false; });
+      window.addEventListener('appinstalled',() => { installPrompt = null; installButton.hidden = true; showNotice('App instalada'); });
+      const closeInstall = () => { installModal.classList.remove('is-open'); installModal.setAttribute('aria-hidden','true'); window.setTimeout(() => { if (!installModal.classList.contains('is-open')) installModal.hidden = true; },200); };
+      installButton.addEventListener('click',async () => {
+        if (installPrompt) {
+          installPrompt.prompt();
+          await installPrompt.userChoice;
+          installPrompt = null;
+          return;
+        }
+        installModal.hidden = false; installModal.setAttribute('aria-hidden','false'); void installModal.offsetWidth; requestAnimationFrame(() => installModal.classList.add('is-open'));
+      });
+      closeInstallButtons.forEach((button) => button.addEventListener('click',closeInstall));
+      installModal.addEventListener('click',(event) => { if (event.target === installModal) closeInstall(); });
+
+      const closeTopOverlay = () => {
+        if (!planModal.hidden) closePlan();
+        else if (!drawerLayer.hidden) closeDrawer();
+        else if (!qrModal.hidden) closeQr();
+        else if (!installModal.hidden) closeInstall();
+      };
+      document.addEventListener('keydown',(event) => { if (event.key === 'Escape') closeTopOverlay(); });
+      planDialog.addEventListener('keydown',(event) => {
+        if (event.key !== 'Tab') return;
+        const focusable=[...planDialog.querySelectorAll('button:not([disabled])')];
+        if (!focusable.length) return; event.preventDefault(); focusable[0].focus();
+      });
+      if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js',{scope:'./'}).catch(() => {});
+    })();
+  </script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'one-more-shell-v109';
+const CACHE_NAME = 'one-more-shell-v110';
 const APP_SHELL = [
   '/',
   '/index.html',
@@ -19,7 +19,7 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('activate', (event) => {
-  event.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key)))).then(() => self.clients.claim()));
+  event.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((key) => key.startsWith('one-more-shell-') && key !== CACHE_NAME).map((key) => caches.delete(key)))).then(() => self.clients.claim()));
 });
 
 self.addEventListener('fetch', (event) => {
@@ -27,6 +27,8 @@ self.addEventListener('fetch', (event) => {
   if (request.method !== 'GET') return;
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
+  // The dates mini-app has its own narrower worker and cache; leave that route alone.
+  if (url.pathname === '/fechas' || url.pathname.startsWith('/fechas/')) return;
   // The hero video is not precached; MapCN assets load on demand, while its poster and login image stay cached.
   if (url.pathname.endsWith('.mp4')) return;
 

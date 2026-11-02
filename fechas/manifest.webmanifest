@@ -1,0 +1,28 @@
+{
+  "id": "/fechas/",
+  "name": "ONE MORE · Fechas",
+  "short_name": "OM Fechas",
+  "description": "Fechas, artistas, entradas, QR y reservas de ONE MORE ELECTRONIC.",
+  "lang": "es-AR",
+  "dir": "ltr",
+  "start_url": "/fechas/",
+  "scope": "/fechas/",
+  "display": "standalone",
+  "background_color": "#080808",
+  "theme_color": "#080808",
+  "categories": ["music", "entertainment"],
+  "icons": [
+    {
+      "src": "icons/app-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/app-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

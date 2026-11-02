@@ -52,7 +52,7 @@
     .action b { font-size:18px; line-height:8px; font-weight:400; }
     .status { font-size:9px; color:var(--muted); text-transform:uppercase; letter-spacing:.13em; }
     .status strong { color:var(--paper); font-weight:700; }
-    .hero-countdown { position:absolute; right:clamp(28px,6.7vw,108px); bottom:51px; z-index:2; display:grid; grid-template-columns:minmax(0,1fr) auto; width:clamp(248px,19vw,292px); padding:15px 16px 14px; border:1px solid rgba(242,240,235,.66); background:#080808; color:var(--paper); text-decoration:none; transition:border-color 180ms ease,background-color 180ms ease; }
+    .hero-countdown { position:absolute; right:clamp(28px,6.7vw,108px); bottom:51px; z-index:2; display:grid; grid-template-columns:minmax(0,1fr); width:clamp(248px,19vw,292px); padding:15px 16px 14px; border:1px solid rgba(242,240,235,.66); background:#080808; color:var(--paper); text-decoration:none; transition:border-color 180ms ease,background-color 180ms ease; }
 .countdown-kicker { grid-column:1 / -1; margin-bottom:12px; color:rgba(242,240,235,.62); font-size:8px; font-weight:700; letter-spacing:.16em; line-height:1; text-transform:uppercase; }.countdown-event { display:block; font-size:clamp(23px,2.2vw,34px); font-weight:900; letter-spacing:-.09em; line-height:.76; text-transform:uppercase; }.countdown-date { display:block; margin-top:8px; color:rgba(242,240,235,.72); font-size:8px; font-weight:700; letter-spacing:.12em; line-height:1.25; text-transform:uppercase; }.countdown-clock { grid-column:1 / -1; display:grid; grid-template-columns:repeat(3,1fr); gap:1px; margin-top:14px; border-top:1px solid rgba(242,240,235,.34); border-bottom:1px solid rgba(242,240,235,.34); background:rgba(242,240,235,.3); }.countdown-clock span { display:flex; flex-direction:column; gap:4px; padding:9px 7px 8px; background:#080808; }.countdown-clock b { font-size:20px; font-weight:900; letter-spacing:-.075em; line-height:.75; }.countdown-clock small { color:rgba(242,240,235,.61); font-size:7px; font-weight:700; letter-spacing:.12em; line-height:1; text-transform:uppercase; }
     .scroll { position:absolute; right:29px; bottom:21px; display:flex; gap:8px; align-items:center; color:var(--paper); font-size:9px; letter-spacing:.13em; text-transform:uppercase; }
     .scroll i { display:block; height:1px; width:30px; background:var(--paper); }
@@ -150,12 +150,15 @@
     .event-countdown-head { display:flex; justify-content:space-between; gap:12px; padding:9px 0 8px; color:rgba(242,240,235,.64); font-size:8px; font-weight:700; letter-spacing:.14em; line-height:1; text-transform:uppercase; }
     .event-countdown-clock { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; background:rgba(242,240,235,.35); }.event-countdown-clock span { display:flex; flex-direction:column; gap:5px; padding:9px 7px 8px; background:#101010; }.event-countdown-clock b { font-size:clamp(20px,2.1vw,31px); font-weight:900; letter-spacing:-.08em; line-height:.76; }.event-countdown-clock small { color:rgba(242,240,235,.58); font-size:7px; font-weight:700; letter-spacing:.12em; line-height:1; text-transform:uppercase; }
     .announce { display:flex; align-items:center; justify-content:space-between; gap:20px; min-height:52px; padding:0 15px; border:1px solid var(--paper); background:var(--paper); color:var(--ink); font-size:10px; font-weight:700; letter-spacing:.12em; text-decoration:none; text-transform:uppercase; transition:background-color 180ms ease,color 180ms ease; }
-    .event-actions { display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) 48px 48px; gap:7px; }.event-actions .announce { min-width:0; }.event-share { display:flex; align-items:center; justify-content:space-between; gap:8px; min-height:52px; padding:0 13px; border:1px solid rgba(242,240,235,.72); background:transparent; color:var(--paper); font:inherit; font-size:9px; font-weight:700; letter-spacing:.11em; line-height:1; text-align:left; text-transform:uppercase; cursor:pointer; transition:background-color 180ms ease,color 180ms ease; }.event-share:hover, .event-share:focus-visible { background:var(--paper); color:var(--ink); }.event-share:focus-visible { outline:2px solid var(--paper); outline-offset:4px; }.event-share svg { flex:0 0 auto; width:17px; height:17px; fill:none; stroke:currentColor; stroke-linecap:square; stroke-linejoin:miter; stroke-width:1.7; }.event-reminder-wrap { position:relative; min-width:0; }.event-reminder { display:grid; place-items:center; width:100%; min-height:52px; padding:0; border:1px solid rgba(242,240,235,.72); background:transparent; color:var(--paper); cursor:pointer; transition:background-color 180ms ease,color 180ms ease,border-color 180ms ease; }.event-reminder svg { width:18px; height:18px; fill:none; stroke:currentColor; stroke-linecap:square; stroke-linejoin:miter; stroke-width:1.6; }.event-reminder:hover, .event-reminder:focus-visible, .event-reminder.is-active { border-color:var(--paper); background:var(--paper); color:var(--ink); }.event-reminder:focus-visible { outline:2px solid var(--paper); outline-offset:4px; }.event-reminder:disabled { cursor:not-allowed; opacity:.42; }.event-reminder-tooltip { position:absolute; z-index:8; right:0; bottom:calc(100% + 8px); padding:9px 10px; border:1px solid var(--paper); background:#080808; color:var(--paper); font-size:8px; font-weight:700; letter-spacing:.12em; line-height:1; text-transform:uppercase; white-space:nowrap; pointer-events:none; opacity:0; transform:translate3d(0,4px,0); transition:opacity 150ms ease,transform 150ms ease; }.event-reminder-tooltip.is-visible { opacity:1; transform:translate3d(0,0,0); }.event-qr-trigger { display:grid; place-items:center; min-height:52px; padding:0; border:1px solid rgba(242,240,235,.72); background:transparent; color:var(--paper); font:inherit; font-size:9px; font-weight:700; letter-spacing:.05em; line-height:1; text-transform:uppercase; cursor:pointer; transition:background-color 180ms ease,color 180ms ease; }.event-qr-trigger:hover, .event-qr-trigger:focus-visible { background:var(--paper); color:var(--ink); }.event-qr-trigger:focus-visible { outline:2px solid var(--paper); outline-offset:4px; }
+    .event-actions { display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) 48px; gap:7px; }.event-actions .announce { min-width:0; }.event-share { display:flex; align-items:center; justify-content:space-between; gap:8px; min-height:52px; padding:0 13px; border:1px solid rgba(242,240,235,.72); background:transparent; color:var(--paper); font:inherit; font-size:9px; font-weight:700; letter-spacing:.11em; line-height:1; text-align:left; text-transform:uppercase; cursor:pointer; transition:background-color 180ms ease,color 180ms ease; }.event-share:hover, .event-share:focus-visible { background:var(--paper); color:var(--ink); }.event-share:focus-visible { outline:2px solid var(--paper); outline-offset:4px; }.event-share svg { flex:0 0 auto; width:17px; height:17px; fill:none; stroke:currentColor; stroke-linecap:square; stroke-linejoin:miter; stroke-width:1.7; }.event-qr-trigger { display:grid; place-items:center; min-height:52px; padding:0; border:1px solid rgba(242,240,235,.72); background:transparent; color:var(--paper); font:inherit; font-size:9px; font-weight:700; letter-spacing:.05em; line-height:1; text-transform:uppercase; cursor:pointer; transition:background-color 180ms ease,color 180ms ease; }.event-qr-trigger:hover, .event-qr-trigger:focus-visible { background:var(--paper); color:var(--ink); }.event-qr-trigger:focus-visible { outline:2px solid var(--paper); outline-offset:4px; }
     .announce:hover, .announce:focus-visible { background:transparent; color:var(--paper); }.announce:focus-visible { outline:2px solid var(--paper); outline-offset:4px; }.announce b { font-size:18px; font-weight:400; }.announce.is-finished { cursor:default; border-color:rgba(242,240,235,.5); background:transparent; color:rgba(242,240,235,.72); pointer-events:none; }
     .ticket-notice { position:fixed; z-index:150; bottom:22px; left:22px; display:flex; align-items:center; gap:11px; padding:11px 13px; border:1px solid var(--ink); background:var(--paper); color:var(--ink); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1; text-transform:uppercase; opacity:0; pointer-events:none; transform:translate3d(0,10px,0); transition:opacity 170ms ease,transform 170ms ease; }
     .ticket-notice.is-visible { opacity:1; transform:translate3d(0,0,0); }.ticket-notice b { font-size:14px; font-weight:400; }
     .qr-modal[hidden] { display:none; }.qr-modal { position:fixed; z-index:170; inset:0; display:grid; place-items:center; padding:18px; background:rgba(8,8,8,.82); opacity:0; visibility:hidden; transition:opacity 180ms ease,visibility 0s linear 180ms; }.qr-modal.is-open { opacity:1; visibility:visible; transition-delay:0s; }.qr-dialog { position:relative; width:min(100%,420px); border:1px solid var(--ink); background:var(--paper); color:var(--ink); box-shadow:8px 8px 0 #080808; opacity:0; transform:translate3d(0,12px,0); transition:opacity 180ms ease,transform 220ms cubic-bezier(.22,.8,.22,1); }.qr-modal.is-open .qr-dialog { opacity:1; transform:translate3d(0,0,0); }.qr-dialog-head { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; padding:17px 18px 15px; border-bottom:1px solid rgba(8,8,8,.7); }.qr-dialog-kicker { margin:0 0 7px; color:rgba(8,8,8,.6); font-size:8px; font-weight:700; letter-spacing:.15em; line-height:1; text-transform:uppercase; }.qr-dialog-title { margin:0; font-size:clamp(31px,7vw,47px); font-weight:900; letter-spacing:-.1em; line-height:.74; text-transform:uppercase; }.qr-close { display:grid; place-items:center; width:32px; height:32px; padding:0; border:1px solid var(--ink); background:transparent; color:var(--ink); font:inherit; font-size:20px; line-height:1; cursor:pointer; }.qr-close:hover, .qr-close:focus-visible { background:var(--ink); color:var(--paper); }.qr-close:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }.qr-dialog-main { display:flex; flex-direction:column; align-items:center; padding:23px 18px 20px; }.qr-code { display:grid; place-items:center; width:min(100%,264px); min-height:264px; padding:10px; border:1px solid var(--ink); background:var(--paper); }.qr-code svg { display:block; width:100%; height:auto; }.qr-code-status { margin:0; color:rgba(8,8,8,.62); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1.35; text-align:center; text-transform:uppercase; }.qr-description { max-width:275px; margin:17px 0 0; font-size:11px; font-weight:700; letter-spacing:.02em; line-height:1.35; text-align:center; text-transform:uppercase; }.qr-dialog-actions { display:grid; grid-template-columns:1fr 1fr; width:100%; gap:7px; margin-top:20px; }.qr-dialog-actions button { display:flex; align-items:center; justify-content:space-between; min-height:42px; padding:0 12px; border:1px solid var(--ink); background:transparent; color:var(--ink); font:inherit; font-size:8px; font-weight:700; letter-spacing:.11em; line-height:1; text-align:left; text-transform:uppercase; cursor:pointer; }.qr-dialog-actions button:hover:not(:disabled), .qr-dialog-actions button:focus-visible { background:var(--ink); color:var(--paper); }.qr-dialog-actions button:disabled { cursor:wait; opacity:.45; }.qr-dialog-actions button:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }body.qr-open { overflow:hidden; }
     .event-bottom { display:flex; justify-content:space-between; gap:16px; padding:16px 22px; border-top:1px solid rgba(8,8,8,.6); color:rgba(8,8,8,.72); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1.2; text-transform:uppercase; }
+    .dates-pwa-entry { display:inline-flex; align-items:center; justify-content:center; gap:9px; min-height:34px; padding:0 11px; border:1px solid rgba(8,8,8,.72); background:transparent; color:var(--ink); font-size:8px; font-weight:700; letter-spacing:.1em; line-height:1; text-decoration:none; text-transform:uppercase; transition:background-color 160ms ease,color 160ms ease; }
+    .dates-pwa-entry:hover,.dates-pwa-entry:focus-visible { background:var(--ink); color:var(--paper); outline:2px solid var(--ink); outline-offset:2px; }
+    .dates-pwa-entry b { font-size:15px; font-weight:400; }
     .archive { overflow:hidden; padding:15px; background:#080808; color:var(--paper); }
     .archive-frame { border:1px solid rgba(242,240,235,.48); }
     .archive-top { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:18px 22px; border-bottom:1px solid rgba(242,240,235,.42); font-size:10px; font-weight:700; letter-spacing:.14em; line-height:1; text-transform:uppercase; }
@@ -310,8 +313,8 @@
       .site-header { min-height:84px; padding:19px 20px; }.header-side { gap:15px; }.header-link { display:none; }.frame { inset:10px; }.brand img { width:37px; height:37px; }.brand-name { font-size:9px; }
       .site-header { min-height:70px; padding:14px 20px; }.hero { padding-top:70px; }.header-side { display:none; }.menu-toggle { display:block; }.mobile-nav { position:fixed; z-index:49; top:70px; right:10px; left:10px; flex-direction:column; gap:0; padding:10px 20px 20px; border:1px solid rgba(242,240,235,.45); background:#080808; }.mobile-nav.open { display:flex; }.mobile-nav a { padding:16px 0; border-bottom:1px solid rgba(242,240,235,.25); color:var(--paper); font-size:11px; font-weight:700; letter-spacing:.12em; text-decoration:none; text-transform:uppercase; }.mobile-nav .mobile-ticket { margin-top:10px; padding:15px; border:1px solid var(--paper); background:var(--paper); color:var(--ink); text-align:center; }
       .hero-main { padding:20px 29px 46px; flex-direction:column; justify-content:flex-end; align-items:stretch; }.hero-copy { width:100%; }.hero-countdown { position:relative; right:auto; bottom:auto; width:100%; margin-top:12px; padding:10px 12px; grid-template-columns:minmax(0,1fr) auto; }.countdown-kicker { display:none; }.countdown-event { font-size:18px; line-height:.82; }.countdown-date { margin-top:4px; font-size:7px; }.countdown-clock { grid-column:2; display:flex; gap:6px; margin:0; border:0; background:transparent; align-self:center; }.countdown-clock span { flex-direction:row; gap:2px; padding:0; background:transparent; }.countdown-clock b { font-size:15px; line-height:1; }.countdown-clock small { align-self:end; font-size:6px; }.eyebrow { font-size:9px; margin-bottom:16px; } h1 { width:100%; max-width:none; font-size:clamp(46px,12.75vw,60px); letter-spacing:-.075em; line-height:.78; text-align:left; } .tagline { margin-top:23px; font-size:13px; }.action-row { gap:14px; margin-top:27px; }.action { min-width:100%; }.status { font-size:8px; }.scroll { right:20px; bottom:22px; }
-      .intro-slider > .next-experience { height:100svh; min-height:100svh; overflow-y:auto; padding:10px; }.intro-slider .next-frame { height:auto; min-height:calc(100svh - 20px); }.intro-slider .section-top { grid-template-columns:1fr auto; }.intro-slider .section-top .event-switcher { grid-column:2; justify-self:end; }.intro-slider .section-top .event-brand { display:none; }.event-nav-copy { min-width:84px; }.event-nav-copy strong { font-size:7px; }.hero-routes { grid-template-columns:1fr; width:100%; margin-top:25px; }.hero-route { min-height:54px; }.entry-curtain::before { inset:10px; }.curtain-layout { inset:10px; grid-template-columns:1fr auto; grid-template-rows:auto 1fr auto; gap:10px; padding:21px 20px; }.curtain-index { grid-column:1; }.curtain-serial { grid-column:2; font-size:7px; }.curtain-main { grid-column:1 / -1; }.curtain-overline { margin-bottom:20px; font-size:8px; }.curtain-title { font-size:clamp(59px,17vw,102px); line-height:.73; }.curtain-rule { margin:25px 0 11px; }.curtain-caption { max-width:245px; font-size:8px; }.mobile-home .menu-arrow { font-size:19px; }
-      .next-experience { padding:10px; }.next-frame { min-height:calc(100svh - 20px); }.section-top { padding:15px; font-size:8px; }.section-top > .event-brand { display:none; }.event-stage { display:grid; grid-template-columns:1fr; }.event-poster { width:100%; height:auto; min-height:0; max-height:640px; aspect-ratio:auto; border-right:0; border-bottom:1px solid rgba(8,8,8,.6); }.intro-slider .event-poster img { width:100%; height:auto; max-height:640px; object-fit:contain; }.event-content { grid-template-columns:1fr; }.intro-slider .event-title { min-height:340px; padding:27px 20px 25px; row-gap:18px; border-right:0; border-bottom:1px solid rgba(8,8,8,.6); }.intro-slider .event-title h2 { margin:0; font-size:clamp(62px,19vw,90px); line-height:.8; }.intro-slider .event-title.is-long-title { min-height:360px; }.intro-slider .event-title.is-long-title h2 { font-size:clamp(46px,12vw,66px); letter-spacing:-.1em; line-height:.9; }.event-info { min-height:450px; padding:29px 20px 24px; }.event-number span { font-size:114px; }.detail-list { margin-top:38px; }.detail { grid-template-columns:80px 1fr; }.event-actions { grid-template-columns:minmax(0,1.15fr) minmax(0,1fr) 44px 44px; }.event-share { padding:0 10px; font-size:8px; }.event-qr-trigger { min-height:52px; font-size:8px; }.qr-modal { padding:12px; }.qr-dialog { box-shadow:5px 5px 0 #080808; }.qr-code { width:min(100%,244px); min-height:244px; }.event-bottom { align-items:center; padding:12px 15px; font-size:8px; }.event-bottom > span:first-child { max-width:100px; }.intro-slider .slider-enter { flex:0 0 auto; min-height:32px; gap:6px; padding:0 9px; font-size:7px; letter-spacing:.08em; white-space:nowrap; }.event-bottom span:last-child { text-align:right; }
+      .intro-slider > .next-experience { height:100svh; min-height:100svh; overflow-y:auto; padding:10px; }.intro-slider .next-frame { height:auto; min-height:calc(100svh - 20px); }.intro-slider .section-top { grid-template-columns:1fr auto; }.intro-slider .section-top .event-switcher { grid-column:2; justify-self:end; }.intro-slider .section-top .event-brand { display:none; }.event-nav-copy { min-width:84px; }.event-nav-copy strong { font-size:7px; }.hero-routes { grid-template-columns:1fr; width:100%; margin-top:25px; }.hero-route { min-height:54px; }.entry-curtain::before { inset:10px; }.curtain-layout { inset:10px; grid-template-columns:1fr auto; grid-template-rows:auto 1fr auto; gap:10px; padding:21px 20px; }.curtain-index { grid-column:1; }.curtain-serial { grid-column:2; font-size:7px; }.curtain-main { grid-column:1 / -1; }.curtain-overline { margin-bottom:20px; font-size:8px; }.curtain-title { font-size:clamp(59px,17vw,102px); letter-spacing:-.065em; line-height:.73; }.curtain-title span + span { letter-spacing:-.075em; }.curtain-rule { margin:25px 0 11px; }.curtain-caption { max-width:245px; font-size:8px; }.mobile-home .menu-arrow { font-size:19px; }
+      .next-experience { padding:10px; }.next-frame { min-height:calc(100svh - 20px); }.section-top { padding:15px; font-size:8px; }.section-top > .event-brand { display:none; }.event-stage { display:grid; grid-template-columns:1fr; }.event-poster { width:100%; height:auto; min-height:0; max-height:640px; aspect-ratio:auto; border-right:0; border-bottom:1px solid rgba(8,8,8,.6); }.intro-slider .event-poster img { width:100%; height:auto; max-height:640px; object-fit:contain; }.event-content { grid-template-columns:1fr; }.intro-slider .event-title { min-height:340px; padding:27px 20px 25px; row-gap:18px; border-right:0; border-bottom:1px solid rgba(8,8,8,.6); }.intro-slider .event-title h2 { margin:0; font-size:clamp(62px,19vw,90px); line-height:.8; }.intro-slider .event-title.is-long-title { min-height:360px; }.intro-slider .event-title.is-long-title h2 { font-size:clamp(46px,12vw,66px); letter-spacing:-.1em; line-height:.9; }.event-info { min-height:450px; padding:29px 20px 24px; }.event-number span { font-size:114px; }.detail-list { margin-top:38px; }.detail { grid-template-columns:80px 1fr; }.event-actions { grid-template-columns:minmax(0,1.15fr) minmax(0,1fr) 44px; }.event-share { padding:0 10px; font-size:8px; }.event-qr-trigger { min-height:52px; font-size:8px; }.qr-modal { padding:12px; }.qr-dialog { box-shadow:5px 5px 0 #080808; }.qr-code { width:min(100%,244px); min-height:244px; }.event-bottom { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:8px 12px; padding:12px 15px; font-size:8px; }.event-bottom > span:first-child { grid-column:1; grid-row:1; max-width:100px; }.event-bottom .dates-pwa-entry { grid-column:1; grid-row:2; justify-self:start; min-height:29px; padding:0 8px; font-size:6px; letter-spacing:.07em; }.event-bottom .slider-enter { grid-column:2; grid-row:1 / span 2; justify-self:end; }.intro-slider .slider-enter { flex:0 0 auto; min-height:32px; gap:6px; padding:0 9px; font-size:7px; letter-spacing:.08em; white-space:nowrap; }.event-bottom span:last-child { text-align:right; }
       .archive { padding:10px; }.archive-top { padding:15px; font-size:8px; }.archive-intro { display:block; padding:37px 20px 31px; }.archive-intro h2 { font-size:clamp(56px,17vw,85px); }.archive-intro p { margin-top:25px; font-size:12px; }.archive-rail { grid-auto-columns:87vw; }.archive-card { min-height:430px; padding:18px; }.archive-card-name { font-size:clamp(60px,18vw,88px); }.archive-card-name.small { font-size:clamp(51px,14vw,70px); }
       .manifesto { padding:10px; }.manifesto-frame { min-height:calc(100svh - 20px); }.manifesto-top { padding:15px; font-size:8px; }.manifesto-top span:last-child { display:none; }.manifesto-main { grid-template-columns:1fr; }.manifesto-title { min-height:435px; padding:30px 20px 25px; border-right:0; border-bottom:1px solid rgba(8,8,8,.62); }.manifesto-title h2 { margin:45px 0; font-size:clamp(46px,12.3vw,64px); letter-spacing:-.115em; line-height:.78; }.manifesto-title h2 span { white-space:nowrap; }.manifesto-copy { min-height:440px; padding:29px 20px 25px; }.manifesto-copy p { font-size:24px; }.manifesto-footer { padding:14px 15px; font-size:8px; }.manifesto-footer span:last-child { text-align:right; }
       .gallery { padding:10px; }.gallery-top { padding:15px; font-size:8px; }.gallery-top span:last-child { display:none; }.gallery-head { display:block; padding:39px 20px 33px; }.gallery-kicker { margin-bottom:18px; font-size:9px; }.gallery-head h2 { font-size:clamp(49px,12.8vw,61px); }.gallery-head p { margin-top:28px; font-size:12px; }.gallery-masonry { grid-template-columns:1fr 1fr; grid-template-rows:360px 230px 230px; }.gallery-item--dance { grid-column:span 2; grid-row:auto; }.gallery-item--decks { grid-column:span 1; grid-row:span 1; }.gallery-item--lights { grid-column:span 1; grid-row:span 1; }.gallery-item--community { grid-column:span 2; grid-row:auto; }.gallery-label { right:15px; bottom:15px; left:15px; font-size:9px; }.gallery-footer { padding:14px 15px; font-size:8px; }.gallery-footer span:last-child { text-align:right; }
@@ -353,7 +356,7 @@
       .founders-head { display:block; padding:31px 20px 27px; }.founders-head h3 { font-size:clamp(49px,15vw,77px); }.founders-head p { margin-top:20px; }.founders-grid { grid-template-columns:1fr; }.founder-card { display:grid; grid-template-columns:minmax(0,39%) minmax(0,1fr); }.founder-card figure { width:100%; min-height:214px; aspect-ratio:auto; }.founder-body { min-height:0; padding:18px 16px 19px; }.founder-number { margin-bottom:27px; }.founder-name { font-size:clamp(29px,8.7vw,40px); letter-spacing:-.06em; white-space:nowrap; }.founder-role { margin-top:11px; font-size:8px; }.founder-bio { margin-top:18px; font-size:12px; line-height:1.36; }
       .hero { padding-top:70px; }
       body.menu-open { overflow:hidden; }
-      .mobile-quick-actions { position:fixed; z-index:110; right:18px; bottom:18px; display:flex; visibility:hidden; pointer-events:none; flex-direction:column; align-items:flex-end; gap:10px; }.site-mode .mobile-quick-actions { visibility:visible; pointer-events:auto; }.menu-open .mobile-quick-actions { display:none !important; }.quick-home, .quick-ticket { opacity:0; will-change:transform,opacity; }.site-mode .quick-home { animation:quick-control-arrive 620ms cubic-bezier(.18,.86,.27,1.2) 760ms both; }.site-mode .quick-ticket { animation:quick-control-arrive 650ms cubic-bezier(.18,.86,.27,1.2) 860ms both; }.mobile-quick-actions.is-leaving { visibility:visible; pointer-events:none; }.mobile-quick-actions.is-leaving .quick-ticket { animation:quick-control-depart 220ms cubic-bezier(.4,0,.8,.3) 0ms both; }.mobile-quick-actions.is-leaving .quick-home { animation:quick-control-depart 220ms cubic-bezier(.4,0,.8,.3) 55ms both; }.quick-home { display:grid; place-items:center; width:48px; height:48px; border:2px solid var(--paper); border-radius:11px; outline:2px solid var(--ink); outline-offset:0; background:#080808; color:var(--paper); font-size:21px; text-decoration:none; }.quick-ticket { display:flex; align-items:center; justify-content:space-between; gap:16px; min-height:48px; padding:0 15px; border:2px solid var(--ink); border-radius:11px; outline:2px solid var(--paper); outline-offset:0; background:var(--paper); color:var(--ink); font-size:9px; font-weight:700; letter-spacing:.13em; text-decoration:none; text-transform:uppercase; }.quick-ticket span:last-child { font-size:16px; font-weight:400; }
+      .mobile-quick-actions { position:fixed; z-index:110; right:18px; bottom:18px; display:flex; visibility:hidden; pointer-events:none; flex-direction:column; align-items:flex-end; gap:10px; }.site-mode .mobile-quick-actions { visibility:visible; pointer-events:auto; }.menu-open .mobile-quick-actions { display:none !important; }.quick-home, .quick-ticket { opacity:0; will-change:transform,opacity; }.site-mode .quick-home { animation:quick-control-arrive 620ms cubic-bezier(.18,.86,.27,1.2) 760ms both; }.site-mode .quick-ticket { animation:quick-control-arrive 650ms cubic-bezier(.18,.86,.27,1.2) 860ms both; }.mobile-quick-actions.is-leaving { visibility:visible; pointer-events:none; }.mobile-quick-actions.is-leaving .quick-ticket { animation:quick-control-depart 220ms cubic-bezier(.4,0,.8,.3) 0ms both; }.mobile-quick-actions.is-leaving .quick-home { animation:quick-control-depart 220ms cubic-bezier(.4,0,.8,.3) 55ms both; }.quick-home { display:grid; place-items:center; width:48px; height:48px; border:2px solid var(--paper); border-radius:11px; outline:2px solid var(--ink); outline-offset:0; background:#080808; color:var(--paper); font-size:21px; text-decoration:none; }.quick-ticket { display:flex; align-items:center; justify-content:space-between; gap:16px; min-height:48px; padding:0 15px; border:2px solid var(--ink); border-radius:11px; outline:2px solid var(--paper); outline-offset:0; background:var(--paper); color:var(--ink); font-size:9px; font-weight:700; letter-spacing:.13em; text-decoration:none; text-transform:uppercase; }
     }
 
     @media (min-width:651px) and (max-width:980px) {
@@ -376,11 +379,10 @@
 
     /* Narrow event-detail columns: avoid squeezing the share action out of its grid. */
     @container (max-width: 390px) {
-      .event-actions { grid-template-columns:minmax(0,1fr) 48px 48px; grid-template-rows:52px 52px; }
+      .event-actions { grid-template-columns:minmax(0,1fr) 48px; grid-template-rows:52px 52px; }
       .event-actions .announce { grid-column:1 / -1; grid-row:1; }
       .event-actions .event-share { grid-column:1; grid-row:2; min-width:0; min-height:52px; height:52px; padding:0 12px; }
-      .event-actions .event-reminder-wrap { grid-column:2; grid-row:2; min-height:52px; height:52px; }
-      .event-actions .event-qr-trigger { grid-column:3; grid-row:2; min-height:52px; height:52px; }
+      .event-actions .event-qr-trigger { grid-column:2; grid-row:2; min-height:52px; height:52px; }
       .event-share span { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
     }
     @media (max-width:760px) {
@@ -756,9 +758,9 @@
 
     body.event-reservation-open { overflow:hidden; }
     .event-reservation-panel[hidden] { display:none; }
-    .event-reservation-panel { position:fixed; z-index:190; inset:0; display:flex; justify-content:flex-end; pointer-events:none; background:rgba(8,8,8,.68); opacity:0; visibility:hidden; transition:opacity 190ms ease,visibility 0s linear 320ms; will-change:opacity; }
+    .event-reservation-panel { position:fixed; z-index:190; inset:0; display:flex; justify-content:flex-end; pointer-events:none; background:rgba(8,8,8,.68); opacity:0; visibility:hidden; transition:opacity 150ms ease,visibility 0s linear 200ms; will-change:opacity; }
     .event-reservation-panel.is-open { visibility:visible; pointer-events:auto; opacity:1; transition-delay:0s; }
-    .event-reservation-drawer { display:flex; width:min(100%,520px); height:100vh; height:100dvh; flex-direction:column; overflow:hidden; border-left:1px solid rgba(242,240,235,.5); background:#101010; color:var(--paper); box-shadow:-14px 0 35px rgba(0,0,0,.28); transform:translate3d(100%,0,0); transition:transform 310ms cubic-bezier(.22,.8,.22,1); will-change:transform; }
+    .event-reservation-drawer { display:flex; width:min(100%,520px); height:100vh; height:100dvh; flex-direction:column; overflow:hidden; border-left:1px solid rgba(242,240,235,.5); background:#101010; color:var(--paper); box-shadow:-14px 0 35px rgba(0,0,0,.28); transform:translate3d(100%,0,0); transition:transform 185ms cubic-bezier(.22,.8,.22,1); will-change:transform; }
     .event-reservation-panel.is-open .event-reservation-drawer { transform:translate3d(0,0,0); }
     .event-reservation-drawer-head { display:flex; align-items:flex-start; justify-content:space-between; gap:18px; padding:22px 22px 19px; border-bottom:1px solid rgba(242,240,235,.36); }
     .event-reservation-drawer-kicker { margin:0 0 9px; color:rgba(242,240,235,.58); font-size:8px; font-weight:700; letter-spacing:.15em; line-height:1; text-transform:uppercase; }.event-reservation-drawer h2 { margin:0; font-size:clamp(33px,4.5vw,50px); font-weight:900; letter-spacing:-.09em; line-height:.75; text-transform:uppercase; }
@@ -785,7 +787,7 @@
       .event-number span { font-size:clamp(78px,7vw,104px); }
       .detail-list { margin-top:28px; }.detail { padding:11px 0; }.event-countdown { margin-top:14px; }
       .event-countdown-clock span { padding-top:7px; padding-bottom:6px; }
-      .announce, .event-share, .event-reminder, .event-qr-trigger { min-height:44px; }
+      .announce, .event-share, .event-qr-trigger { min-height:44px; }
     }
 
     /* Native mobile tap feedback was briefly painting a blue transparent flash over a selected table.
@@ -902,22 +904,17 @@
     }
     /* Hero routes: the ticket action and event card both open the upcoming date. */
     .hero-route { text-decoration:none; }
-    .hero-countdown { grid-template-columns:minmax(0,1fr) auto; cursor:pointer; text-decoration:none; }
+    .hero-countdown { grid-template-columns:minmax(0,1fr); cursor:pointer; text-decoration:none; }
     .hero-countdown:hover { border-color:var(--paper); background:#111; }
     .hero-countdown:hover .countdown-event { color:var(--paper); }
-    .hero-countdown:hover .countdown-link { transform:translate3d(4px,0,0); }
     .hero-countdown:focus-visible { outline:2px solid var(--paper); outline-offset:4px; }
     .hero-countdown.is-disabled { cursor:default; pointer-events:none; opacity:.72; }
     .hero-countdown.is-empty { grid-template-columns:minmax(0,1fr); }
-    .hero-countdown.is-empty .countdown-link { display:none; }
-    .countdown-link { grid-column:2; grid-row:2; align-self:center; justify-self:end; font-size:17px; line-height:1; transition:transform 180ms ease; }
     .countdown-clock[hidden] { display:none !important; }
     .hero-route--next.is-disabled { opacity:.64; cursor:default; pointer-events:none; }
     @media (max-width:650px) {
       .hero h1 { font-size:clamp(40px,12.75vw,60px); }
-      .hero-countdown { grid-template-columns:minmax(0,1fr) auto auto; }
-      .hero-countdown .countdown-clock { grid-column:2; }
-      .hero-countdown .countdown-link { grid-column:3; grid-row:1; align-self:center; }
+      .hero-countdown { grid-template-columns:minmax(0,1fr); }
       .hero-countdown.is-empty { grid-template-columns:minmax(0,1fr); }
     }
 
@@ -952,9 +949,9 @@
     .venue-hire-copy p.venue-rental-note { max-width:360px; margin:22px 0 0; color:rgba(242,240,235,.78); font-size:12px; font-weight:700; letter-spacing:.02em; line-height:1.35; text-transform:uppercase; }
     .venue-hire.rental-details .venue-hire-copy a { margin-top:22px; }
     @media (max-width:760px) {
-      .gallery-head--rental { display:block; padding-left:clamp(15px,5vw,20px); padding-right:clamp(15px,5vw,20px); }
+      .gallery-head--rental { display:grid; grid-template-columns:minmax(0,1fr); justify-items:start; padding-left:clamp(15px,5vw,20px); padding-right:clamp(15px,5vw,20px); }
       .gallery-head--rental h2.section-heading { font-size:clamp(35px,10.5vw,50px); letter-spacing:-.06em !important; line-height:.9 !important; }
-      .gallery-rental-summary { max-width:36ch; margin:18px 0 0; font-size:12px; }
+      .gallery-rental-summary { width:100%; max-width:36ch; justify-self:start; margin:18px 0 0; font-size:12px; text-align:left; }
       .venue-facts--editorial { grid-template-columns:minmax(0,1fr); padding:0 20px; }
       .venue-capacity-card { min-height:0; padding:23px 0 25px; border-right:0; border-bottom:1px solid rgba(242,240,235,.42); }
       .venue-capacity-value { margin-top:14px; column-gap:11px; }
@@ -1087,7 +1084,6 @@
         <span class="countdown-kicker">Próxima fecha</span>
         <span><strong class="countdown-event" data-countdown-event>YAMILA BE</strong><small class="countdown-date" data-countdown-date>Vie 06 NOV · 23:59 H</small></span>
         <span class="countdown-clock" aria-label="Tiempo restante"><span><b data-countdown-days>00</b><small>Días</small></span><span><b data-countdown-hours>00</b><small>Horas</small></span><span><b data-countdown-minutes>00</b><small>Min</small></span></span>
-        <span class="countdown-link" aria-hidden="true">→</span>
       </a>
     </section>
 
@@ -1136,7 +1132,6 @@
             <div class="event-actions">
               <a class="announce" data-event-ticket href="https://www.passline.com/eventos/sabado-3110-more" target="_blank" rel="noopener noreferrer">Comprar entradas <b aria-hidden="true">↗</b></a>
               <button class="event-share" type="button" data-event-share aria-label="Compartir la fecha FESTA BROS"><span>Compartir</span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 16V3m0 0L7.5 7.5M12 3l4.5 4.5M5 13v7h14v-7" /></svg></button>
-              <span class="event-reminder-wrap"><button class="event-reminder" type="button" data-event-reminder aria-label="Agregar recordatorio para FESTA BROS" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9" /><path d="M10 21h4" /></svg></button><span class="event-reminder-tooltip" data-reminder-tooltip role="status" aria-live="polite">Recordatorio agregado</span></span>
               <button class="event-qr-trigger" type="button" data-event-qr aria-label="Ver código QR de la fecha FESTA BROS">QR</button>
             </div>
           </aside>
@@ -1148,7 +1143,7 @@
         <p class="event-reservation-status"><i aria-hidden="true"></i><span data-event-reservation-status>Mesas disponibles</span></p>
         <button class="event-reservation-open" type="button" data-event-reservation-open><span>Ver mesas disponibles</span><b aria-hidden="true">↗</b></button>
       </section>
-      <footer class="event-bottom"><span data-event-footer>FESTA BROS · Sábado 31 de octubre</span><button class="slider-enter" type="button">Entrar a ONE MORE</button></footer>
+      <footer class="event-bottom"><span data-event-footer>FESTA BROS · Sábado 31 de octubre</span><a class="dates-pwa-entry" href="/fechas/" aria-label="Abrir la app instalable de Fechas de ONE MORE">App de fechas <b aria-hidden="true">↗</b></a><button class="slider-enter" type="button">Entrar a ONE MORE</button></footer>
     </div>
   </section>  </div>
   <div class="event-reservation-panel" data-event-reservation-panel hidden aria-hidden="true">
@@ -1191,7 +1186,7 @@
   <div class="pull-enter-indicator" data-pull-enter aria-hidden="true"><p><span>Entrando a</span><b>ONE MORE</b><i aria-hidden="true">↑</i></p></div>
   <nav class="mobile-quick-actions" aria-label="Accesos rápidos">
     <a class="quick-home" href="#inicio" aria-label="Volver al inicio"><span aria-hidden="true">⌂</span></a>
-    <a class="quick-ticket" href="#proxima-experiencia"><span>Próxima fecha</span><span aria-hidden="true">↗</span></a>
+    <a class="quick-ticket" href="#proxima-experiencia"><span>Próxima fecha</span></a>
   </nav>
   <section id="archivo" class="archive" aria-labelledby="archive-title">
     <div class="archive-frame">
@@ -1267,9 +1262,9 @@
           <div>
             <p>ONE MORE nace de una búsqueda compartida: hacer de cada fecha un punto de encuentro para vivir la electrónica más allá de una sola noche.</p>
             <div class="manifesto-values" aria-label="Punto de partida de ONE MORE ELECTRONIC">
-              <div><span>El origen</span><span>Una idea</span></div>
-              <div><span>El lugar</span><span>Sonido y comunidad</span></div>
-              <div><span>El impulso</span><span>Una noche más</span></div>
+              <div><span>El espacio</span><span>Un club en Villa Devoto</span></div>
+              <div><span>La música</span><span>Electrónica en la pista</span></div>
+              <div><span>La comunidad</span><span>Encuentros en cada fecha</span></div>
             </div>
           </div>
         </div>
@@ -1566,7 +1561,7 @@ Minimum version required to store current data is: `+i+`.
 `;return typeof r=="function"&&r(null,h),h}});var Nn=g(O=>{var Tn=_t(),St=Te(),be=Ne(),In=Pe();function Pt(n,t,e,r,o){let i=[].slice.call(arguments,1),s=i.length,u=typeof i[s-1]=="function";if(!u&&!Tn())throw new Error("Callback required as last argument");if(u){if(s<2)throw new Error("Too few arguments provided");s===2?(o=e,e=t,t=r=void 0):s===3&&(t.getContext&&typeof o>"u"?(o=r,r=void 0):(o=r,r=e,e=t,t=void 0))}else{if(s<1)throw new Error("Too few arguments provided");return s===1?(e=t,t=r=void 0):s===2&&!t.getContext&&(r=e,e=t,t=void 0),new Promise(function(c,l){try{let a=St.create(e,r);c(n(a,t,r))}catch(a){l(a)}})}try{let c=St.create(e,r);o(null,n(c,t,r))}catch(c){o(c)}}O.create=St.create;O.toCanvas=Pt.bind(null,be.render);O.toDataURL=Pt.bind(null,be.renderToDataURL);O.toString=Pt.bind(null,function(n,t,e){return In.render(n,e)})});return Nn();})();
 
 </script>
-  <script src="/events.js"></script>
+  <script src="events.js"></script>
   <script>
     const archiveRail = document.getElementById('archive-carousel');
     const archiveCards = [...archiveRail.querySelectorAll('.archive-card')];
@@ -1759,8 +1754,6 @@ Minimum version required to store current data is: `+i+`.
     const eventDetailLineup = document.querySelector('[data-event-detail-lineup]');
     const eventTicket = document.querySelector('[data-event-ticket]');
     const eventShareButton = document.querySelector('[data-event-share]');
-    const eventReminderButton = document.querySelector('[data-event-reminder]');
-    const reminderTooltip = document.querySelector('[data-reminder-tooltip]');
     const eventQrButton = document.querySelector('[data-event-qr]');
     const qrModal = document.querySelector('[data-qr-modal]');
     const qrCloseButton = document.querySelector('[data-qr-close]');
@@ -2130,46 +2123,6 @@ Minimum version required to store current data is: `+i+`.
     const eventPosition = document.querySelector('[data-event-position]');
     const eventTotal = document.querySelector('[data-event-total]');
     const upcomingEvents = window.ONE_MORE_UPCOMING_EVENTS || [];
-    const REMINDER_STORAGE_KEY = 'one-more-event-reminders-v1';
-    let reminderTooltipTimer;
-    const getSavedReminderSlugs = () => {
-      try {
-        const saved = JSON.parse(localStorage.getItem(REMINDER_STORAGE_KEY) || '[]');
-        return Array.isArray(saved) ? new Set(saved) : new Set();
-      } catch (_) { return new Set(); }
-    };
-    const saveReminderSlugs = (slugs) => localStorage.setItem(REMINDER_STORAGE_KEY, JSON.stringify([...slugs]));
-    const showReminderTooltip = (message) => {
-      window.clearTimeout(reminderTooltipTimer);
-      reminderTooltip.textContent = message;
-      reminderTooltip.classList.add('is-visible');
-      reminderTooltipTimer = window.setTimeout(() => reminderTooltip.classList.remove('is-visible'), 2600);
-    };
-    const syncEventReminder = (event) => {
-      const isSaved = getSavedReminderSlugs().has(event.slug);
-      const isFinished = isEventFinished(event);
-      eventReminderButton.classList.toggle('is-active', isSaved && !isFinished);
-      eventReminderButton.disabled = isFinished;
-      eventReminderButton.setAttribute('aria-pressed', String(isSaved && !isFinished));
-      eventReminderButton.setAttribute('aria-label', isFinished ? `La fecha ${event.titleHtml.replace(/<[^>]+>/g, '')} ya finalizó` : `${isSaved ? 'Desactivar' : 'Agregar'} recordatorio para ${event.titleHtml.replace(/<[^>]+>/g, '')}`);
-      eventReminderButton.title = isFinished ? 'Fecha finalizada' : (isSaved ? 'Desactivar recordatorio guardado' : 'Guardar recordatorio');
-    };
-    eventReminderButton.addEventListener('click', () => {
-      const event = upcomingEvents[activeEventIndex];
-      if (!event || isEventFinished(event)) return;
-      const saved = getSavedReminderSlugs();
-      if (saved.has(event.slug)) {
-        saved.delete(event.slug);
-        saveReminderSlugs(saved);
-        syncEventReminder(event);
-        showReminderTooltip('Recordatorio desactivado');
-        return;
-      }
-      saved.add(event.slug);
-      saveReminderSlugs(saved);
-      syncEventReminder(event);
-      showReminderTooltip('Recordatorio guardado');
-    });
     const syncReservationDateOptions = () => {
       if (!reservationDate) return;
       const previousValue = reservationDate.value;
@@ -2383,7 +2336,10 @@ Minimum version required to store current data is: `+i+`.
     };
     const finishClosingEventReservationPanel = () => {
       if (eventReservationPanel.hidden || eventReservationPanel.classList.contains('is-open')) return;
+      window.clearTimeout(eventReservationHideTimer);
+      eventReservationHideTimer = null;
       eventReservationPanel.hidden = true;
+      document.body.classList.remove('event-reservation-open');
       if (eventReservationShouldReturnFocus && eventReservationReturnFocus) eventReservationReturnFocus.focus();
       eventReservationReturnFocus = null;
       eventReservationShouldReturnFocus = false;
@@ -2393,30 +2349,37 @@ Minimum version required to store current data is: `+i+`.
       eventReservationShouldReturnFocus = returnFocus;
       eventReservationPanel.classList.remove('is-open');
       eventReservationPanel.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('event-reservation-open');
       window.clearTimeout(eventReservationHideTimer);
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         finishClosingEventReservationPanel();
         return;
       }
       // Fallback only: normally the drawer's transform transition finishes the close.
-      eventReservationHideTimer = window.setTimeout(finishClosingEventReservationPanel, 380);
+      eventReservationHideTimer = window.setTimeout(finishClosingEventReservationPanel, 260);
     };
     const openEventReservationPanel = (trigger) => {
       const event = upcomingEvents[activeEventIndex];
       if (!event || isEventFinished(event)) return;
+      const panelAlreadyVisible = !eventReservationPanel.hidden;
       window.clearTimeout(eventReservationHideTimer);
+      eventReservationHideTimer = null;
       eventReservationShouldReturnFocus = false;
       eventReservationReturnFocus = trigger;
       setReservationDateFromEvent(event);
       renderEventReservationDrawer(event);
-      eventReservationPanel.hidden = false;
       eventReservationPanel.setAttribute('aria-hidden', 'false');
       document.body.classList.add('event-reservation-open');
-      // Force the off-screen state to be committed before adding .is-open. On mobile this
-      // avoids the browser coalescing display:none → final transform into an abrupt sheet.
+      if (panelAlreadyVisible) {
+        // Reverse a close in place instead of waiting for an old transition/timer to finish.
+        eventReservationPanel.classList.add('is-open');
+        eventReservationCloseButton.focus();
+        return;
+      }
+      eventReservationPanel.hidden = false;
+      // Commit the off-screen state before opening so the drawer animates instead of popping in.
       void eventReservationDrawer.offsetWidth;
       requestAnimationFrame(() => {
+        if (eventReservationPanel.hidden) return;
         eventReservationPanel.classList.add('is-open');
         eventReservationCloseButton.focus();
       });
@@ -2540,7 +2503,6 @@ Minimum version required to store current data is: `+i+`.
       refreshEventCountdown();
       eventInfo.setAttribute('aria-label', `Detalles de ${event.titleHtml.replace(/<[^>]+>/g, ' ')}`);
       syncEventAvailability(event);
-      syncEventReminder(event);
       eventShareButton.setAttribute('aria-label', `Compartir la fecha ${event.titleHtml.replace(/<[^>]+>/g, '')}`);
       eventQrButton.setAttribute('aria-label', `Ver código QR de la fecha ${event.titleHtml.replace(/<[^>]+>/g, '')}`);
       if (document.body.classList.contains('event-open')) {
