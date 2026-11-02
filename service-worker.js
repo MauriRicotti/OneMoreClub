@@ -1,7 +1,8 @@
-const CACHE_NAME = 'one-more-shell-v108';
+const CACHE_NAME = 'one-more-shell-v109';
 const APP_SHELL = [
   '/',
   '/index.html',
+  '/events.js',
   '/login/',
   '/manifest.webmanifest?v=3',
   '/assets/favicon.ico?v=3',
@@ -28,6 +29,19 @@ self.addEventListener('fetch', (event) => {
   if (url.origin !== self.location.origin) return;
   // The hero video is not precached; MapCN assets load on demand, while its poster and login image stay cached.
   if (url.pathname.endsWith('.mp4')) return;
+
+  // Revalidate the shared event schedule on every page load; fall back to its
+  // precached copy when offline so both the home page and login keep working.
+  if (url.pathname === '/events.js') {
+    event.respondWith(fetch(request, { cache: 'no-store' }).then((response) => {
+      if (!response || response.status !== 200 || response.type !== 'basic') {
+        return caches.match(request).then((cached) => cached || response);
+      }
+      const copy = response.clone();
+      return caches.open(CACHE_NAME).then((cache) => cache.put(request, copy)).then(() => response).catch(() => response);
+    }).catch(() => caches.match(request)));
+    return;
+  }
 
   if (request.mode === 'navigate') {
     const isHomeDocument = url.pathname === '/' || url.pathname === '/index.html';

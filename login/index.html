@@ -91,6 +91,28 @@
       .form-submit { min-height:45px; }
       .form-cancel { min-height:42px; margin-top:7px; }
     }
+    @keyframes login-visual-arrive {
+      from { opacity:.58; transform:scale(1.035); }
+      to { opacity:1; transform:scale(1); }
+    }
+    @keyframes login-rise-in {
+      from { opacity:0; transform:translate3d(0,16px,0); }
+      to { opacity:1; transform:translate3d(0,0,0); }
+    }
+    @media (prefers-reduced-motion:no-preference) {
+      .visual-area { animation:login-visual-arrive 900ms cubic-bezier(.22,.8,.22,1) both; }
+      .identity { opacity:0; animation:login-rise-in 560ms cubic-bezier(.22,.8,.22,1) 100ms both; }
+      .visual-copy > * { opacity:0; animation:login-rise-in 620ms cubic-bezier(.22,.8,.22,1) both; }
+      .visual-copy > :nth-child(1) { animation-delay:180ms; }
+      .visual-copy > :nth-child(2) { animation-delay:280ms; }
+      .visual-copy > :nth-child(3) { animation-delay:380ms; }
+      .account-form-wrap > * { opacity:0; animation:login-rise-in 560ms cubic-bezier(.22,.8,.22,1) both; }
+      .account-form-wrap > :nth-child(1) { animation-delay:140ms; }
+      .account-form-wrap > :nth-child(2) { animation-delay:220ms; }
+      .account-form-wrap > :nth-child(3) { animation-delay:300ms; }
+      .account-form-wrap > :nth-child(4) { animation-delay:380ms; }
+      .account-form-wrap > :nth-child(5) { animation-delay:460ms; }
+    }
     @media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; } }
   </style>
 </head>
@@ -126,8 +148,8 @@
         <section class="site-details" aria-label="Información de ONE MORE CLUB">
           <div class="site-detail">
             <span>Próxima fecha</span>
-            <strong>Festa Bros</strong>
-            <p>Sábado 31 OCT · 23:59 Hs</p>
+            <strong data-login-next-event>Nuevas fechas</strong>
+            <p data-login-next-event-date>Próximamente</p>
           </div>
           <div class="site-detail site-detail--venue">
             <span>ONE MORE CLUB</span>
@@ -139,11 +161,29 @@
     </section>
   </main>
 
+  <script src="/events.js"></script>
   <script>
     (() => {
       const VISUAL_ACCESS_KEY = 'one-more-visual-access';
       const form = document.getElementById('visual-login-form');
       const password = document.getElementById('account-password');
+      const nextEventName = document.querySelector('[data-login-next-event]');
+      const nextEventDate = document.querySelector('[data-login-next-event-date]');
+      const syncLoginNextEvent = () => {
+        const nextEvent = (window.ONE_MORE_UPCOMING_EVENTS || [])
+          .filter((event) => Date.parse(event.startsAt) > Date.now())
+          .sort((a, b) => Date.parse(a.startsAt) - Date.parse(b.startsAt))[0];
+        if (!nextEvent) {
+          nextEventName.textContent = 'Nuevas fechas';
+          nextEventDate.textContent = 'Próximamente';
+          return;
+        }
+        nextEventName.textContent = nextEvent.footer.split(' · ')[0];
+        nextEventDate.textContent = nextEvent.countdownLabel;
+      };
+      syncLoginNextEvent();
+      window.setInterval(syncLoginNextEvent, 60000);
+      document.addEventListener('visibilitychange', () => { if (!document.hidden) syncLoginNextEvent(); });
       const passwordVisibility = document.querySelector('[data-password-visibility]');
       passwordVisibility.addEventListener('click', () => {
         const revealing = password.type === 'password';
