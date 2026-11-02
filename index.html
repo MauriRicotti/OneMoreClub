@@ -30,6 +30,7 @@
     .background { position:absolute; inset:-2%; z-index:-4; overflow:hidden; background:url('assets/one-more-crowd-hero.webp') center center / cover no-repeat; transform:translate3d(0,0,0); }
     .hero-video { position:absolute; inset:0; display:block; width:100%; height:100%; object-fit:cover; object-position:center center; }
     @keyframes quick-control-arrive { 0% { opacity:0; transform:translate3d(22px,18px,0) scale(.76) rotate(3deg); } 58% { opacity:1; transform:translate3d(-3px,-2px,0) scale(1.045) rotate(-.6deg); } 78% { transform:translate3d(1px,1px,0) scale(.985) rotate(.15deg); } 100% { opacity:1; transform:translate3d(0,0,0) scale(1) rotate(0deg); } }
+    @keyframes quick-control-return { 0% { opacity:0; transform:translate3d(22px,18px,0) scale(.76) rotate(3deg); } 58% { opacity:1; transform:translate3d(-3px,-2px,0) scale(1.045) rotate(-.6deg); } 78% { transform:translate3d(1px,1px,0) scale(.985) rotate(.15deg); } 100% { opacity:1; transform:translate3d(0,0,0) scale(1) rotate(0deg); } }
     @keyframes quick-control-depart { from { opacity:1; transform:translate3d(0,0,0) scale(1) rotate(0deg); } to { opacity:0; transform:translate3d(24px,14px,0) scale(.82) rotate(2deg); } }
 
     .veil { position:absolute; z-index:-3; inset:0; background:linear-gradient(90deg,rgba(4,4,4,.94) 0%,rgba(5,5,5,.64) 37%,rgba(5,5,5,.13) 73%,rgba(5,5,5,.54) 100%),linear-gradient(0deg,rgba(0,0,0,.94) 0%,rgba(0,0,0,0) 36%,rgba(0,0,0,.24) 100%),linear-gradient(rgba(0,0,0,.10),rgba(0,0,0,.10)); }
@@ -156,9 +157,6 @@
     .ticket-notice.is-visible { opacity:1; transform:translate3d(0,0,0); }.ticket-notice b { font-size:14px; font-weight:400; }
     .qr-modal[hidden] { display:none; }.qr-modal { position:fixed; z-index:170; inset:0; display:grid; place-items:center; padding:18px; background:rgba(8,8,8,.82); opacity:0; visibility:hidden; transition:opacity 180ms ease,visibility 0s linear 180ms; }.qr-modal.is-open { opacity:1; visibility:visible; transition-delay:0s; }.qr-dialog { position:relative; width:min(100%,420px); border:1px solid var(--ink); background:var(--paper); color:var(--ink); box-shadow:8px 8px 0 #080808; opacity:0; transform:translate3d(0,12px,0); transition:opacity 180ms ease,transform 220ms cubic-bezier(.22,.8,.22,1); }.qr-modal.is-open .qr-dialog { opacity:1; transform:translate3d(0,0,0); }.qr-dialog-head { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; padding:17px 18px 15px; border-bottom:1px solid rgba(8,8,8,.7); }.qr-dialog-kicker { margin:0 0 7px; color:rgba(8,8,8,.6); font-size:8px; font-weight:700; letter-spacing:.15em; line-height:1; text-transform:uppercase; }.qr-dialog-title { margin:0; font-size:clamp(31px,7vw,47px); font-weight:900; letter-spacing:-.1em; line-height:.74; text-transform:uppercase; }.qr-close { display:grid; place-items:center; width:32px; height:32px; padding:0; border:1px solid var(--ink); background:transparent; color:var(--ink); font:inherit; font-size:20px; line-height:1; cursor:pointer; }.qr-close:hover, .qr-close:focus-visible { background:var(--ink); color:var(--paper); }.qr-close:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }.qr-dialog-main { display:flex; flex-direction:column; align-items:center; padding:23px 18px 20px; }.qr-code { display:grid; place-items:center; width:min(100%,264px); min-height:264px; padding:10px; border:1px solid var(--ink); background:var(--paper); }.qr-code svg { display:block; width:100%; height:auto; }.qr-code-status { margin:0; color:rgba(8,8,8,.62); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1.35; text-align:center; text-transform:uppercase; }.qr-description { max-width:275px; margin:17px 0 0; font-size:11px; font-weight:700; letter-spacing:.02em; line-height:1.35; text-align:center; text-transform:uppercase; }.qr-dialog-actions { display:grid; grid-template-columns:1fr 1fr; width:100%; gap:7px; margin-top:20px; }.qr-dialog-actions button { display:flex; align-items:center; justify-content:space-between; min-height:42px; padding:0 12px; border:1px solid var(--ink); background:transparent; color:var(--ink); font:inherit; font-size:8px; font-weight:700; letter-spacing:.11em; line-height:1; text-align:left; text-transform:uppercase; cursor:pointer; }.qr-dialog-actions button:hover:not(:disabled), .qr-dialog-actions button:focus-visible { background:var(--ink); color:var(--paper); }.qr-dialog-actions button:disabled { cursor:wait; opacity:.45; }.qr-dialog-actions button:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }body.qr-open { overflow:hidden; }
     .event-bottom { display:flex; justify-content:space-between; gap:16px; padding:16px 22px; border-top:1px solid rgba(8,8,8,.6); color:rgba(8,8,8,.72); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1.2; text-transform:uppercase; }
-    .dates-pwa-entry { display:inline-flex; align-items:center; justify-content:center; gap:9px; min-height:34px; padding:0 11px; border:1px solid rgba(8,8,8,.72); background:transparent; color:var(--ink); font-size:8px; font-weight:700; letter-spacing:.1em; line-height:1; text-decoration:none; text-transform:uppercase; transition:background-color 160ms ease,color 160ms ease; }
-    .dates-pwa-entry:hover,.dates-pwa-entry:focus-visible { background:var(--ink); color:var(--paper); outline:2px solid var(--ink); outline-offset:2px; }
-    .dates-pwa-entry b { font-size:15px; font-weight:400; }
     .archive { overflow:hidden; padding:15px; background:#080808; color:var(--paper); }
     .archive-frame { border:1px solid rgba(242,240,235,.48); }
     .archive-top { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:18px 22px; border-bottom:1px solid rgba(242,240,235,.42); font-size:10px; font-weight:700; letter-spacing:.14em; line-height:1; text-transform:uppercase; }
@@ -314,7 +312,7 @@
       .site-header { min-height:70px; padding:14px 20px; }.hero { padding-top:70px; }.header-side { display:none; }.menu-toggle { display:block; }.mobile-nav { position:fixed; z-index:49; top:70px; right:10px; left:10px; flex-direction:column; gap:0; padding:10px 20px 20px; border:1px solid rgba(242,240,235,.45); background:#080808; }.mobile-nav.open { display:flex; }.mobile-nav a { padding:16px 0; border-bottom:1px solid rgba(242,240,235,.25); color:var(--paper); font-size:11px; font-weight:700; letter-spacing:.12em; text-decoration:none; text-transform:uppercase; }.mobile-nav .mobile-ticket { margin-top:10px; padding:15px; border:1px solid var(--paper); background:var(--paper); color:var(--ink); text-align:center; }
       .hero-main { padding:20px 29px 46px; flex-direction:column; justify-content:flex-end; align-items:stretch; }.hero-copy { width:100%; }.hero-countdown { position:relative; right:auto; bottom:auto; width:100%; margin-top:12px; padding:10px 12px; grid-template-columns:minmax(0,1fr) auto; }.countdown-kicker { display:none; }.countdown-event { font-size:18px; line-height:.82; }.countdown-date { margin-top:4px; font-size:7px; }.countdown-clock { grid-column:2; display:flex; gap:6px; margin:0; border:0; background:transparent; align-self:center; }.countdown-clock span { flex-direction:row; gap:2px; padding:0; background:transparent; }.countdown-clock b { font-size:15px; line-height:1; }.countdown-clock small { align-self:end; font-size:6px; }.eyebrow { font-size:9px; margin-bottom:16px; } h1 { width:100%; max-width:none; font-size:clamp(46px,12.75vw,60px); letter-spacing:-.075em; line-height:.78; text-align:left; } .tagline { margin-top:23px; font-size:13px; }.action-row { gap:14px; margin-top:27px; }.action { min-width:100%; }.status { font-size:8px; }.scroll { right:20px; bottom:22px; }
       .intro-slider > .next-experience { height:100svh; min-height:100svh; overflow-y:auto; padding:10px; }.intro-slider .next-frame { height:auto; min-height:calc(100svh - 20px); }.intro-slider .section-top { grid-template-columns:1fr auto; }.intro-slider .section-top .event-switcher { grid-column:2; justify-self:end; }.intro-slider .section-top .event-brand { display:none; }.event-nav-copy { min-width:84px; }.event-nav-copy strong { font-size:7px; }.hero-routes { grid-template-columns:1fr; width:100%; margin-top:25px; }.hero-route { min-height:54px; }.entry-curtain::before { inset:10px; }.curtain-layout { inset:10px; grid-template-columns:1fr auto; grid-template-rows:auto 1fr auto; gap:10px; padding:21px 20px; }.curtain-index { grid-column:1; }.curtain-serial { grid-column:2; font-size:7px; }.curtain-main { grid-column:1 / -1; }.curtain-overline { margin-bottom:20px; font-size:8px; }.curtain-title { font-size:clamp(59px,17vw,102px); letter-spacing:-.065em; line-height:.73; }.curtain-title span + span { letter-spacing:-.075em; }.curtain-rule { margin:25px 0 11px; }.curtain-caption { max-width:245px; font-size:8px; }.mobile-home .menu-arrow { font-size:19px; }
-      .next-experience { padding:10px; }.next-frame { min-height:calc(100svh - 20px); }.section-top { padding:15px; font-size:8px; }.section-top > .event-brand { display:none; }.event-stage { display:grid; grid-template-columns:1fr; }.event-poster { width:100%; height:auto; min-height:0; max-height:640px; aspect-ratio:auto; border-right:0; border-bottom:1px solid rgba(8,8,8,.6); }.intro-slider .event-poster img { width:100%; height:auto; max-height:640px; object-fit:contain; }.event-content { grid-template-columns:1fr; }.intro-slider .event-title { min-height:340px; padding:27px 20px 25px; row-gap:18px; border-right:0; border-bottom:1px solid rgba(8,8,8,.6); }.intro-slider .event-title h2 { margin:0; font-size:clamp(62px,19vw,90px); line-height:.8; }.intro-slider .event-title.is-long-title { min-height:360px; }.intro-slider .event-title.is-long-title h2 { font-size:clamp(46px,12vw,66px); letter-spacing:-.1em; line-height:.9; }.event-info { min-height:450px; padding:29px 20px 24px; }.event-number span { font-size:114px; }.detail-list { margin-top:38px; }.detail { grid-template-columns:80px 1fr; }.event-actions { grid-template-columns:minmax(0,1.15fr) minmax(0,1fr) 44px; }.event-share { padding:0 10px; font-size:8px; }.event-qr-trigger { min-height:52px; font-size:8px; }.qr-modal { padding:12px; }.qr-dialog { box-shadow:5px 5px 0 #080808; }.qr-code { width:min(100%,244px); min-height:244px; }.event-bottom { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:8px 12px; padding:12px 15px; font-size:8px; }.event-bottom > span:first-child { grid-column:1; grid-row:1; max-width:100px; }.event-bottom .dates-pwa-entry { grid-column:1; grid-row:2; justify-self:start; min-height:29px; padding:0 8px; font-size:6px; letter-spacing:.07em; }.event-bottom .slider-enter { grid-column:2; grid-row:1 / span 2; justify-self:end; }.intro-slider .slider-enter { flex:0 0 auto; min-height:32px; gap:6px; padding:0 9px; font-size:7px; letter-spacing:.08em; white-space:nowrap; }.event-bottom span:last-child { text-align:right; }
+      .next-experience { padding:10px; }.next-frame { min-height:calc(100svh - 20px); }.section-top { padding:15px; font-size:8px; }.section-top > .event-brand { display:none; }.event-stage { display:grid; grid-template-columns:1fr; }.event-poster { width:100%; height:auto; min-height:0; max-height:640px; aspect-ratio:auto; border-right:0; border-bottom:1px solid rgba(8,8,8,.6); }.intro-slider .event-poster img { width:100%; height:auto; max-height:640px; object-fit:contain; }.event-content { grid-template-columns:1fr; }.intro-slider .event-title { min-height:340px; padding:27px 20px 25px; row-gap:18px; border-right:0; border-bottom:1px solid rgba(8,8,8,.6); }.intro-slider .event-title h2 { margin:0; font-size:clamp(62px,19vw,90px); line-height:.8; }.intro-slider .event-title.is-long-title { min-height:360px; }.intro-slider .event-title.is-long-title h2 { font-size:clamp(46px,12vw,66px); letter-spacing:-.1em; line-height:.9; }.event-info { min-height:450px; padding:29px 20px 24px; }.event-number span { font-size:114px; }.detail-list { margin-top:38px; }.detail { grid-template-columns:80px 1fr; }.event-actions { grid-template-columns:minmax(0,1.15fr) minmax(0,1fr) 44px; }.event-share { padding:0 10px; font-size:8px; }.event-qr-trigger { min-height:52px; font-size:8px; }.qr-modal { padding:12px; }.qr-dialog { box-shadow:5px 5px 0 #080808; }.qr-code { width:min(100%,244px); min-height:244px; }.event-bottom { align-items:center; padding:12px 15px; font-size:8px; }.event-bottom > span:first-child { max-width:100px; }.intro-slider .slider-enter { flex:0 0 auto; min-height:32px; gap:6px; padding:0 9px; font-size:7px; letter-spacing:.08em; white-space:nowrap; }.event-bottom span:last-child { text-align:right; }
       .archive { padding:10px; }.archive-top { padding:15px; font-size:8px; }.archive-intro { display:block; padding:37px 20px 31px; }.archive-intro h2 { font-size:clamp(56px,17vw,85px); }.archive-intro p { margin-top:25px; font-size:12px; }.archive-rail { grid-auto-columns:87vw; }.archive-card { min-height:430px; padding:18px; }.archive-card-name { font-size:clamp(60px,18vw,88px); }.archive-card-name.small { font-size:clamp(51px,14vw,70px); }
       .manifesto { padding:10px; }.manifesto-frame { min-height:calc(100svh - 20px); }.manifesto-top { padding:15px; font-size:8px; }.manifesto-top span:last-child { display:none; }.manifesto-main { grid-template-columns:1fr; }.manifesto-title { min-height:435px; padding:30px 20px 25px; border-right:0; border-bottom:1px solid rgba(8,8,8,.62); }.manifesto-title h2 { margin:45px 0; font-size:clamp(46px,12.3vw,64px); letter-spacing:-.115em; line-height:.78; }.manifesto-title h2 span { white-space:nowrap; }.manifesto-copy { min-height:440px; padding:29px 20px 25px; }.manifesto-copy p { font-size:24px; }.manifesto-footer { padding:14px 15px; font-size:8px; }.manifesto-footer span:last-child { text-align:right; }
       .gallery { padding:10px; }.gallery-top { padding:15px; font-size:8px; }.gallery-top span:last-child { display:none; }.gallery-head { display:block; padding:39px 20px 33px; }.gallery-kicker { margin-bottom:18px; font-size:9px; }.gallery-head h2 { font-size:clamp(49px,12.8vw,61px); }.gallery-head p { margin-top:28px; font-size:12px; }.gallery-masonry { grid-template-columns:1fr 1fr; grid-template-rows:360px 230px 230px; }.gallery-item--dance { grid-column:span 2; grid-row:auto; }.gallery-item--decks { grid-column:span 1; grid-row:span 1; }.gallery-item--lights { grid-column:span 1; grid-row:span 1; }.gallery-item--community { grid-column:span 2; grid-row:auto; }.gallery-label { right:15px; bottom:15px; left:15px; font-size:9px; }.gallery-footer { padding:14px 15px; font-size:8px; }.gallery-footer span:last-child { text-align:right; }
@@ -356,7 +354,7 @@
       .founders-head { display:block; padding:31px 20px 27px; }.founders-head h3 { font-size:clamp(49px,15vw,77px); }.founders-head p { margin-top:20px; }.founders-grid { grid-template-columns:1fr; }.founder-card { display:grid; grid-template-columns:minmax(0,39%) minmax(0,1fr); }.founder-card figure { width:100%; min-height:214px; aspect-ratio:auto; }.founder-body { min-height:0; padding:18px 16px 19px; }.founder-number { margin-bottom:27px; }.founder-name { font-size:clamp(29px,8.7vw,40px); letter-spacing:-.06em; white-space:nowrap; }.founder-role { margin-top:11px; font-size:8px; }.founder-bio { margin-top:18px; font-size:12px; line-height:1.36; }
       .hero { padding-top:70px; }
       body.menu-open { overflow:hidden; }
-      .mobile-quick-actions { position:fixed; z-index:110; right:18px; bottom:18px; display:flex; visibility:hidden; pointer-events:none; flex-direction:column; align-items:flex-end; gap:10px; }.site-mode .mobile-quick-actions { visibility:visible; pointer-events:auto; }.menu-open .mobile-quick-actions { display:none !important; }.quick-home, .quick-ticket { opacity:0; will-change:transform,opacity; }.site-mode .quick-home { animation:quick-control-arrive 620ms cubic-bezier(.18,.86,.27,1.2) 760ms both; }.site-mode .quick-ticket { animation:quick-control-arrive 650ms cubic-bezier(.18,.86,.27,1.2) 860ms both; }.mobile-quick-actions.is-leaving { visibility:visible; pointer-events:none; }.mobile-quick-actions.is-leaving .quick-ticket { animation:quick-control-depart 220ms cubic-bezier(.4,0,.8,.3) 0ms both; }.mobile-quick-actions.is-leaving .quick-home { animation:quick-control-depart 220ms cubic-bezier(.4,0,.8,.3) 55ms both; }.quick-home { display:grid; place-items:center; width:48px; height:48px; border:2px solid var(--paper); border-radius:11px; outline:2px solid var(--ink); outline-offset:0; background:#080808; color:var(--paper); font-size:21px; text-decoration:none; }.quick-ticket { display:flex; align-items:center; justify-content:space-between; gap:16px; min-height:48px; padding:0 15px; border:2px solid var(--ink); border-radius:11px; outline:2px solid var(--paper); outline-offset:0; background:var(--paper); color:var(--ink); font-size:9px; font-weight:700; letter-spacing:.13em; text-decoration:none; text-transform:uppercase; }
+      .mobile-quick-actions { position:fixed; z-index:110; right:18px; bottom:18px; display:flex; visibility:hidden; pointer-events:none; flex-direction:column; align-items:flex-end; gap:10px; opacity:1; transform:translate3d(0,0,0); transition:opacity 220ms ease,transform 280ms cubic-bezier(.22,.8,.22,1); }.site-mode .mobile-quick-actions { visibility:visible; pointer-events:auto; }.menu-open .mobile-quick-actions { display:none !important; }.quick-home, .quick-ticket { opacity:0; will-change:transform,opacity; }.site-mode .quick-home { animation:quick-control-arrive 620ms cubic-bezier(.18,.86,.27,1.2) 760ms both; }.site-mode .quick-ticket { animation:quick-control-arrive 650ms cubic-bezier(.18,.86,.27,1.2) 860ms both; }.mobile-quick-actions.is-leaving { visibility:visible; pointer-events:none; }.mobile-quick-actions.is-leaving .quick-ticket { animation:quick-control-depart 220ms cubic-bezier(.4,0,.8,.3) 0ms both; }.mobile-quick-actions.is-leaving .quick-home { animation:quick-control-depart 220ms cubic-bezier(.4,0,.8,.3) 55ms both; }.quick-home { display:grid; place-items:center; width:48px; height:48px; border:2px solid var(--paper); border-radius:11px; outline:2px solid var(--ink); outline-offset:0; background:#080808; color:var(--paper); font-size:21px; text-decoration:none; }.quick-ticket { display:flex; align-items:center; justify-content:space-between; gap:16px; min-height:48px; padding:0 15px; border:2px solid var(--ink); border-radius:11px; outline:2px solid var(--paper); outline-offset:0; background:var(--paper); color:var(--ink); font-size:9px; font-weight:700; letter-spacing:.13em; text-decoration:none; text-transform:uppercase; }
     }
 
     @media (min-width:651px) and (max-width:980px) {
@@ -387,9 +385,10 @@
     }
     @media (max-width:760px) {
       .mobile-quick-actions.is-context-hidden { visibility:hidden !important; pointer-events:none !important; opacity:0; transform:translate3d(18px,16px,0); }
-      .mobile-quick-actions.is-returning { visibility:visible !important; pointer-events:auto !important; }
-      .mobile-quick-actions.is-returning .quick-home { animation:quick-control-arrive 500ms cubic-bezier(.18,.86,.27,1.2) both; }
-      .mobile-quick-actions.is-returning .quick-ticket { animation:quick-control-arrive 560ms cubic-bezier(.18,.86,.27,1.2) 65ms both; }
+      .mobile-quick-actions.is-returning { visibility:visible !important; pointer-events:auto !important; opacity:1; transform:translate3d(0,0,0); }
+      .mobile-quick-actions.is-returning .quick-home { animation:quick-control-return 500ms cubic-bezier(.18,.86,.27,1.2) both; }
+      .mobile-quick-actions.is-returning .quick-ticket { animation:quick-control-return 560ms cubic-bezier(.18,.86,.27,1.2) 65ms both; }
+      .mobile-quick-actions.is-returned .quick-home, .mobile-quick-actions.is-returned .quick-ticket { animation:none !important; opacity:1; transform:translate3d(0,0,0) scale(1) rotate(0deg); }
     }
 
     .tables-section { padding:15px; background:var(--paper); color:var(--ink); }
@@ -1018,6 +1017,46 @@
     }
     @media (prefers-reduced-motion:reduce) { .birthday-photo { transition:none !important; transform:none !important; } }
 
+
+    /* Archive cards: keep the rail; animate only composited transforms and opacity. */
+    .archive-card { --archive-card-inset:22px; position:relative; isolation:isolate; display:block; padding:0; cursor:default; }
+    .archive-card::before { position:absolute; z-index:1; inset:0; background:rgba(0,0,0,.36); opacity:0; content:""; transition:opacity 300ms ease; }
+    .archive-card-top,.archive-card-bottom { position:absolute; z-index:3; right:var(--archive-card-inset); left:var(--archive-card-inset); }
+    .archive-card-top { top:var(--archive-card-inset); }
+    .archive-card-bottom { bottom:var(--archive-card-inset); }
+    .archive-card-copy { --archive-card-half-width:max(210px,19.5vw); position:absolute; z-index:2; top:50%; left:50%; width:max-content; max-width:calc(100% - var(--archive-card-inset) - var(--archive-card-inset)); transform:translate3d(-50%,-50%,0); transition:transform 460ms cubic-bezier(.2,.75,.25,1); }
+    .archive-card-name { position:relative; display:block; width:max-content; max-width:100%; margin:0; text-align:left; transform:scale(1); transform-origin:left top; transition:transform 420ms cubic-bezier(.2,.75,.25,1); }
+    .archive-card-info { position:absolute; z-index:2; top:calc(50% - 12px); right:var(--archive-card-inset); left:var(--archive-card-inset); display:grid; gap:7px; opacity:0; visibility:hidden; transform:translate3d(0,10px,0); transition:opacity 300ms ease,transform 420ms cubic-bezier(.2,.75,.25,1),visibility 0s linear 420ms; }
+    .archive-card-context,.archive-card-date,.archive-card-place { margin:0; }
+    .archive-card-context { color:rgba(242,240,235,.64); font-size:8px; font-weight:700; letter-spacing:.14em; line-height:1.25; text-transform:uppercase; }
+    .archive-card-context strong { margin-left:4px; color:var(--paper); font-size:10px; font-weight:900; letter-spacing:.08em; }
+    .archive-card-date { color:var(--paper); font-size:11px; font-weight:700; letter-spacing:.075em; line-height:1.3; text-transform:uppercase; }
+    .archive-card-place { color:rgba(242,240,235,.68); font-size:8px; font-weight:700; letter-spacing:.11em; line-height:1.35; text-transform:uppercase; }
+    .archive-card-bottom { min-height:32px; align-items:center; }
+    .archive-card:focus-visible { outline:2px solid var(--paper); outline-offset:-5px; }
+    .archive-card.is-open::before { opacity:1; }
+    .archive-card.is-open .archive-card-copy { transform:translate3d(calc(var(--archive-card-inset) - var(--archive-card-half-width)),-86px,0); }
+    .archive-card.is-open .archive-card-name { transform:scale(.42); }
+    .archive-card.is-open .archive-card-name.small { transform:scale(.52); }
+    .archive-card.is-open .archive-card-info { opacity:1; visibility:visible; transform:translate3d(0,0,0); transition-delay:0s; }
+    @media (hover:hover) and (pointer:fine) {
+      .archive-card:hover::before { opacity:1; }
+      .archive-card:hover .archive-card-copy { transform:translate3d(calc(var(--archive-card-inset) - var(--archive-card-half-width)),-86px,0); }
+      .archive-card:hover .archive-card-name { transform:scale(.42); }
+      .archive-card:hover .archive-card-name.small { transform:scale(.52); }
+      .archive-card:hover .archive-card-info { opacity:1; visibility:visible; transform:translate3d(0,0,0); transition-delay:0s; }
+    }
+    @media (max-width:760px) {
+      .archive-card { --archive-card-inset:18px; }
+      .archive-card-copy { --archive-card-half-width:43.5vw; }
+      .archive-card.is-open .archive-card-name { transform:scale(.45); }
+      .archive-card.is-open .archive-card-name.small { transform:scale(.54); }
+    }
+    @supports (width:1cqw) {
+      .archive-card { container-type:inline-size; }
+      .archive-card-copy { --archive-card-half-width:50cqw; }
+    }
+    @media (prefers-reduced-motion:reduce) { .archive-card::before,.archive-card-copy,.archive-card-name,.archive-card-info { transition:none !important; } }
   </style>
 
 </head>
@@ -1059,7 +1098,7 @@
 
   <div id="intro-deck" class="intro-deck hero-intro hero-preparing">
   <main class="hero" aria-label="ONE MORE ELECTRONIC">
-    <div class="background" aria-hidden="true"><video class="hero-video" autoplay muted loop playsinline preload="auto" poster="assets/one-more-crowd-hero.webp"><source src="assets/one-more-hero-v2.mp4" type="video/mp4" /></video></div>
+    <div class="background" aria-hidden="true"><video class="hero-video" autoplay muted loop playsinline preload="auto" poster="assets/one-more-crowd-hero.webp"><source src="assets/one-more-hero-v2.mp4?v=116" type="video/mp4" /></video></div>
     <div class="veil" aria-hidden="true"></div>
     <div class="frame" aria-hidden="true"></div>
 
@@ -1143,7 +1182,7 @@
         <p class="event-reservation-status"><i aria-hidden="true"></i><span data-event-reservation-status>Mesas disponibles</span></p>
         <button class="event-reservation-open" type="button" data-event-reservation-open><span>Ver mesas disponibles</span><b aria-hidden="true">↗</b></button>
       </section>
-      <footer class="event-bottom"><span data-event-footer>FESTA BROS · Sábado 31 de octubre</span><a class="dates-pwa-entry" href="/fechas/" aria-label="Abrir la app instalable de Fechas de ONE MORE">App de fechas <b aria-hidden="true">↗</b></a><button class="slider-enter" type="button">Entrar a ONE MORE</button></footer>
+      <footer class="event-bottom"><span data-event-footer>FESTA BROS · Sábado 31 de octubre</span><button class="slider-enter" type="button">Entrar a ONE MORE</button></footer>
     </div>
   </section>  </div>
   <div class="event-reservation-panel" data-event-reservation-panel hidden aria-hidden="true">
@@ -1191,57 +1230,127 @@
   <section id="archivo" class="archive" aria-labelledby="archive-title">
     <div class="archive-frame">
       <header class="archive-top">
-        <span>Archivo · DJs que pasaron por la cabina</span>
+        <span>Archivo · DJs y noches de ONE MORE</span>
         <div class="archive-controls" aria-label="Controles del carrusel">
-          <p class="archive-progress" aria-live="polite"><span data-archive-current>01</span><i aria-hidden="true"></i><span data-archive-total>05</span></p>
-          <button type="button" class="archive-prev" aria-label="Ver DJs anteriores">←</button>
-          <button type="button" class="archive-next" aria-label="Ver más DJs">→</button>
+          <p class="archive-progress" aria-live="polite"><span data-archive-current>01</span><i aria-hidden="true"></i><span data-archive-total>11</span></p>
+          <button type="button" class="archive-prev" aria-label="Ver tarjetas anteriores">←</button>
+          <button type="button" class="archive-next" aria-label="Ver más tarjetas">→</button>
         </div>
       </header>
       <div class="archive-intro">
         <h2 id="archive-title" class="section-heading"><span>Archivo</span><span>ONE MORE</span></h2>
-        <p>Conocé a los DJs que ya pasaron por ONE MORE: TBT, Denial, Zambe, Luca Sanchez, Mike Moore, Juanci Correia, Miloop y Sophia Fulcito.</p>
+        <p>Conocé a los DJs que ya pasaron por ONE MORE: TBT, Denial, Zambe, Luca Sanchez, Mike Moore, Juanci Correia, Miloop, Sophia Fulcito, Joyce, Festa Bros y GOTH.</p>
       </div>
-      <div class="archive-rail" id="archive-carousel" tabindex="0" aria-label="Carrusel de DJs de fechas anteriores">
-        <article class="archive-card" aria-label="DJ en cabina durante una sesión de archivo" style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-01.webp');">
+      <div class="archive-rail" id="archive-carousel" tabindex="0" aria-label="Carrusel de DJs y artistas de fechas anteriores">
+        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-expanded="false" aria-label="JOYCE. Noche JOYCE. Viernes 23 de octubre de 2026, 23:59. ONE MORE CLUB, Villa Devoto. Tocar para ver los detalles." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-03.webp');">
           <div class="archive-card-top"><span>Archivo</span><span>DJ set</span></div>
-          <h3 class="archive-card-name">TBT</h3>
-          <div class="archive-card-bottom"><span>Fecha anterior</span><span>ONE MORE</span></div>
+          <div class="archive-card-copy"><h3 class="archive-card-name">JOYCE</h3></div>
+          <div class="archive-card-info">
+              <p class="archive-card-context">Noche <strong>JOYCE</strong></p>
+              <p class="archive-card-date">VIE 23 OCT 2026 · 23:59 H</p>
+              <p class="archive-card-place">ONE MORE CLUB · AV. BEIRÓ 3334 · DEVOTO</p>
+            </div>
+          <div class="archive-card-bottom"><span>Ver la noche</span><span>ONE MORE ↗</span></div>
         </article>
-        <article class="archive-card" aria-label="DJ en cabina durante una sesión de archivo" style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-02.webp');">
+        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-expanded="false" aria-label="FESTA BROS. Noche MORE HALLOWEEN. Sábado 31 de octubre de 2026, 23:59. ONE MORE CLUB, Villa Devoto. Tocar para ver los detalles." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-05.webp');">
           <div class="archive-card-top"><span>Archivo</span><span>DJ set</span></div>
-          <h3 class="archive-card-name">Denial</h3>
-          <div class="archive-card-bottom"><span>Fecha anterior</span><span>ONE MORE</span></div>
+          <div class="archive-card-copy"><h3 class="archive-card-name small">FESTA<br>BROS</h3></div>
+          <div class="archive-card-info">
+              <p class="archive-card-context">Noche <strong>MORE HALLOWEEN</strong></p>
+              <p class="archive-card-date">SÁB 31 OCT 2026 · 23:59 H</p>
+              <p class="archive-card-place">ONE MORE CLUB · AV. BEIRÓ 3334 · DEVOTO</p>
+            </div>
+          <div class="archive-card-bottom"><span>Ver la noche</span><span>ONE MORE ↗</span></div>
         </article>
-        <article class="archive-card" aria-label="DJ en cabina durante una sesión de archivo" style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-03.webp');">
+        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-expanded="false" aria-label="GOTH. Noche GOTH. Sábado 24 de octubre de 2026, 23:59. ONE MORE CLUB, Villa Devoto. Tocar para ver los detalles." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-04.webp');">
           <div class="archive-card-top"><span>Archivo</span><span>DJ set</span></div>
-          <h3 class="archive-card-name">Zambe</h3>
-          <div class="archive-card-bottom"><span>Fecha anterior</span><span>ONE MORE</span></div>
+          <div class="archive-card-copy"><h3 class="archive-card-name">GOTH</h3></div>
+          <div class="archive-card-info">
+              <p class="archive-card-context">Noche <strong>GOTH</strong></p>
+              <p class="archive-card-date">SÁB 24 OCT 2026 · 23:59 H</p>
+              <p class="archive-card-place">ONE MORE CLUB · AV. BEIRÓ 3334 · DEVOTO</p>
+            </div>
+          <div class="archive-card-bottom"><span>Ver la noche</span><span>ONE MORE ↗</span></div>
         </article>
-        <article class="archive-card" aria-label="DJ en cabina durante una sesión de archivo" style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-04.webp');">
+        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-expanded="false" aria-label="TBT. Noche GOTH. Sábado 24 de octubre de 2026, 23:59. ONE MORE CLUB, Villa Devoto. Tocar para ver los detalles." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-01.webp');">
           <div class="archive-card-top"><span>Archivo</span><span>DJ set</span></div>
-          <h3 class="archive-card-name small">Luca<br>Sanchez</h3>
-          <div class="archive-card-bottom"><span>Fecha anterior</span><span>ONE MORE</span></div>
+          <div class="archive-card-copy"><h3 class="archive-card-name">TBT</h3></div>
+          <div class="archive-card-info">
+              <p class="archive-card-context">Noche <strong>GOTH</strong></p>
+              <p class="archive-card-date">SÁB 24 OCT 2026 · 23:59 H</p>
+              <p class="archive-card-place">ONE MORE CLUB · AV. BEIRÓ 3334 · DEVOTO</p>
+            </div>
+          <div class="archive-card-bottom"><span>Ver la noche</span><span>ONE MORE ↗</span></div>
         </article>
-        <article class="archive-card" aria-label="DJ en cabina durante una sesión de archivo" style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-05.webp');">
+        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-expanded="false" aria-label="Denial. Noche GOTH. Sábado 24 de octubre de 2026, 23:59. ONE MORE CLUB, Villa Devoto. Tocar para ver los detalles." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-02.webp');">
           <div class="archive-card-top"><span>Archivo</span><span>DJ set</span></div>
-          <h3 class="archive-card-name small">Mike<br>Moore</h3>
-          <div class="archive-card-bottom"><span>Fecha anterior</span><span>ONE MORE</span></div>
+          <div class="archive-card-copy"><h3 class="archive-card-name">Denial</h3></div>
+          <div class="archive-card-info">
+              <p class="archive-card-context">Noche <strong>GOTH</strong></p>
+              <p class="archive-card-date">SÁB 24 OCT 2026 · 23:59 H</p>
+              <p class="archive-card-place">ONE MORE CLUB · AV. BEIRÓ 3334 · DEVOTO</p>
+            </div>
+          <div class="archive-card-bottom"><span>Ver la noche</span><span>ONE MORE ↗</span></div>
         </article>
-        <article class="archive-card" aria-label="Juanci Correia en cabina durante una sesión de archivo" style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-02.webp'); background-position:65% center;">
+        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-expanded="false" aria-label="Zambe. Noche GOTH. Sábado 24 de octubre de 2026, 23:59. ONE MORE CLUB, Villa Devoto. Tocar para ver los detalles." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-03.webp');">
           <div class="archive-card-top"><span>Archivo</span><span>DJ set</span></div>
-          <h3 class="archive-card-name small">Juanci<br>Correia</h3>
-          <div class="archive-card-bottom"><span>Fecha anterior</span><span>ONE MORE</span></div>
+          <div class="archive-card-copy"><h3 class="archive-card-name">Zambe</h3></div>
+          <div class="archive-card-info">
+              <p class="archive-card-context">Noche <strong>GOTH</strong></p>
+              <p class="archive-card-date">SÁB 24 OCT 2026 · 23:59 H</p>
+              <p class="archive-card-place">ONE MORE CLUB · AV. BEIRÓ 3334 · DEVOTO</p>
+            </div>
+          <div class="archive-card-bottom"><span>Ver la noche</span><span>ONE MORE ↗</span></div>
         </article>
-        <article class="archive-card" aria-label="Miloop en cabina durante una sesión de archivo" style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-04.webp'); background-position:68% center;">
+        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-expanded="false" aria-label="Luca Sanchez. Noche GOTH. Sábado 24 de octubre de 2026, 23:59. ONE MORE CLUB, Villa Devoto. Tocar para ver los detalles." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-04.webp');">
           <div class="archive-card-top"><span>Archivo</span><span>DJ set</span></div>
-          <h3 class="archive-card-name">Miloop</h3>
-          <div class="archive-card-bottom"><span>Fecha anterior</span><span>ONE MORE</span></div>
+          <div class="archive-card-copy"><h3 class="archive-card-name small">Luca<br>Sanchez</h3></div>
+          <div class="archive-card-info">
+              <p class="archive-card-context">Noche <strong>GOTH</strong></p>
+              <p class="archive-card-date">SÁB 24 OCT 2026 · 23:59 H</p>
+              <p class="archive-card-place">ONE MORE CLUB · AV. BEIRÓ 3334 · DEVOTO</p>
+            </div>
+          <div class="archive-card-bottom"><span>Ver la noche</span><span>ONE MORE ↗</span></div>
         </article>
-        <article class="archive-card" aria-label="Sophia Fulcito en cabina durante una sesión de archivo" style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-01.webp'); background-position:74% center;">
+        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-expanded="false" aria-label="Mike Moore. Noche GOTH. Sábado 24 de octubre de 2026, 23:59. ONE MORE CLUB, Villa Devoto. Tocar para ver los detalles." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-05.webp');">
           <div class="archive-card-top"><span>Archivo</span><span>DJ set</span></div>
-          <h3 class="archive-card-name small">Sophia<br>Fulcito</h3>
-          <div class="archive-card-bottom"><span>Fecha anterior</span><span>ONE MORE</span></div>
+          <div class="archive-card-copy"><h3 class="archive-card-name small">Mike<br>Moore</h3></div>
+          <div class="archive-card-info">
+              <p class="archive-card-context">Noche <strong>GOTH</strong></p>
+              <p class="archive-card-date">SÁB 24 OCT 2026 · 23:59 H</p>
+              <p class="archive-card-place">ONE MORE CLUB · AV. BEIRÓ 3334 · DEVOTO</p>
+            </div>
+          <div class="archive-card-bottom"><span>Ver la noche</span><span>ONE MORE ↗</span></div>
+        </article>
+        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-expanded="false" aria-label="Juanci Correia. Noche GOTH. Sábado 24 de octubre de 2026, 23:59. ONE MORE CLUB, Villa Devoto. Tocar para ver los detalles." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-02.webp');">
+          <div class="archive-card-top"><span>Archivo</span><span>DJ set</span></div>
+          <div class="archive-card-copy"><h3 class="archive-card-name small">Juanci<br>Correia</h3></div>
+          <div class="archive-card-info">
+              <p class="archive-card-context">Noche <strong>GOTH</strong></p>
+              <p class="archive-card-date">SÁB 24 OCT 2026 · 23:59 H</p>
+              <p class="archive-card-place">ONE MORE CLUB · AV. BEIRÓ 3334 · DEVOTO</p>
+            </div>
+          <div class="archive-card-bottom"><span>Ver la noche</span><span>ONE MORE ↗</span></div>
+        </article>
+        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-expanded="false" aria-label="Miloop. Noche GOTH. Sábado 24 de octubre de 2026, 23:59. ONE MORE CLUB, Villa Devoto. Tocar para ver los detalles." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-04.webp');">
+          <div class="archive-card-top"><span>Archivo</span><span>DJ set</span></div>
+          <div class="archive-card-copy"><h3 class="archive-card-name">Miloop</h3></div>
+          <div class="archive-card-info">
+              <p class="archive-card-context">Noche <strong>GOTH</strong></p>
+              <p class="archive-card-date">SÁB 24 OCT 2026 · 23:59 H</p>
+              <p class="archive-card-place">ONE MORE CLUB · AV. BEIRÓ 3334 · DEVOTO</p>
+            </div>
+          <div class="archive-card-bottom"><span>Ver la noche</span><span>ONE MORE ↗</span></div>
+        </article>
+        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-expanded="false" aria-label="Sophia Fulcito. Noche GOTH. Sábado 24 de octubre de 2026, 23:59. ONE MORE CLUB, Villa Devoto. Tocar para ver los detalles." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-01.webp');">
+          <div class="archive-card-top"><span>Archivo</span><span>DJ set</span></div>
+          <div class="archive-card-copy"><h3 class="archive-card-name small">Sophia<br>Fulcito</h3></div>
+          <div class="archive-card-info">
+              <p class="archive-card-context">Noche <strong>GOTH</strong></p>
+              <p class="archive-card-date">SÁB 24 OCT 2026 · 23:59 H</p>
+              <p class="archive-card-place">ONE MORE CLUB · AV. BEIRÓ 3334 · DEVOTO</p>
+            </div>
+          <div class="archive-card-bottom"><span>Ver la noche</span><span>ONE MORE ↗</span></div>
         </article>
       </div>
     </div>
@@ -1611,14 +1720,41 @@ Minimum version required to store current data is: `+i+`.
       if (!resume || archiveReducedMotion() || archiveDrag) return;
       archiveResumeTimer = window.setTimeout(scheduleArchiveAutoplay, 4500);
     };
+    let archiveLastPointerType = 'mouse';
+    const closeArchiveCards = (except = null) => {
+      archiveCards.forEach((card) => {
+        const keepOpen = card === except;
+        card.classList.toggle('is-open',keepOpen);
+        card.setAttribute('aria-expanded',String(keepOpen));
+      });
+    };
+    const toggleArchiveCard = (card) => {
+      const opening = !card.classList.contains('is-open');
+      closeArchiveCards(opening ? card : null);
+      pauseArchiveAutoplay();
+    };
+    const archiveCoarsePointer = () => matchMedia('(hover: none), (pointer: coarse)').matches;
+    archiveCards.forEach((card) => {
+      card.addEventListener('click',(event) => {
+        // Pointer taps reveal the card on touchscreens; desktop uses hover.
+        if (event.detail > 0 && (archiveLastPointerType === 'touch' || archiveCoarsePointer())) toggleArchiveCard(card);
+      });
+      card.addEventListener('keydown',(event) => {
+        if (event.key !== 'Enter' && event.key !== ' ') return;
+        event.preventDefault();
+        toggleArchiveCard(card);
+      });
+    });
     archiveRail.addEventListener('scroll', () => {
       updateArchiveUI();
+      closeArchiveCards();
       if (!archiveAutoScrolling) pauseArchiveAutoplay();
     }, { passive:true });
     let archiveDrag = null;
     let archiveMomentumFrame;
     const stopArchiveMomentum = () => window.cancelAnimationFrame(archiveMomentumFrame);
     archiveRail.addEventListener('pointerdown', (event) => {
+      archiveLastPointerType = event.pointerType || 'mouse';
       if (event.pointerType === 'touch') return;
       stopArchiveMomentum();
       archiveDrag = { pointerId:event.pointerId, startX:event.clientX, startScroll:archiveRail.scrollLeft, lastX:event.clientX, lastTime:event.timeStamp, velocity:0 };
@@ -1703,7 +1839,16 @@ Minimum version required to store current data is: `+i+`.
     const updateMobileQuickActionVisibility = () => {
       if (!mobileQuickActions || !quickActionBoundary) return;
       const isMobile = window.matchMedia('(max-width: 760px)').matches;
-      const nearEnd = isMobile && document.body.classList.contains('site-mode') && quickActionBoundary.getBoundingClientRect().top < window.innerHeight * .78;
+      const isSiteMode = document.body.classList.contains('site-mode');
+      if (!isMobile || !isSiteMode) {
+        quickActionsAtEnd = false;
+        window.clearTimeout(quickActionMotionTimer);
+        quickActionLinks.forEach((link) => link.removeAttribute('tabindex'));
+        mobileQuickActions.setAttribute('aria-hidden', 'false');
+        mobileQuickActions.classList.remove('is-context-hidden', 'is-leaving', 'is-returning', 'is-returned');
+        return;
+      }
+      const nearEnd = quickActionBoundary.getBoundingClientRect().top < window.innerHeight * .68;
       if (nearEnd === quickActionsAtEnd) return;
       quickActionsAtEnd = nearEnd;
       window.clearTimeout(quickActionMotionTimer);
@@ -1712,7 +1857,7 @@ Minimum version required to store current data is: `+i+`.
       });
       mobileQuickActions.setAttribute('aria-hidden', String(nearEnd));
       if (nearEnd) {
-        mobileQuickActions.classList.remove('is-returning', 'is-context-hidden');
+        mobileQuickActions.classList.remove('is-returning', 'is-returned', 'is-context-hidden');
         mobileQuickActions.classList.add('is-leaving');
         quickActionMotionTimer = window.setTimeout(() => {
           if (!quickActionsAtEnd) return;
@@ -1720,10 +1865,13 @@ Minimum version required to store current data is: `+i+`.
           mobileQuickActions.classList.add('is-context-hidden');
         }, 290);
       } else {
-        mobileQuickActions.classList.remove('is-context-hidden', 'is-leaving');
-        if (!document.body.classList.contains('site-mode')) return;
+        mobileQuickActions.classList.remove('is-context-hidden', 'is-leaving', 'is-returned');
         mobileQuickActions.classList.add('is-returning');
-        quickActionMotionTimer = window.setTimeout(() => mobileQuickActions.classList.remove('is-returning'), 680);
+        quickActionMotionTimer = window.setTimeout(() => {
+          if (quickActionsAtEnd) return;
+          mobileQuickActions.classList.remove('is-returning');
+          mobileQuickActions.classList.add('is-returned');
+        }, 680);
       }
     };
     let quickActionScrollFrame = 0;
@@ -2786,7 +2934,13 @@ Minimum version required to store current data is: `+i+`.
         window.setTimeout(() => document.body.classList.remove('site-nav-ready'), reducedMotionEnabled() ? 0 : 320);
       }, reducedMotionEnabled() ? 0 : 680);
     };
-    const clearQuickActionExit = () => mobileQuickActions.classList.remove('is-leaving');
+    const clearQuickActionExit = () => {
+      window.clearTimeout(quickActionMotionTimer);
+      quickActionsAtEnd = false;
+      quickActionLinks.forEach((link) => link.removeAttribute('tabindex'));
+      mobileQuickActions.setAttribute('aria-hidden', 'false');
+      mobileQuickActions.classList.remove('is-leaving', 'is-context-hidden', 'is-returning', 'is-returned');
+    };
     const clearHeroStaging = () => {
       window.clearTimeout(heroStageTimer);
       introDeck.classList.remove('hero-intro', 'hero-preparing', 'is-hero-ready');
@@ -2824,6 +2978,7 @@ Minimum version required to store current data is: `+i+`.
     };
     const exitQuickActionsThen = (next) => {
       if (!document.body.classList.contains('site-mode') || reducedMotionEnabled()) { next(); return; }
+      mobileQuickActions.classList.remove('is-returning', 'is-returned', 'is-context-hidden');
       mobileQuickActions.classList.add('is-leaving');
       window.setTimeout(next, 285);
     };
