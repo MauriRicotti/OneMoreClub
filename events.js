@@ -31,5 +31,21 @@ window.ONE_MORE_UPCOMING_EVENTS = [
         date:'Viernes 6 de noviembre', time:'23:59 Hs', place:'Av. Beiro 3334 · Devoto',
         lineupLabel:'Artistas confirmados', lineup:'Yamila Be · Camila Díaz · Camila Méndez · Open Call',
         ticket:'Comprar entradas', ticketUrl:'https://www.passline.com/eventos/viernes-611-more-yamila-be', footer:'YAMILA BE · Viernes 6 de noviembre'
+      },
+      {
+        slug:'martin-umpier-07-nov', startsAt:'2026-11-07T23:59:00-03:00', countdownLabel:'Sáb 07 NOV · 23:59 H', titleHtml:'<span>MARTÍN</span><span>UMPIER</span>', longTitle:true,
+        label:'MORE ELECTRONIC MUSIC presenta', image:'assets/martin-umpier-07-noviembre-01.webp', posterImages:[
+          'assets/martin-umpier-07-noviembre-01.webp',
+          'assets/martin-umpier-07-noviembre-02.webp',
+          'assets/martin-umpier-07-noviembre-03.webp',
+          'assets/martin-umpier-07-noviembre-04.webp',
+          'assets/martin-umpier-07-noviembre-05.webp',
+          'assets/martin-umpier-07-noviembre-06.webp',
+          'assets/martin-umpier-07-noviembre-07.webp'
+        ], width:703, height:878,
+        alt:'Flyer de Martín Umpier: sábado 7 de noviembre de 2026, ONE MORE CLUB, Av. Beiro 3334, Devoto.', day:'07', month:'NOV',
+        date:'Sábado 7 de noviembre', time:'23:59 Hs', place:'Av. Beiro 3334 · Devoto',
+        lineupLabel:'Artistas confirmados', lineup:'NFZ · Nahuel Mansilla · Fedi Sanzo · Anto Mangia · Robain Sound · Lucero',
+        ticket:'Comprar entradas', ticketUrl:'https://www.passline.com/eventos/sabado-711-more-martin-umpier', footer:'MARTÍN UMPIER · Sábado 7 de noviembre'
       }
     ];

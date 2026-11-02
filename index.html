@@ -127,7 +127,16 @@
     .next-experience { touch-action:pan-y; }.event-stage { --poster-ratio:606 / 750; flex:1; min-height:0; display:flex; touch-action:pan-y; user-select:none; -webkit-user-select:none; transition:opacity 180ms ease,transform 210ms cubic-bezier(.22,.8,.22,1); will-change:opacity,transform; }.event-stage img { -webkit-user-drag:none; }
     .event-stage.is-switching-next { opacity:0; transform:translate3d(-22px,0,0); }.event-stage.is-switching-prev { opacity:0; transform:translate3d(22px,0,0); }.event-stage.is-preparing-next { opacity:0; transform:translate3d(22px,0,0); transition:none; }.event-stage.is-preparing-prev { opacity:0; transform:translate3d(-22px,0,0); transition:none; }
     .event-poster { position:relative; flex:0 0 auto; width:auto; height:100%; min-height:0; aspect-ratio:var(--poster-ratio); margin:0; display:flex; align-items:center; justify-content:center; overflow:hidden; border-right:1px solid rgba(8,8,8,.6); }
-    .event-poster img { display:block; width:100%; height:100%; object-fit:contain; }.event-poster.is-finished img { filter:grayscale(1) contrast(.82) brightness(.9); }.event-status-badge { position:absolute; z-index:2; top:18px; left:18px; display:none; padding:10px 12px 9px; border:1px solid var(--paper); background:#080808; color:var(--paper); font-size:10px; font-weight:900; letter-spacing:.14em; line-height:1; text-transform:uppercase; box-shadow:4px 4px 0 rgba(242,240,235,.72); }.event-poster.is-finished .event-status-badge { display:block; }
+    .event-poster img { display:block; width:100%; height:100%; object-fit:contain; }.event-poster-image-next { position:absolute; z-index:1; inset:0; opacity:0; pointer-events:none; transition:opacity 260ms ease; }.event-poster.is-poster-crossfading .event-poster-image-next { opacity:1; }.event-poster.is-finished img { filter:grayscale(1) contrast(.82) brightness(.9); }.event-status-badge { position:absolute; z-index:2; top:18px; left:18px; display:none; padding:10px 12px 9px; border:1px solid var(--paper); background:#080808; color:var(--paper); font-size:10px; font-weight:900; letter-spacing:.14em; line-height:1; text-transform:uppercase; box-shadow:4px 4px 0 rgba(242,240,235,.72); }.event-poster.is-finished .event-status-badge { display:block; }
+
+    .event-poster-pagination { position:absolute; z-index:3; bottom:17px; left:50%; display:flex; align-items:center; gap:2px; transform:translateX(-50%); }
+    .event-poster-pagination[hidden] { display:none; }
+    .event-poster-dot { appearance:none; display:grid; place-items:center; width:18px; height:18px; padding:0; border:0; background:transparent; cursor:pointer; }
+    .event-poster-dot::before { content:''; display:block; width:6px; height:6px; border:1px solid rgba(242,240,235,.9); border-radius:50%; background:rgba(8,8,8,.26); box-shadow:0 1px 4px rgba(0,0,0,.68); transition:transform 180ms ease,background-color 180ms ease; }
+    .event-poster-dot[aria-current="true"]::before { transform:scale(1.25); border-color:var(--paper); background:var(--paper); }
+    .event-poster-dot:focus-visible { outline:1px solid var(--paper); outline-offset:-2px; border-radius:50%; }
+    @media (max-width:760px) { .event-poster-pagination { bottom:12px; gap:0; } .event-poster-dot { width:16px; height:16px; } }
+    @media (prefers-reduced-motion:reduce) { .event-poster-dot::before, .event-poster-image-next { transition:none; } }
     .event-content { flex:1 1 0; min-width:0; display:grid; grid-template-columns:minmax(0,1.18fr) minmax(260px,.82fr); }
     .event-title { display:grid; grid-template-rows:auto 1fr auto; min-height:570px; padding:clamp(30px,5vw,74px) clamp(22px,4.4vw,70px) 26px; border-right:1px solid rgba(8,8,8,.6); }
     .event-title h2 { align-self:center; justify-self:center; width:100%; text-align:center; }
@@ -1166,7 +1175,7 @@
         <button class="event-back" type="button" aria-label="Volver a la pantalla de inicio"><span aria-hidden="true">←</span> Inicio</button>
         <nav class="event-switcher" aria-label="Cambiar entre próximas fechas">
           <button class="event-nav-control" data-event-prev type="button" aria-label="Ver fecha anterior"><span aria-hidden="true">←</span></button>
-          <span class="event-nav-copy"><strong>Próximas fechas</strong><small><b data-event-position>01</b> <i aria-hidden="true">/</i> <b data-event-total>04</b></small></span>
+          <span class="event-nav-copy"><strong>Próximas fechas</strong><small><b data-event-position>01</b> <i aria-hidden="true">/</i> <b data-event-total>05</b></small></span>
           <button class="event-nav-control" data-event-next type="button" aria-label="Ver fecha siguiente"><span aria-hidden="true">→</span></button>
         </nav>
         <span class="event-brand">ONE MORE ELECTRONIC</span>
@@ -1174,6 +1183,8 @@
       <div class="event-stage">
         <figure class="event-poster">
           <img src="assets/festa-bros-31-octubre.webp" width="598" height="748" decoding="async" alt="Flyer de Festa Bros: sábado 31 de octubre, ONE MORE CLUB, Av. Beiro 3334, Devoto." />
+          <img class="event-poster-image-next" data-event-poster-next width="598" height="748" decoding="async" alt="" aria-hidden="true" />
+          <div class="event-poster-pagination" data-poster-pagination hidden role="group" aria-label="Seleccionar imagen del flyer"></div>
           <span class="event-status-badge" data-event-status>Fecha finalizada</span>
         </figure>
         <div class="event-content">
@@ -1605,7 +1616,7 @@
     </div>
   </section>
   <section id="mesas" class="tables-section" aria-labelledby="tables-title">
-    <div class="tables-frame"><header class="tables-head"><div><p class="tables-kicker">ONE MORE CLUB · DEVOTO</p><h2 id="tables-title"><span>Mesas</span><span>y reservas</span></h2></div><p>Elegí una fecha, seleccioná una mesa disponible y completá tus datos para reservar.</p></header><div class="tables-main"><div class="table-plan-wrap"><div class="table-plan" data-table-plan aria-label="Plano interactivo de mesas del lugar"><img class="table-plan-image" src="assets/one-more-table-plan.webp" width="585" height="878" decoding="async" alt="" aria-hidden="true" /><div class="table-plan-controls"><button class="table-plan-button table-1" style="--x:31.500%;--y:7.400%;--w:22.600%;--h:8.000%;" type="button" data-table="1" aria-label="Seleccionar mesa 1, Backstage"></button><button class="table-plan-button table-2" style="--x:59.000%;--y:7.400%;--w:22.000%;--h:8.000%;" type="button" data-table="2" aria-label="Seleccionar mesa 2, Private"></button><button class="table-plan-button table-3" style="--x:74.000%;--y:17.500%;--w:12.500%;--h:8.000%;" type="button" data-table="3" aria-label="Seleccionar mesa 3"></button><button class="table-plan-button table-4" style="--x:74.000%;--y:26.200%;--w:12.500%;--h:8.000%;" type="button" data-table="4" aria-label="Seleccionar mesa 4"></button><button class="table-plan-button table-5" style="--x:74.000%;--y:35.000%;--w:12.500%;--h:8.000%;" type="button" data-table="5" aria-label="Seleccionar mesa 5"></button><button class="table-plan-button table-6 is-reserved" style="--x:14.000%;--y:17.300%;--w:12.700%;--h:8.400%;" type="button" data-table="6" disabled aria-label="Mesa 6 reservada"></button><button class="table-plan-button table-7 is-reserved" style="--x:14.500%;--y:27.500%;--w:11.800%;--h:7.500%;" type="button" data-table="7" disabled aria-label="Mesa 7 reservada"></button><button class="table-plan-button table-8" style="--x:14.500%;--y:36.500%;--w:11.800%;--h:7.500%;" type="button" data-table="8" aria-label="Seleccionar mesa 8"></button><button class="table-plan-button table-9" style="--x:74.000%;--y:44.300%;--w:12.500%;--h:8.000%;" type="button" data-table="9" aria-label="Seleccionar mesa 9"></button><button class="table-plan-button table-10" style="--x:74.000%;--y:53.300%;--w:12.500%;--h:8.000%;" type="button" data-table="10" aria-label="Seleccionar mesa 10"></button><button class="table-plan-button table-11" style="--x:74.000%;--y:62.200%;--w:12.500%;--h:8.000%;" type="button" data-table="11" aria-label="Seleccionar mesa 11"></button><button class="table-plan-button table-12" style="--x:74.000%;--y:71.300%;--w:12.500%;--h:8.000%;" type="button" data-table="12" aria-label="Seleccionar mesa 12"></button><button class="table-plan-button table-13" style="--x:74.800%;--y:80.800%;--w:11.000%;--h:7.300%;" type="button" data-table="13" aria-label="Seleccionar mesa 13"></button></div></div><p class="table-plan-caption"><span></span> Disponible <i></i> Reservada <b class="table-plan-vip-key">Mesa 1 Backstage · Mesa 2 Private</b></p></div><form class="reservation-form" data-reservation-form><p class="reservation-eyebrow">Reserva de mesa</p><ol class="reservation-steps" aria-label="Pasos de reserva"><li><span>01</span><label for="reservation-date">Elegí una fecha<select id="reservation-date" data-reservation-date required><option value="festa-bros-31-oct">FESTA BROS · Sáb 31 OCT</option><option value="yamila-be-06-nov">YAMILA BE · Vie 06 NOV</option></select></label></li><li><span>02</span><div><b>Mesa</b><p data-reservation-table>Seleccioná una mesa en el plano.</p></div></li><li><span>03</span><label for="reservation-name">Nombre y contacto<input id="reservation-name" name="name" type="text" autocomplete="name" placeholder="Tu nombre" required /><input name="contact" type="tel" autocomplete="tel" placeholder="WhatsApp" required /></label></li></ol><button class="reservation-submit" type="submit" disabled data-reservation-submit>Continuar reserva <b aria-hidden="true">↗</b></button><p class="reservation-result" data-reservation-result aria-live="polite">Elegí una fecha y una mesa disponible.</p></form></div><footer class="tables-foot"><span>Escenario · dancefloor · barra · mesas</span><span>ONE MORE CLUB · DEVOTO</span></footer></div>
+    <div class="tables-frame"><header class="tables-head"><div><p class="tables-kicker">ONE MORE CLUB · DEVOTO</p><h2 id="tables-title"><span>Mesas</span><span>y reservas</span></h2></div><p>Elegí una fecha, seleccioná una mesa disponible y completá tus datos para reservar.</p></header><div class="tables-main"><div class="table-plan-wrap"><div class="table-plan" data-table-plan aria-label="Plano interactivo de mesas del lugar"><img class="table-plan-image" src="assets/one-more-table-plan.webp" width="585" height="878" decoding="async" alt="" aria-hidden="true" /><div class="table-plan-controls"><button class="table-plan-button table-1" style="--x:31.500%;--y:7.400%;--w:22.600%;--h:8.000%;" type="button" data-table="1" aria-label="Seleccionar mesa 1, Backstage"></button><button class="table-plan-button table-2" style="--x:59.000%;--y:7.400%;--w:22.000%;--h:8.000%;" type="button" data-table="2" aria-label="Seleccionar mesa 2, Private"></button><button class="table-plan-button table-3" style="--x:74.000%;--y:17.500%;--w:12.500%;--h:8.000%;" type="button" data-table="3" aria-label="Seleccionar mesa 3"></button><button class="table-plan-button table-4" style="--x:74.000%;--y:26.200%;--w:12.500%;--h:8.000%;" type="button" data-table="4" aria-label="Seleccionar mesa 4"></button><button class="table-plan-button table-5" style="--x:74.000%;--y:35.000%;--w:12.500%;--h:8.000%;" type="button" data-table="5" aria-label="Seleccionar mesa 5"></button><button class="table-plan-button table-6 is-reserved" style="--x:14.000%;--y:17.300%;--w:12.700%;--h:8.400%;" type="button" data-table="6" disabled aria-label="Mesa 6 reservada"></button><button class="table-plan-button table-7 is-reserved" style="--x:14.500%;--y:27.500%;--w:11.800%;--h:7.500%;" type="button" data-table="7" disabled aria-label="Mesa 7 reservada"></button><button class="table-plan-button table-8" style="--x:14.500%;--y:36.500%;--w:11.800%;--h:7.500%;" type="button" data-table="8" aria-label="Seleccionar mesa 8"></button><button class="table-plan-button table-9" style="--x:74.000%;--y:44.300%;--w:12.500%;--h:8.000%;" type="button" data-table="9" aria-label="Seleccionar mesa 9"></button><button class="table-plan-button table-10" style="--x:74.000%;--y:53.300%;--w:12.500%;--h:8.000%;" type="button" data-table="10" aria-label="Seleccionar mesa 10"></button><button class="table-plan-button table-11" style="--x:74.000%;--y:62.200%;--w:12.500%;--h:8.000%;" type="button" data-table="11" aria-label="Seleccionar mesa 11"></button><button class="table-plan-button table-12" style="--x:74.000%;--y:71.300%;--w:12.500%;--h:8.000%;" type="button" data-table="12" aria-label="Seleccionar mesa 12"></button><button class="table-plan-button table-13" style="--x:74.800%;--y:80.800%;--w:11.000%;--h:7.300%;" type="button" data-table="13" aria-label="Seleccionar mesa 13"></button></div></div><p class="table-plan-caption"><span></span> Disponible <i></i> Reservada <b class="table-plan-vip-key">Mesa 1 Backstage · Mesa 2 Private</b></p></div><form class="reservation-form" data-reservation-form><p class="reservation-eyebrow">Reserva de mesa</p><ol class="reservation-steps" aria-label="Pasos de reserva"><li><span>01</span><label for="reservation-date">Elegí una fecha<select id="reservation-date" data-reservation-date required><option value="festa-bros-31-oct">FESTA BROS · Sáb 31 OCT</option><option value="yamila-be-06-nov">YAMILA BE · Vie 06 NOV</option><option value="martin-umpier-07-nov">MARTIN UMPIER · Sáb 07 NOV</option></select></label></li><li><span>02</span><div><b>Mesa</b><p data-reservation-table>Seleccioná una mesa en el plano.</p></div></li><li><span>03</span><label for="reservation-name">Nombre y contacto<input id="reservation-name" name="name" type="text" autocomplete="name" placeholder="Tu nombre" required /><input name="contact" type="tel" autocomplete="tel" placeholder="WhatsApp" required /></label></li></ol><button class="reservation-submit" type="submit" disabled data-reservation-submit>Continuar reserva <b aria-hidden="true">↗</b></button><p class="reservation-result" data-reservation-result aria-live="polite">Elegí una fecha y una mesa disponible.</p></form></div><footer class="tables-foot"><span>Escenario · dancefloor · barra · mesas</span><span>ONE MORE CLUB · DEVOTO</span></footer></div>
   </section>
   <section class="faq" id="preguntas" aria-labelledby="faq-title">
     <div class="faq-frame">
@@ -1945,8 +1956,10 @@ Minimum version required to store current data is: `+i+`.
     window.addEventListener('resize', scheduleMobileQuickActionVisibility, { passive:true });
     // Each upcoming date is a real, independently navigable item. Images are read
     // for their intrinsic ratio, so changing a flyer also changes the poster column.
-    const eventPosterImage = document.querySelector('.event-poster img');
+    const eventPosterImage = document.querySelector('.event-poster img:not([data-event-poster-next])');
     const eventPoster = eventPosterImage.closest('.event-poster');
+    const eventPosterNextImage = document.querySelector('[data-event-poster-next]');
+    const eventPosterPagination = document.querySelector('[data-poster-pagination]');
     const eventStatusBadge = document.querySelector('[data-event-status]');
     const eventTitleWrap = document.querySelector('[data-event-title-wrap]');
     const eventTitle = document.querySelector('[data-event-title]');
@@ -2675,7 +2688,7 @@ Minimum version required to store current data is: `+i+`.
       const ratio = eventPosterImage.naturalWidth / eventPosterImage.naturalHeight;
       eventPosterImage.closest('.event-stage').style.setProperty('--poster-ratio', String(ratio));
     };
-    // Preload and decode every flyer once. The visible poster changes only after the
+    // Preload and decode each requested flyer once. The visible poster changes only after the
     // target is ready, so a prior flyer can never remain on screen during a switch.
     const flyerPreloads = new Map();
     const preloadFlyer = (source) => {
@@ -2683,17 +2696,61 @@ Minimum version required to store current data is: `+i+`.
       const preloader = new Image();
       preloader.decoding = 'async';
       const ready = new Promise((resolve) => {
-        preloader.onload = async () => {
-          if (preloader.decode) { try { await preloader.decode(); } catch (_) {} }
+        let settled = false;
+        let timeoutId;
+        const finish = () => {
+          if (settled) return;
+          settled = true;
+          window.clearTimeout(timeoutId);
           resolve();
         };
-        preloader.onerror = () => resolve();
+        timeoutId = window.setTimeout(finish, 5000);
+        preloader.onload = async () => {
+          if (preloader.decode) { try { await preloader.decode(); } catch (_) {} }
+          finish();
+        };
+        preloader.onerror = finish;
       });
       preloader.src = source;
       flyerPreloads.set(source, ready);
       return ready;
     };
+    let activePosterSlideIndex = 0;
+    let posterSlideRequestToken = 0;
+    let posterAutoplayTimer = null;
+    const POSTER_AUTOPLAY_DELAY = 4000;
+    const stopPosterAutoplay = () => {
+      if (posterAutoplayTimer !== null) window.clearTimeout(posterAutoplayTimer);
+      posterAutoplayTimer = null;
+    };
+    const getEventPosterImages = (event) => Array.isArray(event.posterImages) && event.posterImages.length ? event.posterImages : [event.image];
+    const syncEventPosterPagination = (posterImages) => {
+      const dots = [...eventPosterPagination.querySelectorAll('[data-poster-slide-dot]')];
+      dots.forEach((dot, index) => {
+        if (index === activePosterSlideIndex) dot.setAttribute('aria-current', 'true');
+        else dot.removeAttribute('aria-current');
+      });
+    };
+    const buildEventPosterPagination = (posterImages) => {
+      const hasMultipleSlides = posterImages.length > 1;
+      eventPoster.classList.toggle('has-poster-slides', hasMultipleSlides);
+      eventPosterPagination.hidden = !hasMultipleSlides;
+      eventPosterPagination.replaceChildren();
+      if (!hasMultipleSlides) return;
+      posterImages.forEach((_, index) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'event-poster-dot';
+        dot.dataset.posterSlideDot = String(index);
+        dot.setAttribute('aria-label', `Ver imagen ${index + 1} de ${posterImages.length} del flyer`);
+        dot.addEventListener('click', () => { void showEventPosterSlide(index); });
+        eventPosterPagination.append(dot);
+      });
+      syncEventPosterPagination(posterImages);
+    };
     const renderUpcomingEvent = async (index) => {
+      stopPosterAutoplay();
+      eventPoster.classList.remove('is-poster-crossfading');
       activeEventIndex = Math.min(Math.max(index, 0), upcomingEvents.length - 1);
       const event = upcomingEvents[activeEventIndex];
       eventTitle.innerHTML = event.titleHtml;
@@ -2720,15 +2777,25 @@ Minimum version required to store current data is: `+i+`.
       eventFooter.textContent = event.footer;
       eventPosition.textContent = String(activeEventIndex + 1).padStart(2, '0');
       eventTotal.textContent = String(upcomingEvents.length).padStart(2, '0');
+      const posterImages = getEventPosterImages(event);
+      activePosterSlideIndex = 0;
+      posterSlideRequestToken += 1;
+      buildEventPosterPagination(posterImages);
+      const firstPoster = posterImages[0] || event.image;
       eventPosterImage.closest('.event-stage').style.setProperty('--poster-ratio', String(event.width / event.height));
       eventPosterImage.width = event.width;
       eventPosterImage.height = event.height;
+      eventPosterNextImage.width = event.width;
+      eventPosterNextImage.height = event.height;
       eventPosterImage.alt = event.alt;
-      if (eventPosterImage.getAttribute('src') !== event.image) {
-        eventPosterImage.src = event.image;
+      eventPosterNextImage.src = firstPoster;
+      if (eventPosterImage.getAttribute('src') !== firstPoster) {
+        eventPosterImage.src = firstPoster;
         if (eventPosterImage.decode) { try { await eventPosterImage.decode(); } catch (_) {} }
       }
       syncPosterRatio();
+      syncUpcomingEventNavigation();
+      startPosterAutoplay();
     };
     eventPosterImage.addEventListener('load', syncPosterRatio);
     const eventStage = document.querySelector('.event-stage');
@@ -2738,17 +2805,85 @@ Minimum version required to store current data is: `+i+`.
     const syncUpcomingEventNavigation = () => {
       const atFirstEvent = activeEventIndex <= 0;
       const atLastEvent = activeEventIndex >= upcomingEvents.length - 1;
-      eventPrevButton.disabled = atFirstEvent;
-      eventNextButton.disabled = atLastEvent;
-      eventPrevButton.setAttribute('aria-disabled', String(atFirstEvent));
-      eventNextButton.setAttribute('aria-disabled', String(atLastEvent));
+      const navigationLocked = isEventTransitioning;
+      eventPrevButton.disabled = atFirstEvent || navigationLocked;
+      eventNextButton.disabled = atLastEvent || navigationLocked;
+      eventPrevButton.setAttribute('aria-disabled', String(atFirstEvent || navigationLocked));
+      eventNextButton.setAttribute('aria-disabled', String(atLastEvent || navigationLocked));
     };
-    const changeUpcomingEvent = (direction) => {
+    const posterMotionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const posterHoverPreference = window.matchMedia('(hover: hover) and (pointer: fine)');
+    const isPosterKeyboardFocused = () => document.activeElement instanceof Element && eventPoster.contains(document.activeElement) && document.activeElement.matches(':focus-visible');
+    const isPosterHovered = () => posterHoverPreference.matches && eventPoster.matches(':hover');
+    const canRunPosterAutoplay = () => document.body.classList.contains('event-open') && !document.hidden && !posterMotionPreference.matches && !isEventTransitioning && eventPoster.classList.contains('has-poster-slides') && !isPosterHovered() && !isPosterKeyboardFocused();
+    const startPosterAutoplay = () => {
+      stopPosterAutoplay();
+      if (!canRunPosterAutoplay()) return;
+      posterAutoplayTimer = window.setTimeout(() => {
+        posterAutoplayTimer = null;
+        if (!canRunPosterAutoplay()) return;
+        const posterImages = getEventPosterImages(upcomingEvents[activeEventIndex]);
+        void showEventPosterSlide((activePosterSlideIndex + 1) % posterImages.length);
+      }, POSTER_AUTOPLAY_DELAY);
+    };
+    const showEventPosterSlide = async (index) => {
+      const event = upcomingEvents[activeEventIndex];
+      if (!event || isEventTransitioning) return;
+      const posterImages = getEventPosterImages(event);
+      if (posterImages.length < 2 || index < 0 || index >= posterImages.length) return;
+      if (index === activePosterSlideIndex) { startPosterAutoplay(); return; }
+      stopPosterAutoplay();
+      activePosterSlideIndex = index;
+      const requestToken = ++posterSlideRequestToken;
+      syncEventPosterPagination(posterImages);
+      await preloadFlyer(posterImages[index]);
+      if (requestToken !== posterSlideRequestToken || event !== upcomingEvents[activeEventIndex]) return;
+      const fadeDuration = posterMotionPreference.matches ? 0 : 260;
+      eventPoster.classList.remove('is-poster-crossfading');
+      eventPosterNextImage.src = posterImages[index];
+      if (eventPosterNextImage.decode) { try { await eventPosterNextImage.decode(); } catch (_) {} }
+      if (requestToken !== posterSlideRequestToken || event !== upcomingEvents[activeEventIndex]) return;
+      if (fadeDuration) {
+        eventPoster.classList.add('is-poster-crossfading');
+        await new Promise((resolve) => window.setTimeout(resolve, fadeDuration));
+      }
+      if (requestToken !== posterSlideRequestToken || event !== upcomingEvents[activeEventIndex]) return;
+      eventPosterImage.src = posterImages[index];
+      eventPosterImage.alt = index === 0 ? event.alt : `${event.alt.replace(/\.$/, '')} Imagen ${index + 1} de ${posterImages.length}.`;
+      if (eventPosterImage.decode) { try { await eventPosterImage.decode(); } catch (_) {} }
+      eventPosterNextImage.src = posterImages[index];
+      syncPosterRatio();
+      if (requestToken === posterSlideRequestToken && event === upcomingEvents[activeEventIndex]) {
+        if (fadeDuration) window.requestAnimationFrame(() => {
+          if (requestToken === posterSlideRequestToken && event === upcomingEvents[activeEventIndex]) eventPoster.classList.remove('is-poster-crossfading');
+        });
+        else eventPoster.classList.remove('is-poster-crossfading');
+        startPosterAutoplay();
+      }
+    };
+    if (posterHoverPreference.matches) {
+      eventPoster.addEventListener('mouseenter', stopPosterAutoplay);
+      eventPoster.addEventListener('mouseleave', startPosterAutoplay);
+    }
+    eventPoster.addEventListener('focusin', (event) => {
+      if (event.target instanceof Element && event.target.matches(':focus-visible')) stopPosterAutoplay();
+    });
+    eventPoster.addEventListener('focusout', () => window.requestAnimationFrame(startPosterAutoplay));
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stopPosterAutoplay(); else startPosterAutoplay();
+    });
+    const onPosterMotionPreferenceChange = () => {
+      if (posterMotionPreference.matches) stopPosterAutoplay(); else startPosterAutoplay();
+    };
+    if (posterMotionPreference.addEventListener) posterMotionPreference.addEventListener('change', onPosterMotionPreferenceChange);
+    else if (posterMotionPreference.addListener) posterMotionPreference.addListener(onPosterMotionPreferenceChange);
+    const changeUpcomingEvent = async (direction) => {
       const nextIndex = activeEventIndex + direction;
       if (isEventTransitioning || nextIndex < 0 || nextIndex >= upcomingEvents.length) {
         syncUpcomingEventNavigation();
         return;
       }
+      stopPosterAutoplay();
       isEventTransitioning = true;
       const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const outgoingClass = direction > 0 ? 'is-switching-next' : 'is-switching-prev';
@@ -2756,21 +2891,26 @@ Minimum version required to store current data is: `+i+`.
       eventPrevButton.disabled = true;
       eventNextButton.disabled = true;
       eventStage.setAttribute('aria-busy', 'true');
-      eventStage.classList.add(outgoingClass);
-      window.setTimeout(async () => {
+      try {
+        eventStage.classList.add(outgoingClass);
+        await new Promise((resolve) => window.setTimeout(resolve, isReducedMotion ? 0 : 180));
         const nextEvent = upcomingEvents[nextIndex];
-        await preloadFlyer(nextEvent.image);
+        await preloadFlyer(getEventPosterImages(nextEvent)[0] || nextEvent.image);
         await renderUpcomingEvent(nextIndex);
         eventStage.classList.remove(outgoingClass);
         eventStage.classList.add(incomingClass);
         void eventStage.offsetWidth;
         eventStage.classList.remove(incomingClass);
-        window.setTimeout(() => {
-          eventStage.removeAttribute('aria-busy');
-          isEventTransitioning = false;
-          syncUpcomingEventNavigation();
-        }, isReducedMotion ? 0 : 220);
-      }, isReducedMotion ? 0 : 180);
+        await new Promise((resolve) => window.setTimeout(resolve, isReducedMotion ? 0 : 220));
+      } catch (error) {
+        console.error('No se pudo cambiar la fecha de ONE MORE:', error);
+      } finally {
+        eventStage.classList.remove(outgoingClass, incomingClass);
+        eventStage.removeAttribute('aria-busy');
+        isEventTransitioning = false;
+        syncUpcomingEventNavigation();
+        startPosterAutoplay();
+      }
     };
     eventPrevButton.addEventListener('click', () => changeUpcomingEvent(-1));
     eventNextButton.addEventListener('click', () => changeUpcomingEvent(1));
@@ -3086,6 +3226,7 @@ Minimum version required to store current data is: `+i+`.
       document.body.classList.remove('intro-active', 'site-mode');
       syncHeroVideoMotion();
       document.body.classList.add('event-open');
+      startPosterAutoplay();
       setIntroLock(true);
       introSlider.classList.remove('exit-left');
       stageEventPanel();
@@ -3112,6 +3253,7 @@ Minimum version required to store current data is: `+i+`.
       clearSiteHeaderStaging();
       introSlider.classList.remove('is-open');
       introSlider.setAttribute('aria-hidden', 'true');
+      stopPosterAutoplay();
       document.body.classList.remove('event-open', 'site-mode');
       document.body.classList.add('intro-active');
       syncHeroVideoMotion();
@@ -3138,6 +3280,7 @@ Minimum version required to store current data is: `+i+`.
         resetSliderOffscreen();
       }
       introSlider.setAttribute('aria-hidden', 'true');
+      stopPosterAutoplay();
       document.body.classList.remove('intro-active', 'event-open');
       syncHeroVideoMotion();
       document.body.classList.add('site-mode');
