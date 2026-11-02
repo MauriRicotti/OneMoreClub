@@ -153,6 +153,20 @@
     .announce { display:flex; align-items:center; justify-content:space-between; gap:20px; min-height:52px; padding:0 15px; border:1px solid var(--paper); background:var(--paper); color:var(--ink); font-size:10px; font-weight:700; letter-spacing:.12em; text-decoration:none; text-transform:uppercase; transition:background-color 180ms ease,color 180ms ease; }
     .event-actions { display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) 48px; gap:7px; }.event-actions .announce { min-width:0; }.event-share { display:flex; align-items:center; justify-content:space-between; gap:8px; min-height:52px; padding:0 13px; border:1px solid rgba(242,240,235,.72); background:transparent; color:var(--paper); font:inherit; font-size:9px; font-weight:700; letter-spacing:.11em; line-height:1; text-align:left; text-transform:uppercase; cursor:pointer; transition:background-color 180ms ease,color 180ms ease; }.event-share:hover, .event-share:focus-visible { background:var(--paper); color:var(--ink); }.event-share:focus-visible { outline:2px solid var(--paper); outline-offset:4px; }.event-share svg { flex:0 0 auto; width:17px; height:17px; fill:none; stroke:currentColor; stroke-linecap:square; stroke-linejoin:miter; stroke-width:1.7; }.event-qr-trigger { display:grid; place-items:center; min-height:52px; padding:0; border:1px solid rgba(242,240,235,.72); background:transparent; color:var(--paper); font:inherit; font-size:9px; font-weight:700; letter-spacing:.05em; line-height:1; text-transform:uppercase; cursor:pointer; transition:background-color 180ms ease,color 180ms ease; }.event-qr-trigger:hover, .event-qr-trigger:focus-visible { background:var(--paper); color:var(--ink); }.event-qr-trigger:focus-visible { outline:2px solid var(--paper); outline-offset:4px; }
     .announce:hover, .announce:focus-visible { background:transparent; color:var(--paper); }.announce:focus-visible { outline:2px solid var(--paper); outline-offset:4px; }.announce b { font-size:18px; font-weight:400; }.announce.is-finished { cursor:default; border-color:rgba(242,240,235,.5); background:transparent; color:rgba(242,240,235,.72); pointer-events:none; }
+    .pwa-install-prompt[hidden] { display:none !important; }
+    .pwa-install-prompt { position:fixed; z-index:165; right:18px; bottom:18px; left:auto; display:grid; grid-template-columns:38px minmax(0,1fr) auto 30px; align-items:center; gap:11px; width:min(470px,calc(100vw - 36px)); padding:13px; border:1px solid rgba(242,240,235,.55); background:#080808; color:var(--paper); box-shadow:0 12px 36px rgba(0,0,0,.48); opacity:0; visibility:hidden; pointer-events:none; transform:translate3d(0,12px,0); transition:opacity 200ms ease,transform 240ms cubic-bezier(.22,.8,.22,1),visibility 0s linear 200ms; }
+    .pwa-install-prompt.is-visible { opacity:1; visibility:visible; pointer-events:auto; transform:translate3d(0,0,0); transition-delay:0s; }
+    .pwa-install-mark { display:grid; place-items:center; width:36px; height:36px; border:1px solid rgba(242,240,235,.38); }
+    .pwa-install-mark img { display:block; width:25px; height:25px; object-fit:contain; }
+    .pwa-install-copy { min-width:0; }
+    .pwa-install-kicker { margin:0 0 5px; color:rgba(242,240,235,.58); font-size:7px; font-weight:700; letter-spacing:.15em; line-height:1; text-transform:uppercase; }
+    .pwa-install-message { margin:0; color:var(--paper); font-size:10px; font-weight:700; letter-spacing:.01em; line-height:1.3; }
+    .pwa-install-action { min-height:38px; padding:0 12px; border:1px solid var(--paper); background:var(--paper); color:var(--ink); font:inherit; font-size:8px; font-weight:700; letter-spacing:.11em; line-height:1; text-transform:uppercase; cursor:pointer; }
+    .pwa-install-action:hover, .pwa-install-action:focus-visible { background:transparent; color:var(--paper); }
+    .pwa-install-action:focus-visible, .pwa-install-dismiss:focus-visible { outline:2px solid var(--paper); outline-offset:3px; }
+    .pwa-install-dismiss { display:grid; place-items:center; width:30px; height:30px; padding:0; border:1px solid rgba(242,240,235,.38); background:transparent; color:var(--paper); font:inherit; font-size:19px; line-height:1; cursor:pointer; }
+    .pwa-install-dismiss:hover, .pwa-install-dismiss:focus-visible { background:var(--paper); color:var(--ink); }
+    @media (max-width:760px) { .pwa-install-prompt { right:12px; bottom:calc(145px + env(safe-area-inset-bottom,0px)); left:12px; grid-template-columns:34px minmax(0,1fr) auto 30px; gap:9px; width:auto; padding:12px; }.pwa-install-mark { width:32px; height:32px; }.pwa-install-mark img { width:22px; height:22px; }.pwa-install-message { font-size:9px; }.pwa-install-action { min-height:36px; padding:0 9px; font-size:7px; } }
     .ticket-notice { position:fixed; z-index:150; bottom:22px; left:22px; display:flex; align-items:center; gap:11px; padding:11px 13px; border:1px solid var(--ink); background:var(--paper); color:var(--ink); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1; text-transform:uppercase; opacity:0; pointer-events:none; transform:translate3d(0,10px,0); transition:opacity 170ms ease,transform 170ms ease; }
     .ticket-notice.is-visible { opacity:1; transform:translate3d(0,0,0); }.ticket-notice b { font-size:14px; font-weight:400; }
     .qr-modal[hidden] { display:none; }.qr-modal { position:fixed; z-index:170; inset:0; display:grid; place-items:center; padding:18px; background:rgba(8,8,8,.82); opacity:0; visibility:hidden; transition:opacity 180ms ease,visibility 0s linear 180ms; }.qr-modal.is-open { opacity:1; visibility:visible; transition-delay:0s; }.qr-dialog { position:relative; width:min(100%,420px); border:1px solid var(--ink); background:var(--paper); color:var(--ink); box-shadow:8px 8px 0 #080808; opacity:0; transform:translate3d(0,12px,0); transition:opacity 180ms ease,transform 220ms cubic-bezier(.22,.8,.22,1); }.qr-modal.is-open .qr-dialog { opacity:1; transform:translate3d(0,0,0); }.qr-dialog-head { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; padding:17px 18px 15px; border-bottom:1px solid rgba(8,8,8,.7); }.qr-dialog-kicker { margin:0 0 7px; color:rgba(8,8,8,.6); font-size:8px; font-weight:700; letter-spacing:.15em; line-height:1; text-transform:uppercase; }.qr-dialog-title { margin:0; font-size:clamp(31px,7vw,47px); font-weight:900; letter-spacing:-.1em; line-height:.74; text-transform:uppercase; }.qr-close { display:grid; place-items:center; width:32px; height:32px; padding:0; border:1px solid var(--ink); background:transparent; color:var(--ink); font:inherit; font-size:20px; line-height:1; cursor:pointer; }.qr-close:hover, .qr-close:focus-visible { background:var(--ink); color:var(--paper); }.qr-close:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }.qr-dialog-main { display:flex; flex-direction:column; align-items:center; padding:23px 18px 20px; }.qr-code { display:grid; place-items:center; width:min(100%,264px); min-height:264px; padding:10px; border:1px solid var(--ink); background:var(--paper); }.qr-code svg { display:block; width:100%; height:auto; }.qr-code-status { margin:0; color:rgba(8,8,8,.62); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1.35; text-align:center; text-transform:uppercase; }.qr-description { max-width:275px; margin:17px 0 0; font-size:11px; font-weight:700; letter-spacing:.02em; line-height:1.35; text-align:center; text-transform:uppercase; }.qr-dialog-actions { display:grid; grid-template-columns:1fr 1fr; width:100%; gap:7px; margin-top:20px; }.qr-dialog-actions button { display:flex; align-items:center; justify-content:space-between; min-height:42px; padding:0 12px; border:1px solid var(--ink); background:transparent; color:var(--ink); font:inherit; font-size:8px; font-weight:700; letter-spacing:.11em; line-height:1; text-align:left; text-transform:uppercase; cursor:pointer; }.qr-dialog-actions button:hover:not(:disabled), .qr-dialog-actions button:focus-visible { background:var(--ink); color:var(--paper); }.qr-dialog-actions button:disabled { cursor:wait; opacity:.45; }.qr-dialog-actions button:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }body.qr-open { overflow:hidden; }
@@ -991,6 +1005,9 @@
     .birthday-cta b { font-size:16px; font-weight:400; }
     .birthday-banner-foot { display:flex; width:100%; justify-content:space-between; gap:14px; padding-top:12px; border-top:1px solid rgba(242,240,235,.42); color:rgba(242,240,235,.58); font-size:8px; font-weight:700; letter-spacing:.12em; line-height:1.3; text-transform:uppercase; }
     .birthday-photo-panel { position:relative; z-index:1; min-width:0; min-height:clamp(460px,42vw,560px); overflow:hidden; background:#080808; }
+
+    .birthday-photo-hashtag { position:absolute; z-index:2; top:clamp(18px,3vw,32px); left:clamp(18px,3vw,32px); display:inline-flex; align-items:center; gap:9px; max-width:calc(100% - 36px); margin:0; color:rgba(242,240,235,.94); font-size:9px; font-weight:700; letter-spacing:.15em; line-height:1; text-shadow:0 2px 12px rgba(0,0,0,.85),0 0 4px rgba(0,0,0,.9); text-transform:none; white-space:nowrap; pointer-events:none; }
+    .birthday-photo-hashtag::before { content:""; display:block; flex:0 0 auto; width:22px; height:1px; background:currentColor; opacity:.85; }
     .birthday-photo-slides { position:absolute; inset:0; overflow:hidden; }
     .birthday-photo { position:absolute; inset:0; display:block; width:100%; height:100%; object-fit:cover; object-position:var(--birthday-photo-position,center 42%); opacity:0; transform:scale(1.025); transition:opacity 760ms ease,transform 5s cubic-bezier(.22,.8,.22,1); }
     .birthday-photo.is-active { opacity:1; transform:scale(1); }
@@ -1027,9 +1044,10 @@
     .archive-card-top,.archive-card-bottom { position:absolute; z-index:3; right:var(--archive-card-inset); left:var(--archive-card-inset); }
     .archive-card-top { top:var(--archive-card-inset); }
     .archive-card-bottom { bottom:var(--archive-card-inset); }
-    .archive-card-copy { --archive-card-half-width:max(210px,19.5vw); position:absolute; z-index:2; top:50%; left:50%; width:max-content; max-width:calc(100% - var(--archive-card-inset) - var(--archive-card-inset)); transform:translate3d(-50%,-50%,0); transition:transform 460ms cubic-bezier(.2,.75,.25,1); }
-    .archive-card-name { position:relative; display:block; width:max-content; max-width:100%; margin:0; text-align:left; transform:scale(1); transform-origin:left top; transition:transform 420ms cubic-bezier(.2,.75,.25,1); }
-    .archive-card-info { position:absolute; z-index:2; top:calc(50% - 12px); right:var(--archive-card-inset); left:var(--archive-card-inset); display:grid; gap:7px; opacity:0; visibility:hidden; transform:translate3d(0,10px,0); transition:opacity 300ms ease,transform 420ms cubic-bezier(.2,.75,.25,1),visibility 0s linear 420ms; }
+    .archive-card-copy { position:absolute; z-index:2; right:var(--archive-card-inset); bottom:calc(var(--archive-card-inset) + 40px); left:var(--archive-card-inset); width:auto; max-width:none; transform:translate3d(0,0,0); transition:transform 260ms ease; }
+    .archive-card-name { position:relative; display:block; width:max-content; max-width:100%; margin:0; color:var(--paper); font-size:clamp(32px,4.2vw,54px); font-weight:900; letter-spacing:-.085em; line-height:.82; text-align:left; text-shadow:0 3px 16px rgba(0,0,0,.55); transform:scale(1); transform-origin:left bottom; transition:transform 260ms ease; }
+    .archive-card-name.small { font-size:clamp(27px,3.3vw,42px); }
+    .archive-card-info { position:absolute; z-index:2; right:var(--archive-card-inset); bottom:calc(var(--archive-card-inset) + 122px); left:var(--archive-card-inset); display:grid; gap:7px; opacity:0; visibility:hidden; transform:translate3d(0,10px,0); transition:opacity 280ms ease,transform 320ms cubic-bezier(.2,.75,.25,1),visibility 0s linear 320ms; }
     .archive-card-context,.archive-card-date,.archive-card-place { margin:0; }
     .archive-card-context { color:rgba(242,240,235,.64); font-size:8px; font-weight:700; letter-spacing:.14em; line-height:1.25; text-transform:uppercase; }
     .archive-card-context strong { margin-left:4px; color:var(--paper); font-size:10px; font-weight:900; letter-spacing:.08em; }
@@ -1038,28 +1056,38 @@
     .archive-card-bottom { min-height:32px; align-items:center; }
     .archive-card:focus-visible { outline:2px solid var(--paper); outline-offset:-5px; }
     .archive-card.is-open::before { opacity:1; }
-    .archive-card.is-open .archive-card-copy { transform:translate3d(calc(var(--archive-card-inset) - var(--archive-card-half-width)),-86px,0); }
-    .archive-card.is-open .archive-card-name { transform:scale(.42); }
-    .archive-card.is-open .archive-card-name.small { transform:scale(.52); }
+    .archive-card.is-open .archive-card-name { transform:scale(.92); }
     .archive-card.is-open .archive-card-info { opacity:1; visibility:visible; transform:translate3d(0,0,0); transition-delay:0s; }
     @media (hover:hover) and (pointer:fine) {
       .archive-card:hover::before { opacity:1; }
-      .archive-card:hover .archive-card-copy { transform:translate3d(calc(var(--archive-card-inset) - var(--archive-card-half-width)),-86px,0); }
-      .archive-card:hover .archive-card-name { transform:scale(.42); }
-      .archive-card:hover .archive-card-name.small { transform:scale(.52); }
+      .archive-card:hover .archive-card-name { transform:scale(.92); }
       .archive-card:hover .archive-card-info { opacity:1; visibility:visible; transform:translate3d(0,0,0); transition-delay:0s; }
     }
     @media (max-width:760px) {
       .archive-card { --archive-card-inset:18px; }
-      .archive-card-copy { --archive-card-half-width:43.5vw; }
-      .archive-card.is-open .archive-card-name { transform:scale(.45); }
-      .archive-card.is-open .archive-card-name.small { transform:scale(.54); }
-    }
-    @supports (width:1cqw) {
-      .archive-card { container-type:inline-size; }
-      .archive-card-copy { --archive-card-half-width:50cqw; }
+      .archive-card-copy { bottom:calc(var(--archive-card-inset) + 40px); }
+      .archive-card-info { bottom:calc(var(--archive-card-inset) + 116px); }
+      .archive-card.is-open .archive-card-name,.archive-card.is-open .archive-card-name.small { transform:scale(.92); }
     }
     @media (prefers-reduced-motion:reduce) { .archive-card::before,.archive-card-copy,.archive-card-name,.archive-card-info { transition:none !important; } }
+  
+    .archive-invite { display:grid; grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr); align-items:center; gap:clamp(28px,5vw,76px); padding:clamp(32px,4.4vw,62px) clamp(24px,5vw,78px); border-top:1px solid rgba(242,240,235,.32); border-bottom:1px solid rgba(242,240,235,.32); background:#151515; color:var(--paper); }
+    .archive-invite-copy,.archive-invite-action-group { min-width:0; }
+    .archive-invite-kicker { margin:0 0 14px; color:rgba(242,240,235,.58); font-size:8px; font-weight:700; letter-spacing:.16em; line-height:1; text-transform:uppercase; }
+    .archive-invite-title { max-width:800px; margin:0; font-size:clamp(42px,5.8vw,82px); font-weight:900; letter-spacing:-.105em; line-height:.78; text-transform:uppercase; }
+    .archive-invite-action-group { display:flex; flex-direction:column; align-items:flex-start; gap:20px; max-width:420px; }
+    .archive-invite-description { margin:0; color:rgba(242,240,235,.74); font-size:clamp(12px,1.15vw,15px); font-weight:600; letter-spacing:.01em; line-height:1.4; }
+    .archive-invite-link { display:flex; align-items:center; justify-content:center; width:min(100%,260px); min-height:52px; padding:0 18px; border:1px solid var(--paper); background:var(--paper); color:var(--ink); font:inherit; font-size:9px; font-weight:700; letter-spacing:.14em; line-height:1; text-align:center; text-decoration:none; text-transform:uppercase; transition:background-color 180ms ease,color 180ms ease; }
+    .archive-invite-link:hover,.archive-invite-link:focus-visible { background:transparent; color:var(--paper); }
+    .archive-invite-link:focus-visible { outline:2px solid var(--paper); outline-offset:4px; }
+    @media (max-width:760px) {
+      .archive-invite { grid-template-columns:minmax(0,1fr); gap:24px; padding:32px 20px; }
+      .archive-invite-kicker { margin-bottom:12px; }
+      .archive-invite-title { max-width:560px; font-size:clamp(40px,10vw,62px); line-height:.82; }
+      .archive-invite-action-group { gap:16px; max-width:none; }
+      .archive-invite-description { max-width:420px; font-size:12px; }
+      .archive-invite-link { width:100%; max-width:none; min-height:50px; }
+    }
   </style>
 
 </head>
@@ -1235,16 +1263,76 @@
       <header class="archive-top">
         <span>Archivo · DJs y noches de ONE MORE</span>
         <div class="archive-controls" aria-label="Controles del carrusel">
-          <p class="archive-progress" aria-live="polite"><span data-archive-current>01</span><i aria-hidden="true"></i><span data-archive-total>11</span></p>
+          <p class="archive-progress" aria-live="polite"><span data-archive-current>01</span><i aria-hidden="true"></i><span data-archive-total>12</span></p>
           <button type="button" class="archive-prev" aria-label="Ver tarjetas anteriores">←</button>
           <button type="button" class="archive-next" aria-label="Ver más tarjetas">→</button>
         </div>
       </header>
       <div class="archive-intro">
         <h2 id="archive-title" class="section-heading"><span>Archivo</span><span>ONE MORE</span></h2>
-        <p>Conocé a los DJs que ya pasaron por ONE MORE: TBT, Denial, Zambe, Luca Sanchez, Mike Moore, Juanci Correia, Miloop, Sophia Fulcito, Joyce, Festa Bros y GOTH.</p>
+        <p>Conocé a los DJs que ya pasaron por ONE MORE: Dana, Chinno, Gonzalo Cesar, Matias Sundblad, Julian Fuentes, Aldo Haydar, Joyce, Festa Bros, GOTH, Zambe, Miloop y Sophia Fulcito.</p>
       </div>
       <div class="archive-rail" id="archive-carousel" tabindex="0" aria-label="Carrusel de DJs y artistas de fechas anteriores">
+        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-expanded="false" aria-label="DANA. Noche DANA. Sábado 17 de mayo de 2025, 23:59. ONE MORE CLUB, Villa Devoto. Tocar para ver los detalles." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dana.webp');">
+          <div class="archive-card-top"><span>Archivo</span></div>
+          <div class="archive-card-copy"><h3 class="archive-card-name">DANA</h3></div>
+          <div class="archive-card-info">
+            <p class="archive-card-context">Noche <strong>DANA</strong></p>
+            <p class="archive-card-date">SÁB 17 MAY 2025 · 23:59 H</p>
+            <p class="archive-card-place">ONE MORE CLUB · AV. BEIRÓ 3334 · DEVOTO</p>
+          </div>
+          <div class="archive-card-bottom"><span>Ver la noche</span><span>ONE MORE ↗</span></div>
+        </article>
+        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-expanded="false" aria-label="CHINNO. Noche CHINNO. Sábado 12 de julio de 2025, 23:59. ONE MORE CLUB, Villa Devoto. Tocar para ver los detalles." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-chinno.webp');">
+          <div class="archive-card-top"><span>Archivo</span></div>
+          <div class="archive-card-copy"><h3 class="archive-card-name">CHINNO</h3></div>
+          <div class="archive-card-info">
+            <p class="archive-card-context">Noche <strong>CHINNO</strong></p>
+            <p class="archive-card-date">SÁB 12 JUL 2025 · 23:59 H</p>
+            <p class="archive-card-place">ONE MORE CLUB · AV. BEIRÓ 3334 · DEVOTO</p>
+          </div>
+          <div class="archive-card-bottom"><span>Ver la noche</span><span>ONE MORE ↗</span></div>
+        </article>
+        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-expanded="false" aria-label="GONZALO CESAR. Noche GONZALO CESAR. Viernes 29 de agosto de 2025, 23:59. ONE MORE CLUB, Villa Devoto. Tocar para ver los detalles." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-gonzalo-cesar.webp');">
+          <div class="archive-card-top"><span>Archivo</span></div>
+          <div class="archive-card-copy"><h3 class="archive-card-name small">GONZALO<br>CESAR</h3></div>
+          <div class="archive-card-info">
+            <p class="archive-card-context">Noche <strong>GONZALO CESAR</strong></p>
+            <p class="archive-card-date">VIE 29 AGO 2025 · 23:59 H</p>
+            <p class="archive-card-place">ONE MORE CLUB · AV. BEIRÓ 3334 · DEVOTO</p>
+          </div>
+          <div class="archive-card-bottom"><span>Ver la noche</span><span>ONE MORE ↗</span></div>
+        </article>
+        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-expanded="false" aria-label="MATIAS SUNDBLAD. Noche MATIAS SUNDBLAD. Viernes 14 de noviembre de 2025, 23:59. ONE MORE CLUB, Villa Devoto. Tocar para ver los detalles." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-matias-sundblad.webp');">
+          <div class="archive-card-top"><span>Archivo</span></div>
+          <div class="archive-card-copy"><h3 class="archive-card-name small">MATIAS<br>SUNDBLAD</h3></div>
+          <div class="archive-card-info">
+            <p class="archive-card-context">Noche <strong>MATIAS SUNDBLAD</strong></p>
+            <p class="archive-card-date">VIE 14 NOV 2025 · 23:59 H</p>
+            <p class="archive-card-place">ONE MORE CLUB · AV. BEIRÓ 3334 · DEVOTO</p>
+          </div>
+          <div class="archive-card-bottom"><span>Ver la noche</span><span>ONE MORE ↗</span></div>
+        </article>
+        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-expanded="false" aria-label="JULIAN FUENTES. Noche JULIAN FUENTES. Sábado 20 de diciembre de 2025, 23:59. ONE MORE CLUB, Villa Devoto. Tocar para ver los detalles." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-julian-fuentes.webp');">
+          <div class="archive-card-top"><span>Archivo</span></div>
+          <div class="archive-card-copy"><h3 class="archive-card-name small">JULIAN<br>FUENTES</h3></div>
+          <div class="archive-card-info">
+            <p class="archive-card-context">Noche <strong>JULIAN FUENTES</strong></p>
+            <p class="archive-card-date">SÁB 20 DIC 2025 · 23:59 H</p>
+            <p class="archive-card-place">ONE MORE CLUB · AV. BEIRÓ 3334 · DEVOTO</p>
+          </div>
+          <div class="archive-card-bottom"><span>Ver la noche</span><span>ONE MORE ↗</span></div>
+        </article>
+        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-expanded="false" aria-label="ALDO HAYDAR. Noche ALDO HAYDAR. Sábado 18 de octubre de 2025, 23:59. ONE MORE CLUB, Villa Devoto. Tocar para ver los detalles." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-aldo-haydar.webp');">
+          <div class="archive-card-top"><span>Archivo</span></div>
+          <div class="archive-card-copy"><h3 class="archive-card-name small">ALDO<br>HAYDAR</h3></div>
+          <div class="archive-card-info">
+            <p class="archive-card-context">Noche <strong>ALDO HAYDAR</strong></p>
+            <p class="archive-card-date">SÁB 18 OCT 2025 · 23:59 H</p>
+            <p class="archive-card-place">ONE MORE CLUB · AV. BEIRÓ 3334 · DEVOTO</p>
+          </div>
+          <div class="archive-card-bottom"><span>Ver la noche</span><span>ONE MORE ↗</span></div>
+        </article>
         <article class="archive-card" data-archive-card role="button" tabindex="0" aria-expanded="false" aria-label="JOYCE. Noche JOYCE. Viernes 23 de octubre de 2026, 23:59. ONE MORE CLUB, Villa Devoto. Tocar para ver los detalles." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-03.webp');">
           <div class="archive-card-top"><span>Archivo</span><span>DJ set</span></div>
           <div class="archive-card-copy"><h3 class="archive-card-name">JOYCE</h3></div>
@@ -1275,59 +1363,9 @@
             </div>
           <div class="archive-card-bottom"><span>Ver la noche</span><span>ONE MORE ↗</span></div>
         </article>
-        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-expanded="false" aria-label="TBT. Noche GOTH. Sábado 24 de octubre de 2026, 23:59. ONE MORE CLUB, Villa Devoto. Tocar para ver los detalles." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-01.webp');">
-          <div class="archive-card-top"><span>Archivo</span><span>DJ set</span></div>
-          <div class="archive-card-copy"><h3 class="archive-card-name">TBT</h3></div>
-          <div class="archive-card-info">
-              <p class="archive-card-context">Noche <strong>GOTH</strong></p>
-              <p class="archive-card-date">SÁB 24 OCT 2026 · 23:59 H</p>
-              <p class="archive-card-place">ONE MORE CLUB · AV. BEIRÓ 3334 · DEVOTO</p>
-            </div>
-          <div class="archive-card-bottom"><span>Ver la noche</span><span>ONE MORE ↗</span></div>
-        </article>
-        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-expanded="false" aria-label="Denial. Noche GOTH. Sábado 24 de octubre de 2026, 23:59. ONE MORE CLUB, Villa Devoto. Tocar para ver los detalles." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-02.webp');">
-          <div class="archive-card-top"><span>Archivo</span><span>DJ set</span></div>
-          <div class="archive-card-copy"><h3 class="archive-card-name">Denial</h3></div>
-          <div class="archive-card-info">
-              <p class="archive-card-context">Noche <strong>GOTH</strong></p>
-              <p class="archive-card-date">SÁB 24 OCT 2026 · 23:59 H</p>
-              <p class="archive-card-place">ONE MORE CLUB · AV. BEIRÓ 3334 · DEVOTO</p>
-            </div>
-          <div class="archive-card-bottom"><span>Ver la noche</span><span>ONE MORE ↗</span></div>
-        </article>
         <article class="archive-card" data-archive-card role="button" tabindex="0" aria-expanded="false" aria-label="Zambe. Noche GOTH. Sábado 24 de octubre de 2026, 23:59. ONE MORE CLUB, Villa Devoto. Tocar para ver los detalles." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-03.webp');">
           <div class="archive-card-top"><span>Archivo</span><span>DJ set</span></div>
           <div class="archive-card-copy"><h3 class="archive-card-name">Zambe</h3></div>
-          <div class="archive-card-info">
-              <p class="archive-card-context">Noche <strong>GOTH</strong></p>
-              <p class="archive-card-date">SÁB 24 OCT 2026 · 23:59 H</p>
-              <p class="archive-card-place">ONE MORE CLUB · AV. BEIRÓ 3334 · DEVOTO</p>
-            </div>
-          <div class="archive-card-bottom"><span>Ver la noche</span><span>ONE MORE ↗</span></div>
-        </article>
-        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-expanded="false" aria-label="Luca Sanchez. Noche GOTH. Sábado 24 de octubre de 2026, 23:59. ONE MORE CLUB, Villa Devoto. Tocar para ver los detalles." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-04.webp');">
-          <div class="archive-card-top"><span>Archivo</span><span>DJ set</span></div>
-          <div class="archive-card-copy"><h3 class="archive-card-name small">Luca<br>Sanchez</h3></div>
-          <div class="archive-card-info">
-              <p class="archive-card-context">Noche <strong>GOTH</strong></p>
-              <p class="archive-card-date">SÁB 24 OCT 2026 · 23:59 H</p>
-              <p class="archive-card-place">ONE MORE CLUB · AV. BEIRÓ 3334 · DEVOTO</p>
-            </div>
-          <div class="archive-card-bottom"><span>Ver la noche</span><span>ONE MORE ↗</span></div>
-        </article>
-        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-expanded="false" aria-label="Mike Moore. Noche GOTH. Sábado 24 de octubre de 2026, 23:59. ONE MORE CLUB, Villa Devoto. Tocar para ver los detalles." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-05.webp');">
-          <div class="archive-card-top"><span>Archivo</span><span>DJ set</span></div>
-          <div class="archive-card-copy"><h3 class="archive-card-name small">Mike<br>Moore</h3></div>
-          <div class="archive-card-info">
-              <p class="archive-card-context">Noche <strong>GOTH</strong></p>
-              <p class="archive-card-date">SÁB 24 OCT 2026 · 23:59 H</p>
-              <p class="archive-card-place">ONE MORE CLUB · AV. BEIRÓ 3334 · DEVOTO</p>
-            </div>
-          <div class="archive-card-bottom"><span>Ver la noche</span><span>ONE MORE ↗</span></div>
-        </article>
-        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-expanded="false" aria-label="Juanci Correia. Noche GOTH. Sábado 24 de octubre de 2026, 23:59. ONE MORE CLUB, Villa Devoto. Tocar para ver los detalles." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-02.webp');">
-          <div class="archive-card-top"><span>Archivo</span><span>DJ set</span></div>
-          <div class="archive-card-copy"><h3 class="archive-card-name small">Juanci<br>Correia</h3></div>
           <div class="archive-card-info">
               <p class="archive-card-context">Noche <strong>GOTH</strong></p>
               <p class="archive-card-date">SÁB 24 OCT 2026 · 23:59 H</p>
@@ -1355,7 +1393,18 @@
             </div>
           <div class="archive-card-bottom"><span>Ver la noche</span><span>ONE MORE ↗</span></div>
         </article>
+
       </div>
+    </div>
+  </section>
+  <section class="archive-invite" aria-labelledby="archive-invite-title">
+    <div class="archive-invite-copy">
+      <p class="archive-invite-kicker">ONE MORE · PROPUESTAS ARTÍSTICAS</p>
+      <h2 class="archive-invite-title" id="archive-invite-title">¿Querés ser el próximo?</h2>
+    </div>
+    <div class="archive-invite-action-group">
+      <p class="archive-invite-description">Si tenés una propuesta, contanos qué sonido querés traer a la pista de ONE MORE.</p>
+      <a class="archive-invite-link" href="https://www.instagram.com/more_electronic/" target="_blank" rel="noopener noreferrer" aria-label="Enviar una propuesta artística a ONE MORE por Instagram">Enviar propuesta</a>
     </div>
   </section>
   <section id="el-club" class="manifesto" aria-labelledby="club-title">
@@ -1521,6 +1570,7 @@
               <img class="birthday-photo" src="assets/birthday-photo-03.webp" alt="Invitado sonriendo entre amigos durante una fiesta." data-birthday-slide="2" aria-hidden="true" loading="lazy" decoding="async" style="--birthday-photo-position:center 40%;" />
               <img class="birthday-photo" src="assets/birthday-photo-04.webp" alt="Grupo de amigas reunidas bajo luces de fiesta." data-birthday-slide="3" aria-hidden="true" loading="lazy" decoding="async" style="--birthday-photo-position:center 48%;" />
           </div>
+          <p class="birthday-photo-hashtag">#festejaenmore</p>
         </div>
       </section>
       <footer class="gallery-footer"><span>Alquiler del espacio · Av. Beiró 3334</span><span>ONE MORE ELECTRONIC · DEVOTO</span></footer>
@@ -1639,6 +1689,12 @@
       <p class="footer-simple-wordmark" aria-hidden="true"><span>ONE MORE</span></p>
     </div>
   </footer>
+  <aside class="pwa-install-prompt" data-pwa-install-prompt role="region" aria-label="Instalar ONE MORE" aria-live="polite" aria-atomic="true" aria-hidden="true" hidden>
+    <span class="pwa-install-mark" aria-hidden="true"><img src="assets/one-logo.webp" width="25" height="25" alt="" decoding="async" /></span>
+    <div class="pwa-install-copy"><p class="pwa-install-kicker">ONE MORE · APP</p><p class="pwa-install-message" data-pwa-install-message>Instalá ONE MORE en tu pantalla de inicio.</p></div>
+    <button class="pwa-install-action" type="button" data-pwa-install>Instalar</button>
+    <button class="pwa-install-dismiss" type="button" data-pwa-install-dismiss aria-label="Cerrar aviso de instalación">×</button>
+  </aside>
   <div id="ticket-notice" class="ticket-notice" role="status" aria-live="polite" aria-atomic="true"><span>Abriendo entradas</span><b aria-hidden="true">↗</b></div>
   <div class="logout-modal" data-logout-modal hidden>
     <section class="logout-dialog" role="dialog" aria-modal="true" aria-labelledby="logout-title" aria-describedby="logout-description" tabindex="-1">
@@ -3245,17 +3301,55 @@ Minimum version required to store current data is: `+i+`.
       if (event.key === 'Escape' && !qrModal.hidden) { closeEventQr(); return; }
       if (event.key === 'Escape' && document.body.classList.contains('event-open') && menuToggle.getAttribute('aria-expanded') !== 'true') showIntroPanel();
     });
-    // Installable PWA shell. The alert buttons are intentionally passive until Firebase
-    // messaging and a subscriber store are connected; users are never asked for a permission
-    // that the site cannot yet honor.
+    // Show an in-page install invitation when Chromium marks the PWA installable.
+    // iOS Safari has no programmatic install prompt, so it receives the manual Add to Home Screen steps.
     const pwaInstallButtons = [...document.querySelectorAll('[data-pwa-install]')];
+    const pwaInstallPanel = document.querySelector('[data-pwa-install-prompt]');
+    const pwaInstallMessage = document.querySelector('[data-pwa-install-message]');
+    const pwaInstallDismissButton = document.querySelector('[data-pwa-install-dismiss]');
     const pwaDisplayMode = window.matchMedia('(display-mode: standalone)');
     const isPwaInstalled = () => pwaDisplayMode.matches || window.navigator.standalone === true;
-    const isAppleMobile = () => /iphone|ipad|ipod/i.test(navigator.userAgent);
+    const isAppleMobile = () => /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    const isAppleMobileSafari = () => isAppleMobile() && /safari/i.test(navigator.userAgent) && !/(crios|fxios|edgios|opios|duckduckgo|gsa)/i.test(navigator.userAgent);
+    const pwaInstallDismissKey = 'one-more-pwa-install-dismissed-until';
+    const pwaInstallSeenKey = 'one-more-pwa-install-seen-session';
+    const pwaInstallDismissed = () => {
+      try { return Number(localStorage.getItem(pwaInstallDismissKey) || 0) > Date.now(); } catch (_) { return false; }
+    };
+    const rememberPwaInstallDismissal = () => {
+      try { localStorage.setItem(pwaInstallDismissKey, String(Date.now() + 14 * 24 * 60 * 60 * 1000)); } catch (_) {}
+    };
     let deferredInstallPrompt;
+    let pwaInstallHideTimer;
     const setPwaInstallVisibility = (visible = true) => pwaInstallButtons.forEach((button) => { button.hidden = !visible || isPwaInstalled(); });
+    const hidePwaInstallPanel = (remember = false) => {
+      if (!pwaInstallPanel) return;
+      window.clearTimeout(pwaInstallHideTimer);
+      if (remember) rememberPwaInstallDismissal();
+      pwaInstallPanel.classList.remove('is-visible');
+      pwaInstallPanel.setAttribute('aria-hidden', 'true');
+      pwaInstallHideTimer = window.setTimeout(() => {
+        if (!pwaInstallPanel.classList.contains('is-visible')) pwaInstallPanel.hidden = true;
+      }, 260);
+    };
+    const showPwaInstallPanel = (platform = 'chromium') => {
+      if (!pwaInstallPanel || isPwaInstalled() || pwaInstallDismissed()) return;
+      try {
+        if (sessionStorage.getItem(pwaInstallSeenKey)) return;
+        sessionStorage.setItem(pwaInstallSeenKey, '1');
+      } catch (_) {}
+      const apple = platform === 'apple';
+      if (pwaInstallMessage) pwaInstallMessage.textContent = apple
+        ? (isAppleMobileSafari() ? 'En Safari, tocá Compartir y elegí «Agregar a pantalla de inicio».' : 'Abrí ONE MORE en Safari para agregarla a tu pantalla de inicio.')
+        : 'Instalá ONE MORE en tu pantalla de inicio para volver cuando quieras.';
+      pwaInstallButtons.forEach((button) => { button.textContent = apple ? 'Ver pasos' : 'Instalar'; button.hidden = isPwaInstalled(); });
+      window.clearTimeout(pwaInstallHideTimer);
+      pwaInstallPanel.hidden = false;
+      pwaInstallPanel.setAttribute('aria-hidden', 'false');
+      window.requestAnimationFrame(() => pwaInstallPanel.classList.add('is-visible'));
+    };
     const showInstallInstructions = () => {
-      showActionNotice(isAppleMobile() ? 'Compartir → Agregar a inicio' : 'Abrí ⋮ y elegí Instalar app');
+      showActionNotice(isAppleMobileSafari() ? 'Safari: tocá Compartir y elegí Agregar a inicio' : isAppleMobile() ? 'Abrí Safari para agregar ONE MORE al inicio' : 'Abrí el menú del navegador y elegí Instalar app');
     };
     setPwaInstallVisibility();
     if ('serviceWorker' in navigator) {
@@ -3265,25 +3359,40 @@ Minimum version required to store current data is: `+i+`.
       event.preventDefault();
       deferredInstallPrompt = event;
       setPwaInstallVisibility();
+      showPwaInstallPanel('chromium');
     });
     window.addEventListener('appinstalled', () => {
       deferredInstallPrompt = undefined;
       setPwaInstallVisibility(false);
+      hidePwaInstallPanel();
       showActionNotice('ONE MORE instalada');
     });
-    pwaDisplayMode.addEventListener('change', () => setPwaInstallVisibility(!isPwaInstalled()));
-    window.addEventListener('pageshow', () => setPwaInstallVisibility(!isPwaInstalled()));
+    const syncPwaInstallState = () => {
+      if (isPwaInstalled()) { setPwaInstallVisibility(false); hidePwaInstallPanel(); }
+      else setPwaInstallVisibility(true);
+    };
+    if (typeof pwaDisplayMode.addEventListener === 'function') pwaDisplayMode.addEventListener('change', syncPwaInstallState);
+    else if (typeof pwaDisplayMode.addListener === 'function') pwaDisplayMode.addListener(syncPwaInstallState);
+    window.addEventListener('pageshow', syncPwaInstallState);
+    if (isAppleMobile() && !isPwaInstalled()) {
+      const scheduleAppleInstallHint = () => window.setTimeout(() => showPwaInstallPanel('apple'), 2800);
+      if (document.readyState === 'complete') scheduleAppleInstallHint();
+      else window.addEventListener('load', scheduleAppleInstallHint, { once:true });
+    }
+    pwaInstallDismissButton?.addEventListener('click', () => hidePwaInstallPanel(true));
     pwaInstallButtons.forEach((button) => button.addEventListener('click', async () => {
-      if (isPwaInstalled()) { setPwaInstallVisibility(false); return; }
+      if (isPwaInstalled()) { setPwaInstallVisibility(false); hidePwaInstallPanel(); return; }
       if (!deferredInstallPrompt) { showInstallInstructions(); return; }
+      const installPrompt = deferredInstallPrompt;
+      deferredInstallPrompt = undefined;
       try {
-        deferredInstallPrompt.prompt();
-        const choice = await deferredInstallPrompt.userChoice;
-        if (choice && choice.outcome === 'dismissed') showActionNotice('Instalación cancelada');
+        installPrompt.prompt();
+        const choice = await installPrompt.userChoice;
+        if (choice && choice.outcome === 'accepted') hidePwaInstallPanel();
+        else if (choice && choice.outcome === 'dismissed') hidePwaInstallPanel(true);
       } catch (_) {
         showInstallInstructions();
       }
-      deferredInstallPrompt = undefined;
       setPwaInstallVisibility(!isPwaInstalled());
     }));
 
@@ -3326,6 +3435,7 @@ Minimum version required to store current data is: `+i+`.
     const initialiseEditorialMotion = () => {
       const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
       const motionPlan = [
+        ['.archive-invite', 'motion-reveal--lift', 0],
         ['#el-club .manifesto-title', 'motion-reveal--left', 0],
         ['#el-club .manifesto-copy', 'motion-reveal--right', 70],
         ['#el-club .founders-head', 'motion-reveal--lift', 0],
