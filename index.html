@@ -2292,6 +2292,11 @@ Minimum version required to store current data is: `+i+`.
         if (currentEventSharePosterSlug === event.slug) currentEventSharePosterFile = null;
       }
     };
+    const getPlainEventTitle = (event) => event.titleHtml
+      .replace(/<\/span>\s*<span[^>]*>/gi, ' ')
+      .replace(/<[^>]+>/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
     const getCurrentEventShareDetails = () => {
       const event = upcomingEvents[activeEventIndex];
       const url = new URL(window.location.href);
@@ -2301,24 +2306,44 @@ Minimum version required to store current data is: `+i+`.
       return {
         event,
         url:url.toString(),
-        title:`ONE MORE ELECTRONIC — ${event.titleHtml.replace(/<[^>]+>/g, '')}`,
-        text:`${event.footer} · ${event.place}`
+        title:`ONE MORE ELECTRONIC — ${getPlainEventTitle(event)}`
       };
+    };
+    const buildEventShareMessage = (event, url, { includePosterLink = false, includeEventUrl = false } = {}) => {
+      const lines = [
+        'ONE MORE ELECTRONIC',
+        '━━━━━━━━━━━━━━━━━━━━',
+        getPlainEventTitle(event).toUpperCase(),
+        `${event.date} · ${event.time}`,
+        event.place
+      ];
+      if (event.lineup) lines.push('', 'LINE-UP', event.lineup);
+      if (includePosterLink && event.image) lines.push('', 'PORTADA', new URL(event.image, window.location.href).toString());
+      if (event.ticketUrl) lines.push('', 'ENTRADAS', event.ticketUrl);
+      if (includeEventUrl) lines.push('', 'DETALLES DE LA FECHA', url);
+      return lines.join('\n');
+    };
+    const isMobileShareDevice = () => Boolean(navigator.userAgentData?.mobile)
+      || /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)
+      || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    const openWhatsAppEventDraft = (message) => {
+      const url = `https://wa.me/?text=${encodeURIComponent(message)}`;
+      const whatsappWindow = window.open(url, '_blank');
+      if (whatsappWindow) whatsappWindow.opener = null;
+      else window.location.assign(url);
     };
     const shareCurrentEvent = async (event) => {
       event?.preventDefault();
       event?.stopPropagation();
-      const { event:currentEvent, url, title, text } = getCurrentEventShareDetails();
+      const { event:currentEvent, url, title } = getCurrentEventShareDetails();
+      const message = buildEventShareMessage(currentEvent, url);
       const posterFile = currentEventSharePosterSlug === currentEvent.slug ? currentEventSharePosterFile : null;
       let canSharePoster = false;
       try {
         canSharePoster = Boolean(posterFile && navigator.canShare && navigator.canShare({ files:[posterFile] }));
       } catch (_) {}
-      const useNativeShare = Boolean(navigator.share) && (canSharePoster || window.matchMedia('(pointer:coarse)').matches || navigator.maxTouchPoints > 0);
-      if (useNativeShare) {
-        const shareData = canSharePoster
-          ? { title, text:`${text}\n${url}`, files:[posterFile] }
-          : { title, text, url };
+      if (isMobileShareDevice() && navigator.share) {
+        const shareData = canSharePoster ? { title, text:message, url, files:[posterFile] } : { title, text:message, url };
         try {
           await navigator.share(shareData);
           showActionNotice(canSharePoster ? 'Fecha y portada compartidas' : 'Fecha compartida');
@@ -2327,12 +2352,9 @@ Minimum version required to store current data is: `+i+`.
           if (error && error.name === 'AbortError') return;
         }
       }
-      try {
-        await copyShareLink(url);
-        showActionNotice('Link copiado');
-      } catch (_) {
-        showActionNotice('No se pudo copiar el link');
-      }
+      const desktopMessage = buildEventShareMessage(currentEvent, url, { includePosterLink:true, includeEventUrl:true });
+      openWhatsAppEventDraft(desktopMessage);
+      showActionNotice('WhatsApp abierto con la fecha lista');
     };
     let activeQrSvg = '';
     let activeQrUrl = '';
