@@ -4,7 +4,7 @@
   "redirects": [
     { "source": "/q/joyce", "destination": "/?evento=joyce-23-oct&utm_source=qr&utm_medium=print&utm_campaign=joyce", "permanent": false },
     { "source": "/q/goth", "destination": "/?evento=goth-24-oct&utm_source=qr&utm_medium=print&utm_campaign=goth", "permanent": false },
-    { "source": "/q/halloween", "destination": "/?evento=halloween-31-oct&utm_source=qr&utm_medium=print&utm_campaign=halloween", "permanent": false }
+    { "source": "/q/halloween", "destination": "/?evento=festa-bros-31-oct&utm_source=qr&utm_medium=print&utm_campaign=halloween", "permanent": false }
   ],
   "headers": [
     {

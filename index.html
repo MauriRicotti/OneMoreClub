@@ -126,17 +126,23 @@
        not from an arbitrary grid fraction. This keeps every event poster edge-to-edge. */
     .next-experience { touch-action:pan-y; }.event-stage { --poster-ratio:606 / 750; flex:1; min-height:0; display:flex; touch-action:pan-y; user-select:none; -webkit-user-select:none; transition:opacity 180ms ease,transform 210ms cubic-bezier(.22,.8,.22,1); will-change:opacity,transform; }.event-stage img { -webkit-user-drag:none; }
     .event-stage.is-switching-next { opacity:0; transform:translate3d(-22px,0,0); }.event-stage.is-switching-prev { opacity:0; transform:translate3d(22px,0,0); }.event-stage.is-preparing-next { opacity:0; transform:translate3d(22px,0,0); transition:none; }.event-stage.is-preparing-prev { opacity:0; transform:translate3d(-22px,0,0); transition:none; }
-    .event-poster { position:relative; flex:0 0 auto; width:auto; height:100%; min-height:0; aspect-ratio:var(--poster-ratio); margin:0; display:flex; align-items:center; justify-content:center; overflow:hidden; border-right:1px solid rgba(8,8,8,.6); }
-    .event-poster img { display:block; width:100%; height:100%; object-fit:contain; }.event-poster-image-next { position:absolute; z-index:1; inset:0; opacity:0; pointer-events:none; transition:opacity 260ms ease; }.event-poster.is-poster-crossfading .event-poster-image-next { opacity:1; }.event-poster.is-finished img { filter:grayscale(1) contrast(.82) brightness(.9); }.event-status-badge { position:absolute; z-index:2; top:18px; left:18px; display:none; padding:10px 12px 9px; border:1px solid var(--paper); background:#080808; color:var(--paper); font-size:10px; font-weight:900; letter-spacing:.14em; line-height:1; text-transform:uppercase; box-shadow:4px 4px 0 rgba(242,240,235,.72); }.event-poster.is-finished .event-status-badge { display:block; }
+    .event-poster { --poster-pagination-height:0px; position:relative; flex:0 0 auto; width:auto; height:100%; min-height:0; aspect-ratio:var(--poster-ratio); margin:0; display:flex; align-items:center; justify-content:center; overflow:hidden; touch-action:pan-y; background:#080808; border-right:1px solid rgba(8,8,8,.6); }
+    /* The pagination owns its own strip below the artwork; the flyer is never covered. */
+    .event-poster.has-poster-slides { --poster-pagination-height:34px; padding-bottom:var(--poster-pagination-height); }
+    .event-poster img { display:block; width:100%; height:100%; object-fit:contain; transform:translate3d(var(--poster-drag-x,0px),0,0); transition:transform 240ms cubic-bezier(.22,.8,.22,1); }.event-poster .event-poster-image-next { position:absolute; z-index:1; inset:0; bottom:var(--poster-pagination-height); opacity:0; pointer-events:none; transition:opacity 260ms ease,transform 240ms cubic-bezier(.22,.8,.22,1); }.event-poster img.event-poster-image-next { height:calc(100% - var(--poster-pagination-height)); }.event-poster.is-poster-swiping img { transition:none; }.event-poster.is-poster-crossfading .event-poster-image-next { opacity:1; }.event-poster.is-finished img { filter:grayscale(1) contrast(.82) brightness(.9); }.event-status-badge { position:absolute; z-index:2; top:18px; left:18px; display:none; padding:10px 12px 9px; border:1px solid var(--paper); background:#080808; color:var(--paper); font-size:10px; font-weight:900; letter-spacing:.14em; line-height:1; text-transform:uppercase; box-shadow:4px 4px 0 rgba(242,240,235,.72); }.event-poster.is-finished .event-status-badge { display:block; }
 
-    .event-poster-pagination { position:absolute; z-index:3; bottom:17px; left:50%; display:flex; align-items:center; gap:2px; transform:translateX(-50%); }
+    /* Flyer pagination (option B): counter + arrows in a strip below the artwork. */
+    .event-poster-pagination { position:absolute; z-index:3; right:0; bottom:0; left:0; display:flex; align-items:center; justify-content:center; gap:18px; height:var(--poster-pagination-height); padding:0 11px; border-top:1px solid rgba(242,240,235,.32); background:#080808; }
     .event-poster-pagination[hidden] { display:none; }
-    .event-poster-dot { appearance:none; display:grid; place-items:center; width:18px; height:18px; padding:0; border:0; background:transparent; cursor:pointer; }
-    .event-poster-dot::before { content:''; display:block; width:6px; height:6px; border:1px solid rgba(242,240,235,.9); border-radius:50%; background:rgba(8,8,8,.26); box-shadow:0 1px 4px rgba(0,0,0,.68); transition:transform 180ms ease,background-color 180ms ease; }
-    .event-poster-dot[aria-current="true"]::before { transform:scale(1.25); border-color:var(--paper); background:var(--paper); }
-    .event-poster-dot:focus-visible { outline:1px solid var(--paper); outline-offset:-2px; border-radius:50%; }
-    @media (max-width:760px) { .event-poster-pagination { bottom:12px; gap:0; } .event-poster-dot { width:16px; height:16px; } }
-    @media (prefers-reduced-motion:reduce) { .event-poster-dot::before, .event-poster-image-next { transition:none; } }
+    .event-poster-arrow { appearance:none; display:grid; place-items:center; width:44px; height:100%; padding:0; border:0; background:transparent; color:rgba(242,240,235,.72); font-family:inherit; font-size:17px; font-weight:400; line-height:1; cursor:pointer; transition:color 160ms ease,background-color 160ms ease; }
+    .event-poster-arrow:hover { color:var(--paper); background:rgba(242,240,235,.12); }
+    .event-poster-arrow:active { background:rgba(242,240,235,.2); }
+    .event-poster-arrow:focus-visible { outline:1px solid var(--paper); outline-offset:-3px; color:var(--paper); }
+    .event-poster-counter { margin:0; min-width:52px; color:var(--paper); font-size:9px; font-weight:700; letter-spacing:.14em; line-height:1; text-align:center; white-space:nowrap; font-variant-numeric:tabular-nums; }
+    .event-poster-counter i { margin:0 5px; color:rgba(242,240,235,.48); font-style:normal; }
+    .event-poster-counter span { color:rgba(242,240,235,.66); }
+    @media (max-width:760px) { .event-poster.has-poster-slides { --poster-pagination-height:30px; } .event-poster-pagination { gap:14px; padding:0 9px; } .event-poster-arrow { width:44px; font-size:16px; } .event-poster-counter { font-size:8px; } }
+    @media (prefers-reduced-motion:reduce) { .event-poster-arrow { transition:none; } .event-poster-image-next, .event-poster img { transition:none; } }
     .event-content { flex:1 1 0; min-width:0; display:grid; grid-template-columns:minmax(0,1.18fr) minmax(260px,.82fr); }
     .event-title { display:grid; grid-template-rows:auto 1fr auto; min-height:570px; padding:clamp(30px,5vw,74px) clamp(22px,4.4vw,70px) 26px; border-right:1px solid rgba(8,8,8,.6); }
     .event-title h2 { align-self:center; justify-self:center; width:100%; text-align:center; }
@@ -178,7 +184,7 @@
     @media (max-width:760px) { .pwa-install-prompt { right:12px; bottom:calc(145px + env(safe-area-inset-bottom,0px)); left:12px; grid-template-columns:34px minmax(0,1fr) auto 30px; gap:9px; width:auto; padding:12px; }.pwa-install-mark { width:32px; height:32px; }.pwa-install-mark img { width:22px; height:22px; }.pwa-install-message { font-size:9px; }.pwa-install-action { min-height:36px; padding:0 9px; font-size:7px; } }
     .ticket-notice { position:fixed; z-index:150; bottom:22px; left:22px; display:flex; align-items:center; gap:11px; padding:11px 13px; border:1px solid var(--ink); background:var(--paper); color:var(--ink); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1; text-transform:uppercase; opacity:0; pointer-events:none; transform:translate3d(0,10px,0); transition:opacity 170ms ease,transform 170ms ease; }
     .ticket-notice.is-visible { opacity:1; transform:translate3d(0,0,0); }.ticket-notice b { font-size:14px; font-weight:400; }
-    .qr-modal[hidden] { display:none; }.qr-modal { position:fixed; z-index:170; inset:0; display:grid; place-items:center; padding:18px; background:rgba(8,8,8,.82); opacity:0; visibility:hidden; transition:opacity 180ms ease,visibility 0s linear 180ms; }.qr-modal.is-open { opacity:1; visibility:visible; transition-delay:0s; }.qr-dialog { position:relative; width:min(100%,420px); border:1px solid var(--ink); background:var(--paper); color:var(--ink); box-shadow:8px 8px 0 #080808; opacity:0; transform:translate3d(0,12px,0); transition:opacity 180ms ease,transform 220ms cubic-bezier(.22,.8,.22,1); }.qr-modal.is-open .qr-dialog { opacity:1; transform:translate3d(0,0,0); }.qr-dialog-head { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; padding:17px 18px 15px; border-bottom:1px solid rgba(8,8,8,.7); }.qr-dialog-kicker { margin:0 0 7px; color:rgba(8,8,8,.6); font-size:8px; font-weight:700; letter-spacing:.15em; line-height:1; text-transform:uppercase; }.qr-dialog-title { margin:0; font-size:clamp(31px,7vw,47px); font-weight:900; letter-spacing:-.1em; line-height:.74; text-transform:uppercase; }.qr-close { display:grid; place-items:center; width:32px; height:32px; padding:0; border:1px solid var(--ink); background:transparent; color:var(--ink); font:inherit; font-size:20px; line-height:1; cursor:pointer; }.qr-close:hover, .qr-close:focus-visible { background:var(--ink); color:var(--paper); }.qr-close:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }.qr-dialog-main { display:flex; flex-direction:column; align-items:center; padding:23px 18px 20px; }.qr-code { display:grid; place-items:center; width:min(100%,264px); min-height:264px; padding:10px; border:1px solid var(--ink); background:var(--paper); }.qr-code svg { display:block; width:100%; height:auto; }.qr-code-status { margin:0; color:rgba(8,8,8,.62); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1.35; text-align:center; text-transform:uppercase; }.qr-description { max-width:275px; margin:17px 0 0; font-size:11px; font-weight:700; letter-spacing:.02em; line-height:1.35; text-align:center; text-transform:uppercase; }.qr-dialog-actions { display:grid; grid-template-columns:1fr 1fr; width:100%; gap:7px; margin-top:20px; }.qr-dialog-actions button { display:flex; align-items:center; justify-content:space-between; min-height:42px; padding:0 12px; border:1px solid var(--ink); background:transparent; color:var(--ink); font:inherit; font-size:8px; font-weight:700; letter-spacing:.11em; line-height:1; text-align:left; text-transform:uppercase; cursor:pointer; }.qr-dialog-actions button:hover:not(:disabled), .qr-dialog-actions button:focus-visible { background:var(--ink); color:var(--paper); }.qr-dialog-actions button:disabled { cursor:wait; opacity:.45; }.qr-dialog-actions button:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }body.qr-open { overflow:hidden; }
+    .qr-modal[hidden] { display:none; }.qr-modal { position:fixed; z-index:170; inset:0; display:grid; place-items:center; padding:18px; background:rgba(8,8,8,.82); opacity:0; visibility:hidden; transition:opacity 180ms ease,visibility 0s linear 180ms; }.qr-modal.is-open { opacity:1; visibility:visible; transition-delay:0s; }.qr-dialog { position:relative; width:min(100%,420px); border:1px solid var(--ink); background:var(--paper); color:var(--ink); box-shadow:8px 8px 0 #080808; opacity:0; transform:translate3d(0,12px,0); transition:opacity 180ms ease,transform 220ms cubic-bezier(.22,.8,.22,1); }.qr-modal.is-open .qr-dialog { opacity:1; transform:translate3d(0,0,0); }.qr-dialog-head { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; padding:17px 18px 15px; border-bottom:1px solid rgba(8,8,8,.7); }.qr-dialog-kicker { margin:0 0 7px; color:rgba(8,8,8,.6); font-size:8px; font-weight:700; letter-spacing:.15em; line-height:1; text-transform:uppercase; }.qr-dialog-head > div { flex:1 1 auto; min-width:0; }.qr-dialog-title { margin:0; min-width:0; font-size:clamp(31px,7vw,47px); font-weight:900; letter-spacing:-.1em; word-spacing:.14em; line-height:.85; text-transform:uppercase; overflow-wrap:break-word; }.qr-dialog-title.is-long-title { font-size:clamp(26px,6.2vw,40px); }.qr-close { display:grid; place-items:center; width:32px; height:32px; padding:0; border:1px solid var(--ink); background:transparent; color:var(--ink); font:inherit; font-size:20px; line-height:1; cursor:pointer; }.qr-close:hover, .qr-close:focus-visible { background:var(--ink); color:var(--paper); }.qr-close:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }.qr-dialog-main { display:flex; flex-direction:column; align-items:center; padding:23px 18px 20px; }.qr-code { display:grid; place-items:center; width:min(100%,264px); min-height:264px; padding:10px; border:1px solid var(--ink); background:var(--paper); }.qr-code svg { display:block; width:100%; height:auto; }.qr-code-status { margin:0; color:rgba(8,8,8,.62); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1.35; text-align:center; text-transform:uppercase; }.qr-description { max-width:275px; margin:17px 0 0; font-size:11px; font-weight:700; letter-spacing:.02em; line-height:1.35; text-align:center; text-transform:uppercase; }.qr-dialog-actions { display:grid; grid-template-columns:1fr 1fr; width:100%; gap:7px; margin-top:20px; }.qr-dialog-actions button { display:flex; align-items:center; justify-content:space-between; min-height:42px; padding:0 12px; border:1px solid var(--ink); background:transparent; color:var(--ink); font:inherit; font-size:8px; font-weight:700; letter-spacing:.11em; line-height:1; text-align:left; text-transform:uppercase; cursor:pointer; }.qr-dialog-actions button:hover:not(:disabled), .qr-dialog-actions button:focus-visible { background:var(--ink); color:var(--paper); }.qr-dialog-actions button:disabled { cursor:wait; opacity:.45; }.qr-dialog-actions button:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }body.qr-open { overflow:hidden; }
     .event-bottom { display:flex; justify-content:space-between; gap:16px; padding:16px 22px; border-top:1px solid rgba(8,8,8,.6); color:rgba(8,8,8,.72); font-size:9px; font-weight:700; letter-spacing:.13em; line-height:1.2; text-transform:uppercase; }
     .archive { overflow:hidden; padding:15px; background:#080808; color:var(--paper); }
     .archive-frame { border:1px solid rgba(242,240,235,.48); }
@@ -1199,7 +1205,11 @@
         <figure class="event-poster">
           <img src="assets/festa-bros-31-octubre.webp" width="598" height="748" decoding="async" alt="Flyer de Festa Bros: sábado 31 de octubre, ONE MORE CLUB, Av. Beiro 3334, Devoto." />
           <img class="event-poster-image-next" data-event-poster-next width="598" height="748" decoding="async" alt="" aria-hidden="true" />
-          <div class="event-poster-pagination" data-poster-pagination hidden role="group" aria-label="Seleccionar imagen del flyer"></div>
+          <div class="event-poster-pagination" data-poster-pagination hidden role="group" aria-label="Cambiar imagen del flyer">
+            <button class="event-poster-arrow" type="button" data-poster-prev aria-label="Imagen anterior del flyer">‹</button>
+            <p class="event-poster-counter"><b data-poster-current>01</b><i>/</i><span data-poster-total>07</span></p>
+            <button class="event-poster-arrow" type="button" data-poster-next aria-label="Imagen siguiente del flyer">›</button>
+          </div>
           <span class="event-status-badge" data-event-status>Fecha finalizada</span>
         </figure>
         <div class="event-content">
@@ -1220,7 +1230,7 @@
                 <div class="detail"><dt>Lugar</dt><dd data-event-place>Av. Beiro 3334 · Devoto</dd></div>
                 <div class="detail"><dt>Line-up</dt><dd data-event-detail-lineup>Festa Bros · Gonzalo Salinas · Oddone b2b Ariel Ladereche · Dana</dd></div>
               </dl>
-              <div class="event-countdown" data-event-countdown aria-label="Cuenta regresiva para Joyce">
+              <div class="event-countdown" data-event-countdown aria-label="Cuenta regresiva">
                 <div class="event-countdown-head"><span data-event-countdown-label>Faltan</span></div>
                 <div class="event-countdown-clock" aria-hidden="true"><span><b data-event-countdown-days>00</b><small>Días</small></span><span><b data-event-countdown-hours>00</b><small>Horas</small></span><span><b data-event-countdown-minutes>00</b><small>Min</small></span></div>
               </div>
@@ -1750,6 +1760,13 @@ Minimum version required to store current data is: `+i+`.
 </script>
   <script src="events.js"></script>
   <script>
+    // titleHtml stores one <span> per word. Plain-text contexts (QR dialog,
+    // share sheet, JPG export, aria-labels) need a real space between the words.
+    const getEventTitleText = (event) => String(event?.titleHtml || '')
+      .replace(/<[^>]*>/g, ' ')
+      .replace(/&nbsp;/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
     const archiveRail = document.getElementById('archive-carousel');
     const archiveCards = [...archiveRail.querySelectorAll('.archive-card')];
     const archivePrevButton = document.querySelector('.archive-prev');
@@ -2027,6 +2044,10 @@ Minimum version required to store current data is: `+i+`.
     const eventPoster = eventPosterImage.closest('.event-poster');
     const eventPosterNextImage = document.querySelector('[data-event-poster-next]');
     const eventPosterPagination = document.querySelector('[data-poster-pagination]');
+    const eventPosterPrevButton = eventPosterPagination.querySelector('[data-poster-prev]');
+    const eventPosterNextButton = eventPosterPagination.querySelector('[data-poster-next]');
+    const eventPosterCurrent = eventPosterPagination.querySelector('[data-poster-current]');
+    const eventPosterTotal = eventPosterPagination.querySelector('[data-poster-total]');
     const eventStatusBadge = document.querySelector('[data-event-status]');
     const eventTitleWrap = document.querySelector('[data-event-title-wrap]');
     const eventTitle = document.querySelector('[data-event-title]');
@@ -2056,25 +2077,6 @@ Minimum version required to store current data is: `+i+`.
       ticketNoticeText.textContent = message;
       ticketNotice.classList.add('is-visible');
       ticketNoticeTimer = window.setTimeout(() => ticketNotice.classList.remove('is-visible'), 2600);
-    };
-    const RESERVATION_WHATSAPP_NUMBER = '5491141948773';
-    const buildReservationWhatsAppUrl = ({ date, time = '', place = '', tables, name, contact }) => {
-      const lines = [
-        'Hola, quiero consultar disponibilidad para reservar una mesa en ONE MORE CLUB.',
-        `Fecha: ${date}${time ? ` · ${time}` : ''}`,
-        place ? `Lugar: ${place}` : '',
-        `Mesa${tables.length === 1 ? '' : 's'} seleccionada${tables.length === 1 ? '' : 's'}: ${tables.join(', ')}`,
-        `Nombre: ${name}`,
-        `WhatsApp de contacto: ${contact}`,
-        '¿Me confirman si está disponible? Entiendo que la consulta queda pendiente hasta su respuesta.'
-      ].filter(Boolean);
-      return `https://wa.me/${RESERVATION_WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join('\n'))}`;
-    };
-    const openReservationWhatsApp = (details) => {
-      const url = buildReservationWhatsAppUrl(details);
-      const whatsappWindow = window.open(url, '_blank');
-      if (whatsappWindow) whatsappWindow.opener = null;
-      else window.location.assign(url);
     };
     const reservationForm = document.querySelector('[data-reservation-form]');
     const reservationDate = document.querySelector('[data-reservation-date]');
@@ -2124,12 +2126,10 @@ Minimum version required to store current data is: `+i+`.
       if (!selectedDemoTables.size) { reservationResult.textContent = 'Primero seleccioná una o más mesas disponibles en el plano.'; return; }
       const formData = new FormData(reservationForm);
       const name = String(formData.get('name') || '').trim();
-      const contact = String(formData.get('contact') || '').trim();
-      const date = reservationDate?.options[reservationDate.selectedIndex]?.text || '';
-      if (!name || !contact || !date) { reservationResult.textContent = 'Completá tu nombre, WhatsApp y la fecha para consultar disponibilidad.'; return; }
-      openReservationWhatsApp({ date, tables:getSelectedDemoTables(), name, contact });
-      reservationResult.textContent = 'Se abrió WhatsApp con la consulta preparada. Tocá Enviar para preguntar; la reserva queda sujeta a confirmación del club.';
-      showActionNotice('Consulta preparada para WhatsApp');
+      const date = reservationDate.options[reservationDate.selectedIndex].text;
+      const total = selectedDemoTables.size;
+      reservationResult.textContent = `${name || 'Solicitud'} · ${selectedTablesLabel().toLowerCase()} · ${date}.`;
+      showActionNotice(`${total} ${total === 1 ? 'mesa seleccionada' : 'mesas seleccionadas'}`);
     });
     syncDemoReservation();
     // Tiny synthesized UI sounds: no media files or autoplay. They become audible only
@@ -2274,29 +2274,6 @@ Minimum version required to store current data is: `+i+`.
       field.remove();
       if (!copied) throw new Error('copy failed');
     };
-    let currentEventSharePosterFile = null;
-    let currentEventSharePosterSlug = '';
-    const prepareEventSharePoster = async (event) => {
-      currentEventSharePosterFile = null;
-      currentEventSharePosterSlug = event.slug;
-      try {
-        const response = await fetch(new URL(event.image, window.location.href), { cache:'force-cache' });
-        if (!response.ok) throw new Error('Event cover unavailable');
-        const blob = await response.blob();
-        const mimeType = blob.type || (event.image.toLowerCase().endsWith('.png') ? 'image/png' : 'image/webp');
-        if (!blob.size || !mimeType.startsWith('image/')) throw new Error('Event cover is not an image');
-        const extension = mimeType === 'image/jpeg' ? 'jpg' : (mimeType.split('/')[1] || 'webp');
-        const posterFile = new File([blob], `one-more-${event.slug}-cover.${extension}`, { type:mimeType });
-        if (currentEventSharePosterSlug === event.slug) currentEventSharePosterFile = posterFile;
-      } catch (_) {
-        if (currentEventSharePosterSlug === event.slug) currentEventSharePosterFile = null;
-      }
-    };
-    const getPlainEventTitle = (event) => event.titleHtml
-      .replace(/<\/span>\s*<span[^>]*>/gi, ' ')
-      .replace(/<[^>]+>/g, ' ')
-      .replace(/\s+/g, ' ')
-      .trim();
     const getCurrentEventShareDetails = () => {
       const event = upcomingEvents[activeEventIndex];
       const url = new URL(window.location.href);
@@ -2306,55 +2283,30 @@ Minimum version required to store current data is: `+i+`.
       return {
         event,
         url:url.toString(),
-        title:`ONE MORE ELECTRONIC — ${getPlainEventTitle(event)}`
+        title:`ONE MORE ELECTRONIC — ${getEventTitleText(event)}`,
+        text:`${event.footer} · ${event.place}`
       };
-    };
-    const buildEventShareMessage = (event, url, { includePosterLink = false, includeEventUrl = false } = {}) => {
-      const lines = [
-        'ONE MORE ELECTRONIC',
-        '━━━━━━━━━━━━━━━━━━━━',
-        getPlainEventTitle(event).toUpperCase(),
-        `${event.date} · ${event.time}`,
-        event.place
-      ];
-      if (event.lineup) lines.push('', 'LINE-UP', event.lineup);
-      if (includePosterLink && event.image) lines.push('', 'PORTADA', new URL(event.image, window.location.href).toString());
-      if (event.ticketUrl) lines.push('', 'ENTRADAS', event.ticketUrl);
-      if (includeEventUrl) lines.push('', 'DETALLES DE LA FECHA', url);
-      return lines.join('\n');
-    };
-    const isMobileShareDevice = () => Boolean(navigator.userAgentData?.mobile)
-      || /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)
-      || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-    const openWhatsAppEventDraft = (message) => {
-      const url = `https://wa.me/?text=${encodeURIComponent(message)}`;
-      const whatsappWindow = window.open(url, '_blank');
-      if (whatsappWindow) whatsappWindow.opener = null;
-      else window.location.assign(url);
     };
     const shareCurrentEvent = async (event) => {
       event?.preventDefault();
       event?.stopPropagation();
-      const { event:currentEvent, url, title } = getCurrentEventShareDetails();
-      const message = buildEventShareMessage(currentEvent, url);
-      const posterFile = currentEventSharePosterSlug === currentEvent.slug ? currentEventSharePosterFile : null;
-      let canSharePoster = false;
-      try {
-        canSharePoster = Boolean(posterFile && navigator.canShare && navigator.canShare({ files:[posterFile] }));
-      } catch (_) {}
-      if (isMobileShareDevice() && navigator.share) {
-        const shareData = canSharePoster ? { title, text:message, url, files:[posterFile] } : { title, text:message, url };
+      const { url, title, text } = getCurrentEventShareDetails();
+      const useNativeShare = Boolean(navigator.share) && (window.matchMedia('(pointer:coarse)').matches || navigator.maxTouchPoints > 0);
+      if (useNativeShare) {
         try {
-          await navigator.share(shareData);
-          showActionNotice(canSharePoster ? 'Fecha y portada compartidas' : 'Fecha compartida');
+          await navigator.share({ title, text, url });
+          showActionNotice('Fecha compartida');
           return;
         } catch (error) {
           if (error && error.name === 'AbortError') return;
         }
       }
-      const desktopMessage = buildEventShareMessage(currentEvent, url, { includePosterLink:true, includeEventUrl:true });
-      openWhatsAppEventDraft(desktopMessage);
-      showActionNotice('WhatsApp abierto con la fecha lista');
+      try {
+        await copyShareLink(url);
+        showActionNotice('Link copiado');
+      } catch (_) {
+        showActionNotice('No se pudo copiar el link');
+      }
     };
     let activeQrSvg = '';
     let activeQrUrl = '';
@@ -2377,7 +2329,8 @@ Minimum version required to store current data is: `+i+`.
       qrModal.hidden = false;
       requestAnimationFrame(() => qrModal.classList.add('is-open'));
       document.body.classList.add('qr-open');
-      qrTitle.textContent = event.titleHtml.replace(/<[^>]+>/g, '');
+      qrTitle.textContent = getEventTitleText(event);
+      qrTitle.classList.toggle('is-long-title', Boolean(event.longTitle));
       qrCode.innerHTML = '<p class="qr-code-status">Generando QR</p>';
       qrDownloadButton.disabled = true;
       activeQrSvg = '';
@@ -2420,9 +2373,15 @@ Minimum version required to store current data is: `+i+`.
         context.fillStyle = '#080808';
         context.font = '700 24px Arial, Helvetica, sans-serif';
         context.fillText('ONE MORE ELECTRONIC', 84, 105);
-        const title = event.titleHtml.replace(/<[^>]+>/g, '').toUpperCase();
-        const titleSize = title.length > 8 ? 116 : 150;
+        const title = getEventTitleText(event).toUpperCase();
+        let titleSize = title.length > 8 ? 116 : 150;
         context.font = `900 ${titleSize}px Arial, Helvetica, sans-serif`;
+        const maxTitleWidth = canvas.width - 168;
+        const measuredTitleWidth = context.measureText(title).width;
+        if (measuredTitleWidth > maxTitleWidth) {
+          titleSize = Math.max(48, Math.floor(titleSize * maxTitleWidth / measuredTitleWidth));
+          context.font = `900 ${titleSize}px Arial, Helvetica, sans-serif`;
+        }
         context.fillText(title, 84, 252);
         context.fillRect(84, 294, 1032, 3);
         const qrSize = 820;
@@ -2775,14 +2734,8 @@ Minimum version required to store current data is: `+i+`.
       }
       const formData = new FormData(eventReservationForm);
       const name = String(formData.get('name') || '').trim();
-      const contact = String(formData.get('contact') || '').trim();
-      if (!name || !contact) {
-        eventReservationResult.textContent = 'Completá tu nombre y WhatsApp para consultar disponibilidad.';
-        return;
-      }
-      openReservationWhatsApp({ date:currentEvent.footer, time:currentEvent.time, place:currentEvent.place, tables, name, contact });
-      eventReservationResult.textContent = 'Se abrió WhatsApp con la consulta preparada. Tocá Enviar para preguntar; la reserva queda sujeta a confirmación del club.';
-      showActionNotice('Consulta preparada para WhatsApp');
+      eventReservationResult.textContent = `${name || 'Solicitud'} · ${selectedTablesLabel().toLowerCase()} · ${currentEvent.footer}.`;
+      showActionNotice(`${tables.length} ${tables.length === 1 ? 'mesa seleccionada' : 'mesas seleccionadas'}`);
     });
     document.addEventListener('keydown', (event) => {
       if (event.key !== 'Escape' || eventReservationPanel.hidden || !eventTablePlanPreview.hidden) return;
@@ -2860,42 +2813,27 @@ Minimum version required to store current data is: `+i+`.
     let activePosterSlideIndex = 0;
     let posterSlideRequestToken = 0;
     let posterAutoplayTimer = null;
-    const POSTER_AUTOPLAY_DELAY = 4000;
+    const POSTER_AUTOPLAY_DELAY = 2700;
     const stopPosterAutoplay = () => {
       if (posterAutoplayTimer !== null) window.clearTimeout(posterAutoplayTimer);
       posterAutoplayTimer = null;
     };
     const getEventPosterImages = (event) => Array.isArray(event.posterImages) && event.posterImages.length ? event.posterImages : [event.image];
     const syncEventPosterPagination = (posterImages) => {
-      const dots = [...eventPosterPagination.querySelectorAll('[data-poster-slide-dot]')];
-      dots.forEach((dot, index) => {
-        if (index === activePosterSlideIndex) dot.setAttribute('aria-current', 'true');
-        else dot.removeAttribute('aria-current');
-      });
+      eventPosterCurrent.textContent = String(activePosterSlideIndex + 1).padStart(2, '0');
+      eventPosterTotal.textContent = String(posterImages.length).padStart(2, '0');
     };
     const buildEventPosterPagination = (posterImages) => {
       const hasMultipleSlides = posterImages.length > 1;
       eventPoster.classList.toggle('has-poster-slides', hasMultipleSlides);
       eventPosterPagination.hidden = !hasMultipleSlides;
-      eventPosterPagination.replaceChildren();
-      if (!hasMultipleSlides) return;
-      posterImages.forEach((_, index) => {
-        const dot = document.createElement('button');
-        dot.type = 'button';
-        dot.className = 'event-poster-dot';
-        dot.dataset.posterSlideDot = String(index);
-        dot.setAttribute('aria-label', `Ver imagen ${index + 1} de ${posterImages.length} del flyer`);
-        dot.addEventListener('click', () => { void showEventPosterSlide(index); });
-        eventPosterPagination.append(dot);
-      });
-      syncEventPosterPagination(posterImages);
+      if (hasMultipleSlides) syncEventPosterPagination(posterImages);
     };
     const renderUpcomingEvent = async (index) => {
       stopPosterAutoplay();
       eventPoster.classList.remove('is-poster-crossfading');
       activeEventIndex = Math.min(Math.max(index, 0), upcomingEvents.length - 1);
       const event = upcomingEvents[activeEventIndex];
-      void prepareEventSharePoster(event);
       eventTitle.innerHTML = event.titleHtml;
       eventTitleWrap.classList.toggle('is-long-title', event.longTitle);
       eventLabel.textContent = event.label;
@@ -2908,10 +2846,10 @@ Minimum version required to store current data is: `+i+`.
       eventPlace.textContent = event.place;
       eventDetailLineup.textContent = event.lineup;
       refreshEventCountdown();
-      eventInfo.setAttribute('aria-label', `Detalles de ${event.titleHtml.replace(/<[^>]+>/g, ' ')}`);
+      eventInfo.setAttribute('aria-label', `Detalles de ${getEventTitleText(event)}`);
       syncEventAvailability(event);
-      eventShareButton.setAttribute('aria-label', `Compartir la fecha ${event.titleHtml.replace(/<[^>]+>/g, '')}`);
-      eventQrButton.setAttribute('aria-label', `Ver código QR de la fecha ${event.titleHtml.replace(/<[^>]+>/g, '')}`);
+      eventShareButton.setAttribute('aria-label', `Compartir la fecha ${getEventTitleText(event)}`);
+      eventQrButton.setAttribute('aria-label', `Ver código QR de la fecha ${getEventTitleText(event)}`);
       if (document.body.classList.contains('event-open')) {
         const eventUrl = new URL(window.location.href);
         eventUrl.searchParams.set('evento', event.slug);
@@ -3004,6 +2942,15 @@ Minimum version required to store current data is: `+i+`.
         startPosterAutoplay();
       }
     };
+    // Option B: arrows step through the flyer with wrap-around; the swipe still works.
+    const stepPosterSlide = (direction) => {
+      const posterImages = getEventPosterImages(upcomingEvents[activeEventIndex]);
+      if (posterImages.length < 2 || isEventTransitioning) return;
+      const target = (activePosterSlideIndex + direction + posterImages.length) % posterImages.length;
+      void showEventPosterSlide(target);
+    };
+    eventPosterPrevButton.addEventListener('click', () => stepPosterSlide(-1));
+    eventPosterNextButton.addEventListener('click', () => stepPosterSlide(1));
     if (posterHoverPreference.matches) {
       eventPoster.addEventListener('mouseenter', stopPosterAutoplay);
       eventPoster.addEventListener('mouseleave', startPosterAutoplay);
@@ -3020,6 +2967,114 @@ Minimum version required to store current data is: `+i+`.
     };
     if (posterMotionPreference.addEventListener) posterMotionPreference.addEventListener('change', onPosterMotionPreferenceChange);
     else if (posterMotionPreference.addListener) posterMotionPreference.addListener(onPosterMotionPreferenceChange);
+    // Swiping the flyer moves between poster images. Horizontal swipes elsewhere on
+    // the date screen still change dates: the date gesture below yields on flyers
+    // that have more than one image.
+    const isPosterSwipeTarget = (target) => target instanceof Element && !!target.closest('.event-poster') && eventPoster.classList.contains('has-poster-slides');
+    const POSTER_SWIPE_THRESHOLD = 36;
+    let posterPointerGesture = null;
+    let posterTouchGesture = null;
+    let lastPosterSwipeAt = 0;
+    const posterSwipeDirection = (startX, startY, endX, endY) => {
+      const deltaX = endX - startX;
+      const deltaY = endY - startY;
+      if (Math.abs(deltaX) < POSTER_SWIPE_THRESHOLD || Math.abs(deltaX) <= Math.abs(deltaY)) return 0;
+      return deltaX < 0 ? 1 : -1;
+    };
+    const requestPosterSwipe = (direction) => {
+      const now = Date.now();
+      if (!direction || now - lastPosterSwipeAt < 320 || isEventTransitioning) return;
+      const posterImages = getEventPosterImages(upcomingEvents[activeEventIndex]);
+      if (posterImages.length < 2) return;
+      lastPosterSwipeAt = now;
+      const target = (activePosterSlideIndex + direction + posterImages.length) % posterImages.length;
+      void showEventPosterSlide(target);
+    };
+    const setPosterDragOffset = (deltaX) => {
+      const offset = Math.max(-28, Math.min(28, deltaX * 0.14));
+      eventPoster.style.setProperty('--poster-drag-x', `${offset}px`);
+    };
+    const clearPosterDrag = () => {
+      eventPoster.style.removeProperty('--poster-drag-x');
+      eventPoster.classList.remove('is-poster-swiping');
+    };
+    const finishPosterGesture = (direction) => {
+      clearPosterDrag();
+      if (direction) requestPosterSwipe(direction);
+      // Siempre reanudar: si el swipe fue descartado (dedupe o transición de fecha),
+      // showEventPosterSlide no llegaría a reiniciar el autoplay.
+      startPosterAutoplay();
+    };
+    const cancelPosterGesture = () => {
+      clearPosterDrag();
+      startPosterAutoplay();
+    };
+    const trackPosterGestureMove = (gesture, deltaX, deltaY, event) => {
+      // A vertical drag belongs to the page scroll, not to the carousel.
+      if (Math.abs(deltaY) > Math.abs(deltaX) && Math.abs(deltaY) > 10) return false;
+      if (Math.abs(deltaX) > 8 && Math.abs(deltaX) > Math.abs(deltaY)) {
+        gesture.horizontal = true;
+        eventPoster.classList.add('is-poster-swiping');
+        setPosterDragOffset(deltaX);
+        event.preventDefault();
+      }
+      return true;
+    };
+    eventPoster.addEventListener('dragstart', (event) => event.preventDefault());
+    eventPoster.addEventListener('pointerdown', (event) => {
+      if (!isPosterSwipeTarget(event.target) || (event.pointerType === 'mouse' && event.button !== 0)) return;
+      posterPointerGesture = { id:event.pointerId, x:event.clientX, y:event.clientY, horizontal:false };
+      stopPosterAutoplay();
+    });
+    document.addEventListener('pointermove', (event) => {
+      const gesture = posterPointerGesture;
+      if (!gesture || gesture.id !== event.pointerId) return;
+      if (!trackPosterGestureMove(gesture, event.clientX - gesture.x, event.clientY - gesture.y, event)) {
+        posterPointerGesture = null;
+        cancelPosterGesture();
+      }
+    }, { passive:false });
+    document.addEventListener('pointerup', (event) => {
+      const gesture = posterPointerGesture;
+      if (!gesture || gesture.id !== event.pointerId) return;
+      posterPointerGesture = null;
+      const direction = gesture.horizontal ? posterSwipeDirection(gesture.x, gesture.y, event.clientX, event.clientY) : 0;
+      finishPosterGesture(direction);
+    });
+    document.addEventListener('pointercancel', () => {
+      if (!posterPointerGesture) return;
+      posterPointerGesture = null;
+      cancelPosterGesture();
+    });
+    // Some mobile webviews cancel Pointer Events while the page scrolls.
+    eventPoster.addEventListener('touchstart', (event) => {
+      if (!isPosterSwipeTarget(event.target) || event.touches.length !== 1) return;
+      const touch = event.touches[0];
+      posterTouchGesture = { x:touch.clientX, y:touch.clientY, horizontal:false };
+      stopPosterAutoplay();
+    }, { passive:true });
+    document.addEventListener('touchmove', (event) => {
+      const gesture = posterTouchGesture;
+      if (!gesture || event.touches.length !== 1) return;
+      const touch = event.touches[0];
+      if (!trackPosterGestureMove(gesture, touch.clientX - gesture.x, touch.clientY - gesture.y, event)) {
+        posterTouchGesture = null;
+        cancelPosterGesture();
+      }
+    }, { passive:false });
+    document.addEventListener('touchend', (event) => {
+      const gesture = posterTouchGesture;
+      if (!gesture || !event.changedTouches.length) return;
+      posterTouchGesture = null;
+      const touch = event.changedTouches[0];
+      const direction = gesture.horizontal ? posterSwipeDirection(gesture.x, gesture.y, touch.clientX, touch.clientY) : 0;
+      finishPosterGesture(direction);
+    }, { passive:true });
+    document.addEventListener('touchcancel', () => {
+      if (!posterTouchGesture) return;
+      posterTouchGesture = null;
+      cancelPosterGesture();
+    }, { passive:true });
     const changeUpcomingEvent = async (direction) => {
       const nextIndex = activeEventIndex + direction;
       if (isEventTransitioning || nextIndex < 0 || nextIndex >= upcomingEvents.length) {
@@ -3077,7 +3132,7 @@ Minimum version required to store current data is: `+i+`.
       return deltaX < 0 ? 1 : -1;
     };
     document.addEventListener('pointerdown', (event) => {
-      if (!isEventGestureTarget(event.target) || eventSwipeInteractiveTarget(event.target)) return;
+      if (!isEventGestureTarget(event.target) || eventSwipeInteractiveTarget(event.target) || isPosterSwipeTarget(event.target)) return;
       eventPointerSwipe = { id:event.pointerId, x:event.clientX, y:event.clientY, horizontal:false };
     }, true);
     document.addEventListener('pointermove', (event) => {
@@ -3103,7 +3158,7 @@ Minimum version required to store current data is: `+i+`.
     }, true);
     // Touch Events are deliberately also registered: some mobile browsers cancel Pointer Events while a page can scroll.
     document.addEventListener('touchstart', (event) => {
-      if (!isEventGestureTarget(event.target) || eventSwipeInteractiveTarget(event.target) || event.touches.length !== 1) return;
+      if (!isEventGestureTarget(event.target) || eventSwipeInteractiveTarget(event.target) || isPosterSwipeTarget(event.target) || event.touches.length !== 1) return;
       const touch = event.touches[0];
       eventTouchSwipe = { x:touch.clientX, y:touch.clientY, horizontal:false };
     }, { capture:true, passive:true });
@@ -3779,7 +3834,11 @@ Minimum version required to store current data is: `+i+`.
     };
     initialiseEditorialMotion();
 
-    const requestedEventSlug = new URLSearchParams(window.location.search).get('evento');
+    // Legacy printed QR links may still carry the old Halloween slug. Map them to
+    // the canonical event so the deep link keeps opening the intended card.
+    const LEGACY_EVENT_SLUGS = { 'halloween-31-oct': 'festa-bros-31-oct' };
+    const requestedEventSlugRaw = new URLSearchParams(window.location.search).get('evento');
+    const requestedEventSlug = LEGACY_EVENT_SLUGS[requestedEventSlugRaw] || requestedEventSlugRaw;
     const requestedEventIndex = upcomingEvents.findIndex(({ slug }) => slug === requestedEventSlug);
     if (requestedEventIndex >= 0) {
       void renderUpcomingEvent(requestedEventIndex);
