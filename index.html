@@ -1118,6 +1118,62 @@
       .archive-invite-description { max-width:420px; font-size:12px; }
       .archive-invite-link { width:100%; max-width:none; min-height:50px; }
     }
+    /* Tablet / small desktop windows (651-980px): the three-column date screen
+       crushes the title column and short windows clipped the detail panel.
+       Stack the panel, cap the flyer and let the screen scroll instead. */
+    @media (min-width:651px) and (max-width:980px) {
+      .intro-slider > .next-experience { height:100svh; min-height:100svh; padding:12px; overflow-x:hidden; overflow-y:auto; }
+      .intro-slider .next-frame { height:auto; min-height:calc(100svh - 24px); }
+      .intro-slider .event-stage { display:grid; grid-template-columns:1fr; background:#080808; }
+      .intro-slider .event-poster { width:min(100%,560px); max-width:560px; height:auto; min-height:0; max-height:none; aspect-ratio:auto; justify-self:center; border-right:0; border-bottom:1px solid rgba(8,8,8,.6); }
+      .intro-slider .event-poster img { width:100%; height:auto; max-height:none; object-fit:contain; }
+      .intro-slider .event-content { grid-template-columns:1fr; }
+      .intro-slider .event-title { min-height:0; padding:34px clamp(22px,4.5vw,48px) 30px; row-gap:20px; border-right:0; border-bottom:1px solid rgba(8,8,8,.6); background:var(--paper); }
+      .intro-slider .event-title h2 { margin:0; font-size:clamp(56px,8vw,88px); line-height:.82; }
+      .intro-slider .event-title.is-long-title h2 { font-size:clamp(44px,6.4vw,70px); }
+      .intro-slider .event-info { min-height:0; padding:30px clamp(22px,4.5vw,48px) 26px; }
+      .intro-slider .event-number span { font-size:clamp(88px,11vw,118px); }
+      .intro-slider .event-bottom { padding:14px clamp(22px,4.5vw,48px); }
+      .intro-slider .event-reservation-strip { padding:11px clamp(22px,4.5vw,48px); }
+    }
+    /* Narrow phones: the old 640px cap clipped the pagination strip once the
+       flyer grew tall. Let the poster size itself from the image instead. */
+    @media (max-width:650px) {
+      .intro-slider .event-poster { max-height:none; }
+      .intro-slider .event-poster img { max-height:none; }
+    }
+    /* Short wide windows (981px+ and up to 720px tall): the info column used
+       to centre more content than it could hold, so the big date number was
+       cut off at the top and the countdown overlapped the buttons. Keep the
+       three-column design, tighten its vertical rhythm and let that column
+       scroll if it still overflows. */
+    @media (min-width:981px) and (max-height:720px) {
+      .intro-slider .event-number span { font-size:clamp(62px,5.2vw,84px); }
+      .intro-slider .detail-list { margin-top:12px; }
+      .intro-slider .detail { padding:6px 0; }
+      .intro-slider .event-countdown { margin-top:10px; }
+      .intro-slider .event-countdown-clock span { padding-top:4px; padding-bottom:4px; }
+      .intro-slider .event-info-content { flex:0 0 auto; justify-content:flex-start; }
+      .intro-slider .event-info { justify-content:flex-start; overflow-y:auto; }
+      .intro-slider .event-actions { flex:0 0 auto; margin-top:18px; }
+    }
+    /* Narrower desktop windows that are also short: squeeze the vertical
+       rhythm a bit more so no button needs an internal scroll. */
+    @media (min-width:981px) and (max-width:1150px) and (max-height:700px) {
+      .intro-slider .event-number span { font-size:clamp(54px,4.6vw,72px); }
+      .intro-slider .detail-list { margin-top:8px; }
+      .intro-slider .detail { padding:4px 0; }
+      .intro-slider .event-countdown { margin-top:6px; }
+      .intro-slider .event-countdown-clock span { padding-top:2px; padding-bottom:2px; }
+      .intro-slider .event-info { padding-top:14px; padding-bottom:12px; }
+      .intro-slider .event-actions { margin-top:10px; grid-template-rows:44px 40px; row-gap:6px; }
+      .intro-slider .event-actions .announce, .intro-slider .event-actions .event-share, .intro-slider .event-actions .event-qr-trigger { min-height:0; height:auto; }
+    }
+    /* Very short wide windows: never clip, allow scrolling. */
+    @media (min-width:981px) and (max-height:620px) {
+      .intro-slider > .next-experience { height:100svh; min-height:100svh; overflow-x:hidden; overflow-y:auto; }
+      .intro-slider .next-frame { height:auto; min-height:calc(100svh - 30px); }
+    }
   </style>
 
 </head>
