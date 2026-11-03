@@ -183,9 +183,25 @@
     .archive { overflow:hidden; padding:15px; background:#080808; color:var(--paper); }
     .archive-frame { border:1px solid rgba(242,240,235,.48); }
     .archive-top { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:18px 22px; border-bottom:1px solid rgba(242,240,235,.42); font-size:10px; font-weight:700; letter-spacing:.14em; line-height:1; text-transform:uppercase; }
-    .archive-controls { display:flex; align-items:center; gap:7px; }.archive-progress { display:flex; align-items:center; gap:7px; margin:0 5px 0 0; color:rgba(242,240,235,.68); font-size:8px; font-weight:700; letter-spacing:.14em; line-height:1; }.archive-progress i { display:block; width:21px; height:1px; background:rgba(242,240,235,.52); }
-    .archive-controls button { display:grid; place-items:center; width:29px; height:25px; padding:0; border:1px solid rgba(242,240,235,.65); color:var(--paper); background:transparent; cursor:pointer; font-size:15px; line-height:1; transition:background-color 160ms ease,color 160ms ease,opacity 160ms ease; }
-    .archive-controls button:hover:not(:disabled) { background:var(--paper); color:var(--ink); }.archive-controls button:disabled { opacity:.28; cursor:default; }.archive-controls button:focus-visible { outline:2px solid var(--paper); outline-offset:3px; }
+    .archive-carousel-nav { padding:14px 22px; border-top:1px solid rgba(242,240,235,.42); }
+    .archive-controls { display:flex; align-items:center; justify-content:space-between; gap:14px; width:100%; }
+    .archive-progress { display:flex; align-items:center; gap:7px; margin:0 5px 0 0; color:rgba(242,240,235,.68); font-size:8px; font-weight:700; letter-spacing:.14em; line-height:1; white-space:nowrap; }.archive-progress i { display:block; width:21px; height:1px; background:rgba(242,240,235,.52); }
+    .archive-progress-segments { display:grid; flex:1 1 auto; grid-template-columns:repeat(12,minmax(6px,1fr)); align-items:center; gap:5px; width:100%; min-width:0; max-width:680px; justify-self:center; }
+    @media (min-width:651px) { .archive-progress-segments { display:none; } }
+    .archive-progress-segment { appearance:none; display:flex; align-items:center; min-width:0; height:28px; padding:0; border:0; background:transparent; cursor:pointer; }
+    .archive-progress-track { display:block; width:100%; height:2px; overflow:hidden; background:rgba(242,240,235,.23); }
+    .archive-progress-fill { display:block; width:100%; height:100%; transform:scaleX(0); transform-origin:left center; background:var(--paper); }
+    .archive-progress-segment[aria-current="true"] .archive-progress-track { background:rgba(242,240,235,.48); }
+    .archive-progress-segment[data-archive-end="true"] .archive-progress-fill { transform:scaleX(1); }
+    .archive-progress-segments.is-progress-running .archive-progress-segment[aria-current="true"] .archive-progress-fill { animation:archive-progress-fill var(--archive-progress-duration,3800ms) linear forwards; }
+    @keyframes archive-progress-fill { to { transform:scaleX(1); } }
+    .archive-progress-segment:hover .archive-progress-track { background:rgba(242,240,235,.62); }
+    .archive-progress-segment:focus-visible { outline:2px solid var(--paper); outline-offset:1px; }
+    .archive-nav-buttons { display:flex; align-items:center; gap:7px; flex:0 0 auto; }
+    .archive-nav-buttons button { display:grid; place-items:center; width:29px; height:25px; padding:0; border:1px solid rgba(242,240,235,.65); color:var(--paper); background:transparent; cursor:pointer; font-size:15px; line-height:1; transition:background-color 160ms ease,color 160ms ease,opacity 160ms ease; }
+    .archive-nav-buttons button:hover:not(:disabled) { background:var(--paper); color:var(--ink); }.archive-nav-buttons button:disabled { opacity:.28; cursor:default; }.archive-nav-buttons button:focus-visible { outline:2px solid var(--paper); outline-offset:3px; }
+    @media (max-width:650px) { .archive-carousel-nav { padding:10px 12px; } .archive-controls { display:grid; grid-template-columns:auto minmax(0,1fr) auto; grid-template-rows:auto; column-gap:7px; } .archive-progress { grid-column:1; grid-row:1; gap:4px; margin:0; font-size:7px; } .archive-progress i { width:9px; } .archive-progress-segments { grid-column:2; grid-row:1; max-width:none; gap:2px; } .archive-progress-segment { height:24px; } .archive-nav-buttons { grid-column:3; grid-row:1; gap:4px; justify-self:end; } .archive-nav-buttons button { width:25px; height:24px; } }
+    @media (prefers-reduced-motion:reduce) { .archive-progress-fill { animation:none !important; transition:none; } }
     .archive-intro { display:flex; align-items:end; justify-content:space-between; gap:30px; padding:clamp(30px,5vw,72px) clamp(22px,4.4vw,70px) 38px; }
     .archive-intro h2 { max-width:730px; margin:0; font-size:clamp(54px,8.9vw,142px); font-weight:900; letter-spacing:-.1em; line-height:.72; text-transform:uppercase; }
     .archive-intro h2 span { display:block; }
@@ -1052,14 +1068,13 @@
     .archive-card::before { position:absolute; z-index:1; inset:0; background:rgba(0,0,0,.36); opacity:0; content:""; transition:opacity 300ms ease; }
     .archive-card-top,.archive-card-bottom { position:absolute; z-index:3; right:var(--archive-card-inset); left:var(--archive-card-inset); }
     .archive-card-top { top:var(--archive-card-inset); }
+    .archive-card-top .archive-card-index { color:var(--paper); font-size:clamp(32px,4.2vw,54px); font-weight:900; letter-spacing:-.085em; line-height:.82; text-shadow:0 3px 16px rgba(0,0,0,.55); }
     .archive-card-bottom { bottom:var(--archive-card-inset); }
     .archive-card-copy { position:absolute; z-index:2; right:var(--archive-card-inset); bottom:calc(var(--archive-card-inset) + 40px); left:var(--archive-card-inset); width:auto; max-width:none; transform:translate3d(0,0,0); transition:transform 260ms ease; }
     .archive-card-name { position:relative; display:block; width:max-content; max-width:100%; margin:0; color:var(--paper); font-size:clamp(32px,4.2vw,54px); font-weight:900; letter-spacing:-.085em; line-height:.82; text-align:left; text-shadow:0 3px 16px rgba(0,0,0,.55); transform:scale(1); transform-origin:left bottom; transition:transform 260ms ease; }
     .archive-card-name.small { font-size:clamp(27px,3.3vw,42px); }
     .archive-card-info { position:absolute; z-index:2; right:var(--archive-card-inset); bottom:calc(var(--archive-card-inset) + 122px); left:var(--archive-card-inset); display:grid; gap:7px; opacity:0; visibility:hidden; transform:translate3d(0,10px,0); transition:opacity 280ms ease,transform 320ms cubic-bezier(.2,.75,.25,1),visibility 0s linear 320ms; }
-    .archive-card-context,.archive-card-date,.archive-card-place { margin:0; }
-    .archive-card-context { color:rgba(242,240,235,.64); font-size:8px; font-weight:700; letter-spacing:.14em; line-height:1.25; text-transform:uppercase; }
-    .archive-card-context strong { margin-left:4px; color:var(--paper); font-size:10px; font-weight:900; letter-spacing:.08em; }
+    .archive-card-date,.archive-card-place { margin:0; }
     .archive-card-date { color:var(--paper); font-size:11px; font-weight:700; letter-spacing:.075em; line-height:1.3; text-transform:uppercase; }
     .archive-card-place { color:rgba(242,240,235,.68); font-size:8px; font-weight:700; letter-spacing:.11em; line-height:1.35; text-transform:uppercase; }
     .archive-card-bottom { min-height:32px; align-items:center; }
@@ -1083,7 +1098,7 @@
     .archive-invite { display:grid; grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr); align-items:center; gap:clamp(28px,5vw,76px); padding:clamp(32px,4.4vw,62px) clamp(24px,5vw,78px); border-top:1px solid rgba(242,240,235,.32); border-bottom:1px solid rgba(242,240,235,.32); background:#151515; color:var(--paper); }
     .archive-invite-copy,.archive-invite-action-group { min-width:0; }
     .archive-invite-kicker { margin:0 0 14px; color:rgba(242,240,235,.58); font-size:8px; font-weight:700; letter-spacing:.16em; line-height:1; text-transform:uppercase; }
-    .archive-invite-title { max-width:800px; margin:0; font-size:clamp(42px,5.8vw,82px); font-weight:900; letter-spacing:-.105em; line-height:.78; text-transform:uppercase; }
+    .archive-invite-title { max-width:800px; margin:0; font-size:clamp(42px,5.8vw,82px); font-weight:900; letter-spacing:-.035em; line-height:.78; text-transform:uppercase; }
     .archive-invite-action-group { display:flex; flex-direction:column; align-items:flex-start; gap:20px; max-width:420px; }
     .archive-invite-description { margin:0; color:rgba(242,240,235,.74); font-size:clamp(12px,1.15vw,15px); font-weight:600; letter-spacing:.01em; line-height:1.4; }
     .archive-invite-link { display:flex; align-items:center; justify-content:center; width:min(100%,260px); min-height:52px; padding:0 18px; border:1px solid var(--paper); background:var(--paper); color:var(--ink); font:inherit; font-size:9px; font-weight:700; letter-spacing:.14em; line-height:1; text-align:center; text-decoration:none; text-transform:uppercase; transition:background-color 180ms ease,color 180ms ease; }
@@ -1096,43 +1111,6 @@
       .archive-invite-action-group { gap:16px; max-width:none; }
       .archive-invite-description { max-width:420px; font-size:12px; }
       .archive-invite-link { width:100%; max-width:none; min-height:50px; }
-    }
-    /* A9 · Foco de teclado visible en el plano de mesas. Las 13 mesas son capas
-       transparentes sobre la imagen: sin anillo propio el foco quedaba invisible. */
-    .table-plan-button:focus-visible { outline:3px solid var(--paper); outline-offset:3px; }
-    /* A9 · Microetiquetas de cuenta regresiva a 9 px en pantallas chicas.
-       En escritorio no cambia nada. */
-    @media (max-width:760px) {
-      .countdown-date, .countdown-clock small, .event-countdown-head, .event-countdown-clock small { font-size:9px; }
-    }
-
-    /* Archivo · Vitrina: una noche en foco, el resto en sombra. */
-    .archive-rail { display:flex; gap:0; background:transparent; box-shadow:none; scroll-snap-type:x mandatory; overscroll-behavior-x:contain; }
-    .archive-rail .archive-card { flex:0 0 clamp(300px,34vw,470px); margin-right:1px; min-height:clamp(420px,48vw,540px); scroll-snap-align:center; scroll-snap-stop:always; outline:1px solid transparent; contain:paint; filter:grayscale(1) brightness(.62); }
-    .archive-rail .archive-card::after { position:absolute; z-index:5; inset:0; background:#080808; opacity:.34; content:""; pointer-events:none; transition:opacity 320ms ease; }
-    .archive-rail .archive-card.is-focus { filter:none; outline:1px solid var(--paper); }
-    .archive-rail .archive-card.is-focus::after { opacity:0; }
-    @media (prefers-reduced-motion:reduce) { .archive-rail .archive-card::after { transition:none !important; } }
-    .archive-rail .archive-card.is-focus .archive-card-name { transform:scale(.92); }
-    .archive-rail .archive-card.is-focus .archive-card-info { opacity:1; visibility:visible; transform:translate3d(0,0,0); transition-delay:0s; }
-    .archive-rail .archive-card:not(.is-focus) .archive-card-bottom { opacity:0; }
-    .archive-card-bottom { transition:opacity 300ms ease; }
-    @media (hover:hover) and (pointer:fine) {
-      .archive-rail .archive-card:hover:not(.is-focus) .archive-card-name { transform:scale(1); }
-      .archive-rail .archive-card:hover:not(.is-focus) .archive-card-info { opacity:0; visibility:hidden; }
-    }
-    .archive-rail .archive-card.is-focus:focus-visible { outline:2px solid var(--paper); outline-offset:-6px; }
-    .archive-card-num { font-size:15px; font-weight:900; letter-spacing:.01em; line-height:.9; font-variant-numeric:tabular-nums; }
-    .archive-rail .archive-card:not(.is-focus) .archive-card-num { color:rgba(242,240,235,.78); }
-    .archive-controls .archive-ticks { display:flex; align-items:center; gap:5px; width:clamp(110px,20vw,300px); margin:0 6px 0 2px; }
-    .archive-controls .archive-ticks button { width:auto; flex:1; height:2px; min-height:0; padding:0; border:0; border-radius:0; background:rgba(242,240,235,.24); cursor:pointer; transition:background-color 240ms ease, transform 200ms ease; }
-    .archive-controls .archive-ticks button:hover { background:rgba(242,240,235,.62); transform:scaleY(2); }
-    .archive-controls .archive-ticks button.is-on { background:var(--paper); }
-    .archive-controls .archive-ticks button:focus-visible { outline:2px solid var(--paper); outline-offset:4px; }
-    .archive-controls .archive-play svg { width:10px; height:10px; display:block; }
-    @media (max-width:760px) {
-      .archive-rail .archive-card { flex:0 0 84vw; min-height:440px; }
-      .archive-controls .archive-ticks { display:none; }
     }
   </style>
 
@@ -1310,134 +1288,115 @@
     <div class="archive-frame">
       <header class="archive-top">
         <span>Archivo · DJs y noches de ONE MORE</span>
-        <div class="archive-controls" aria-label="Controles del carrusel">
-          <p class="archive-progress" aria-live="polite"><span data-archive-current>01</span><i aria-hidden="true"></i><span data-archive-total>12</span></p>
-          <div class="archive-ticks" data-archive-ticks role="tablist" aria-label="Ir a una noche del archivo"></div>
-          <button type="button" class="archive-play" data-archive-play aria-label="Pausar el avance automático" aria-pressed="true"></button>
-          <button type="button" class="archive-prev" aria-label="Noche anterior">←</button>
-          <button type="button" class="archive-next" aria-label="Noche siguiente">→</button>
-        </div>
       </header>
       <div class="archive-intro">
         <h2 id="archive-title" class="section-heading"><span>Archivo</span><span>ONE MORE</span></h2>
         <p>Conocé a los DJs que ya pasaron por ONE MORE: Dana, Chinno, Gonzalo Cesar, Matias Sundblad, Julian Fuentes, Aldo Haydar, Joyce, Festa Bros, GOTH, Zambe, Miloop y Sophia Fulcito.</p>
       </div>
       <div class="archive-rail" id="archive-carousel" tabindex="0" aria-label="Carrusel de DJs y artistas de fechas anteriores">
-        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-label="DANA. Noche DANA. Sábado 17 de mayo de 2025, 23:59. ONE MORE CLUB, Villa Devoto. Enfocar esta noche." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dana.webp');">
-          <div class="archive-card-top"><span class="archive-card-num">01</span><span>Noche</span></div>
+        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-expanded="false" aria-label="DANA. Noche DANA. Sábado 17 de mayo de 2025, 23:59. ONE MORE CLUB, Villa Devoto. Tocar para ver los detalles." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dana.webp');">
+          <div class="archive-card-top"><span class="archive-card-index">01</span></div>
           <div class="archive-card-copy"><h3 class="archive-card-name">DANA</h3></div>
           <div class="archive-card-info">
-            <p class="archive-card-context">Noche <strong>DANA</strong></p>
             <p class="archive-card-date">SÁB 17 MAY 2025 · 23:59 H</p>
             <p class="archive-card-place">ONE MORE CLUB · AV. BEIRÓ 3334 · DEVOTO</p>
           </div>
           <div class="archive-card-bottom"><span>Ver la noche</span><span>ONE MORE ↗</span></div>
         </article>
-        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-label="CHINNO. Noche CHINNO. Sábado 12 de julio de 2025, 23:59. ONE MORE CLUB, Villa Devoto. Enfocar esta noche." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-chinno.webp');">
-          <div class="archive-card-top"><span class="archive-card-num">02</span><span>Noche</span></div>
+        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-expanded="false" aria-label="CHINNO. Noche CHINNO. Sábado 12 de julio de 2025, 23:59. ONE MORE CLUB, Villa Devoto. Tocar para ver los detalles." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-chinno.webp');">
+          <div class="archive-card-top"><span class="archive-card-index">02</span></div>
           <div class="archive-card-copy"><h3 class="archive-card-name">CHINNO</h3></div>
           <div class="archive-card-info">
-            <p class="archive-card-context">Noche <strong>CHINNO</strong></p>
             <p class="archive-card-date">SÁB 12 JUL 2025 · 23:59 H</p>
             <p class="archive-card-place">ONE MORE CLUB · AV. BEIRÓ 3334 · DEVOTO</p>
           </div>
           <div class="archive-card-bottom"><span>Ver la noche</span><span>ONE MORE ↗</span></div>
         </article>
-        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-label="GONZALO CESAR. Noche GONZALO CESAR. Viernes 29 de agosto de 2025, 23:59. ONE MORE CLUB, Villa Devoto. Enfocar esta noche." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-gonzalo-cesar.webp');">
-          <div class="archive-card-top"><span class="archive-card-num">03</span><span>Noche</span></div>
+        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-expanded="false" aria-label="GONZALO CESAR. Noche GONZALO CESAR. Viernes 29 de agosto de 2025, 23:59. ONE MORE CLUB, Villa Devoto. Tocar para ver los detalles." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-gonzalo-cesar.webp');">
+          <div class="archive-card-top"><span class="archive-card-index">03</span></div>
           <div class="archive-card-copy"><h3 class="archive-card-name small">GONZALO<br>CESAR</h3></div>
           <div class="archive-card-info">
-            <p class="archive-card-context">Noche <strong>GONZALO CESAR</strong></p>
             <p class="archive-card-date">VIE 29 AGO 2025 · 23:59 H</p>
             <p class="archive-card-place">ONE MORE CLUB · AV. BEIRÓ 3334 · DEVOTO</p>
           </div>
           <div class="archive-card-bottom"><span>Ver la noche</span><span>ONE MORE ↗</span></div>
         </article>
-        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-label="MATIAS SUNDBLAD. Noche MATIAS SUNDBLAD. Viernes 14 de noviembre de 2025, 23:59. ONE MORE CLUB, Villa Devoto. Enfocar esta noche." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-matias-sundblad.webp');">
-          <div class="archive-card-top"><span class="archive-card-num">04</span><span>Noche</span></div>
+        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-expanded="false" aria-label="MATIAS SUNDBLAD. Noche MATIAS SUNDBLAD. Viernes 14 de noviembre de 2025, 23:59. ONE MORE CLUB, Villa Devoto. Tocar para ver los detalles." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-matias-sundblad.webp');">
+          <div class="archive-card-top"><span class="archive-card-index">04</span></div>
           <div class="archive-card-copy"><h3 class="archive-card-name small">MATIAS<br>SUNDBLAD</h3></div>
           <div class="archive-card-info">
-            <p class="archive-card-context">Noche <strong>MATIAS SUNDBLAD</strong></p>
             <p class="archive-card-date">VIE 14 NOV 2025 · 23:59 H</p>
             <p class="archive-card-place">ONE MORE CLUB · AV. BEIRÓ 3334 · DEVOTO</p>
           </div>
           <div class="archive-card-bottom"><span>Ver la noche</span><span>ONE MORE ↗</span></div>
         </article>
-        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-label="JULIAN FUENTES. Noche JULIAN FUENTES. Sábado 20 de diciembre de 2025, 23:59. ONE MORE CLUB, Villa Devoto. Enfocar esta noche." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-julian-fuentes.webp');">
-          <div class="archive-card-top"><span class="archive-card-num">05</span><span>Noche</span></div>
+        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-expanded="false" aria-label="JULIAN FUENTES. Noche JULIAN FUENTES. Sábado 20 de diciembre de 2025, 23:59. ONE MORE CLUB, Villa Devoto. Tocar para ver los detalles." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-julian-fuentes.webp');">
+          <div class="archive-card-top"><span class="archive-card-index">05</span></div>
           <div class="archive-card-copy"><h3 class="archive-card-name small">JULIAN<br>FUENTES</h3></div>
           <div class="archive-card-info">
-            <p class="archive-card-context">Noche <strong>JULIAN FUENTES</strong></p>
             <p class="archive-card-date">SÁB 20 DIC 2025 · 23:59 H</p>
             <p class="archive-card-place">ONE MORE CLUB · AV. BEIRÓ 3334 · DEVOTO</p>
           </div>
           <div class="archive-card-bottom"><span>Ver la noche</span><span>ONE MORE ↗</span></div>
         </article>
-        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-label="ALDO HAYDAR. Noche ALDO HAYDAR. Sábado 18 de octubre de 2025, 23:59. ONE MORE CLUB, Villa Devoto. Enfocar esta noche." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-aldo-haydar.webp');">
-          <div class="archive-card-top"><span class="archive-card-num">06</span><span>Noche</span></div>
+        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-expanded="false" aria-label="ALDO HAYDAR. Noche ALDO HAYDAR. Sábado 18 de octubre de 2025, 23:59. ONE MORE CLUB, Villa Devoto. Tocar para ver los detalles." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-aldo-haydar.webp');">
+          <div class="archive-card-top"><span class="archive-card-index">06</span></div>
           <div class="archive-card-copy"><h3 class="archive-card-name small">ALDO<br>HAYDAR</h3></div>
           <div class="archive-card-info">
-            <p class="archive-card-context">Noche <strong>ALDO HAYDAR</strong></p>
             <p class="archive-card-date">SÁB 18 OCT 2025 · 23:59 H</p>
             <p class="archive-card-place">ONE MORE CLUB · AV. BEIRÓ 3334 · DEVOTO</p>
           </div>
           <div class="archive-card-bottom"><span>Ver la noche</span><span>ONE MORE ↗</span></div>
         </article>
-        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-label="JOYCE. Noche JOYCE. Viernes 23 de octubre de 2026, 23:59. ONE MORE CLUB, Villa Devoto. Enfocar esta noche." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-03.webp');">
-          <div class="archive-card-top"><span class="archive-card-num">07</span><span>Noche</span></div>
+        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-expanded="false" aria-label="JOYCE. Noche JOYCE. Viernes 23 de octubre de 2026, 23:59. ONE MORE CLUB, Villa Devoto. Tocar para ver los detalles." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-03.webp');">
+          <div class="archive-card-top"><span class="archive-card-index">07</span><span>DJ set</span></div>
           <div class="archive-card-copy"><h3 class="archive-card-name">JOYCE</h3></div>
           <div class="archive-card-info">
-              <p class="archive-card-context">Noche <strong>JOYCE</strong></p>
               <p class="archive-card-date">VIE 23 OCT 2026 · 23:59 H</p>
               <p class="archive-card-place">ONE MORE CLUB · AV. BEIRÓ 3334 · DEVOTO</p>
             </div>
           <div class="archive-card-bottom"><span>Ver la noche</span><span>ONE MORE ↗</span></div>
         </article>
-        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-label="FESTA BROS. Noche MORE HALLOWEEN. Sábado 31 de octubre de 2026, 23:59. ONE MORE CLUB, Villa Devoto. Enfocar esta noche." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-05.webp');">
-          <div class="archive-card-top"><span class="archive-card-num">08</span><span>Noche</span></div>
+        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-expanded="false" aria-label="FESTA BROS. Noche MORE HALLOWEEN. Sábado 31 de octubre de 2026, 23:59. ONE MORE CLUB, Villa Devoto. Tocar para ver los detalles." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-05.webp');">
+          <div class="archive-card-top"><span class="archive-card-index">08</span><span>DJ set</span></div>
           <div class="archive-card-copy"><h3 class="archive-card-name small">FESTA<br>BROS</h3></div>
           <div class="archive-card-info">
-              <p class="archive-card-context">Noche <strong>MORE HALLOWEEN</strong></p>
               <p class="archive-card-date">SÁB 31 OCT 2026 · 23:59 H</p>
               <p class="archive-card-place">ONE MORE CLUB · AV. BEIRÓ 3334 · DEVOTO</p>
             </div>
           <div class="archive-card-bottom"><span>Ver la noche</span><span>ONE MORE ↗</span></div>
         </article>
-        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-label="GOTH. Noche GOTH. Sábado 24 de octubre de 2026, 23:59. ONE MORE CLUB, Villa Devoto. Enfocar esta noche." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-04.webp');">
-          <div class="archive-card-top"><span class="archive-card-num">09</span><span>Noche</span></div>
+        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-expanded="false" aria-label="GOTH. Noche GOTH. Sábado 24 de octubre de 2026, 23:59. ONE MORE CLUB, Villa Devoto. Tocar para ver los detalles." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-04.webp');">
+          <div class="archive-card-top"><span class="archive-card-index">09</span><span>DJ set</span></div>
           <div class="archive-card-copy"><h3 class="archive-card-name">GOTH</h3></div>
           <div class="archive-card-info">
-              <p class="archive-card-context">Noche <strong>GOTH</strong></p>
               <p class="archive-card-date">SÁB 24 OCT 2026 · 23:59 H</p>
               <p class="archive-card-place">ONE MORE CLUB · AV. BEIRÓ 3334 · DEVOTO</p>
             </div>
           <div class="archive-card-bottom"><span>Ver la noche</span><span>ONE MORE ↗</span></div>
         </article>
-        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-label="Zambe. Noche GOTH. Sábado 24 de octubre de 2026, 23:59. ONE MORE CLUB, Villa Devoto. Enfocar esta noche." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-03.webp');">
-          <div class="archive-card-top"><span class="archive-card-num">10</span><span>Noche</span></div>
+        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-expanded="false" aria-label="Zambe. Noche GOTH. Sábado 24 de octubre de 2026, 23:59. ONE MORE CLUB, Villa Devoto. Tocar para ver los detalles." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-03.webp');">
+          <div class="archive-card-top"><span class="archive-card-index">10</span><span>DJ set</span></div>
           <div class="archive-card-copy"><h3 class="archive-card-name">Zambe</h3></div>
           <div class="archive-card-info">
-              <p class="archive-card-context">Noche <strong>GOTH</strong></p>
               <p class="archive-card-date">SÁB 24 OCT 2026 · 23:59 H</p>
               <p class="archive-card-place">ONE MORE CLUB · AV. BEIRÓ 3334 · DEVOTO</p>
             </div>
           <div class="archive-card-bottom"><span>Ver la noche</span><span>ONE MORE ↗</span></div>
         </article>
-        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-label="Miloop. Noche GOTH. Sábado 24 de octubre de 2026, 23:59. ONE MORE CLUB, Villa Devoto. Enfocar esta noche." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-04.webp');">
-          <div class="archive-card-top"><span class="archive-card-num">11</span><span>Noche</span></div>
+        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-expanded="false" aria-label="Miloop. Noche GOTH. Sábado 24 de octubre de 2026, 23:59. ONE MORE CLUB, Villa Devoto. Tocar para ver los detalles." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-04.webp');">
+          <div class="archive-card-top"><span class="archive-card-index">11</span><span>DJ set</span></div>
           <div class="archive-card-copy"><h3 class="archive-card-name">Miloop</h3></div>
           <div class="archive-card-info">
-              <p class="archive-card-context">Noche <strong>GOTH</strong></p>
               <p class="archive-card-date">SÁB 24 OCT 2026 · 23:59 H</p>
               <p class="archive-card-place">ONE MORE CLUB · AV. BEIRÓ 3334 · DEVOTO</p>
             </div>
           <div class="archive-card-bottom"><span>Ver la noche</span><span>ONE MORE ↗</span></div>
         </article>
-        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-label="Sophia Fulcito. Noche GOTH. Sábado 24 de octubre de 2026, 23:59. ONE MORE CLUB, Villa Devoto. Enfocar esta noche." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-01.webp');">
-          <div class="archive-card-top"><span class="archive-card-num">12</span><span>Noche</span></div>
+        <article class="archive-card" data-archive-card role="button" tabindex="0" aria-expanded="false" aria-label="Sophia Fulcito. Noche GOTH. Sábado 24 de octubre de 2026, 23:59. ONE MORE CLUB, Villa Devoto. Tocar para ver los detalles." style="background-image:linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.78)), url('assets/archive-dj-01.webp');">
+          <div class="archive-card-top"><span class="archive-card-index">12</span><span>DJ set</span></div>
           <div class="archive-card-copy"><h3 class="archive-card-name small">Sophia<br>Fulcito</h3></div>
           <div class="archive-card-info">
-              <p class="archive-card-context">Noche <strong>GOTH</strong></p>
               <p class="archive-card-date">SÁB 24 OCT 2026 · 23:59 H</p>
               <p class="archive-card-place">ONE MORE CLUB · AV. BEIRÓ 3334 · DEVOTO</p>
             </div>
@@ -1445,6 +1404,16 @@
         </article>
 
       </div>
+      <nav class="archive-carousel-nav" aria-label="Navegación del carrusel del Archivo">
+        <div class="archive-controls" role="group" aria-label="Controles del carrusel">
+          <p class="archive-progress" aria-live="polite"><span data-archive-current>01</span><i aria-hidden="true"></i><span data-archive-total>12</span></p>
+          <div class="archive-progress-segments" data-archive-segments role="group" aria-label="Progreso y selección de las tarjetas del Archivo"></div>
+          <div class="archive-nav-buttons">
+            <button type="button" class="archive-prev" aria-label="Ver tarjetas anteriores">←</button>
+            <button type="button" class="archive-next" aria-label="Ver más tarjetas">→</button>
+          </div>
+        </div>
+      </nav>
     </div>
   </section>
   <section class="archive-invite" aria-labelledby="archive-invite-title">
@@ -1783,161 +1752,148 @@ Minimum version required to store current data is: `+i+`.
   <script>
     const archiveRail = document.getElementById('archive-carousel');
     const archiveCards = [...archiveRail.querySelectorAll('.archive-card')];
-    const archiveTotalCards = archiveCards.length;
     const archivePrevButton = document.querySelector('.archive-prev');
     const archiveNextButton = document.querySelector('.archive-next');
     const archiveCurrent = document.querySelector('[data-archive-current]');
     const archiveTotal = document.querySelector('[data-archive-total]');
-    const archiveTicks = document.querySelector('[data-archive-ticks]');
-    const archivePlayButton = document.querySelector('[data-archive-play]');
+    const archiveProgressSegments = document.querySelector('[data-archive-segments]');
+    const archiveCarouselNav = document.querySelector('.archive-carousel-nav');
     const archiveReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const pad2 = (n) => String(n).padStart(2, '0');
-    const ARCHIVE_AUTOPLAY_MS = 5000;
-    const ARCHIVE_ICON_PAUSE = '<svg viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="1" width="3" height="10" fill="currentColor"/><rect x="7" y="1" width="3" height="10" fill="currentColor"/></svg>';
-    const ARCHIVE_ICON_PLAY = '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1.5 10 6 3 10.5Z" fill="currentColor"/></svg>';
-
-    // Una marca por noche para saltar directo.
-    if (archiveTicks) {
-      archiveTicks.innerHTML = archiveCards.map((card, index) => {
-        const name = (card.getAttribute('aria-label') || '').split('.')[0].trim();
-        return '<button type="button" role="tab" aria-selected="false" aria-label="Noche ' + (index + 1) + ': ' + (name || 'sin título') + '"></button>';
-      }).join('');
-    }
-    const archiveTickButtons = archiveTicks ? [...archiveTicks.querySelectorAll('button')] : [];
-
-    let archiveActive = 0;
-    let archiveUserPaused = archiveReducedMotion();
-    let archiveVisible = false;
-    let archiveHovering = false;
-    let archiveFocused = false;
-    let archiveAutoTimer;
-    let archiveFocusLock = false;
-    let archiveLastScrollCheck = 0;
-    let archiveDrag = null;
-    let archiveMomentumFrame;
-
     const archiveMaxScroll = () => Math.max(0, archiveRail.scrollWidth - archiveRail.clientWidth);
-    // Posiciones medidas una vez (y al redimensionar): evita leer el layout en cada frame de scroll.
-    let archiveOffsets = [];
-    const measureArchive = () => {
-      const railLeft = archiveRail.getBoundingClientRect().left;
+    const getArchiveCardLeft = (card) => card.getBoundingClientRect().left - archiveRail.getBoundingClientRect().left + archiveRail.scrollLeft;
+    const getActiveArchiveIndex = () => {
       const scrollLeft = archiveRail.scrollLeft;
-      archiveOffsets = archiveCards.map((card) => card.getBoundingClientRect().left - railLeft + scrollLeft);
+      return archiveCards.reduce((closest, card, index) => Math.abs(getArchiveCardLeft(card) - scrollLeft) < Math.abs(getArchiveCardLeft(archiveCards[closest]) - scrollLeft) ? index : closest, 0);
     };
-    const getArchiveCardLeft = (card, index) => (archiveOffsets[index] != null ? archiveOffsets[index] : card.getBoundingClientRect().left - archiveRail.getBoundingClientRect().left + archiveRail.scrollLeft);
-
-    // Se divide en dos: lo caro (clases de 12 tarjetas, marcas e innerHTML del botón)
-    // sólo corre cuando cambia la noche activa o el estado de reproducción.
-    let archiveRenderedActive = -1;
-    let archiveRenderedPlaying = null;
-    const syncArchiveUI = () => {
-      if (archiveActive !== archiveRenderedActive) {
-        // Sólo se tocan la tarjeta que se apaga y la que se enciende:
-        // antes se recorrian las 12 en cada cambio y se disparaban recálculos de estilo de más.
-        const previousCard = archiveCards[archiveRenderedActive];
-        if (previousCard) { previousCard.classList.remove('is-focus'); previousCard.removeAttribute('aria-current'); }
-        const nextCard = archiveCards[archiveActive];
-        nextCard.classList.add('is-focus');
-        nextCard.setAttribute('aria-current', 'true');
-        const previousTick = archiveTickButtons[archiveRenderedActive];
-        if (previousTick) { previousTick.classList.remove('is-on'); previousTick.setAttribute('aria-selected', 'false'); }
-        const nextTick = archiveTickButtons[archiveActive];
-        if (nextTick) { nextTick.classList.add('is-on'); nextTick.setAttribute('aria-selected', 'true'); }
-        archiveCurrent.textContent = pad2(archiveActive + 1);
-        archiveTotal.textContent = pad2(archiveTotalCards);
-        archiveRenderedActive = archiveActive;
-      }
-      const playing = !archiveUserPaused;
-      if (playing !== archiveRenderedPlaying) {
-        archiveRenderedPlaying = playing;
-        archivePlayButton.setAttribute('aria-pressed', String(playing));
-        archivePlayButton.innerHTML = playing ? ARCHIVE_ICON_PAUSE : ARCHIVE_ICON_PLAY;
-      }
+    const updateArchiveUI = () => {
       const max = archiveMaxScroll();
+      const index = getActiveArchiveIndex();
+      archivePrevButton.disabled = archiveRail.scrollLeft <= 2;
+      archiveNextButton.disabled = archiveRail.scrollLeft >= max - 2;
       archiveRail.classList.toggle('can-scroll-left', archiveRail.scrollLeft > 2);
       archiveRail.classList.toggle('can-scroll-right', archiveRail.scrollLeft < max - 2);
-    };
-
-    // Lleva la noche indicada al centro de la tira; da la vuelta en los extremos.
-    const goArchive = (index, { scroll = true } = {}) => {
-      archiveActive = ((index % archiveTotalCards) + archiveTotalCards) % archiveTotalCards;
-      if (scroll) {
-        const card = archiveCards[archiveActive];
-        const left = getArchiveCardLeft(card, archiveActive) - (archiveRail.clientWidth - card.offsetWidth) / 2;
-        archiveFocusLock = true;
-        archiveRail.scrollTo({ left: Math.max(0, Math.min(archiveMaxScroll(), left)), behavior: archiveReducedMotion() ? 'auto' : 'smooth' });
-      }
-      syncArchiveUI();
-    };
-
-    const canArchiveAutoplay = () => !archiveUserPaused && !archiveReducedMotion() && archiveVisible
-      && !document.hidden && !archiveHovering && !archiveFocused && !archiveDrag;
-    const clearArchiveTimers = () => window.clearTimeout(archiveAutoTimer);
-    const scheduleArchiveAutoplay = () => {
-      clearArchiveTimers();
-      if (!canArchiveAutoplay()) return;
-      archiveAutoTimer = window.setTimeout(() => {
-        goArchive(archiveActive + 1);
-        scheduleArchiveAutoplay();
-      }, ARCHIVE_AUTOPLAY_MS);
-    };
-
-    archiveNextButton.addEventListener('click', () => { goArchive(archiveActive + 1); scheduleArchiveAutoplay(); });
-    archivePrevButton.addEventListener('click', () => { goArchive(archiveActive - 1); scheduleArchiveAutoplay(); });
-    archiveTickButtons.forEach((tick, index) => tick.addEventListener('click', () => { goArchive(index); scheduleArchiveAutoplay(); }));
-    archivePlayButton.addEventListener('click', () => {
-      archiveUserPaused = !archiveUserPaused;
-      syncArchiveUI();
-      scheduleArchiveAutoplay();
-    });
-    archiveRail.addEventListener('keydown', (event) => {
-      if (event.key === 'ArrowRight') { event.preventDefault(); goArchive(archiveActive + 1); scheduleArchiveAutoplay(); }
-      if (event.key === 'ArrowLeft') { event.preventDefault(); goArchive(archiveActive - 1); scheduleArchiveAutoplay(); }
-    });
-
-    // Tocar o enfocar una tarjeta la pone en foco.
-    archiveCards.forEach((card, index) => {
-      card.addEventListener('click', (event) => {
-        if (index !== archiveActive) { event.preventDefault(); goArchive(index); scheduleArchiveAutoplay(); }
+      archiveCurrent.textContent = String(index + 1).padStart(2, '0');
+      archiveTotal.textContent = String(archiveCards.length).padStart(2, '0');
+      [...archiveProgressSegments.querySelectorAll('[data-archive-index]')].forEach((segment, segmentIndex) => {
+        if (segmentIndex === index) segment.setAttribute('aria-current', 'true');
+        else segment.removeAttribute('aria-current');
+        if (segmentIndex === index && index === archiveCards.length - 1) segment.dataset.archiveEnd = 'true';
+        else delete segment.dataset.archiveEnd;
       });
-      card.addEventListener('focus', () => {
-        if (index !== archiveActive) goArchive(index, { scroll:false });
-      });
-    });
-
-    // Al arrastrar, el foco sigue a la tarjeta más cercana al centro.
-    // El bloqueo evita que el foco salte cuando la primera o la última tarjeta
-    // no pueden quedar centradas por el límite del scroll.
-    const releaseArchiveFocusLock = () => { archiveFocusLock = false; };
-    archiveRail.addEventListener('pointerdown', releaseArchiveFocusLock, { passive:true });
-    archiveRail.addEventListener('wheel', releaseArchiveFocusLock, { passive:true });
-    archiveRail.addEventListener('touchstart', releaseArchiveFocusLock, { passive:true });
-    archiveRail.addEventListener('scroll', () => {
-      if (archiveFocusLock) { return; }
-      if (archiveDrag) return;
-      // Con las posiciones cacheadas alcanza con limitar la frecuencia, sin volver a medir.
-      const now = performance.now();
-      if (now - archiveLastScrollCheck < 90) return;
-      archiveLastScrollCheck = now;
-      const mid = archiveRail.scrollLeft + archiveRail.clientWidth / 2;
-      let best = archiveActive;
-      let distance = Infinity;
+    };
+    const scrollArchiveTo = (index, behavior = 'smooth') => {
+      const target = archiveCards[Math.max(0, Math.min(archiveCards.length - 1, index))];
+      archiveRail.scrollTo({ left:getArchiveCardLeft(target), behavior });
+    };
+    const buildArchiveProgressSegments = () => {
       archiveCards.forEach((card, index) => {
-        const delta = Math.abs(getArchiveCardLeft(card, index) + card.offsetWidth / 2 - mid);
-        if (delta < distance) { distance = delta; best = index; }
+        const segment = document.createElement('button');
+        segment.type = 'button';
+        segment.className = 'archive-progress-segment';
+        segment.dataset.archiveIndex = String(index);
+        const name = card.querySelector('.archive-card-name')?.textContent.replace(/\s+/g, ' ').trim() || `tarjeta ${index + 1}`;
+        segment.setAttribute('aria-label', `Mostrar ${name}, tarjeta ${index + 1} de ${archiveCards.length}`);
+        const track = document.createElement('span');
+        track.className = 'archive-progress-track';
+        track.setAttribute('aria-hidden', 'true');
+        const fill = document.createElement('span');
+        fill.className = 'archive-progress-fill';
+        track.append(fill);
+        segment.append(track);
+        segment.addEventListener('click', () => {
+          pauseArchiveAutoplay();
+          closeArchiveCards();
+          scrollArchiveTo(index);
+        });
+        archiveProgressSegments.append(segment);
       });
-      if (best !== archiveActive) { archiveActive = best; syncArchiveUI(); }
-      scheduleArchiveAutoplay();
+      updateArchiveUI();
+    };
+    buildArchiveProgressSegments();
+    archiveNextButton.addEventListener('click', () => { pauseArchiveAutoplay(); scrollArchiveTo(getActiveArchiveIndex() + 1); });
+    archivePrevButton.addEventListener('click', () => { pauseArchiveAutoplay(); scrollArchiveTo(getActiveArchiveIndex() - 1); });
+    let archiveAutoTimer;
+    let archiveResumeTimer;
+    let archiveVisible = false;
+    let archiveAutoScrolling = false;
+    const ARCHIVE_AUTOPLAY_DELAY = 3800;
+    const stopArchiveProgress = () => archiveProgressSegments.classList.remove('is-progress-running');
+    const startArchiveProgress = () => {
+      archiveProgressSegments.style.setProperty('--archive-progress-duration', `${ARCHIVE_AUTOPLAY_DELAY}ms`);
+      archiveProgressSegments.classList.remove('is-progress-running');
+      void archiveProgressSegments.offsetWidth;
+      archiveProgressSegments.classList.add('is-progress-running');
+    };
+    const clearArchiveTimers = () => {
+      window.clearTimeout(archiveAutoTimer);
+      window.clearTimeout(archiveResumeTimer);
+      stopArchiveProgress();
+    };
+    const isArchiveNavigationEngaged = () => {
+      const supportsHover = matchMedia('(hover: hover) and (pointer: fine)').matches;
+      const hasHover = supportsHover && (archiveCarouselNav.matches(':hover') || archiveRail.matches(':hover'));
+      const activeElement = document.activeElement;
+      const hasKeyboardFocus = activeElement instanceof Element && activeElement.matches(':focus-visible') && (archiveCarouselNav.contains(activeElement) || archiveRail.contains(activeElement));
+      return hasHover || hasKeyboardFocus;
+    };
+    const scheduleArchiveAutoplay = () => {
+      window.clearTimeout(archiveAutoTimer);
+      stopArchiveProgress();
+      if (!archiveVisible || archiveReducedMotion() || document.hidden || archiveRail.scrollLeft >= archiveMaxScroll() - 2 || isArchiveNavigationEngaged()) return;
+      startArchiveProgress();
+      archiveAutoTimer = window.setTimeout(() => {
+        stopArchiveProgress();
+        archiveAutoScrolling = true;
+        scrollArchiveTo(getActiveArchiveIndex() + 1);
+        window.setTimeout(() => { archiveAutoScrolling = false; scheduleArchiveAutoplay(); }, 700);
+      }, ARCHIVE_AUTOPLAY_DELAY);
+    };
+    const pauseArchiveAutoplay = ({ resume = true } = {}) => {
+      clearArchiveTimers();
+      if (!resume || archiveReducedMotion() || archiveDrag) return;
+      archiveResumeTimer = window.setTimeout(scheduleArchiveAutoplay, 4500);
+    };
+    let archiveLastPointerType = 'mouse';
+    const closeArchiveCards = (except = null) => {
+      archiveCards.forEach((card) => {
+        const keepOpen = card === except;
+        card.classList.toggle('is-open',keepOpen);
+        card.setAttribute('aria-expanded',String(keepOpen));
+      });
+    };
+    const toggleArchiveCard = (card) => {
+      const opening = !card.classList.contains('is-open');
+      closeArchiveCards(opening ? card : null);
+      pauseArchiveAutoplay();
+    };
+    const archiveCoarsePointer = () => matchMedia('(hover: none), (pointer: coarse)').matches;
+    archiveCards.forEach((card) => {
+      card.addEventListener('click',(event) => {
+        // Pointer taps reveal the card on touchscreens; desktop uses hover.
+        if (event.detail > 0 && (archiveLastPointerType === 'touch' || archiveCoarsePointer())) toggleArchiveCard(card);
+      });
+      card.addEventListener('keydown',(event) => {
+        if (event.key !== 'Enter' && event.key !== ' ') return;
+        event.preventDefault();
+        toggleArchiveCard(card);
+      });
+    });
+    archiveRail.addEventListener('scroll', () => {
+      updateArchiveUI();
+      closeArchiveCards();
+      if (!archiveAutoScrolling) pauseArchiveAutoplay();
     }, { passive:true });
-
+    let archiveDrag = null;
+    let archiveMomentumFrame;
     const stopArchiveMomentum = () => window.cancelAnimationFrame(archiveMomentumFrame);
     archiveRail.addEventListener('pointerdown', (event) => {
+      archiveLastPointerType = event.pointerType || 'mouse';
       if (event.pointerType === 'touch') return;
       stopArchiveMomentum();
       archiveDrag = { pointerId:event.pointerId, startX:event.clientX, startScroll:archiveRail.scrollLeft, lastX:event.clientX, lastTime:event.timeStamp, velocity:0 };
       archiveRail.setPointerCapture(event.pointerId);
       archiveRail.classList.add('is-dragging');
-      clearArchiveTimers();
+      pauseArchiveAutoplay({ resume:false });
     });
     archiveRail.addEventListener('pointermove', (event) => {
       if (!archiveDrag || event.pointerId !== archiveDrag.pointerId) return;
@@ -1958,38 +1914,32 @@ Minimum version required to store current data is: `+i+`.
       let momentum = -velocity * 26;
       const glide = () => {
         if (Math.abs(momentum) < .35 || archiveRail.scrollLeft <= 0 || archiveRail.scrollLeft >= archiveMaxScroll()) {
-          goArchive(archiveActive);
-          scheduleArchiveAutoplay();
+          scrollArchiveTo(getActiveArchiveIndex());
           return;
         }
         archiveRail.scrollLeft += momentum;
         momentum *= .925;
         archiveMomentumFrame = window.requestAnimationFrame(glide);
       };
-      if (!archiveReducedMotion()) archiveMomentumFrame = window.requestAnimationFrame(glide);
-      else goArchive(archiveActive);
-      scheduleArchiveAutoplay();
+      if (!archiveReducedMotion()) archiveMomentumFrame = window.requestAnimationFrame(glide); else scrollArchiveTo(getActiveArchiveIndex(), 'auto');
+      pauseArchiveAutoplay();
     };
     archiveRail.addEventListener('pointerup', finishArchiveDrag);
     archiveRail.addEventListener('pointercancel', finishArchiveDrag);
-    archiveRail.addEventListener('mouseenter', () => { archiveHovering = true; clearArchiveTimers(); });
-    archiveRail.addEventListener('mouseleave', () => { archiveHovering = false; scheduleArchiveAutoplay(); });
-    archiveRail.addEventListener('focusin', () => { archiveFocused = true; clearArchiveTimers(); });
-    archiveRail.addEventListener('focusout', () => { archiveFocused = false; window.setTimeout(scheduleArchiveAutoplay, 0); });
-    window.addEventListener('resize', () => { measureArchive(); syncArchiveUI(); });
-    if ('ResizeObserver' in window) {
-      new ResizeObserver(() => { measureArchive(); syncArchiveUI(); }).observe(archiveRail);
-    }
-    let archiveFirstPaintTimer = window.setTimeout(() => measureArchive(), 600);
+    archiveRail.addEventListener('mouseenter', () => pauseArchiveAutoplay({ resume:false }));
+    archiveRail.addEventListener('mouseleave', scheduleArchiveAutoplay);
+    archiveRail.addEventListener('focusin', () => pauseArchiveAutoplay({ resume:false }));
+    archiveRail.addEventListener('focusout', () => window.setTimeout(scheduleArchiveAutoplay, 0));
+    archiveCarouselNav.addEventListener('mouseenter', () => pauseArchiveAutoplay({ resume:false }));
+    archiveCarouselNav.addEventListener('mouseleave', scheduleArchiveAutoplay);
+    archiveCarouselNav.addEventListener('focusin', () => pauseArchiveAutoplay({ resume:false }));
+    archiveCarouselNav.addEventListener('focusout', () => window.setTimeout(scheduleArchiveAutoplay, 0));
+    window.addEventListener('resize', updateArchiveUI);
     document.addEventListener('visibilitychange', () => document.hidden ? clearArchiveTimers() : scheduleArchiveAutoplay());
     if ('IntersectionObserver' in window) {
-      new IntersectionObserver(([entry]) => {
-        archiveVisible = entry.isIntersecting;
-        if (archiveVisible) scheduleArchiveAutoplay(); else clearArchiveTimers();
-      }, { threshold:.35 }).observe(archiveRail);
+      new IntersectionObserver(([entry]) => { archiveVisible = entry.isIntersecting; if (archiveVisible) scheduleArchiveAutoplay(); else clearArchiveTimers(); }, { threshold:.35 }).observe(archiveRail);
     } else { archiveVisible = true; scheduleArchiveAutoplay(); }
-    measureArchive();
-    syncArchiveUI();
+    updateArchiveUI();
 
     const siteHeader = document.querySelector('.site-header');
     const menuToggle = document.querySelector('.menu-toggle');
