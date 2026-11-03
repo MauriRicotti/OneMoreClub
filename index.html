@@ -2057,6 +2057,25 @@ Minimum version required to store current data is: `+i+`.
       ticketNotice.classList.add('is-visible');
       ticketNoticeTimer = window.setTimeout(() => ticketNotice.classList.remove('is-visible'), 2600);
     };
+    const RESERVATION_WHATSAPP_NUMBER = '5491141948773';
+    const buildReservationWhatsAppUrl = ({ date, time = '', place = '', tables, name, contact }) => {
+      const lines = [
+        'Hola, quiero consultar disponibilidad para reservar una mesa en ONE MORE CLUB.',
+        `Fecha: ${date}${time ? ` · ${time}` : ''}`,
+        place ? `Lugar: ${place}` : '',
+        `Mesa${tables.length === 1 ? '' : 's'} seleccionada${tables.length === 1 ? '' : 's'}: ${tables.join(', ')}`,
+        `Nombre: ${name}`,
+        `WhatsApp de contacto: ${contact}`,
+        '¿Me confirman si está disponible? Entiendo que la consulta queda pendiente hasta su respuesta.'
+      ].filter(Boolean);
+      return `https://wa.me/${RESERVATION_WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join('\n'))}`;
+    };
+    const openReservationWhatsApp = (details) => {
+      const url = buildReservationWhatsAppUrl(details);
+      const whatsappWindow = window.open(url, '_blank');
+      if (whatsappWindow) whatsappWindow.opener = null;
+      else window.location.assign(url);
+    };
     const reservationForm = document.querySelector('[data-reservation-form]');
     const reservationDate = document.querySelector('[data-reservation-date]');
     const reservationTable = document.querySelector('[data-reservation-table]');
@@ -2105,10 +2124,12 @@ Minimum version required to store current data is: `+i+`.
       if (!selectedDemoTables.size) { reservationResult.textContent = 'Primero seleccioná una o más mesas disponibles en el plano.'; return; }
       const formData = new FormData(reservationForm);
       const name = String(formData.get('name') || '').trim();
-      const date = reservationDate.options[reservationDate.selectedIndex].text;
-      const total = selectedDemoTables.size;
-      reservationResult.textContent = `${name || 'Solicitud'} · ${selectedTablesLabel().toLowerCase()} · ${date}.`;
-      showActionNotice(`${total} ${total === 1 ? 'mesa seleccionada' : 'mesas seleccionadas'}`);
+      const contact = String(formData.get('contact') || '').trim();
+      const date = reservationDate?.options[reservationDate.selectedIndex]?.text || '';
+      if (!name || !contact || !date) { reservationResult.textContent = 'Completá tu nombre, WhatsApp y la fecha para consultar disponibilidad.'; return; }
+      openReservationWhatsApp({ date, tables:getSelectedDemoTables(), name, contact });
+      reservationResult.textContent = 'Se abrió WhatsApp con la consulta preparada. Tocá Enviar para preguntar; la reserva queda sujeta a confirmación del club.';
+      showActionNotice('Consulta preparada para WhatsApp');
     });
     syncDemoReservation();
     // Tiny synthesized UI sounds: no media files or autoplay. They become audible only
@@ -2253,6 +2274,24 @@ Minimum version required to store current data is: `+i+`.
       field.remove();
       if (!copied) throw new Error('copy failed');
     };
+    let currentEventSharePosterFile = null;
+    let currentEventSharePosterSlug = '';
+    const prepareEventSharePoster = async (event) => {
+      currentEventSharePosterFile = null;
+      currentEventSharePosterSlug = event.slug;
+      try {
+        const response = await fetch(new URL(event.image, window.location.href), { cache:'force-cache' });
+        if (!response.ok) throw new Error('Event cover unavailable');
+        const blob = await response.blob();
+        const mimeType = blob.type || (event.image.toLowerCase().endsWith('.png') ? 'image/png' : 'image/webp');
+        if (!blob.size || !mimeType.startsWith('image/')) throw new Error('Event cover is not an image');
+        const extension = mimeType === 'image/jpeg' ? 'jpg' : (mimeType.split('/')[1] || 'webp');
+        const posterFile = new File([blob], `one-more-${event.slug}-cover.${extension}`, { type:mimeType });
+        if (currentEventSharePosterSlug === event.slug) currentEventSharePosterFile = posterFile;
+      } catch (_) {
+        if (currentEventSharePosterSlug === event.slug) currentEventSharePosterFile = null;
+      }
+    };
     const getCurrentEventShareDetails = () => {
       const event = upcomingEvents[activeEventIndex];
       const url = new URL(window.location.href);
@@ -2269,12 +2308,20 @@ Minimum version required to store current data is: `+i+`.
     const shareCurrentEvent = async (event) => {
       event?.preventDefault();
       event?.stopPropagation();
-      const { url, title, text } = getCurrentEventShareDetails();
-      const useNativeShare = Boolean(navigator.share) && (window.matchMedia('(pointer:coarse)').matches || navigator.maxTouchPoints > 0);
+      const { event:currentEvent, url, title, text } = getCurrentEventShareDetails();
+      const posterFile = currentEventSharePosterSlug === currentEvent.slug ? currentEventSharePosterFile : null;
+      let canSharePoster = false;
+      try {
+        canSharePoster = Boolean(posterFile && navigator.canShare && navigator.canShare({ files:[posterFile] }));
+      } catch (_) {}
+      const useNativeShare = Boolean(navigator.share) && (canSharePoster || window.matchMedia('(pointer:coarse)').matches || navigator.maxTouchPoints > 0);
       if (useNativeShare) {
+        const shareData = canSharePoster
+          ? { title, text:`${text}\n${url}`, files:[posterFile] }
+          : { title, text, url };
         try {
-          await navigator.share({ title, text, url });
-          showActionNotice('Fecha compartida');
+          await navigator.share(shareData);
+          showActionNotice(canSharePoster ? 'Fecha y portada compartidas' : 'Fecha compartida');
           return;
         } catch (error) {
           if (error && error.name === 'AbortError') return;
@@ -2706,8 +2753,14 @@ Minimum version required to store current data is: `+i+`.
       }
       const formData = new FormData(eventReservationForm);
       const name = String(formData.get('name') || '').trim();
-      eventReservationResult.textContent = `${name || 'Solicitud'} · ${selectedTablesLabel().toLowerCase()} · ${currentEvent.footer}.`;
-      showActionNotice(`${tables.length} ${tables.length === 1 ? 'mesa seleccionada' : 'mesas seleccionadas'}`);
+      const contact = String(formData.get('contact') || '').trim();
+      if (!name || !contact) {
+        eventReservationResult.textContent = 'Completá tu nombre y WhatsApp para consultar disponibilidad.';
+        return;
+      }
+      openReservationWhatsApp({ date:currentEvent.footer, time:currentEvent.time, place:currentEvent.place, tables, name, contact });
+      eventReservationResult.textContent = 'Se abrió WhatsApp con la consulta preparada. Tocá Enviar para preguntar; la reserva queda sujeta a confirmación del club.';
+      showActionNotice('Consulta preparada para WhatsApp');
     });
     document.addEventListener('keydown', (event) => {
       if (event.key !== 'Escape' || eventReservationPanel.hidden || !eventTablePlanPreview.hidden) return;
@@ -2820,6 +2873,7 @@ Minimum version required to store current data is: `+i+`.
       eventPoster.classList.remove('is-poster-crossfading');
       activeEventIndex = Math.min(Math.max(index, 0), upcomingEvents.length - 1);
       const event = upcomingEvents[activeEventIndex];
+      void prepareEventSharePoster(event);
       eventTitle.innerHTML = event.titleHtml;
       eventTitleWrap.classList.toggle('is-long-title', event.longTitle);
       eventLabel.textContent = event.label;
